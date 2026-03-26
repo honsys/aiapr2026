@@ -1,0 +1,33 @@
+# Gem Test Framework
+# ------------------
+
+_tests_passed = 0
+_tests_failed = 0
+
+fun assert(desc, cond)
+    bool ok = cond
+    if ok
+        _tests_passed = _tests_passed + 1
+        sys.print("[PASS]", desc)
+    end
+    if ok == false
+        _tests_failed = _tests_failed + 1
+        sys.print("[FAIL]", desc)
+        sys.print("  Condition evaluated to false")
+    end
+end
+
+fun assert_eq(desc, actual, expected)
+    bool match = (actual == expected)
+    if match
+        _tests_passed = _tests_passed + 1
+        sys.print("[PASS]", desc)
+    end
+    if match == false
+        _tests_failed = _tests_failed + 1
+        sys.print("[FAIL]", desc)
+        sys.print("  Diagnostics:")
+        sys.print("    Expected:", expected)
+        sys.print("    Actual:  ", actual)
+    end
+end

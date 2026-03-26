@@ -1,0 +1,59 @@
+# Gem Tutorial 08: Functions & Objects
+# ------------------------------------
+
+# 1. Defining Functions
+# Functions use 'fun name(params)' and 'end [return_value]'
+fun calculate_circle_area(radius)
+  r2 = radius * radius
+  area = math.pi * r2
+  sys.print("Area for radius", radius, "is", area)
+end area
+
+# 2. Calling Functions
+# Capture return values
+area5 = calculate_circle_area(5)
+sys.print("Captured area:", area5)
+
+# 3. Objects & Inheritance
+# Use 'obj Name(params) : Parent'
+obj Shape(name)
+  .name = name
+  
+  fun describe()
+    sys.print("I am a", .name)
+  end
+end
+
+# Single inheritance
+obj Rectangle(w, h) : Shape
+  .name = "Rectangle"
+  .width = w
+  .height = h
+  
+  # Method overriding
+  fun describe()
+    sys.print("Rectangle:", .width, "x", .height)
+  end
+  
+  fun area()
+    res = .width * .height
+  end res
+end
+
+# Instantiation
+rect = Rectangle(10, 20)
+rect.describe()
+sys.print("Area:", rect.area())
+
+# 4. Builtin Inheritance
+# All objects inherit from 'sys' automagically
+rect.print("I can use sys.print directly because I am an object!")
+
+# 5. Best Practices
+_APP_NAME = "GemScientific"
+
+fun start_app()
+  sys.print("Welcome to", _APP_NAME)
+end
+
+start_app()

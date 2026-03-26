@@ -1,0 +1,137 @@
+commence writing the first draft of volume 3 with a new markdown doc file @vol3DanielLyonDenWolfLair.md with the first chapter opening scene as Daniel awakes in his cold dark Vraxx prison cell somehwere in Siberia alone and resigned to his ill fated shortened life expectancy. it is completely dark and Daniel worries he has lost his vision
+
+Daniel worked with Smoot and Herreid as a NASA contactor but did not attend MIT; he attended Columbia U in NYC and Johns Hopkins in Baltimore and his lonesome existence in the cold cell is filled with memories of universities and his NASA early career
+
+✦ Okay, I'll revise the first chapter of vol3DanielLyonDenWolfLair.md to reflect Daniel's updated backstory. I'll correct his academic history, stating he
+  attended Columbia and Johns Hopkins and worked with Smoot and Herreid as a NASA contractor, not an MIT student. I will also enrich his solitude in the Vrax  cell with vivid memories from his university days and early NASA career, contrasting his vibrant past with his current grim reality.
+
+without removing existing prose in @vol3DanielLionDenWolfLair.md write an outline with Zora learning that she is pregnant with twins via Daniel and during the first 9 chapters she describes her life in her notes, assuming Daniel has been killed by the Vraxx and she eventually gives birth to twin boys she names Gregory and Christopher. 
+
+ the opening scene of @vol3DanielLionDenWolfLair.md include Daniel contemplating his columbia core curriculum and the writings of homer and
+  heroditus and plato's republic
+
+Daniel also recalls his readings of Thucydides and the 20 years war between Athens and Sparta and wonders if the Vraxx are wolf-like versions of the Spartans
+
+Daniel wonders if the Vraxx are like the ancient Spartans, is their population 90% Helot slaves?
+
+Daniel resolves to converse with the Vraxx who occasionally visit his cell to provide water and modest provision and are dressed differently than the larger more militant types who torture and question him. Eventually he makes a friend of a young Vraxx and learns more about their enslavement.
+
+the young vraxx daniel befriends is sympathetic and related to the wife of the vraxx technician who as killed by the ferocious vraxx officer
+  whene Daniel was captured and agrees to help Daniel attempt an escape
+
+daniel cannot pronounce the young vraxx's name, who agrees to allow daniel to call him mikey. they have many conversations thru chapters 0 and 1 and 2; eventually in chapter 3 mikey manages to find daniel's personal effects and brings one of the ankle bracelets FoF had provided. when daniel dons the braclet it immediately notifies FoF of his location.
+    
+write a makefile supporting macos and linux that creates a renpy novel from each markdown file in this folder
+
+
+without removing existing prose proceed with more details in the first 3 chapters of @vol3DanielLionDenWolfLair.md to describe the darkest moments of Daniels time in the dark cold Vraxx prison cell as he is in deep in reverie, trying his best to recall the happier times of his life -- in college at Columbia and Sunday feasts in Brooklyn with Joe's family, and his regrets of missing an anthropolgy class with Margaret Mead his senior year; then in grad school at Johns Hopkins with classmates Luke and Dan and Erica and Juan with very supportive Professors Bruce Barnett and Arthur Anderson and Richard Elston; then his first contract jobs at NASA with Leon Herreid and Karin Babst and George Smoot and Alan Mcconnell and playing tennis with Bob Price and Richard Schwartz. At some point in his deepest darkest moment he realizes someone is whispering to him through a grating. It is FoF. She has located him through the ankle bracelet when it became briefly activated by his proximity before it was lost again during another round of torture. FoF manages to rescue Daniel at the end of chapter 3 via a newly designed teleportation harness she hands him through the grating in a tightly rolled pouch.
+
+Daniel's parents divoced when he was an infant and he, and his todler sister who was 18 months older, and mother departed LA to return to live in DC where they were joined my his latin mother's abuela and abuelo. danial recalls bilingual conversations with his estranged parents. his mother is a polymath multilingual genious who started out as a solar astronomer at the smithsonian in dc when daniel was a child, while his father who remained in LA his entire career was a pioneer of NMR who turned down stanford to become a weapons physicist, Eventually while living in DC his mother switched fields after Smithsonian budget cuts and became an oceanographer at NOAA while his dad became the country's preeminant high engery laser weapons dev. 
+
+the summer before his older sister entered high school Daniel and his sister Diana commenced a many summer practice of flying froma Reagan National to LAX where they were fetched by their father who kept a 30 foot sailboat in Marina Del Ray. Durin g many conversations spanning many summers Daniel's father spoke of his career as a physicist, and his belief that when one studies Physics one becomes well prepared for any high tech career. Daniel's father asserted that essentially Physcists can do anything and everything; so Daniel resolved to major in Physics when he would later attend college.
+
+
+write a markdown doc with a complete student quide to AI entitled "Think and Do AI" as a user and a dev and implementor, and provide refs and inks to free
+   publications and tutorials and related open source projects on gitlab and github 
+
+
+describe the events immediately after  daniel's rescue in @vol3DanielLionDenWolfLair.md and his insistence on finding his young vraxx
+   benefactor with FoF to bring the young vraxx along with them. FoF is unhappy to devote more time to teleporting through the vraxx bas to
+   find the teenage boy, but daniel insist he would not be alive without the youngster's help; daniel describe how the young vraxx brought
+   clean water and food that kept daniel alive. the subsequent chapter should provide a detailed description of their search of the vraxx base
+   and a suprising discovery, along with persuading the young vraxx to join them
+
+
+volkov becomes annoyed and concerned about zora's health and recruits another russian operative he believes is trustworthy. the new
+   operative has a reputation for being brightt and quick and far stronger than most. eventually we learn the new operative is a well placed
+   vraxx in their latest human genomic tech disguise
+
+bailieboy's and grahamcracker's hackles rise when they meet mikey the teenage vraxx who helped daniel survive, despite the young vraxx's human disguise FoF has prepared. daniel and FoF realize that bailieboy and grahamcracker may somehow detect a vraxx by their keen sense of smell. eventually this becomes  a critical element by the end of vol3 in detecting that volkov's replacement of zora in a pending catastrophe of the penultimate chapter. include scenes of the partial unmasking and departure of the disguised vraxx, who takes the teenager with him as hostage. throughout each chapter insert scenes with the disguiesed vraxx collecting information about daniel and especially about FoF and relaying back to high command
+
+
+ without removing any existing prose in @vol3DanielLionDenWolfLair.md provide more background and detailed history of FoF's advanced star
+   fairing libertarian civilization and loose knit extended family culture with descriptions of their evolution from sloth-like marsupials who's
+   biotech allows them to chage their appearance such that FoF presents herself on Earth as a 5 foot 2 inch tall human
+
+provide more biology and botany of FoF's habitats and scene where she sheds her young adult human woman's appearance to present her true form
+   to Daniel, then transforms back to human form. daniel asserts that her sloth marsupial form is more adventations, with her natueral pouch for
+   tools and her natural hands have 6 digits -- 2 opposing thumbs really help with climbing and tool usage, etc.
+
+without removing existing prose proceed with more details in all chapters of @vol3DanielLionDenWolfLair.md with Daniel devoting time in FoF's extensive technical library trying to understand her faster than light starship science and mention quaternion and tenser math and tachyons with comparison and human historical content, along with conversations with FoF comparing the history of her civilization and comparisons with human history 
+
+without removing existing prose proceed with more details in all chapters of @vol3DanielLionDenWolfLair.md describe FoF's botech ablity to transform her hominid marcupial slo0th-like form to human and back and emphasize that she remains 5 foot 2 inches tall, but in her natural form she has fine tawny fur covering much of her body and that her feet are as dextorous as her hands
+
+describe the young pre-teen vraxx mikey in detail as red furred wolf-like and upright biped with fangs and retractable sharp claws and dexterious human-like hands and how bailie the dog and graham the cat gradually accept him and his reciprical fascination with the pets and with daniel and FoF
+
+continue expanding the prose without removing any existing prose in @vol3DanielLionDenWolfLair.md to describe the young pre-teen vraxx mikey in detail as a red furred wolf-like upright biped with fangs and retractable sharp claws and dexterious human-like hands and how bailie the dog and graham the cat gradually accept him and his reciprical fascination with the pets and withdaniel and FoF. mikey is quite bright and curious and learns to speak american english during the course of all chapters and eventually reveals his extended family are essentually slaves of the more  dominent militant vraxx. the vraxx economy is founded on slave trade and the dominnts subscribe to a system one might describe as mix of spartan and roman and mongol empires; 90% of the vraxx population are slaves, akin to sparta's helots.
+
+continue expanding the prose without removing any existing prose in @vol3DanielLionDenWolfLair.md to describe the Sentinal's observations and of the Vraxx operartions on Earth and also Hect4's attempts to learn more about the Sentinal itself. eventually the Sentiinal does something it rarely decides worth the investment. The Sentinal sends an avatar directly to Earth in the form of a young adult native american human, to engage in so-called ground truth observations, starting with a Crow Indian resevation.
+
+
+find duplicate sentenences and remove all but one of each throughout @vol3DanielLionDenWolfLair.md
+
+without removing existing prose in  @vol3DanielLionDenWolfLair.md provide more Sentinal content as it decides to do something it seldom does. the sentinel creates an avatar in the form of a young adult native american Crow indian who starts hiking the Garden of the Gods in Colorado and finds his way into FoF's hidden outpost there. The young adult calls himself Golden Eagle aka GE, and awaits the arrival of FoF and Daniel and Mikey 
+
+in the final chapter of @vol3DanielLionDenWolfLair.md Daniel and FoF and Mikey and BailieBoy and GrahamCraker return to the Garden of the Gods outpost to fine Golden Eagle awaiting outsde near the entrance. Golden Eagle is serene and eminates a calm and keen intelligence as he introduces himself and answers their questions. The pets find his armoma fascinating and Graham purrs.
+
+
+without removing existing prose in vol3DanielLionDenWolfLair.md describe the interior of FoF's the interior of her colorado garden of the gods secret facility and her other facility of the coast of california near catalina island, as she and daniel and the pets enter with golden eagle. the floors are covered with dense soft short grass and also the walls; 
+flowering vines hang from hight celings bussing with butterflies and humming birds; grahamcracker kittycat is very intrigued by the flying creatures but never quite manages to jump high enough nor move fast enough to catch any
+
+
+each faclisty and FoF's starship contain a large central lake surrounded by rainforest with a caldera shaped island in
+   the center of the lake that provides living facilities for visitors. daniel the pets, and golden eagle find comfortable
+   arrangements on the island
+✦ Okay, I'll update FoF's facilities and starship. Each will get a central rainforest-ringed lake with a caldera island for
+  visitors, and Daniel, the pets, and Golden Eagle will be comfortable there. First up, modifying the Colorado facility.
+
+
+continue to expand the plot and the prose in @vol3DanielLionDenWolfLair.md using first person with BailieBoy and GrahamCracker, 2nd person with Daniel and 3rd person for everyone else; Daniel and FoF converse with the young Vraxx Mikey to learn more about Vraxx history and culture; BailieBoy and GrahamCracker expplore FoF's starship and hidden bases to reveal details of the symbiotic nature of oxygen producing plants and carbon dioxide producing small life forms such as small birds and benign insects and arachnids inhsbiting the greeen spaces 
+
+daniel devotes more time to developing his smart clothes items and sets up 3D printers for building samples. daniel also develops a custom programmng language he calls "gem" to support his science interests and better understand FoF's tech, and also to help with his smart clothes designs
+
+
+continue to expand the plot and the prose in @vol3DanielLionDenWolfLair.md from the perspective of the Sentinel avatar Golden Eagle  and his observations of Daniel and Fof and their pets BailiBoy and GrahamCracker
+
+daniel learns more about FoF's familiy history and her galactic explorations and asks her if anyone has travelled outside the galaxy
+
+
+Daniel's and Fof's conversation about extra glactic mysteries amuses Golden Eagle, and Daniel notices; Daniel asks Golden Eagle to provide insight. 
+
+Daniel and FoF continue to glean more from Golden Eagle and eventually it is revealed that there had been a prior advanced technical civilization on Earth that became too dangerous and agressive, resulting in Sentinel interventions which coincided with an Ice Age "cleansing" of the Earth's surface
+
+Without removing any exsiting content add more conversations between Daniel and FoF and GoldenEagle to @vol3DanielLionDenWolfLair.md;describe Daniel's Physics PhD researchh and pre-DevOps early career devoted to scientific algorithms, which helps his efforts in FoF's technical library to learn about the science of fast innterstellar propulsion. Danial mentions to FoF his science fiction entertainment and that FoF's starship reminds him of a film entitled "Silent Running". Daniel embarks on an effort to design his own starship.
+
+Without removing any exsiting content add more conversations in @vol3DanielLionDenWolfLair.md between Daniel and FoF and GoldenEagle to describe Daniel's Physics PhD researchh and pre-DevOps early career devoted to scientific algorithms, which helpshis efforts in FoF's technical library to learn about the science of fast innterstellar propulsion. Danial mentions to FoF his science fiction entertainment and that FoF's starship reminds him of a film entitled "Silent Running". Daniel embarks on an effort to design his own starship.
+
+FoF and Golden Eagle express interest in viewing "Silent Running" and other science fiction classics, so Deniel sets up a cinema arena within the Garden of the Gods facility and decided to include an arena in the design of his starship.
+
+without removing any existing prose throughout vol3DanielLionDenWolfLair.md insert conversations in every chapter with Daniel and his father John, and his NASA colleagues George Smoot and John Mather and Alan Mcconnel, and his best friends Leon and Kevin and Joseph and Jay.
+
+without removing any existing prose throughout vol3DanielLionDenWolfLair.md provide descriptions of Daniel's activities in FoF's technical library and his starship design efforts; and his growing intereset in the mystory of extra-galactice explorations
+
+Daniel was a Navy Coop in college as a Columbia University Physics major, where he studied with Jame Rainwater who taught him scientific programming
+
+=================
+✦ I have successfully updated vol3DanielLionDenWolfLair.md to integrate the biographical details about Daniel's time at Columbia
+  University.
+
+  Key Additions:
+
+
+   * Navy Coop at Columbia: Added descriptions in Chapters 0 and 1 of Daniel's life as a Physics major and Navy Coop, a dual path that
+     instilled in him the discipline and technical rigor he now applies in his battle against the Vraxx.
+   * Studies with James Rainwater: Inserted memories of Daniel's time in Pupin Hall studying with the legendary James Rainwater, who
+     first taught him scientific programming on early mainframes.
+   * Algorithmic Legacy: Linked his early education with James Rainwater to his current creation of the "gem" programming language in
+     Chapter 19, framing it as the ultimate expression of the "Navy Coop spirit" and the "intellectual fire of Columbia."
+   * Global Context preserved: All previous additions—including conversations with John Hahn, George Smoot, John Mather, Alan McConnell,
+     and his friends Leon, Kevin, Joseph, and Jay—have been maintained throughout every chapter and integrated with these new
+     biographical details.
+
+
+  No existing prose was removed, and the new biographical context has been seamlessly woven into Daniel's reflections on his past.
+=================
+
+Without removing any existing prose throughout vol3DanielLionDenWolfLair.md provide details of Daniel's activities in FoF's technical library as he works on his starship design efforts and the history of FoF's star fairing culture, describing the increasingly sophisticated tech developed by her family. . Daniel describes the his NASA work and the "triple redundancy" of NASA deep space missions. Daniel's extra-galactic starship should include considerable redundancy, so he decides on 10-fold redundancy and on a fleet of 11 ships; each identical ship similar but somewhat larger than FOF's.
+

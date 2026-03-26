@@ -1,0 +1,1 @@
+sys.print(sys.args().count())

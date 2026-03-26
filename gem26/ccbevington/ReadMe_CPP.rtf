@@ -1,0 +1,326 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033\deflangfe1033{\fonttbl{\f0\fmodern\fprq1\fcharset0 Courier New;}{\f1\fnil\fcharset0 Courier New;}{\f2\froman\fprq2\fcharset0 Times New Roman;}}
+{\colortbl ;\red255\green0\blue0;\red0\green0\blue0;}
+\viewkind4\uc1\pard\nowidctlpar\cf1\b\f0\fs20 This file is formatted for WordPad.\cf2\par
+\cf0\par
+Notes on the C++ Programs\tab\tab\tab 09/06/02\par
+\pard (\b0\f1 Direct questions to kxr2@po.cwru.edu.  Watch for updates to these programs)\par
+\pard\nowidctlpar\b\f0 ==========\par
+\pard\b0\f1\par
+\b A. COPYRIGHT NOTICE\par
+\b0 This software is Copyright 2002 by McGraw-Hill.\par
+\par
+\b B. DISCLAIMER\par
+\b0 These routines are intended to illustrate examples in the text  and  to\par
+provide starting points for users' own programs.  While  they  have  been\par
+thoroughly tested, there may be small errors or bugs.  The   authors  and\par
+the publisher take no responsibility and  offer  no  warranties  on  this\par
+software. The user must assume all risk and  responsibility  when  using\par
+these routines.\par
+\par
+\b C. Organization of the C++ Routines\par
+\b0 The files are in the directory \\cpp and are organized into subdirectories  \par
+\\Chapt-5, \\Chapt-6, etc. An additional subdirectory, \\CppLibrary, includes \par
+files with routines that may be used by more than one program. A list of all \par
+files follows these comments.\par
+\par
+In general, the subdirectories for each chapter include:\par
+1. Main program with local functions;\par
+2. References through their prototypes to files of library routines;\par
+3. One or more local file of routines specific to the programs in the chapter, \par
+   referenced through their prototypes.   \par
+4. Data and parameter files with extensions .dat and .par respectively.\par
+\par
+Chapters 6 through 9 contain discussions and example of methods for fitting \par
+functions to data samples.  The sample programs for each of these chapters include\par
+a local file of fitting utilities (e.e., FitUtil-ch6.cpp) and reference to a library \par
+file of utility programs, \\CppLibrary\\GenUtil.cpp).  (A single file, FitUtil.cpp,\par
+which includes all fitting methods discussed in these chapters, is available \par
+in \\CppLibrary. Most of the calling programs in Chapters 7 through 9 \par
+should work with this comprehensive file.)  Sample data files are also included.\par
+\par
+\b D. Suggested Procedure\par
+\b0 If possible, copy the C++ files and subdirectories to a hard drive, preserving \par
+the directory structure, i.e., the base directory should be c:\\cpp. This will \par
+avoid the necessity of changing the references to "include" files and data files. \par
+\par
+\cf2\f2\fs22 However, compressing and decompressing the programs changes the names of the subdirectories.  \cf1 Therefore, \par
+before running the programs you must rename all  11 subdirectories so that they are consistent with the file name \par
+references in the programs. For example, names of the form "Chapt05" must be changed to the form "Chapt-5", "Chapt10" becomes "Chapt-10", and "Append_A" becomes "Append-A."\cf2\par
+\cf1\f1\fs20\par
+\cf0 Feel free to experiment with the routines  and to make  changes  to  suit\par
+particular applications.\par
+\par
+\pard\nowidctlpar\b\f0 E. C++ Routines and Prototypes\par
+\\CppLibrary\b0\par
+\ul MonteLib.cpp\ulnone  \ul Monte Carlo Routines\par
+MonteLib.h\ulnone\par
+  void \tab SetRandomDeviateSeed(unsigned sa, unsigned sb, unsigned  sc);\par
+  void \tab GetRandomDeviateSeed(unsigned &sa,unsigned &sb, unsigned &sc);\par
+  float \tab RandomGaussDeviate();\par
+  float \tab RandomDeviate();\par
+  float \tab GaussSmear(float x, float dx);\par
+  float \tab PoissonRecur(int j, float m);\par
+  int \tab PoissonDeviate(float mu, bool init);\par
+\ul GenUtil.cpp\ulnone\tab\ul General Utility routines\ulnone\par
+\ul GenUtil.h\par
+\pard\ulnone\f1   #define PI 3.14159\par
+  //File_IO  Input-Output\tab\par
+  void\tab OpenInFile(char *Fname, int length);\par
+  void\tab ReadString(char *sBuffer, int length);\par
+  void\tab ReadIntegers(int numNumbers,int *Buffer,int iLength) ;\par
+  void\tab ReadDoubles(int numNumbers,double *Buffer,double dLength);\par
+  double\tab sqr(double x);\tab\par
+  void\tab ErrorMessage(char message[]);\par
+  char\tab pause();\tab\tab\tab\tab\tab\tab //--- pause routine for ch 6\par
+  double\tab Simpson(char functCode,int nInt, double loLim, \par
+                 double hiLim, double p1, double p2); // 2 calcs per interval\par
+  double\tab ChiX(double x, double h, double dummy);\tab //Data for Simpson. h = nFree/2\par
+  double\tab Gamma(double h);\tab\tab //Approximate Gamma function for integers and half-integers\par
+  double\tab ChiProb(int nFree, double chi2);\par
+\pard\nowidctlpar\ul\f0 FitUtil.cpp\ulnone  \ul Summary of all utility routines for fitting: not used by the \par
+\ulnone\tab\tab\tab\ul individualprograms. See routine in each chapter.\ulnone\par
+\ul FitUtil.h\par
+\pard\ulnone\f1 // Move Data\par
+  void\tab PutTitle(char sBuffer[]);\par
+  void\tab PutnPts(int nData);\par
+  int\tab\tab Getm();\par
+  void\tab Putm(int m);\par
+  double\tab GetParam(int i);\par
+  void\tab PutParam(int i, double aNew);\par
+  void\tab PutParamIncr(int i, double deltaaNew);\par
+  void\tab PutXYdY(int i, double xin, double yin, double dxin);\par
+  void\tab SetLinear(bool trueOrfalse);\tab\tab // Linear or non-linear fitting\par
+//     \par
+  void\tab ChooseFunction(char funcCode, char code1Set);\par
+  void\tab InvertX();\par
+  void\tab StatisticalErrs();\par
+  void\tab FillYarray();\tab\tab\tab\tab\tab\tab //fills array Ycalc.  \par
+  double\tab CalcChiSq();\tab\tab\par
+  double\tab LineFit();\par
+  double\tab PowerSeriesFunc(int k, double x);\par
+  double\tab LegendreFunc(int k, double x);\par
+  double\tab Expf(double x, double a);  \par
+  double\tab TwoExponentials(int idummy, double x);\par
+//Added for Chapt-7\par
+  void\tab MakeBeta();\par
+  void\tab MakeAlpha();\par
+  double\tab MatInv();\tab\tab\tab //invert a matrix\par
+  void\tab SquareByRow();\tab\tab // multiply square matrix by linear matrix\par
+  void\tab SigMatrix();     \par
+// added for Chapt-8\par
+  void\tab ReadParameterFile_NonLin(char fName[], double stepSize);\par
+  void\tab Gridls(double &chiSqr);\par
+  void\tab Gradls(double &chiSqr, double stepDown);\par
+  void\tab ChiFit(double &chiSqr);\par
+  void\tab Marquardt(double &chiSqr, double chiCut, double lambda);\par
+  void\tab SigParab();\par
+  double\tab dXiSq_da(int j);\par
+  double\tab d2XiSq_da2(int j);\par
+  double\tab d2XiSq_dajk(int j, int k);\par
+// added for Chapt-9\par
+  double\tab OneLorentz(int idummy, double x); // Calculate one peak on background\par
+  double\tab TwoLorentz(int idummy, double x); // Calculate two peaks on background\par
+  double\tab Lorentz(double x, double mean, double gamma);\tab // Calculate the peak\par
+//Input Output\par
+  void\tab FitOut(char outFile[], double chi2, char aErrorsFrom);\par
+\ul QuikHist.cpp\ulnone  \ul Routines for making a character-based histogram\ulnone\par
+\ul QuikHist.h\par
+\ulnone   void \tab HistSetup(float Hbot,float Hint, float Htop);\par
+  void \tab Histogram(float x);\par
+  void \tab HistStats(char title[]);\par
+  void \tab HistDisplay(char title[]);\par
+\par
+\pard\nowidctlpar\b\f0\\Chapt-5\b0\tab\tab\par
+HotRod.cpp\tab\tab\tab\tab\tab Example 5.4\par
+PoissDecay.cpp\tab\tab\tab\tab Example 5.5\par
+MC_K_Decay.cpp\tab\tab\tab\tab Example 5.7 \par
+MC_K-decay_data.txt\tab\tab\tab Output data file from MC_K_Decay.cpp\par
+MC_K-decay_summary.txt\tab\tab\tab Output summary file from MC_K_Decay.cpp\par
+\par
+\b\\Chapt-6\par
+\b0 FitLine.cpp\tab\tab\tab\tab\tab Calling routine for fitting by determinants\par
+Volts.dat\tab\tab\tab\tab\tab Data input for Example 6.1\par
+Geiger.dat\tab\tab\tab\tab\tab Data input for Example 6.2\par
+GenUtil.h\par
+\ul FitUtil-ch6.cpp\ulnone  \ul Routines used in the fits\par
+FitUtil-ch6.h\ulnone\par
+\pard\f1   // Move Data\par
+  void\tab PutTitle(char sBuffer[]);\par
+  void\tab PutnPts(int nData);\par
+  int\tab\tab Getm();\par
+  void\tab Putm(int m);\par
+  void\tab PutXYdY(int i, double xin, double yin, double dxin);\par
+  void\tab InvertX();\par
+  void\tab StatisticalErrs();\par
+  void\tab FillYarray();\tab\tab\tab //fills array Ycalc.  \par
+  double\tab CalcChiSq();\tab\tab\par
+//Fit procedure\par
+  double\tab LineFit();\par
+// Fitting function\par
+  double\tab PowerSeriesFunc(double x);\par
+//Output\par
+  void\tab FitOut(char outFile[], double chi2, char aErrorsFrom);\par
+\par
+\pard\nowidctlpar\b\f0\\Chapt-7\b0\par
+MultiRegr.cpp\tab\tab\tab\tab Calling routine for linear fitting by matrices\par
+ThermCouple-E7-2.Dat\tab\tab\tab Data for Example 7.2\par
+LegendreAngleE7-3.Dat\tab\tab\tab Data for Example 7.3\par
+GenUtil.h\par
+\ul FitUtil-ch7.cpp\ulnone  \ul Routines used in the fits\ulnone\tab\tab\tab\tab\par
+\ul FitUtil-ch7.h\par
+\pard\ulnone\f1 // Move Data\par
+  void\tab PutTitle(char sBuffer[]);\par
+  void\tab PutnPts(int nData);\par
+  int\tab\tab Getm();\par
+  void\tab Putm(int m);\par
+  double\tab GetParam(int i);\par
+  void\tab PutParam(int i, double aNew);\par
+  void\tab PutXYdY(int i, double xin, double yin, double dxin);\par
+  void\tab ChooseFunction(char funcCode, char code1Set);\par
+  void\tab InvertX();\par
+  void\tab StatisticalErrs();\par
+  void\tab FillYarray();\tab\tab\tab\tab\tab\tab //fills array Ycalc.  \par
+  double\tab CalcChiSq();\tab\tab\par
+  double\tab LineFit();\par
+  double\tab PowerSeriesFunc(int k, double x);\par
+  double\tab LegendreFunc(int k, double x);\par
+//Added for Chapt-7\par
+  void\tab MakeBeta();\par
+  void\tab MakeAlpha();\par
+  double\tab MatInv();\tab\tab\tab\tab\tab\tab\tab //invert a matrix\par
+  void\tab LinearBySquare(char outArray); // multiply square matrix by linear matrix\par
+  void\tab SigMatrix();     \par
+//Output\par
+  void\tab FitOut(char outFile[], double chi2, char aErrorsFrom);\par
+\pard\nowidctlpar\par
+\b\f0\\Chapt-8\b0\par
+NonLinearFit.cpp\tab\tab\tab\tab Calling routine for non-fitting\par
+radioDk.par\tab\tab\tab\tab\tab Parameter file (starting values)\par
+radioDkdat\tab\tab\tab\tab\tab Input data from decay of two unstable states\par
+GenUtil.h\par
+\ul FitUtil-ch8.cpp\ulnone  \ul Routines used in the fits\ulnone\tab\tab\tab\tab\par
+\ul FitUtil-ch8.h\par
+\pard\ulnone\f1 // Move Data\par
+  void\tab PutTitle(char sBuffer[]);\par
+  void\tab PutnPts(int nData);\par
+  int\tab\tab Getm();\par
+  void\tab Putm(int m);\par
+  double\tab GetParam(int i);\par
+  void\tab PutParam(int i, double aNew);\par
+  void\tab PutParamIncr(int i, double deltaaNew);\par
+  void\tab PutXYdY(int i, double xin, double yin, double dxin);\par
+  void\tab SetLinear(bool trueOrfalse);\tab\tab // Linear or non-linear fitting\par
+  void\tab ChooseFunction(char funcCode, char code1Set);\par
+  void\tab InvertX();\par
+  void\tab StatisticalErrs();\par
+  void\tab FillYarray();\tab\tab\tab\tab\tab\tab //fills array Ycalc.  \par
+  double\tab CalcChiSq();\tab\tab\par
+  double\tab Expf(double x, double a);  \par
+  double\tab TwoExponentials(int idummy, double x);\par
+//Added for Chapt-7\par
+  double\tab MatInv();\tab\tab\tab\tab\tab\tab\tab //invert a matrix\par
+  void\tab SquareByRow();\tab\tab // multiply square matrix by linear matrix\par
+  void\tab SigMatrix();     \par
+// added for Chapt-8\par
+  void\tab ReadParameterFile_NonLin(char fName[], double stepSize);\par
+  void\tab Gridls(double &chiSqr);\par
+  void\tab Gradls(double &chiSqr, double stepDown);\par
+  void\tab ChiFit(double &chiSqr);\par
+  void\tab Marquardt(double &chiSqr, double chiCut, double lambda);\par
+  void\tab SigParab();\par
+  double\tab dXiSq_da(int j);\par
+  double\tab d2XiSq_da2(int j);\par
+  double\tab d2XiSq_dajk(int j, int k);\par
+//Output\par
+  void\tab FitOut(char outFile[], double chi2, char aErrorsFrom);\par
+\pard\nowidctlpar\par
+\b\f0\\Chapt-9 \b0\par
+Loren_Fit.cpp\par
+single.par\tab\tab\tab\tab\tab A single Lorentzian peak on a quadratic background\par
+single.dat\par
+double.par\tab\tab\tab\tab\tab Two Lorentzian peaks on a quadratic background\par
+double.dat\par
+GenUtil.h\par
+\ul FitUtil-ch9.cpp\ulnone  \ul Routines used in the fits\ulnone\tab\tab\tab\tab\par
+\ul FitUtil-ch9.h\par
+\pard\ulnone\f1   void\tab PutTitle(char sBuffer[]);\par
+  void\tab PutnPts(int nData); \par
+  int\tab\tab Getm();\par
+  void\tab Putm(int m);\par
+  double\tab GetParam(int i);\par
+  void\tab PutParam(int i, double aNew);\par
+  void\tab PutParamIncr(int i, double deltaaNew);\par
+  void\tab PutXYdY(int i, double xin, double yin, double dxin);\par
+  void\tab SetLinear(bool trueOrfalse);\tab\tab // Linear or non-linear fitting\par
+  void\tab ChooseFunction(char funcCode, char code1Set);\par
+  void\tab InvertX();\par
+  void\tab StatisticalErrs();\par
+  void\tab FillYarray();\tab\tab\tab\tab\tab\tab //fills array Ycalc.  \par
+  double\tab CalcChiSq();\tab\tab\par
+  double\tab LineFit();\par
+  double\tab PowerSeriesFunc(int k, double x);\par
+  double\tab LegendreFunc(int k, double x);\par
+  double\tab Expf(double x, double a);  \par
+  double\tab TwoExponentials(int idummy, double x);\par
+//Added for Chapt-7\par
+  void\tab MakeBeta();\par
+  void\tab MakeAlpha();\par
+  double\tab MatInv();\tab\tab\tab //invert a matrix\par
+  void\tab SquareByRow();\tab\tab // multiply square matrix by linear matrix\par
+  void\tab SigMatrix();     \par
+// added for Chapt-8\par
+  void\tab ReadParameterFile_NonLin(char fName[], double stepSize);\par
+  void\tab Marquardt(double &chiSqr, double chiCut, double lambda);\par
+  void\tab SigParab();\par
+  double\tab dXiSq_da(int j);\par
+  double\tab d2XiSq_da2(int j);\par
+  double\tab d2XiSq_dajk(int j, int k);\par
+// added for Chapt-9\par
+  double\tab OneLorentz(int idummy, double x);\tab\tab // Calculate one peak on background\par
+  double\tab TwoLorentz(int idummy, double x);\tab\tab // Calculate two peaks on background\par
+  double\tab Lorentz(double x, double mean, double gamma);\tab\tab // Calculate the peak\par
+//Input Output\par
+  void\tab FitOut(char outFile[], double chi2, char aErrorsFrom);\par
+\pard\nowidctlpar\b\f0\\Chapt-10\b0\par
+MaxLikelihood.cpp\tab\tab\tab\tab Maximum likelihood calling program\par
+MaxLike.par\tab\tab\tab\tab\tab Decay of a single unstable state\par
+MaxLike.dat\par
+GenUtil.h\par
+\par
+\b\\Chapt-11\par
+\b0 TestStats.cpp\tab\tab\tab\tab Calling program to test various statistical functions\par
+StatFunctions.cpp\tab\tab\tab\tab A collection of statistical functions discussed in several  \par
+\ul StatFunctions.h\ulnone\tab\tab\tab\tab chapters,including Chapter 11 and Appendix C.\par
+double Power(double x, double a);\tab\tab\tab\tab // x^a\par
+double Simpson(char functCode,int nIntervals, double loLim, double hiLim, double p1, \par
+\tab\tab\tab\tab\tab\tab double p2, double p3); \tab\tab //2 calcs/interval\par
+double Gamma(double h);\tab\tab // Approximate Gamma function for integers and half-integers     \par
+double Chi2_Dens(double x, double h, double g);\tab\par
+double ChiProb(double chi2, double nFree); \tab // Returns integral from chi2 to infinity. \par
+double LinCorrel_Dens(double r, double nFree, double dummy);   \par
+double LinCorProb(double r, double nFree); \tab\tab // Returns integral from r to infinity.\par
+double StudentT_Dens(double  t, double nu, double g, double dummy); \par
+double Stud_tProb(double t, double h);\tab\tab\tab // Returns integral from -t to +t.\par
+double F_Dens(double f, double nu1, double nu2, double g);\tab\tab\tab\par
+double F_Prob(double f, double nu1, double nu2);\tab // Returns integral from f to infinity. \par
+double GaussProb(double xLim);\tab\tab\tab\tab // Returns integral from -xLim to + xLim.\par
+\par
+\b\\Append-A\b0\par
+CubicSplines.cpp\tab\tab\tab\tab\tab // Calculate s spline point, includes a testing routine\par
+Spline.dat\tab\tab\tab\tab\tab\tab // Sample data\par
+\ul Other Sample programs\par
+\ulnone Numerical derivatives: calculated in  Append-A\\Cubic Splines.cpp and in \\Chapt-6\\FitUtil.cpp.  \par
+\tab These are forms peculiar to the particular problems.\par
+Simpson's rule: routine in \\Chapt-6\\GenUtil.cpp and in \\Chapt-11\\StatFunctions.cpp.\par
+\par
+\b\\Append-B\par
+\b0\\CppLibrary\\FitUtil.cpp includes routines for multiplying and inverting matrices.\par
+\par
+\b\\Append-C\b0\par
+\\Chapt-11\\StatFunctions.cpp includes routines for calculating all the probabilities discussed \tab\tab\tab\tab\tab in this section. \par
+\par
+\b\\Append-D\par
+\b0\\CppLibrary\\QuikHist.cpp includes simple routines for making a character-based histogram. \par
+\par
+}
+ 

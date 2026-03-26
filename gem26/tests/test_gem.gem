@@ -1,0 +1,10 @@
+# Test script for sys.doc behavior
+# This line is a comment
+
+sys.print("--- Comments of current file ---")
+sys.print(sys.doc())
+
+sys.print("--- Full content of test_gem.gem ---")
+sys.print(sys.doc("test_gem.gem"))
+
+exit

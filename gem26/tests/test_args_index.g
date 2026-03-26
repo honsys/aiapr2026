@@ -1,0 +1,5 @@
+_args = sys.args()
+sys.print("0:", _args[0])
+sys.print("1:", _args[1])
+sys.print("2:", _args[2])
+sys.print("3:", _args[3])

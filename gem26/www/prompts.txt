@@ -1,0 +1,35 @@
+write a gem lang URL redirect webapp using the builtin object www here as @url2url.g; and write a makefile that supports an install of gem and gem modules and gem app into /usr/local with tests
+
+
+✦ I have implemented the URL redirect webapp and the comprehensive Makefile as requested.
+
+
+  1. URL Redirect WebApp (@url2url.g)
+  The application defines a mapping of short paths to target URLs and serves them using the builtin www object. Since www.app is
+  optimized for high-performance HTML delivery, I utilized Meta Refresh headers to perform robust client-side redirection. The script
+  also includes a persistent loop to keep the server running in the background when compiled as a standalone binary.
+
+  2. Test Suite (test_redirect.g)
+  A dedicated test script verifies the redirection logic and route generation. It ensures that the app correctly translates the redirect
+  map into functional HTML routes.
+
+
+  3. Comprehensive Makefile
+  The provided Makefile handles the entire lifecycle of the Gem language and the Redirect App:
+   - Build: Automatically builds the Gem interpreter from source if it's not already in the system PATH.
+   - Compile: Uses the Gem compiler (-c) to bundle @url2url.g into a self-contained executable named url2url.
+   - Install: Deploys the gem binary, the url2url app, and all Gem modules (.gm files) into /usr/local/bin and /usr/local/lib/gem/,
+     respectively.
+   - Test: Executes both the comprehensive system-wide Gem tests and the app-specific redirection tests.
+
+  You can now build, test, and install the application using:
+
+
+   1 make test
+   2 sudo make install
+  The compiled app can be run simply as url2url, and it will listen on port 8091 (configurable in the script).
+
+
+
+url2url CLI should support destination redirect url and ensure the destiation is alive and accepting connections
+

@@ -1,0 +1,47 @@
+# Makefile for Markdown to Ren'Py conversion
+# Supports macOS and Linux
+
+# Define the Python interpreter to use
+PYTHON ?= python3
+
+# Path to the md_to_rpy.py script
+MD_TO_RPY_SCRIPT = renpy/md_to_rpy.py
+
+# Directory where Ren'Py scripts should be placed
+RENPY_GAME_DIR = renpy/cybernovel_vn/game/
+
+# Find all markdown files in the current directory
+MARKDOWN_FILES = $(wildcard *.md)
+
+# Generate corresponding Ren'Py script names in the target directory
+# For example: DanielsLair.md -> renpy/cybernovel_vn/game/DanielsLair.rpy
+RPY_FILES = $(patsubst %.md, $(RENPY_GAME_DIR)%.rpy, $(MARKDOWN_FILES))
+
+.PHONY: all clean help
+
+all: $(RPY_FILES)
+
+# Rule to create the output directory if it doesn't exist
+# This is a prerequisite for any .rpy file generation.
+$(RENPY_GAME_DIR):
+	@echo "Ensuring output directory $(RENPY_GAME_DIR) exists..."
+	mkdir -p $(RENPY_GAME_DIR)
+
+# Rule to convert each markdown file to a Ren'Py script
+# The `| $(RENPY_GAME_DIR)` makes sure the directory exists before attempting to write.
+$(RENPY_GAME_DIR)%.rpy: %.md | $(RENPY_GAME_DIR)
+	@echo "Converting $< to $@"
+	$(PYTHON) $(MD_TO_RPY_SCRIPT) $< $@
+
+clean:
+	@echo "Cleaning up generated .rpy files from $(RENPY_GAME_DIR)..."
+	rm -f $(RPY_FILES)
+
+help:
+	@echo "Usage:"
+	@echo "  make -f Makefile.md2rpy            - Convert all .md files in the current directory to .rpy files in $(RENPY_GAME_DIR)."
+	@echo "  make -f Makefile.md2rpy clean      - Remove all generated .rpy files from $(RENPY_GAME_DIR)."
+	@echo ""
+	@echo "Note: This Makefile assumes the 'renpy/md_to_rpy.py' script is capable of converting markdown to Ren'Py format"
+	@echo "and accepts two command-line arguments: input markdown file and output .rpy file."
+	@echo "It also assumes that a Python interpreter ('python3' by default) is available."

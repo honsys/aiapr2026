@@ -1,0 +1,92 @@
+# Makefile to build multi-language doconvrt CLI tools (pandoc-based and native)
+
+.PHONY: all pandoc_cli native_cli clean install_deps
+
+# Main target builds everything
+all: pandoc_cli native_cli
+
+# Target to build all pandoc-based CLIs
+pandoc_cli:
+	@$(MAKE) -C pandoc_cli all
+
+# Target to build all native CLIs
+native_cli: native_cli_cpp native_cli_go native_cli_python native_cli_julia
+
+# --- Native C++ ---
+native_cli_cpp: native_cli/cpp/main.cpp native_cli/cpp/lib/converter.cpp
+	@echo "Building Native C++ version..."
+	g++ -std=c++11 -static -I./native_cli/cpp/lib -o native_cli_cpp native_cli/cpp/main.cpp native_cli/cpp/lib/converter.cpp -lcmark
+
+# --- Native Go ---
+native_cli_go:
+	@echo "Building Native Go version..."
+	cd native_cli/go && go mod init doconvrt && go mod tidy
+	go build -ldflags="-w -s" -o native_cli_go ./native_cli/go/main.go
+
+# --- Native Python ---
+native_cli_python:
+	@echo "Building Native Python version (creates a shell script wrapper)..."
+	@echo '#!/bin/sh' > native_cli_python
+	@echo 'PYTHONPATH=./native_cli/python python3 ./native_cli/python/main.py "$$@"' >> native_cli_python
+	@chmod +x native_cli_python
+
+# --- Native Julia ---
+native_cli_julia:
+	@echo "Building Native Julia version (creates a shell script wrapper)..."
+	@echo '#!/bin/sh' > native_cli_julia
+	@echo 'julia --project=./native_cli/julia ./native_cli/julia/main.jl "$$@"' >> native_cli_julia
+	@chmod +x native_cli_julia
+
+# --- Housekeeping ---
+clean:
+	@echo "Cleaning up..."
+	@rm -f native_cli_cpp native_cli_go native_cli_python native_cli_julia
+	@cd pandoc_cli && $(MAKE) clean || true
+	@cd native_cli/go && rm -f go.mod go.sum || true
+
+install_deps:
+	@echo "Installing dependencies..."
+	@echo "--- C++ (libcmark) ---"
+	@if [[ "$$(uname)" == "Darwin" ]]; then \
+		brew install cmark; \
+	else \
+		if command -v apt-get >/dev/null 2>&1; then \
+			sudo apt-get update && sudo apt-get install -y libcmark-dev; \
+		elif command -v dnf >/dev/null 2>&1; then \
+			sudo dnf install -y cmark-devel; \
+		else \
+			echo "Could not find apt or dnf. Please install cmark development library manually."; \
+		fi; \
+	fi
+	@echo "--- Python (weasyprint, markdown-it-py) ---"
+	pip install -q weasyprint markdown-it-py
+	@echo "--- Go (goldmark, chromedp) ---"
+	@# Go modules will be downloaded on build
+	@echo "--- Julia (ArgParse) ---"
+	julia --project=./native_cli/julia -e 'using Pkg; Pkg.instantiate()'
+	@echo "\nNOTE: For native Go PDF conversion, you must have Google Chrome or Chromium installed."
+	@echo "NOTE: For pandoc-based apps, you still need pandoc and a LaTeX distribution."
+
+# --- Makefile for pandoc_cli directory ---
+.PHONY: pandoc_cli/all pandoc_cli/clean
+pandoc_cli/all pandoc_cli/clean:
+	@$(MAKE) -C pandoc_cli $(@F)
+
+# Create a Makefile inside pandoc_cli on the fly if it doesn't exist
+# This makes the project self-contained.
+$(shell cat > pandoc_cli/Makefile << 'EOL'
+.PHONY: all clean
+
+all: doconvrt_cpp doconvrt_go
+
+doconvrt_cpp: doconvrt.cpp
+	g++ -std=c++11 -static -o doconvrt_cpp doconvrt.cpp
+
+
+doconvrt_go: doconvrt.go
+	go build -ldflags="-w -s" -o doconvrt_go doconvrt.go
+
+clean:
+	rm -f doconvrt_cpp doconvrt_go
+EOL
+)

@@ -1,0 +1,65 @@
+# Makefile to build multi-language doconvrt CLI tools
+
+.PHONY: all clean install_deps
+
+all: doconvrt_cpp doconvrt_go doconvrt_python doconvrt_julia
+
+# --- C++ ---
+doconvrt_cpp: doconvrt.cpp
+	@echo "Building C++ version..."
+	g++ -std=c++11 -static -o doconvrt_cpp doconvrt.cpp
+
+# --- Go ---
+doconvrt_go: doconvrt.go
+	@echo "Building Go version..."
+	go build -ldflags="-w -s" -o doconvrt_go doconvrt.go
+
+# --- Python ---
+# Note: Requires pyinstaller to be installed (see install_deps)
+doconvrt_python: doconvrt.py
+	@echo "Building Python version (using PyInstaller)..."
+	pyinstaller --name doconvrt_python --onefile --clean doconvrt.py
+	@# Move executable from dist directory to the current directory
+	@mv dist/doconvrt_python .
+	@rm -rf build dist doconvrt_python.spec
+
+# --- Julia ---
+# Note: Requires PackageCompiler.jl to be installed (see install_deps)
+# This creates a full application directory `build_jl`
+doconvrt_julia: doconvrt.jl Project.toml build.jl
+	@echo "Building Julia version (using PackageCompiler)..."
+	@echo "This may take a while as it compiles Julia's system image."
+	julia build.jl
+	@# For consistency, create a symlink or copy the executable
+	@ln -sf build_jl/bin/doconvrt_julia doconvrt_julia
+	@echo "Julia app created. Executable: ./doconvrt_julia"
+
+# --- Housekeeping ---
+clean:
+	@echo "Cleaning up..."
+	@rm -f doconvrt_cpp doconvrt_go doconvrt_python doconvrt_julia
+	@rm -rf build_jl build dist
+	@find . -name "*.pyc" -delete
+	@find . -name "__pycache__" -delete
+
+install_deps:
+	@echo "Installing dependencies..."
+	@echo "--- C++ ---"
+	@if [[ "$$(uname)" == "Darwin" ]]; then \
+		echo "Assuming Xcode Command Line Tools are installed on macOS."; \
+	else \
+		if command -v apt-get >/dev/null 2>&1; then \
+			sudo apt-get update && sudo apt-get install -y build-essential; \
+		elif command -v dnf >/dev/null 2>&1; then \
+			sudo dnf groupinstall -y "Development Tools"; \
+		else \
+			echo "Could not find apt or dnf. Please install a C++ compiler (g++) manually."; \
+		fi; \
+	fi
+	@echo "--- Python ---"
+pip install -q pyinstaller
+	@echo "--- Julia ---"
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
+	@echo "--- Go ---"
+	@echo "Go dependencies are handled by 'go build'."
+	@echo "\nNOTE: Don't forget to install pandoc and a LaTeX distribution (like MacTeX or TeX Live) to run the converters!"

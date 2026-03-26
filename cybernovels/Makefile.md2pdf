@@ -1,0 +1,63 @@
+# Makefile for Markdown to LaTeX/PDF conversion
+# Supports macOS and Linux
+
+# Default font size for large print. Can be overridden:
+# e.g., make FONTSIZE=14pt
+# Standard LaTeX classes typically support 10pt, 11pt, 12pt directly.
+# For larger sizes (e.g., 14pt, 16pt, 18pt), pandoc will try its best
+# by passing it as a class option. For more precise control over very
+# large fonts or specific document layouts, a custom LaTeX template
+# (e.g., using --template=my-template.latex) might be necessary.
+FONTSIZE ?= 12pt
+
+# Default LaTeX engine for PDF generation. Can be overridden:
+# e.g., make LATEX_ENGINE=lualatex
+# xelatex is recommended for better font handling and system font access.
+LATEX_ENGINE ?= xelatex
+
+# Find all markdown files in the current directory
+MARKDOWN_FILES = $(wildcard *.md)
+
+# Generate corresponding PDF file names
+PDF_FILES = $(patsubst %.md, %.pdf, $(MARKDOWN_FILES))
+
+.PHONY: all clean help
+
+all: $(PDF_FILES)
+
+%.pdf: %.md
+	@echo "Converting $< to $@"
+	# Convert markdown to PDF using pandoc
+	# --from=markdown: specifies input format
+	# --to=pdf: specifies output format
+	# --standalone: produces a complete standalone document
+	# --variable fontsize=$(FONTSIZE): passes font size to the LaTeX template
+	# --pdf-engine=$(LATEX_ENGINE): specifies the LaTeX engine (e.g., xelatex, pdflatex, lualatex)
+	# -V geometry:margin=1in: sets page margins to 1 inch
+	# -V mainfont, monofont, sansfont: sets fonts for main text, monospace, and sans-serif text.
+	#   Requires xelatex or lualatex and system fonts like DejaVu Serif/Sans.
+	pandoc $< -o $@ \
+		--from=markdown \
+		--to=pdf \
+		--standalone \
+		--variable fontsize=$(FONTSIZE) \
+		--pdf-engine=$(LATEX_ENGINE) \
+		-V geometry:margin=1in \
+		-V mainfont="DejaVu Serif" \
+		-V monofont="DejaVu Sans Mono" \
+		-V sansfont="DejaVu Sans"
+
+clean:
+	@echo "Cleaning up generated files..."
+	# Clean up generated PDF files and auxiliary files from LaTeX compilation
+	rm -f $(PDF_FILES) *.aux *.log *.fls *.fdb_latexmk *.synctex.gz *.toc *.out
+
+help:
+	@echo "Usage:"
+	@echo "  make -f Makefile.md2pdf           - Convert all .md files to .pdf with default settings (12pt, xelatex)."
+	@echo "  make -f Makefile.md2pdf FONTSIZE=14pt - Convert all .md files to .pdf with 14pt font size."
+	@echo "  make -f Makefile.md2pdf LATEX_ENGINE=pdflatex - Convert using pdflatex engine (might not support custom fonts)."
+	@echo "  make -f Makefile.md2pdf clean     - Remove all generated .pdf, .aux, .log, etc. files."
+	@echo ""
+	@echo "Note: Requires pandoc and a LaTeX distribution (e.g., TeX Live, MacTeX) with xelatex/pdflatex installed."
+	@echo "For custom fonts (DejaVu Serif/Sans), ensure they are installed on your system or use a different font name."

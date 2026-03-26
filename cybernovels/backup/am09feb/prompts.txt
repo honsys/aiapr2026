@@ -1,0 +1,117 @@
+insert more prose without removing any existing content into @vol2DanielandBailieBoy_FoFandGraham.md to provide more scenes and content with Daniel and FoF and their pets making the round trip from earth to FoF's family reunion; with discussions of AI tech and Daniel introduces FoF to baroque and classical music of Earth -- Bach and Beethove and Handel and Vivaldi and Mozart and Stranvinksi and Prokoviev and more. Point out that Daniel's mother is named after 2 French operahs. FoF asks Daniel to explain other forms of Earthly Art and he describes how before and after he took each written and oral PHD qualifying exam in the Johns Hopkins Physics dept he would walk through the Baltimore museum of modern art; and one weekend he took a train from Baltimore to Washington DC and found the Post Impressionism exhibit at the Smithsonian
+
+While Daniel and FoF and pets are traversing the galaxy Zora and Volkov meet in a secret location they establish in Eastern Europe to plan ahead an develop a
+ strategy for dealing with the Vraxx, while listening to RUssian classical music. While Daniel and FoF listen to symphanies in FoF's starship, BailieBoy decides he likes Bach and Beethoven, and Graham likes Vivaldi ad Handel, and all of them listen to Mozart too
+
+Volkov follows the ancient Persian Army policy described by Heroditus to conduct three iterations of military planning their mission into the Vraxx stonghold in Sibera. First he sits down stone cold sober and writes down a plan, then sleeps on it. The next day his sips mulled red wine (red vodka) and reviews the plan and revises it, then sleeps on it. The third day he rests and copes with his hangover. The fourth day he is once again sober and reviews the 2 versions of his plan and performs the penultimate revisions and provides it to Zora, who has also performed the same exercise. They review each other's plans and settle on a final revision.
+
+insert more prose without removing any existing content into @vol2DanielandBailieBoy_FoFandGraham.md to provide more context and perspectivie observations by BailieBoy and by GrahamCracker in each chapter as they follow Daniel and FoF adventures and hear and see and sniff and feal and patricipate in all the various acitivites; the dog and the cat somehow sense a vraxx in human disguise and attempt to inform FoF and Daniel
+
+insert more prose without removing any existing content into each and every chapter @vol2DanielandBailieBoy_FoFandGraham.md to provide more content of Joe helping Jay's team investigate financial transactions in the global internation shadow banking system
+
+insert more scenes without removing existing prose with Daniel's father Dr Professor John F Hon and Daniel's former NASA office mate Dr Alan
+Mcconnell discussing scenarions for helping Daniel throughout
+
+insert more prose without removing any existing content into each and every chapter @vol2DanielandBailieBoy_FoFandGraham.md to provide more content of Daniel's 2 brilliant MIT genious former work colleagues and mentors Geoge Smoot and Leon Herreid interacting with each other and with Daniel discussong Cosmology and Astrophysics and the software development of state-of-the-art bleeding edge infrared and
+
+microwave instruments they built to study the cosmic microwave background. also insert scenes with Professors Richard Elston and Charles Telesco and their respectibe near and mid IR instruments; and also mention Daniel's Johns Hopkins professors Bruce Barnett and Arthur Davidson along with Arthur Davidson's Hopkins Ultraviolet Telescope aka HUT and its historic space shuttle mission that Daniel participated in as a PhD qualifying candidate, but instrument hardware problems resulted in poor data acquisition, resulting in Daniel taking a leave of absence from his PhD. Daniel plans to return to Hopkins, but life seems to have other plans for him.
+
+write a script that converts markdown to latex with a large easy to read font and a makefile suppoting macos and linux
+
+✦ I have updated the Makefile with the features you requested. It no longer depends on the md_to_latex.sh script for conversions.
+
+  Here is a summary of the new commands:
+
+   * Install `pandoc`:
+   1     make install_pandoc
+      This will attempt to install pandoc on your system. It supports macOS with Homebrew and Linux with apt, dnf, or yum. You may be prompted
+  for your password on Linux.
+
+   * Markdown to PDF:
+   1     make pdf
+      Converts all .md files to .pdf. This is the default, so just make works too.
+
+   * Markdown to LaTeX:
+   1     make latex
+      Converts all .md files to .tex files.
+
+   * Convert to Markdown:
+   1     make markdown
+      Converts existing .tex and .pdf files to .md. Please note that PDF-to-Markdown conversion can be unreliable.
+
+   * Cleaning Up:
+
+   1     make clean
+      Removes generated files like .pdf, .tex, and .log files.
+   1     make distclean
+      Does everything make clean does, and also removes Markdown files generated from other file types.
+
+> also write versions of the file conversion script in golang and julia and python
+
+✦ Of course. I will write three new scripts that perform the same Markdown-to-LaTeX conversion, one each for Python, Go, and Julia.
+
+  Each script will:
+   1. Take a single command-line argument: the path to the input Markdown file.
+   2. Verify that pandoc is installed and that the input file exists.
+   3. Execute pandoc with the same settings as before to generate a .tex file (14pt font, 1-inch margins).
+
+  I will now create md_to_latex.py, md_to_latex.go, and md_to_latex.jl.
+
+the makefile should support a list of files created by a recusive directory search of markdown or latex or pdf files    
+
+write  CLI apps named doconvrt in python and julia and golang that support bi-directinal document convert to and from markdown and latex and
+  pdf and html and plain text
+
+
+write new versions of the convert apps, and preserve the existing versions, as libraries and modules included and imported and used in simple
+  mains, along with a new makefile, using native libs and modules rather than the external pandoc tool
+
+
+without removing any existing prose provide more content via conversations between Daniel and FoF in each and every chapter of vol2DanielandBailieBoy_FoFandGraham.md with each describing their respective childhoods: Daniel discovering the science fiction section of his grade school library, reading Heinlein and Asimov and Clark and others and FoF having her own similar galaxy exploration accounts from her extended family library
+
+
+write a makefile supporting macos and linux that provides markdown to latex conversions of all markdown files in this folder with options to set
+  font size for large print novels for elderly folks
+
+write a makefile supporting macos and linux that creates a renpy novel from each markdown file in this folder
+
+without removing existing prose proceed with more details in the first 3 chapters of @vol3DanielLionDenWolfLair.md to describe the darkest moments of Daniels time in the dark cold Vraxx prison cell as he is in deep in reverie, trying his best to recall the happier times of his life -- in college at Columbia and Sunday feasts in Brooklyn with Joe's family, and his regrets of missing an anthropolgy class with Margaret Mead his senior year; then in grad school at Johns Hopkins with classmates Luke and Dan and Erica and Juan with very supportive Professors Bruce Barnett and Arthur Anderson and Richard Elston; then his first contract jobs at NASA with Leon Herreid and Karin Babst and George Smoot and Alan Mcconnell and playing tennis with Bob Price and Richard Schwartz. At some point in his deepest darkest moment he realizes someone is whispering to him through a grating. It is FoF. She has located him through the ankle bracelet when it became briefly activated by his proximity before it was lost again during another round of torture. FoF manages to rescue Daniel at the end of chapter 3 via a newly designed teleportation harness she hands him through the grating in a tightly rolled pouch.
+
+Daniel's parents divoced when he was an infant and he, and his todler sister who was 18 months older, and mother departed LA to live in DC where they were joined my his latin mother's abuela and abuelo, bilingual, etc
+
+in all 3 volumes danial recalls conversations with his estranged parents. his mother a polymath multilingual genious started out as a solar astronomer at the smithsonian in dc when daniel was a child, while his father was a pioneer of NMR who turned down stanford to become a weapons physicist ... his mother switched fields and became  an oceanographer while his dad became the country's preeminant high engery laser weapons dev. 
+
+Daniel's parents divoced when he was a very young toddler and he grew up in the DC metro with his latina mother and abuela and abuelo, bilingual, etc. the summer before his older sister entered high school Daniel and his sister Diana commenced a many summer practice of flying froma Reagan National to LAX where they were fetched by their father who kept a 30 foot sailboat in Marina Del Ray. Durin g many conversations spanning many summers Daniel's father spoke of his career as a physicist, and his belief that when one studies Physics one becomes well prepared for any high tech career. Daniel's father asserted that essentially Physcists can do anything and everything; so Daniel resolved to major in Physics when he would later attend college.
+
+without removing existing prose proceed with more details in all chapters of @vol3DanielLionDenWolfLair.md with Daniel devoting time in FoF's extensive technical library trying to understand her faster than light starship science and mention quaternion and tenser math and tachyons with comparison and human historical content, along with conversations with FoF comparing the history of her civilization and comparisons with human history 
+
+without removing existing prose proceed with more details in all chapters of @vol3DanielLionDenWolfLair.md describe FoF's botech ablity to transform her hominid marcupial slo0th-like form to human and back and emphasize that she remains 5 foot 2 inches tall, but in her natural form she has fine tawny fur covering much of her body and that her feet are as dextorous as her hands
+ 
+
+✦ Okay, I understand the request. I will enhance the existing prose in vol3DanielLionDenWolfLair.md by adding more vivid
+  descriptions of FoF's biotechnical transformation abilities, detailing her natural form, and including reactions from Daniel
+  and his canine companions during these transformations.
+
+I will perform the following steps:
+   1. Read the content of vol3DanielLionDenWolfLair.md.
+   2. Add details to Chapter 0 regarding FoF's bionic abilities and her natural form.
+   3. Add details to Chapter 1 about FoF transforming and Daniel and the dogs' amazement during outings.
+   4. Add further details to Chapter 2, incorporating FoF's comparisons of Xylosian and human history, focusing on quaternion
+      and tensor math, and tachyons.
+   5. Add details to Chapter 3 regarding the intensity of Daniel's torture, the detection of FoF's signal, and the nature of
+      the harness.
+   6. Add more extensive details to Chapter 4 about FoF's transformation and Daniel's reaction to her natural form, including
+      the dogs' reactions.
+   7. Add more details to Chapter 5 to specify her fur color and feet dexterity.
+
+describe the young pre-teen vraxx mikey in detail as red furred wolf-like and upright biped with fangs and retractable sharp claws and dexterious human-like hands and how bailie the dog and graham the cat gradually accept him and his reciprical fascination with the pets and with daniel and FoF
+
+
+ continue expanding the prose with removing any existing prose in @vol3DanielLionDenWolfLair.md to describe the young
+   pre-teen vraxx mikey in detail as a red furred wolf-like upright biped with fangs and retractable sharp claws and
+   dexterious human-like hands and how bailie the dog and graham the cat gradually accept him and his reciprical
+   fascination with the pets and with daniel and FoF. mikey is quite bright and curious and learns to speak american
+   english during the course of all chapters and eventually reveals his extended family are essentually slaves of the more
+   dominent militant vraxx. the vraxx economy is founded on slave trade and the dominnts subscribe to a system one might
+   describe as mix of spartan and roman and mongol empires; 90% of the vraxx population are slaves, akin to sparta's helots.
+

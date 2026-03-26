@@ -1,0 +1,1 @@
+create an interactive visual novel using https://github.com/renpy/renpy.git with the content of the markdown files in this folder without removing any existing prose in the markdown

@@ -1,0 +1,2 @@
+write a detailed readme here discussing all tutorial examples along with an introduction to the gem lang and a roadmap for future features and architecture and AI support (prompt editing and more)
+

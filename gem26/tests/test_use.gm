@@ -1,0 +1,4 @@
+fun foo(x)
+  sys.print("Foo called with", x)
+  res = x * 2
+end res
