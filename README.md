@@ -1,6 +1,10 @@
 # aiapr2026
 
+Continue gemini / ollama / mistrel activities -- cybernovels and gem26 lang dev, etc.
 
+Daniel should devote time to the gem lang dev in vol3 and use revenue from smart colthes sales to invest using new algos implemented in gem lang.
+
+Review list of characters in all vols and create cast of characters appendix with bios; the Vraxx operative needs more attention and her polar opposite the Vraxx preteen Mikey too. Also FoF's grandfather Hector is found somewhere in the Magellenic clouds, and he seems to already have met Golden Eagle, etc.
 
 ## Getting started
 
