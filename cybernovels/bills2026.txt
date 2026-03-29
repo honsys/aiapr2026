@@ -1,0 +1,8 @@
+amex = locked
+bestbuy_visa = 355.00
+BofACU = 2672.55
+BofAJHU = 0.00
+bonvoy_visa = 0.0 
+nasa_visa = 243.40
+wellsfargo_visa = 0.00
+
