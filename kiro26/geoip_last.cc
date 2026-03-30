@@ -1,14 +1,28 @@
-// geoip_last.cpp — reads /var/log/wtmp, prints GeoIP city/country per login IP
-// Build: g++ -std=c++23 -o geoip_last geoip_last.cpp -lcurl
+// geoip_last.cc — reads /var/log/wtmp, prints GeoIP city/country per login IP
+// Build: g++ -std=c++23 -o geoip_last geoip_last.cc -lcurl
 // Usage: ./geoip_last [wtmp_file]
 
+// ── platform detection ────────────────────────────────────────────────────────
+#if defined(__APPLE__)
+#  include <AvailabilityMacros.h>
+#  include <utmpx.h>          // macOS uses utmpx, not utmp
+#  define UTMP_STRUCT utmpx
+#  define UT_HOST     ut_host
+#  define USER_PROC   USER_PROCESS
+#elif defined(__linux__)
+#  include <utmp.h>
+#  define UTMP_STRUCT utmp
+#  define UT_HOST     ut_host
+#  define USER_PROC   USER_PROCESS
+#else
+#  error "Unsupported platform"
+#endif
+
 #include <curl/curl.h>
-#include <utmp.h>
 
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#include <cstring>
 #include <format>
 #include <fstream>
 #include <iostream>
@@ -22,7 +36,7 @@ static size_t write_cb(char* ptr, size_t size, size_t nmemb, std::string* out) {
     return size * nmemb;
 }
 
-// ── Minimal JSON field extractor (no dependency) ──────────────────────────────
+// ── Minimal JSON field extractor ──────────────────────────────────────────────
 static std::string json_field(const std::string& json, const std::string& key) {
     auto pos = json.find(std::format("\"{}\"", key));
     if (pos == std::string::npos) return "?";
@@ -56,19 +70,18 @@ static GeoInfo geoip(const std::string& ip) {
 
 // ── Resolve hostname → IP string ──────────────────────────────────────────────
 static std::string resolve(const char* host) {
-    // Already an IP?
     struct in_addr a{}; struct in6_addr a6{};
     if (inet_pton(AF_INET, host, &a) == 1 || inet_pton(AF_INET6, host, &a6) == 1)
         return host;
 
     addrinfo hints{}, *res{};
-    hints.ai_family = AF_UNSPEC;
+    hints.ai_family   = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     if (getaddrinfo(host, nullptr, &hints, &res) != 0) return {};
 
     char buf[INET6_ADDRSTRLEN]{};
     if (res->ai_family == AF_INET)
-        inet_ntop(AF_INET, &reinterpret_cast<sockaddr_in*>(res->ai_addr)->sin_addr, buf, sizeof buf);
+        inet_ntop(AF_INET,  &reinterpret_cast<sockaddr_in* >(res->ai_addr)->sin_addr,  buf, sizeof buf);
     else
         inet_ntop(AF_INET6, &reinterpret_cast<sockaddr_in6*>(res->ai_addr)->sin6_addr, buf, sizeof buf);
     freeaddrinfo(res);
@@ -88,17 +101,15 @@ int main(int argc, char* argv[]) {
     std::println("{:<45} {:<22} {}", "IP", "City", "Country");
     std::println("{}", std::string(75, '-'));
 
-    utmp entry{};
+    UTMP_STRUCT entry{};
     while (f.read(reinterpret_cast<char*>(&entry), sizeof entry)) {
-        // Only USER_PROCESS entries with a remote host (like last.c)
-        if (entry.ut_type != USER_PROCESS) continue;
-        const char* host = entry.ut_host;
+        if (entry.ut_type != USER_PROC) continue;
+        const char* host = entry.UT_HOST;
         if (host[0] == '\0') continue;
 
         std::string ip = resolve(host);
         if (ip.empty()) continue;
 
-        // Skip private/loopback addresses
         if (ip.starts_with("127.") || ip.starts_with("10.") ||
             ip.starts_with("192.168.") || ip == "::1") continue;
 

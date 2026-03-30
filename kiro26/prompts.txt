@@ -1,4 +1,23 @@
+
+all c++ filenames should use ".cc" filename extension and conditional includes 
+
+write a CLI app in c++26 that prints geoIP city and country info of the IPs using the code from https://github.com/util-linux/util-linux/blob/master/login-utils/last.c ; all c++ filenames should use ".cc" filename extension and conditional includes 
+
+also write a pure python module and cli equiv of the c++26
+
+write a makefile that supports macos and linux ; the makefile should use Nuitka to optimize the python impl
+
+the makefile should install all dependencies via a "dep" target and should check available c++ compilers on the host to use the proper c++ compile cli
+
 all c++26 and python should compile an macos and linux; extend the makefile to use cython for the python code
+
+the makefile should create a local python3 venv and activate it for all python and cython dev and tests
+
+ensure all c++ and cython compilation works fully without errors or warnings
+
+makefile should supprt c++23 and c++26 on linux and macos to ensure all c++ and cython compilation works fully without errors or warnings
+
+> kiro
 
 1% > /help
 Switching to the [help] agent.
