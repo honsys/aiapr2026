@@ -676,7 +676,17 @@ public:
 
             if (!targets.empty() && i < tokens.size()) {
                 size_t p = i;
-                auto val = parseExpression(tokens, p);
+                // If RHS is a single bare identifier that resolves to nothing, treat as string literal
+                size_t rhsEnd = p;
+                while (rhsEnd < tokens.size() && tokens[rhsEnd].type != TOKEN_EOF) rhsEnd++;
+                bool rhsIsBareId = (rhsEnd == p + 1 && tokens[p].type == TOKEN_ID
+                                    && !currentScope->resolve(tokens[p].text)
+                                    && !builtins.count(tokens[p].text)
+                                    && !userFunctions.count(tokens[p].text)
+                                    && !userClasses.count(tokens[p].text));
+                auto val = rhsIsBareId
+                    ? std::make_shared<GemValue>(tokens[p].text)
+                    : parseExpression(tokens, p);
                 if (val) {
                     if (compoundOp != TOKEN_UNKNOWN && targets.size() == 1) {
                         auto target = targets[0];
@@ -702,11 +712,10 @@ public:
                                 // Try to update existing variable in the scope chain
                                 auto existing = currentScope->resolve(target.first);
                                 if (existing) {
-                                    // GemValue is shared, but we need to update the variant.
-                                    // Actually, resolve returns a new shared_ptr to the SAME GemValue object.
-                                    // So we just update the variant content!
                                     existing->value = val->value;
                                 } else {
+                                    // Warn: implicit declaration (no type keyword used)
+                                    std::cerr << "Warning: implicit declaration of '" << target.first << "'" << std::endl;
                                     auto thisVal = currentScope->resolve("this");
                                     if (thisVal && std::holds_alternative<std::shared_ptr<GemObject>>(thisVal->value)) {
                                         std::get<std::shared_ptr<GemObject>>(thisVal->value)->set(target.first, val);

@@ -155,3 +155,6 @@ ensure the gem lang builtin in object "ai" also supports rufus
 ========================================
 
 > update the readme with latest features including keywords and buitin functions and builtin objects along with all turtorial examples and the tutorial readme
+
+the gem lang statement "foo = abcd" should set foo to the text or string 'abcd" while "foo = 10" should set foo to a double float if foo does yet exist or issue a warning
+
