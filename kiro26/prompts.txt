@@ -1,3 +1,5 @@
+all c++26 and python should compile an macos and linux; extend the makefile to use cython for the python code
+
 1% > /help
 Switching to the [help] agent.
 Welcome to Kiro CLI Help!
