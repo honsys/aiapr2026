@@ -1,4 +1,13 @@
-CXX      := g++
+# ── detect C++ compiler ───────────────────────────────────────────────────────
+CXX := $(shell \
+    for cc in clang++ g++-14 g++-13 g++ c++; do \
+        command -v $$cc >/dev/null 2>&1 && echo $$cc && break; \
+    done)
+
+ifeq ($(CXX),)
+    $(error No C++ compiler found. Install clang++ or g++)
+endif
+
 CXXFLAGS := -std=c++26 -O2
 LDFLAGS  := -lcurl
 TARGET   := geoip_last
@@ -11,7 +20,7 @@ UNAME := $(shell uname)
 
 # ── platform tweaks ───────────────────────────────────────────────────────────
 ifeq ($(UNAME), Darwin)
-    BREW_CURL := $(shell brew --prefix curl)
+    BREW_CURL := $(shell command -v brew >/dev/null 2>&1 && brew --prefix curl 2>/dev/null || echo /usr)
     CXXFLAGS  += -I$(BREW_CURL)/include
     LDFLAGS   := -L$(BREW_CURL)/lib $(LDFLAGS)
     PY_EXT    := $(shell python -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))")
@@ -24,8 +33,31 @@ PY_SO := geoip_last$(PY_EXT)
 # ── targets ───────────────────────────────────────────────────────────────────
 all: $(TARGET) $(PY_BIN) cython
 
+# Install all dependencies
+dep:
+	@echo "==> Installing dependencies..."
+ifeq ($(UNAME), Darwin)
+	@command -v brew >/dev/null 2>&1 || (echo "Error: Homebrew not found. Install from https://brew.sh" && exit 1)
+	@brew list curl >/dev/null 2>&1 || brew install curl
+	@echo "✓ curl installed via Homebrew"
+else ifeq ($(shell . /etc/os-release 2>/dev/null && echo $$ID), ubuntu)
+	@sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev python3-dev
+	@echo "✓ libcurl4-openssl-dev and python3-dev installed"
+else ifeq ($(shell . /etc/os-release 2>/dev/null && echo $$ID), fedora)
+	@sudo dnf install -y libcurl-devel python3-devel
+	@echo "✓ libcurl-devel and python3-devel installed"
+else
+	@echo "Unsupported Linux distro. Manually install: libcurl-dev, python3-dev"
+	@exit 1
+endif
+	@python -m pip install --upgrade pip setuptools wheel
+	@python -m pip install cython nuitka
+	@echo "✓ Python packages installed (cython, nuitka)"
+	@echo "==> All dependencies installed. Run 'make' to build."
+
 # C++26 binary
 $(TARGET): $(SRC)
+	@echo "Building C++ binary with $(CXX)..."
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Nuitka standalone binary
@@ -50,4 +82,4 @@ clean:
 	rm -rf build __pycache__ *.egg-info
 	rm -rf $(PY_BIN).build $(PY_BIN).dist $(PY_BIN).onefile-build
 
-.PHONY: all cython clean
+.PHONY: all dep cython clean
