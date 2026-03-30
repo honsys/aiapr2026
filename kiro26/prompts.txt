@@ -17,6 +17,8 @@ ensure all c++ and cython compilation works fully without errors or warnings
 
 makefile should supprt c++23 and c++26 on linux and macos to ensure all c++ and cython compilation works fully without errors or warnings
 
+write a readme here describing all the work so far today along with a roadmap of future features and recommendations
+
 > kiro
 
 1% > /help
