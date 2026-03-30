@@ -1,0 +1,43 @@
+1% > /help
+Switching to the [help] agent.
+Welcome to Kiro CLI Help!
+
+I can answer questions about Kiro CLI and help you configure it:
+• Slash commands (/agent, /context, /tools, etc.)
+• Built-in tools (fs_read, code, grep, etc.)
+• Configuration settings
+• Features like MCP, Tangent Mode, Code Intelligence
+• Create/modify agents, prompts, and LSP configs in .kiro/
+
+Just ask me anything about Kiro CLI!
+
+Common questions:
+• "How do I save a conversation?"
+• "What tools are available?"
+• "How does the code tool work?"
+• "Create a new agent for me"
+
+Tip: Use /help to return to your previous agent
+For the classic help text, use /help --legacy
+
+[help] 0% > How do I save a conversation?
+
+Introspecting to get you the right information [mode: semantic] (using tool: introspect)
+ - Completed in 15.925s
+
+> Use /chat save <path> to save your current conversation to a file:
+/chat save my-session.json
+
+This exports the full conversation as JSON — message history, context files, agent config, etc. To reload it later:
+
+/chat load my-session.json
+
+A few useful options:
+- /chat save backup.json --force — overwrite an existing file
+- /chat save ~/backups/session.json — save to a specific path
+
+Note: conversations are also auto-saved to a database after every turn (per-directory), so you can resume 
+without manually saving using kiro-cli chat --resume or /chat resume.
+
+ ▸ Credits: 0.06 • Time: 24s
+
