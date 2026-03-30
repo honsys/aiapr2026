@@ -1,6 +1,0 @@
-compare free open source options trading APIs and write a detailed markdown doc here with a set of example CLI apps that use each API to sell PUTs ans sell CALLs
-
-use https://github.com/ranaroussi/yfinance to implement a webapp that displays a list of high yield etf tickers fro kurv and yieldmax with current prices and put options info
-
-use the python API for options trading https://public.com/settings/v2/api to implement a webapp that displays a list of high yield etf tickers fro kurv and yieldmax with current prices and put options info
-
