@@ -80,6 +80,9 @@
 #include "QuikHist.h"
 #undef pause
 
+// Astrophysics module (forward-included after base types)
+// gem_astro.hpp is included at the bottom of this file
+
 // Forward declarations
 class GemObject;
 class GemValue;
@@ -460,7 +463,7 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, www, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart" << std::endl;
+                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, www, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
                 std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
                 std::cout << "\nDetailed help: help \"topic\" or help(topic)" << std::endl;
@@ -687,6 +690,22 @@ public:
                 } else if (topic == "exit") {
                     std::cout << "Keyword: exit" << std::endl;
                     std::cout << "Description: Exits the Gem interpreter." << std::endl;
+                } else if (topic == "astro") {
+                    std::cout << "Description: Astrophysics, Solar Physics, and Planetary Science module." << std::endl;
+                    std::cout << "Constants: G, c, AU, pc, ly, Msun, Rsun, Lsun, Tsun, Mearth, Rearth, H0, sigma_sb" << std::endl;
+                    std::cout << "Unit conversions: to_ly(pc), to_pc(ly), to_au(m), deg_to_rad(d), rad_to_deg(r)" << std::endl;
+                    std::cout << "Stellar: luminosity(R_rsun,T), stefan_boltzmann(T,R), wien(T), abs_magnitude(m,d_pc)" << std::endl;
+                    std::cout << "         distance_modulus(d_pc), spectral_class(T), schwarzschild_radius(M)" << std::endl;
+                    std::cout << "         escape_velocity(M,R)" << std::endl;
+                    std::cout << "Orbital: orbital_period(a_au,M_msun), orbital_velocity(a_m,M_kg)" << std::endl;
+                    std::cout << "         hill_sphere(a,mp,ms), roche_limit(R,rho_p,rho_s), synodic_period(p1,p2)" << std::endl;
+                    std::cout << "         planet(name) → Mercury/Venus/Earth/Mars/Jupiter/Saturn/Uranus/Neptune" << std::endl;
+                    std::cout << "Solar:   solar_flux(dist_au), solar_wind_pressure(n_cm3,v_km_s)" << std::endl;
+                    std::cout << "         sunspot_cycle(year), parker_spiral_angle(v_sw,dist_au), solar_activity()" << std::endl;
+                    std::cout << "Cosmology: hubble_distance(z), redshift_velocity(z), lookback_time(z), critical_density()" << std::endl;
+                    std::cout << "Coords:  equatorial_to_galactic(ra,dec), angular_separation(ra1,dec1,ra2,dec2)" << std::endl;
+                    std::cout << "Exoplanet: transit_depth(rp_rearth,rs_rsun), habitable_zone(L_lsun), equilibrium_temp(L,d,A)" << std::endl;
+                    std::cout << "Pulsar:  pulsar_spindown(P_s, Pdot) → {age_yr, Bfield_G, edot_W}" << std::endl;
                 } else {
                     std::cout << "No detailed help available for " << topic << std::endl;
                 }
@@ -1437,301 +1456,6 @@ public:
     }
 };
 
-// GemFin Module (yfinance + TradingView)
-class GemFin : public GemSys {
-public:
-    GemFin() : GemSys() {
-        name = "fin";
-        set("www", std::make_shared<GemValue>(std::make_shared<GemWWW>()));
-
-        methods["ticker"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-            if (args.empty() || !std::holds_alternative<std::string>(args[0]->value)) return std::make_shared<GemValue>();
-            std::string symbol = std::get<std::string>(args[0]->value);
-            char* response = call_yfinance_ticker((char*)symbol.c_str());
-            if (response == NULL) return std::make_shared<GemValue>();
-            std::string res_str(response);
-            free(response);
-            
-            auto obj = std::make_shared<GemObject>("Ticker");
-            auto parseStr = [&](const std::string& key) {
-                size_t kPos = res_str.find("\"" + key + "\":");
-                if (kPos != std::string::npos) {
-                    size_t vStart = res_str.find("\"", kPos + key.length() + 3);
-                    if (vStart != std::string::npos) {
-                        size_t vEnd = res_str.find("\"", vStart + 1);
-                        if (vEnd != std::string::npos) return res_str.substr(vStart + 1, vEnd - vStart - 1);
-                    }
-                }
-                return std::string("");
-            };
-            auto parseNum = [&](const std::string& key) {
-                size_t kPos = res_str.find("\"" + key + "\":");
-                if (kPos != std::string::npos) {
-                    size_t vStart = kPos + key.length() + 2;
-                    size_t vEnd = res_str.find_first_of(",}", vStart);
-                    if (vEnd != std::string::npos) {
-                        try { return std::stod(res_str.substr(vStart, vEnd - vStart)); } catch(...) {}
-                    }
-                }
-                return 0.0;
-            };
-
-            obj->set("symbol", std::make_shared<GemValue>(parseStr("symbol")));
-            obj->set("price", std::make_shared<GemValue>(parseNum("price")));
-            obj->set("change", std::make_shared<GemValue>(parseNum("change")));
-            return std::make_shared<GemValue>(obj);
-        }, true };
-
-        methods["high_yield_bonds"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-            char* response = call_tradingview_high_yield((char*)"bonds");
-            if (response == NULL) return std::make_shared<GemValue>(std::vector<std::shared_ptr<GemObject>>{});
-            std::string res_str(response);
-            free(response);
-            // Minimal parser for JSON array of objects
-            std::vector<std::shared_ptr<GemObject>> bonds;
-            size_t pos = 0;
-            while ((pos = res_str.find("{", pos)) != std::string::npos) {
-                size_t end = res_str.find("}", pos);
-                if (end == std::string::npos) break;
-                std::string objStr = res_str.substr(pos, end - pos + 1);
-                auto obj = std::make_shared<GemObject>("Bond");
-                auto extract = [&](const std::string& k) {
-                    size_t kp = objStr.find("\"" + k + "\":");
-                    if (kp == std::string::npos) return std::string("");
-                    size_t vs = objStr.find("\"", kp + k.length() + 3);
-                    size_t ve = objStr.find("\"", vs + 1);
-                    return objStr.substr(vs + 1, ve - vs - 1);
-                };
-                obj->set("name", std::make_shared<GemValue>(extract("name")));
-                obj->set("description", std::make_shared<GemValue>(extract("description")));
-                obj->set("yield_to_maturity", std::make_shared<GemValue>(std::stod(extract("yield_to_maturity"))));
-                bonds.push_back(obj);
-                pos = end + 1;
-            }
-            return std::make_shared<GemValue>(bonds);
-        }, true };
-
-        methods["high_yield_etfs"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-            char* response = call_tradingview_high_yield((char*)"etfs");
-            if (response == NULL) return std::make_shared<GemValue>(std::vector<std::shared_ptr<GemObject>>{});
-            std::string res_str(response);
-            free(response);
-            std::vector<std::shared_ptr<GemObject>> etfs;
-            size_t pos = 0;
-            while ((pos = res_str.find("{", pos)) != std::string::npos) {
-                size_t end = res_str.find("}", pos);
-                if (end == std::string::npos) break;
-                std::string objStr = res_str.substr(pos, end - pos + 1);
-                auto obj = std::make_shared<GemObject>("ETF");
-                auto extract = [&](const std::string& k) {
-                    size_t kp = objStr.find("\"" + k + "\":");
-                    if (kp == std::string::npos) return std::string("");
-                    size_t vs = objStr.find("\"", kp + k.length() + 3);
-                    size_t ve = objStr.find("\"", vs + 1);
-                    return objStr.substr(vs + 1, ve - vs - 1);
-                };
-                obj->set("name", std::make_shared<GemValue>(extract("name")));
-                obj->set("description", std::make_shared<GemValue>(extract("description")));
-                obj->set("dividend_yield_recent", std::make_shared<GemValue>(std::stod(extract("dividend_yield_recent"))));
-                etfs.push_back(obj);
-                pos = end + 1;
-            }
-            return std::make_shared<GemValue>(etfs);
-        }, true };
-
-        methods["high_yield_equities"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-            char* response = call_tradingview_high_yield((char*)"equities");
-            if (response == NULL) return std::make_shared<GemValue>(std::vector<std::shared_ptr<GemObject>>{});
-            std::string res_str(response);
-            free(response);
-            std::vector<std::shared_ptr<GemObject>> equities;
-            size_t pos = 0;
-            while ((pos = res_str.find("{", pos)) != std::string::npos) {
-                size_t end = res_str.find("}", pos);
-                if (end == std::string::npos) break;
-                std::string objStr = res_str.substr(pos, end - pos + 1);
-                auto obj = std::make_shared<GemObject>("Equity");
-                auto extract = [&](const std::string& k) {
-                    size_t kp = objStr.find("\"" + k + "\":");
-                    if (kp == std::string::npos) return std::string("");
-                    size_t vs = objStr.find("\"", kp + k.length() + 3);
-                    size_t ve = objStr.find("\"", vs + 1);
-                    return objStr.substr(vs + 1, ve - vs - 1);
-                };
-                obj->set("name", std::make_shared<GemValue>(extract("name")));
-                obj->set("description", std::make_shared<GemValue>(extract("description")));
-                obj->set("dividend_yield_recent", std::make_shared<GemValue>(std::stod(extract("dividend_yield_recent"))));
-                equities.push_back(obj);
-                pos = end + 1;
-            }
-            return std::make_shared<GemValue>(equities);
-        }, true };
-
-        methods["dashboard"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-            int port = (args.empty()) ? 8082 : (int)std::get<double>(args[0]->value);
-            std::thread([port]() {
-                httplib::Server svr;
-                svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
-                    res.set_content(R"html(<!DOCTYPE html>
-<html>
-<head>
-    <title>Gem Financial Dashboard</title>
-    <style>
-        body { font-family: sans-serif; margin: 20px; background: #f0f2f5; }
-        h1 { color: #1a73e8; }
-        .table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
-        th { background: #f8f9fa; font-weight: bold; }
-        tr:hover { background: #f1f3f4; }
-        .yield { color: #28a745; font-weight: bold; }
-        .price { color: #17a2b8; }
-        .tabs { margin-bottom: 20px; }
-        .tab { padding: 10px 20px; cursor: pointer; border: 1px solid #ccc; background: #fff; margin-right: 5px; border-radius: 4px; }
-        .tab.active { background: #1a73e8; color: white; border-color: #1a73e8; }
-    </style>
-</head>
-<body>
-    <h1>Gem Financial Dashboard</h1>
-    <div class="tabs">
-        <button class="tab active" onclick="loadData('bonds')">High Yield Bonds</button>
-        <button class="tab" onclick="loadData('etfs')">High Yield ETFs</button>
-        <button class="tab" onclick="loadData('equities')">High Yield Equities</button>
-    </div>
-    <div id="content" class="table-container">Loading data...</div>
-    <script>
-        async function loadData(type) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            if (event && event.target && event.target.classList) event.target.classList.add('active');
-            document.getElementById('content').innerHTML = 'Loading ' + type + '...';
-            try {
-                const response = await fetch('/api/' + type);
-                const data = await response.json();
-                renderTable(data);
-            } catch (e) { document.getElementById('content').innerHTML = 'Error: ' + e; }
-        }
-        function renderTable(data) {
-            if (!data || data.length === 0) { document.getElementById('content').innerHTML = 'No data.'; return; }
-            let keys = Object.keys(data[0]);
-            let html = '<table><thead><tr>' + keys.map(k => '<th>'+k+'</th>').join('') + '</tr></thead><tbody>';
-            data.forEach(row => {
-                html += '<tr>' + keys.map(k => {
-                    let c = k.includes('yield') ? 'yield' : (k=='close'||k=='price'?'price':'');
-                    return '<td class="'+c+'">'+(row[k]!==null?row[k]:'-')+'</td>';
-                }).join('') + '</tr>';
-            });
-            document.getElementById('content').innerHTML = html + '</tbody></table>';
-        }
-        loadData('bonds');
-    </script>
-</body>
-</html>)html", "text/html");
-                });
-                
-                auto serveAPI = [](const char* type, httplib::Response& res) {
-                    char* response = call_tradingview_high_yield((char*)type);
-                    if (response) {
-                        res.set_content(response, "application/json");
-                        free(response);
-                    } else res.set_content("[]", "application/json");
-                };
-                svr.Get("/api/bonds", [serveAPI](const httplib::Request&, httplib::Response& res) { serveAPI("bonds", res); });
-                svr.Get("/api/etfs", [serveAPI](const httplib::Request&, httplib::Response& res) { serveAPI("etfs", res); });
-                svr.Get("/api/equities", [serveAPI](const httplib::Request&, httplib::Response& res) { serveAPI("equities", res); });
-
-                std::cout << "Starting Financial Dashboard on port " << port << "..." << std::endl;
-                svr.listen("0.0.0.0", port);
-            }).detach();
-            return std::make_shared<GemValue>(true);
-        }, true };
-
-        methods["bs_price"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-#ifdef HAS_QUANTLIB
-             if (args.size() < 6) return std::make_shared<GemValue>(0.0);
-             std::string type = args[0]->toString();
-             double strike = std::get<double>(args[1]->value), spot = std::get<double>(args[2]->value);
-             double rate = std::get<double>(args[3]->value), vol = std::get<double>(args[4]->value), t = std::get<double>(args[5]->value);
-             
-             QuantLib::Option::Type optType = (type == "put" || type == "Put") ? QuantLib::Option::Put : QuantLib::Option::Call;
-             QuantLib::Calendar calendar = QuantLib::TARGET();
-             QuantLib::Date today = QuantLib::Date::todaysDate();
-             QuantLib::Settings::instance().evaluationDate() = today;
-             QuantLib::DayCounter dayCounter = QuantLib::Actual365Fixed();
-             QuantLib::Date maturity = today + int(t*365);
-
-             auto payoff = QuantLib::ext::make_shared<QuantLib::PlainVanillaPayoff>(optType, strike);
-             auto exercise = QuantLib::ext::make_shared<QuantLib::EuropeanExercise>(maturity);
-             
-             QuantLib::Handle<QuantLib::Quote> spotHandle(QuantLib::ext::make_shared<QuantLib::SimpleQuote>(spot));
-             QuantLib::Handle<QuantLib::YieldTermStructure> qTS(QuantLib::ext::make_shared<QuantLib::FlatForward>(today, 0.0, dayCounter));
-             QuantLib::Handle<QuantLib::YieldTermStructure> rTS(QuantLib::ext::make_shared<QuantLib::FlatForward>(today, rate, dayCounter));
-             QuantLib::Handle<QuantLib::BlackVolTermStructure> volTS(QuantLib::ext::make_shared<QuantLib::BlackConstantVol>(today, calendar, vol, dayCounter));
-             
-             auto process = QuantLib::ext::make_shared<QuantLib::BlackScholesMertonProcess>(spotHandle, qTS, rTS, volTS);
-             QuantLib::VanillaOption option(payoff, exercise);
-             option.setPricingEngine(QuantLib::ext::make_shared<QuantLib::AnalyticEuropeanEngine>(process));
-             return std::make_shared<GemValue>(option.NPV());
-#else
-             return std::make_shared<GemValue>(0.0);
-#endif
-        }, true };
-
-        methods["greeks"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-             auto obj = std::make_shared<GemObject>("Greeks");
-#ifdef HAS_QUANTLIB
-             if (args.size() < 6) return std::make_shared<GemValue>(obj);
-             std::string type = args[0]->toString();
-             double strike = std::get<double>(args[1]->value), spot = std::get<double>(args[2]->value);
-             double rate = std::get<double>(args[3]->value), vol = std::get<double>(args[4]->value), t = std::get<double>(args[5]->value);
-             
-             QuantLib::Option::Type optType = (type == "put" || type == "Put") ? QuantLib::Option::Put : QuantLib::Option::Call;
-             QuantLib::Calendar calendar = QuantLib::TARGET();
-             QuantLib::Date today = QuantLib::Date::todaysDate();
-             QuantLib::Settings::instance().evaluationDate() = today;
-             QuantLib::DayCounter dayCounter = QuantLib::Actual365Fixed();
-             QuantLib::Date maturity = today + int(t*365);
-
-             auto payoff = QuantLib::ext::make_shared<QuantLib::PlainVanillaPayoff>(optType, strike);
-             auto exercise = QuantLib::ext::make_shared<QuantLib::EuropeanExercise>(maturity);
-             QuantLib::Handle<QuantLib::Quote> spotHandle(QuantLib::ext::make_shared<QuantLib::SimpleQuote>(spot));
-             QuantLib::Handle<QuantLib::YieldTermStructure> qTS(QuantLib::ext::make_shared<QuantLib::FlatForward>(today, 0.0, dayCounter));
-             QuantLib::Handle<QuantLib::YieldTermStructure> rTS(QuantLib::ext::make_shared<QuantLib::FlatForward>(today, rate, dayCounter));
-             QuantLib::Handle<QuantLib::BlackVolTermStructure> volTS(QuantLib::ext::make_shared<QuantLib::BlackConstantVol>(today, calendar, vol, dayCounter));
-             auto process = QuantLib::ext::make_shared<QuantLib::BlackScholesMertonProcess>(spotHandle, qTS, rTS, volTS);
-             QuantLib::VanillaOption option(payoff, exercise);
-             option.setPricingEngine(QuantLib::ext::make_shared<QuantLib::AnalyticEuropeanEngine>(process));
-
-             obj->set("npv", std::make_shared<GemValue>(option.NPV()));
-             obj->set("delta", std::make_shared<GemValue>(option.delta()));
-             obj->set("gamma", std::make_shared<GemValue>(option.gamma()));
-             obj->set("theta", std::make_shared<GemValue>(option.theta()));
-             obj->set("vega", std::make_shared<GemValue>(option.vega()));
-             return std::make_shared<GemValue>(obj);
-#endif
-             return std::make_shared<GemValue>(obj);
-        }, true };
-    }
-};
-
-class GemBSM : public GemFin {
-public:
-    GemBSM() : GemFin() {
-        name = "bsm";
-        methods["price_american"] = { std::function<std::shared_ptr<GemValue>(std::vector<std::shared_ptr<GemValue>>)>(
-            [this](std::vector<std::shared_ptr<GemValue>> args) {
-            if (args.size() < 3) return std::make_shared<GemValue>(0.0);
-            std::string symbol = args[0]->toString(), type = args[1]->toString(), duration = args[2]->toString();
-            auto tickerVal = call("ticker", {std::make_shared<GemValue>(symbol)});
-            if (!std::holds_alternative<std::shared_ptr<GemObject>>(tickerVal->value)) return std::make_shared<GemValue>(0.0);
-            auto tickerObj = std::get<std::shared_ptr<GemObject>>(tickerVal->value);
-            double spot = std::get<double>(tickerObj->get("price")->value), T = 0.25;
-            if (duration == "weekly") T = 0.019178; else if (duration == "monthly") T = 0.082192;
-            auto euroPriceVal = call("bs_price", {std::make_shared<GemValue>(type), std::make_shared<GemValue>(spot), std::make_shared<GemValue>(spot), std::make_shared<GemValue>(0.05), std::make_shared<GemValue>(0.30), std::make_shared<GemValue>(T)});
-            double euro_price = std::get<double>(euroPriceVal->value), premium = (type == "put" || type == "Put") ? euro_price * 0.05 : euro_price * 0.01;
-            return std::make_shared<GemValue>(euro_price + premium);
-        }), true };
-    }
-};
 
 class GemGeo : public GemSys {
 public:
@@ -2445,7 +2169,7 @@ public:
             std::thread([port]() {
                 httplib::Server svr;
                 svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
-                    res.set_content(R"(<!DOCTYPE html>
+                    res.set_content(R"HTML(<!DOCTYPE html>
 <html>
 <head>
     <title>Gem Financial Dashboard</title>
@@ -2498,7 +2222,7 @@ public:
         loadData('bonds');
     </script>
 </body>
-</html>)", "text/html");
+</html>)HTML", "text/html");
                 });
                 
                 auto serveAPI = [](const char* type, httplib::Response& res) {
@@ -2601,5 +2325,7 @@ public:
 
 inline bool GemImg::initialized = false;
 inline bool GemAI::pythonInitialized = false;
+
+#include "gem_astro.hpp"
 
 #endif
