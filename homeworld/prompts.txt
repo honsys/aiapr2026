@@ -1,0 +1,5 @@
+create an interactive webapp "FoFworld" using worldengine that presents a world similar to prehistorioc Earth but is approx 60% water and 40% land with large jungles and rivers and lakes separated by extensive mountain ranges and small deserts and grasslands
+
+the dominant species on planet FoFworld are highly evolved secretive cautious unaggressive sloth-like beings who have developed advanced tech to explore and travel throughout the milky galaxy. the world is located in the sagitarious arm of the galaxy -- create anoher worldengine interactive webapp that presents the milkyway galaxy and the relative locations of the solar system in the Orian arm vs. FoFworld in the sagitarious arm
+
+

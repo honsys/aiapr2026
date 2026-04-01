@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FoFworld — Prehistoric World Generator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a14; color: #d4c9a8; font-family: 'Georgia', serif; min-height: 100vh; }
+
+  header {
+    text-align: center;
+    padding: 18px 0 10px;
+    background: linear-gradient(180deg, #0d1a2e 0%, #0a0a14 100%);
+    border-bottom: 1px solid #2a3a50;
+  }
+  header h1 { font-size: 2rem; letter-spacing: 4px; color: #8ecae6; text-shadow: 0 0 20px #1a6a9a; }
+  header p  { font-size: 0.85rem; color: #7a8a7a; margin-top: 4px; letter-spacing: 2px; }
+
+  .controls {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    padding: 12px; flex-wrap: wrap;
+  }
+  .controls label { font-size: 0.85rem; color: #9ab; }
+  .controls input[type=number] {
+    width: 90px; padding: 5px 8px; background: #1a2030; border: 1px solid #3a5070;
+    color: #d4c9a8; border-radius: 4px; font-size: 0.9rem;
+  }
+  button {
+    padding: 7px 20px; background: #1a4a6a; border: 1px solid #3a7aaa;
+    color: #8ecae6; border-radius: 4px; cursor: pointer; font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  button:hover { background: #2a6a9a; }
+  button:disabled { opacity: 0.5; cursor: default; }
+
+  #status { font-size: 0.8rem; color: #6a8a6a; min-width: 160px; text-align: center; }
+
+  .map-wrap {
+    display: flex; justify-content: center; padding: 10px 20px 0;
+    position: relative;
+  }
+  canvas {
+    border: 2px solid #2a3a50;
+    cursor: crosshair;
+    image-rendering: pixelated;
+    max-width: 100%;
+  }
+
+  #tooltip {
+    position: fixed; background: rgba(10,15,25,0.92); border: 1px solid #3a5070;
+    padding: 7px 12px; border-radius: 5px; font-size: 0.8rem; pointer-events: none;
+    display: none; color: #c8d8c8; z-index: 100; line-height: 1.6;
+  }
+
+  .legend {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+    padding: 14px 20px 20px; max-width: 900px; margin: 0 auto;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #9aaa9a;
+  }
+  .legend-swatch {
+    width: 14px; height: 14px; border-radius: 2px; border: 1px solid #3a4a3a; flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌿 FoFworld</h1>
+  <p>PREHISTORIC EARTH — 60% OCEAN · VAST JUNGLES · ANCIENT MOUNTAINS</p>
+</header>
+
+<div class="controls">
+  <label>Seed: <input type="number" id="seedInput" value="42" min="0" max="99999"></label>
+  <button id="genBtn" onclick="generate()">Generate World</button>
+  <button onclick="randomSeed()">🎲 Random</button>
+  <span id="status">Ready</span>
+</div>
+
+<div class="map-wrap">
+  <canvas id="map"></canvas>
+</div>
+
+<div id="tooltip"></div>
+
+<div class="legend" id="legend"></div>
+
+<script>
+const BIOME_LABELS = {
+  deep_ocean:    "Deep Ocean",
+  ocean:         "Ocean",
+  shallow_ocean: "Shallow Ocean",
+  lake:          "Lake",
+  river:         "River",
+  beach:         "Beach",
+  jungle:        "Jungle",
+  rainforest:    "Rainforest",
+  forest:        "Forest",
+  grassland:     "Grassland",
+  savanna:       "Savanna",
+  desert:        "Desert",
+  mountain:      "Mountain",
+  snow_mountain: "Snow Mountain",
+  tundra:        "Tundra",
+  ice:           "Ice Cap",
+};
+
+let worldData = null;
+
+function rgb(c) { return `rgb(${c[0]},${c[1]},${c[2]})`; }
+
+function buildLegend(colors) {
+  const el = document.getElementById("legend");
+  el.innerHTML = "";
+  for (const [key, color] of Object.entries(colors)) {
+    const item = document.createElement("div");
+    item.className = "legend-item";
+    item.innerHTML = `<div class="legend-swatch" style="background:${rgb(color)}"></div>${BIOME_LABELS[key] || key}`;
+    el.appendChild(item);
+  }
+}
+
+function drawWorld(data) {
+  const canvas = document.getElementById("map");
+  canvas.width  = data.width;
+  canvas.height = data.height;
+  const ctx = canvas.getContext("2d");
+  const imgData = ctx.createImageData(data.width, data.height);
+  const px = data.pixels;
+  for (let i = 0; i < px.length; i++) {
+    const base = i * 4;
+    imgData.data[base]   = px[i][0];
+    imgData.data[base+1] = px[i][1];
+    imgData.data[base+2] = px[i][2];
+    imgData.data[base+3] = 255;
+  }
+  ctx.putImageData(imgData, 0, 0);
+  worldData = data;
+  buildLegend(data.biome_colors);
+}
+
+async function generate() {
+  const seed = parseInt(document.getElementById("seedInput").value) || 42;
+  const btn  = document.getElementById("genBtn");
+  const status = document.getElementById("status");
+  btn.disabled = true;
+  status.textContent = "Generating world…";
+  try {
+    const res  = await fetch(`/api/world?seed=${seed}`);
+    const data = await res.json();
+    drawWorld(data);
+    status.textContent = `Seed ${data.seed} · sea level ${(data.sea_level*100).toFixed(1)}%`;
+  } catch(e) {
+    status.textContent = "Error: " + e.message;
+  }
+  btn.disabled = false;
+}
+
+function randomSeed() {
+  document.getElementById("seedInput").value = Math.floor(Math.random() * 99999);
+  generate();
+}
+
+// Tooltip on hover
+const canvas = document.getElementById("map");
+const tooltip = document.getElementById("tooltip");
+canvas.addEventListener("mousemove", e => {
+  if (!worldData) return;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = worldData.width  / rect.width;
+  const scaleY = worldData.height / rect.height;
+  const mx = Math.floor((e.clientX - rect.left) * scaleX);
+  const my = Math.floor((e.clientY - rect.top)  * scaleY);
+  if (mx < 0 || my < 0 || mx >= worldData.width || my >= worldData.height) return;
+  const idx = my * worldData.width + mx;
+  const px  = worldData.pixels[idx];
+  // Find biome by color match
+  let biomeName = "unknown";
+  for (const [key, c] of Object.entries(worldData.biome_colors)) {
+    if (c[0] === px[0] && c[1] === px[1] && c[2] === px[2]) { biomeName = key; break; }
+  }
+  tooltip.style.display = "block";
+  tooltip.style.left = (e.clientX + 14) + "px";
+  tooltip.style.top  = (e.clientY - 10) + "px";
+  tooltip.innerHTML = `<b>${BIOME_LABELS[biomeName] || biomeName}</b><br>x:${mx} y:${my}`;
+});
+canvas.addEventListener("mouseleave", () => { tooltip.style.display = "none"; });
+
+// Auto-generate on load
+generate();
+</script>
+</body>
+</html>
