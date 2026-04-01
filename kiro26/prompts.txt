@@ -1,24 +1,21 @@
-
 all c++ filenames should use ".cc" filename extension and conditional includes 
 
-write a CLI app in c++26 that prints geoIP city and country info of the IPs using the code from https://github.com/util-linux/util-linux/blob/master/login-utils/last.c ; all c++ filenames should use ".cc" filename extension and conditional includes 
+write a CLI app in c++26 that prints geoIP city and country info of the IPs using the code from https://github.com/util-linux/util-linux/blob/master/login-utils/last.c ; all c++ filenames should use ".cc" filename extension and conditional includes ; also write a pure python module and cli equiv of the c++26
 
-also write a pure python module and cli equiv of the c++26
+write a makefile that supports macos and linux ; the makefile should use Nuitka to optimize the python impl ; the makefile should install all dependencies via a "dep" target and should check available c++ compilers on the host to use the proper c++ compile cli
 
-write a makefile that supports macos and linux ; the makefile should use Nuitka to optimize the python impl
+all c++26 and python should compile on macos and linux; extend the makefile to use cython for the python code ; the makefile should create a local python3 venv and activate it for all python and cython dev and tests
 
-the makefile should install all dependencies via a "dep" target and should check available c++ compilers on the host to use the proper c++ compile cli
-
-all c++26 and python should compile an macos and linux; extend the makefile to use cython for the python code
-
-the makefile should create a local python3 venv and activate it for all python and cython dev and tests
-
-ensure all c++ and cython compilation works fully without errors or warnings
-
-makefile should supprt c++23 and c++26 on linux and macos to ensure all c++ and cython compilation works fully without errors or warnings
+makefile should support c++23 and c++26 on linux and macos to ensure all c++ and cython compilation works fully without errors or warnings
 
 write a readme here describing all the work so far today along with a roadmap of future features and recommendations
 
+write a python module that uses the api from https://github.com/PublicDotCom and a CLI app that supports trading of stocks and options and ETFs on the public.com platform
+
+learn to develop with https://gitlab.com/1percent1/aiapr2026/-/tree/main/gem26 and write a gem lang module hontrade.gm that uses the python trader module to impl a webapp hontrade.g
+
+ensure the makefile supports gem lang and cython compilation on macos and linux and a "deps" target to setup a python venv and a Vagrantfile to launch linux VMs and a Dockerfile too
+  
 > kiro
 
 1% > /help

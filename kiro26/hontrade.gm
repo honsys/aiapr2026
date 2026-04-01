@@ -1,0 +1,111 @@
+# hontrade.gm — Public.com trading module for Gem
+# Wraps public_trader.py via the `use` keyword.
+# Requires: PUBLIC_API_KEY and PUBLIC_ACCOUNT_NUMBER env vars.
+
+use "public_trader.py"
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+fun _trader()
+  t = python.eval("_trader_from_env()")
+end t
+
+fun _close(t)
+  python.eval("t.close()")
+end
+
+# ── account ───────────────────────────────────────────────────────────────────
+
+fun accounts()
+  t = _trader()
+  res = python.eval("t.accounts()")
+  _close(t)
+end res
+
+fun portfolio()
+  t = _trader()
+  res = python.eval("t.portfolio()")
+  _close(t)
+end res
+
+fun history(limit)
+  t = _trader()
+  res = python.eval("t.history(page_size=" + limit + ")")
+  _close(t)
+end res
+
+# ── market data ───────────────────────────────────────────────────────────────
+
+fun quote(symbol)
+  t = _trader()
+  res = python.eval("t.quote('" + symbol + "')")
+  _close(t)
+end res
+
+fun expirations(symbol)
+  t = _trader()
+  res = python.eval("t.option_expirations('" + symbol + "')")
+  _close(t)
+end res
+
+fun chain(symbol, expiry)
+  t = _trader()
+  res = python.eval("t.option_chain('" + symbol + "', '" + expiry + "')")
+  _close(t)
+end res
+
+fun greeks(osi)
+  t = _trader()
+  res = python.eval("t.option_greeks('" + osi + "')")
+  _close(t)
+end res
+
+# ── orders ────────────────────────────────────────────────────────────────────
+
+fun preflight(symbol, side, qty, price)
+  t = _trader()
+  res = python.eval("t.preflight('" + symbol + "', OrderSide." + side + ", Decimal('" + qty + "'), Decimal('" + price + "'))")
+  _close(t)
+end res
+
+fun buy(symbol, qty, price)
+  t = _trader()
+  res = python.eval("t.buy('" + symbol + "', Decimal('" + qty + "'), Decimal('" + price + "'))")
+  _close(t)
+end res
+
+fun sell(symbol, qty, price)
+  t = _trader()
+  res = python.eval("t.sell('" + symbol + "', Decimal('" + qty + "'), Decimal('" + price + "'))")
+  _close(t)
+end res
+
+fun buy_option(osi, qty, price)
+  t = _trader()
+  res = python.eval("t.buy_option('" + osi + "', " + qty + ", Decimal('" + price + "'))")
+  _close(t)
+end res
+
+fun sell_option(osi, qty, price)
+  t = _trader()
+  res = python.eval("t.sell_option('" + osi + "', " + qty + ", Decimal('" + price + "'))")
+  _close(t)
+end res
+
+fun spread(sell_osi, buy_osi, qty, price)
+  t = _trader()
+  res = python.eval("t.spread('" + sell_osi + "', '" + buy_osi + "', " + qty + ", Decimal('" + price + "'))")
+  _close(t)
+end res
+
+fun order_status(order_id)
+  t = _trader()
+  res = python.eval("t.order_status('" + order_id + "')")
+  _close(t)
+end res
+
+fun cancel(order_id)
+  t = _trader()
+  python.eval("t.cancel('" + order_id + "')")
+  _close(t)
+end
