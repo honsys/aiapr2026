@@ -4,3 +4,6 @@
 [submodule "Kiro"]
 	path = Kiro
 	url = https://github.com/kirodotdev/Kiro.git
+[submodule "publicdotcom-py"]
+	path = publicdotcom-py
+	url = https://github.com/PublicDotCom/publicdotcom-py.git
