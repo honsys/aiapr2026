@@ -1,6 +1,3 @@
-[submodule "grok-cli"]
-	path = grok-cli
-	url = https://github.com/superagent-ai/grok-cli.git
 [submodule "Kiro"]
 	path = Kiro
 	url = https://github.com/kirodotdev/Kiro.git
