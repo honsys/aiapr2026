@@ -1,0 +1,31 @@
+# mobl.gm — Cross-platform Mobile/Desktop Object for Gem
+# Browser supplies GPS + speech via Web APIs; Gem handles NLP + GeoJSON
+
+obj mobl(device_name)
+
+  # NLP: parse spoken text → {title, note, tags} via AI
+  fun dictate(spoken_text)
+    string prompt = "Extract a travel note. Return ONLY valid JSON with keys: title (string), note (string), tags (string array). Dictation: " + spoken_text
+    ai.prompt(prompt)
+  end
+
+  # Build one GeoJSON Feature from browser-supplied lat/lon + dictation
+  fun make_feature(lat, lon, spoken_text)
+    string parsed = .dictate(spoken_text)
+    string title  = ai.prompt("From this JSON return only the title value, no quotes or JSON: " + parsed)
+    string note   = ai.prompt("From this JSON return only the note value, no quotes or JSON: "  + parsed)
+    string tags   = ai.prompt("From this JSON return only the tags as a JSON array: "           + parsed)
+    {
+      "type"     : "Feature",
+      "geometry" : { "type": "Point", "coordinates": [lon, lat] },
+      "properties" : {
+        "title"     : title,
+        "note"      : note,
+        "tags"      : tags,
+        "timestamp" : algo.now(),
+        "device"    : .device_name
+      }
+    }
+  end
+
+end

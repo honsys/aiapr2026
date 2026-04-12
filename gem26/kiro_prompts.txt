@@ -55,3 +55,9 @@ Pulsar / neutron star:
 - Removed pre-existing duplicate GemFin/GemBSM class definitions that were already in the file
 - Fixed a pre-existing raw string literal bug in the financial dashboard HTML (R"(..." → R"HTML(...)"HTML")
 
+
+=============================================
+
+the gem lang mobile cell phone object "mobl" and app that supports dictation via NLP to create a geojson travel log with geolocation and map interface should work on androind and iphone and macos and linux and win11 laptops and desktops
+
+

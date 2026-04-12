@@ -1,28 +1,38 @@
 # Gem Tutorial 07: AI & NLP
 # --------------------------
+# Covers: ai.prompt, ai.useMistral, ai.useOllama, ai.useGemini, ai.prompt_native
 
-# 1. AI Prompting (Gemini Pro)
-sys.print("Asking Gemini for a haiku...")
-# response = ai.prompt("Write a haiku about a gem language.")
+sys.print("--- Gem AI & NLP Tutorial ---")
+
+# 1. Default provider: Gemini
+# response = ai.prompt("Write a haiku about the Gem language.")
 # sys.print("Gemini:", response)
 
-# 2. Natural Language Processing
-text_to_analyze = "Gem is a wonderful language for automation and science."
-cleaned = nlp.clean(text_to_analyze)
-sys.print("Cleaned:", cleaned)
+# 2. Switch to Mistral
+ai.useMistral("mistral-small")
+# ai.setKey("YOUR_MISTRAL_API_KEY")
+# response = ai.prompt("Explain quantum entanglement in one sentence.")
+# sys.print("Mistral:", response)
 
-sentiment = nlp.sentiment(text_to_analyze)
-sys.print("Sentiment Score:", sentiment)
+# 3. Native Mistral C++ bridge (high-performance)
+# response = ai.prompt_native("What is the speed of light?")
+# sys.print("Mistral native:", response)
 
-# 3. Tokenization
-words = nlp.tokenize(text_to_analyze)
-sys.print("First word object:", words[0].text)
-# (Note: list indexing implemented via internal logic)
+# 4. Local model via Ollama
+# ai.useOllama("llama3")
+# response = ai.prompt("Summarize the Gem language in 3 bullet points.")
+# sys.print("Ollama:", response)
 
-# 4. Polyglot Translation (The 'use' keyword)
-# The 'use' keyword uses Gemini AI to translate code to Gem.
-# Example:
-# use "test_python.py"
-# This will translate the Python code to Gem and execute it.
-# It supports: Python, R, Julia, Fortran, and C++.
+# 5. Switch back to Gemini
+ai.useGemini()
 
+# 6. NLP: parse structured data from free text
+string spoken = "Arrived at the Golden Gate Bridge, amazing fog, landmark bridge"
+string parsed = ai.prompt("Extract a travel note. Return ONLY valid JSON with keys: title, note, tags (array). Text: " + spoken)
+sys.print("Parsed travel note:", parsed)
+
+# 7. AI-assisted code translation (use keyword)
+# use "legacy_script.py"   # translates Python → Gem and executes
+# use "model.jl"           # translates Julia → Gem and executes
+
+sys.print("Tutorial 07 complete.")

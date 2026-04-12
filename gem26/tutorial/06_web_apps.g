@@ -1,24 +1,35 @@
-# Gem Tutorial 06: Web & Networking
-# ---------------------------------
+# Gem Tutorial 06: Web Apps & Routing
+# -------------------------------------
+# Covers: sys.app with string routes, file routes, and handler functions
 
-# 1. Wget
-sys.print("Downloading Gem logo...")
-# www.wget("https://raw.githubusercontent.com/google/gemini-cli/main/logo.png", "logo.png")
+sys.print("--- Gem Web App Tutorial ---")
 
-# 2. Functional Redirect
-# starts a background server that redirects all traffic to Google
-www.redirect("https://www.google.com", 9001)
-sys.print("Redirect server running on http://localhost:9001")
-
-# 3. WebApp (Flask-like)
-# You can define a map of routes and their HTML content
-_routes = {
-    "/": "<h1>Gem App</h1><p>Home Page</p><a href='/info'>Info</a>",
-    "/info": "<h1>Info</h1><p>Gem is a high-performance STEM language.</p><a href='/'>Back</a>"
+# 1. Simple string routes
+string routes = {
+  "/":     "<h1>Gem App</h1><p>Welcome. <a href='/info'>Info</a></p>",
+  "/info": "<h1>Info</h1><p>Gem is a high-performance STEM language. <a href='/'>Back</a></p>"
 }
+sys.print("Starting web app on port 9000...")
+sys.app(9000, routes)
+sys.print("Visit http://localhost:9000")
 
-sys.print("Starting Web App on port 9000...")
-www.app(9000, _routes)
+# 2. File route — serve an HTML file directly
+# string file_routes = { "/map": "travel_map.html" }
+# sys.app(9001, file_routes)
 
-sys.print("Server is running in the background.")
-sys.print("Visit http://localhost:9000 to see your app.")
+# 3. Handler function route — dynamic response
+fun handle_status(req)
+  "{\"status\": \"ok\", \"time\": \"" + algo.now() + "\"}"
+end
+
+string api_routes = {
+  "/":       "<h1>API Server</h1>",
+  "/status": handle_status
+}
+# sys.app(9002, api_routes)
+
+# 4. HTTP Redirect server
+# sys.redirect("https://www.google.com", 9003)
+# sys.print("Redirect server on http://localhost:9003")
+
+sys.print("Tutorial 06 complete.")

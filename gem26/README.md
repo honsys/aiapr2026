@@ -11,6 +11,7 @@ Gem is a high-performance STEM language designed for scientific computing, data 
 - **Cloud & DevOps**: Native modules for Docker, K3s, Vagrant, and Networking.
 - **AI-Powered**: Native integration with Gemini, Mistral, and Ollama (local models).
 - **Interactive Visuals**: Interactive 2D/3D multi-axes charting using Plotly.js.
+- **Mobile & Cross-Platform**: Browser-based PWA interface works on Android, iPhone, macOS, Linux, and Windows 11.
 
 ## Built-in Modules and Functions
 
@@ -24,7 +25,7 @@ Gem is a high-performance STEM language designed for scientific computing, data 
     *   `doc([path])`: Reads documentation or script comments.
     *   `langport(pattern, [output])`: Ports foreign code (Python, Julia, C++, etc.) to Gem. Pattern can include `*`.
     *   `redirect(url, [port])`: HTTP redirection and background redirection server.
-    *   `app(port, [routes])`: Starts a background web app server with optional routes map.
+    *   `app(port, [routes])`: Starts a background web app server with optional routes map. Routes may map paths to HTML strings, file paths, or handler functions.
     *   `exit()`: Exits the interpreter.
 *   **`math`**: Constants and functions.
     *   `sin(x)`, `cos(x)`, `sqrt(x)`: Basic math.
@@ -73,9 +74,19 @@ Gem is a high-performance STEM language designed for scientific computing, data 
     *   `read_csv(path)`: CSV processing into objects.
     *   `mean(vector)`, `std(vector)`: Basic statistics.
 *   **`geo`**: GIS, Geolocation, and GeoJSON.
-    *   `lookup()`, `distance(lat1, lon1, lat2, lon2)`, `write_geojson(path, features)`.
+    *   `lookup()`: Returns current location object with `.lat`, `.lon`, `.city`, `.country`.
+    *   `distance(lat1, lon1, lat2, lon2)`: Haversine distance in km.
+    *   `write_geojson(path, features)`: Writes a GeoJSON FeatureCollection.
     *   `history(plate)`: AI-assisted tectonic history.
-    *   `plot2d(data, [layout])`, `plot3d(data, [layout])`: 2D/3D map visualizations.
+    *   `plot2d(data, [layout])`, `plot3d(data, [layout])`: 2D/3D Plotly map visualizations.
+
+### Mobile & Cross-Platform (`mobl`)
+*   **`mobl`**: Mobile/desktop cell phone object. Use `mobl.gm` module.
+    *   `obj mobl(device_name)`: Instantiate with a device label.
+    *   `dictate(spoken_text)`: NLP parse of speech → JSON `{title, note, tags}` via `ai.prompt()`.
+    *   `make_feature(lat, lon, spoken_text)`: Builds a GeoJSON Feature from browser-supplied GPS + dictation.
+    *   **Cross-platform delivery**: Gem runs the server (`sys.app`); any browser (Android Chrome, iPhone Safari, macOS/Linux/Win11) connects as a PWA using the Web Speech API and Geolocation API.
+    *   See `mobl.gm`, `travel_log.g`, `travel_log.html` for the reference implementation.
 
 ### Polyglot Interop
 *   **`cpp`**: C++ JIT via Cling.
@@ -89,6 +100,7 @@ Gem is a high-performance STEM language designed for scientific computing, data 
 *   **`ai`**: AI Integration.
     *   `prompt(text)`, `prompt_native(text)`: Gemini/Mistral prompts.
     *   `useMistral(model)`, `useOllama(model, [host])`: Switch AI providers.
+    *   `useGemini()`: Switch back to Gemini.
     *   `setKey(key)`, `setHost(host)`, `setPath(path)`: API configuration.
 *   **`container`**: Docker and Kubernetes (K3s).
     *   `docker_run(image, cmd)`, `docker_ps()`, `docker_build(path, tag)`, `docker_stop(id)`.
@@ -140,12 +152,12 @@ The Gem interactive help system is built directly into the language.
 - `help "topic"`: Detailed help for a specific module or keyword.
 - `help("www")`: Functional call to help.
 
-Available topics: `sys`, `math`, `ai`, `text`, `algo`, `bev`, `file`, `zip`, `nlp`, `img`, `geo`, `www`, `cpp`, `tcp`, `itr`, `data`, `container`, `vm`, `go`, `ruby`, `node`, `rust`, `fin`, `bsm`, `chart`, `fun`, `obj`, `if`, `while`, `alias`, `his`, `lib`, `exit`.
+Available topics: `sys`, `math`, `ai`, `text`, `algo`, `bev`, `file`, `zip`, `nlp`, `img`, `geo`, `mobl`, `cpp`, `tcp`, `itr`, `data`, `container`, `vm`, `go`, `ruby`, `node`, `rust`, `fin`, `bsm`, `chart`, `fun`, `obj`, `if`, `while`, `alias`, `his`, `lib`, `exit`.
 
 ## Getting Started
 
 ### Installation
-Gem supports macOS (Intel/ARM) and Linux.
+Gem supports macOS (Intel/ARM), Linux, and Windows 11 (WSL or native).
 ```bash
 make all
 ```
@@ -169,37 +181,48 @@ Gem includes a comprehensive test suite verifying all keywords and built-in feat
 - `./gem -h`: Display session history and interactive browser.
 - `./gem -t <file> [-o output]`: AI-assisted translation to Gem.
 
+## Mobile Travel Log App
+
+Gem ships with a reference cross-platform mobile/desktop travel log app:
+
+```bash
+./gem travel_log.g          # start server on :8080
+# Android/iPhone → http://<host-ip>:8080
+# macOS/Linux/Win11 → http://localhost:8080
+```
+
+Features: NLP voice dictation → AI parsing → GPS pinning → live GeoJSON → Plotly map.
+
 ## Future Roadmap
 
-Gem is evolving rapidly to meet the needs of modern STEM research and autonomous systems development.
-
 ### Phase 1: Core Performance & Tooling (Q2-Q3 2026)
-*   **Bytecode VM**: Transitioning from a token-stream interpreter to a stack-based bytecode virtual machine for 10x performance gains.
-*   **`gpm` (Gem Package Manager)**: A native tool to manage dependencies and share community-built modules.
-*   **LSP Support**: Language Server Protocol implementation for VS Code and other modern editors.
-*   **Native JIT**: Optional JIT compilation using LLVM for compute-heavy loops.
+*   **Bytecode VM**: Stack-based bytecode VM for 10x performance gains.
+*   **`gpm` (Gem Package Manager)**: Native dependency and module management.
+*   **LSP Support**: Language Server Protocol for VS Code and other editors.
+*   **Native JIT**: Optional LLVM JIT for compute-heavy loops.
 
 ### Phase 2: Ecosystem Expansion (Q4 2026 - Q1 2027)
-*   **`gem.web`**: An async, high-performance web framework inspired by FastAPI and Go Fiber.
-*   **`gem.df`**: Native C++ DataFrames for high-speed data manipulation (Pandas alternative).
-*   **`gem.ui`**: A cross-platform GUI framework based on Skia.
-*   **Extended Polyglot**: First-class support for WASM modules and direct Swift/Kotlin interop.
+*   **`gem.web`**: Async web framework inspired by FastAPI and Go Fiber.
+*   **`gem.df`**: Native C++ DataFrames (Pandas alternative).
+*   **`gem.ui`**: Cross-platform GUI framework based on Skia.
+*   **Extended Polyglot**: WASM modules, Swift/Kotlin interop.
 
 ### Phase 3: Intelligence & Autonomy (Q2 2027+)
-*   **`gem.agent`**: Built-in framework for creating multi-agent AI systems with tool-use capabilities.
-*   **WASM Target**: Compile Gem code directly to WebAssembly for the browser.
-*   **GPU Acceleration**: Native support for CUDA/Metal within the `math` and `data` modules.
+*   **`gem.agent`**: Multi-agent AI framework with tool-use.
+*   **WASM Target**: Compile Gem to WebAssembly.
+*   **GPU Acceleration**: CUDA/Metal support in `math` and `data`.
 
 ## Context: Language Evolution and Trends
 
 ### A Brief History
-The history of programming is a constant push for higher abstraction without sacrificing control. From the raw power of **Fortran (1957)** and **C (1972)** to the object-oriented revolution of **Smalltalk (1980)** and **C++ (1985)**, we reached the productivity era of **Python (1991)** and **JavaScript (1995)**. Gem represents the next logical step: the **STEM-Native Language**, which fuses the performance of C++26 with the flexibility of modern AI-driven development.
+From **Fortran (1957)** and **C (1972)** through the OOP era of **C++ (1985)** and the productivity era of **Python (1991)**, Gem represents the next step: the **STEM-Native Language** fusing C++26 performance with AI-driven development.
 
 ### Current Trends in 2026
-*   **AI Integration**: Languages are evolving from "syntax for humans" to "interfaces for agents." Gem's native LLM bindings reflect this shift.
-*   **Universal Runtime**: WebAssembly is becoming the universal "safe" execution target for all languages.
-*   **Memory Safety**: The industry is moving away from manual memory management, favoring either strict ownership models (Rust) or smart-pointer-based safety (C++26, Gem).
-*   **Polyglot Programming**: The ability to "use" code from any language (Python, R, Fortran) within a single project is no longer a luxury but a requirement for modern data science.
+*   **AI Integration**: Languages evolving from "syntax for humans" to "interfaces for agents."
+*   **Universal Runtime**: WebAssembly as the universal safe execution target.
+*   **Memory Safety**: Smart-pointer-based safety (C++26, Gem) over manual management.
+*   **Polyglot Programming**: Multi-language interop is a requirement, not a luxury.
+*   **Mobile-First Web**: PWA + browser APIs (Speech, Geolocation) as the universal mobile UI layer.
 
 ---
-*Developed with Gemini CLI.*
+*Developed with Gemini CLI and Kiro.*

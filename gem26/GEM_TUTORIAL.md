@@ -1,12 +1,10 @@
 # Gem Language Reference & Tutorial
 
-Welcome to the **Gem Language**, a modern, high-performance scientific and automation scripting language implemented in C++26. Gem integrates powerful libraries like ImageMagick, Mapnik, and PDF-Writer directly into its core, with industry-standard support for QuantLib, Plotly.js, and Docker.
+Welcome to the **Gem Language**, a modern, high-performance scientific and automation scripting language implemented in C++26. Gem integrates powerful libraries like ImageMagick, PDF-Writer, QuantLib, Plotly.js, and Docker directly into its core.
 
 ---
 
 ## 1. Reserved Keywords
-
-The following keywords are reserved and define the structure of the Gem language:
 
 | Keyword | Description |
 |:---|:---|
@@ -58,13 +56,13 @@ The following keywords are reserved and define the structure of the Gem language
 - `help([topic])`: Interactive help system.
 - `doc([path])`: Reads documentation comments or file contents.
 - `redirect(url, [port])`: HTTP redirection or background redirect server.
-- `app(port, [routes])`: Starts a background web app server with optional routes.
+- `app(port, [routes])`: Starts a background web app server. Routes map paths to HTML strings, file paths, or handler functions.
 - `exit()`: Functional exit.
 
 ### `math` (Mathematical & LaTeX)
 - `sin(x)`, `cos(x)`, `sqrt(x)`: Standard math functions.
 - `useSymPy()`, `useSage()`: Select symbolic provider (default: SymPy).
-- `simplify(expr)`, `diff(expr, [var])`: Symbolic simplification and differentiation via SymPy or SageMath.
+- `simplify(expr)`, `diff(expr, [var])`: Symbolic simplification and differentiation.
 - `integrate(expr, [var])`, `solve(expr, [var])`: Symbolic integration and equation solving.
 - `sym_latex(expr)`: Returns LaTeX for symbolic expressions.
 - `to_latex(val)`: Converts values/vectors to LaTeX strings.
@@ -79,24 +77,40 @@ The following keywords are reserved and define the structure of the Gem language
 - `prompt_native(text)`: High-performance native Mistral C++ bridge.
 - `useMistral([model])`: Configures Mistral as the AI provider.
 - `useOllama(model, [host])`: Use a local model via Ollama.
+- `useGemini()`: Switch back to Gemini.
 - `setKey(key)`, `setHost(host)`, `setPath(path)`: API configuration.
+
+### `mobl` (Mobile & Cross-Platform)
+Defined in `mobl.gm`. Provides NLP dictation and GeoJSON travel log support via browser PWA.
+- `obj mobl(device_name)`: Instantiate with a device label.
+- `dictate(spoken_text)`: Parses speech via `ai.prompt()` → JSON `{title, note, tags}`.
+- `make_feature(lat, lon, spoken_text)`: Builds a GeoJSON Feature from GPS coordinates + dictation.
+- **Cross-platform**: Gem runs the server (`sys.app`); any browser (Android Chrome, iPhone Safari, macOS/Linux/Win11) connects as a PWA using the Web Speech API and Geolocation API.
+- See `mobl.gm`, `travel_log.g`, `travel_log.html` for the reference implementation.
+
+### `geo` (GIS & Geolocation)
+- `lookup()`: Returns current location object with `.lat`, `.lon`, `.city`, `.country`.
+- `distance(lat1, lon1, lat2, lon2)`: Haversine distance in km.
+- `write_geojson(path, features)`: Writes a GeoJSON FeatureCollection file.
+- `history(plate)`: AI-assisted tectonic plate history.
+- `plot2d(data, [layout])`, `plot3d(data, [layout])`: 2D/3D Plotly map visualizations.
 
 ### `text` (String Manipulation)
 - `read(path)`, `read_pdf(path)`: Extracts text from files or PDFs.
 - `sub(s, start, [len])`: Returns a substring.
 - `replace(s, old, new)`: Replaces occurrences of a string.
-- `write_pdf(path, content)`: Creates a PDF file.
+- `write_pdf(path, content)`, `write_pdf_a(path, content)`: Creates PDF files.
+- `read_markdown(path)`, `write_markdown(path, text)`.
+- `read_yaml(path)`, `write_yaml(path, obj)`.
+- `read_html(path)`, `write_html(path, text)`.
+- `read_xml(path)`, `write_xml(path, text)`.
+- `read_fits_header(path)`, `read_hdf_header(path)`.
 
 ### `algo` (Algorithmic Utilities)
 - `add(...)`: Sums numeric arguments.
 - `quicksort(array)`, `sort(array, [start, end])`: Sorting utilities.
 - `now()`: Returns current date/time string.
 - `date_add(ts, days)`, `date_diff(ts1, ts2)`: Date manipulation.
-
-### `container` (Docker & Kubernetes)
-- `docker_run(image, cmd)`: Runs a Docker container.
-- `docker_ps()`, `docker_build(path, tag)`, `docker_stop(id)`.
-- `k3s_apply(yaml)`, `k3s_get(resource)`, `k3s_pods()`, `k3s_nodes()`, `k3s_logs(pod)`.
 
 ### `fin` (Finance & QuantLib)
 - `ticker(symbol)`: Fetches real-time data. Returns a `Ticker` object.
@@ -105,9 +119,29 @@ The following keywords are reserved and define the structure of the Gem language
 - `date(d, m, y)`, `calendar(name)`: Create QuantLib objects.
 - `is_holiday(cal, d, m, y)`, `add_days(d, m, y, n)`, `diff_days(...)`.
 
+### `bsm` (Black-Scholes-Merton)
+Inherits from `fin`. Provides American option pricing via PDE.
+- `price_american(ticker, type, duration)`: Returns American option price.
+
+### `bev` (Bevington Data Reduction)
+- `data(x, y)`: Load x/y data vectors.
+- `fit_line()`: Perform linear regression.
+- `param(idx)`: Return fit parameter (0=intercept, 1=slope).
+
+### `data` (Data Science)
+- `read_csv(path)`: CSV processing into objects.
+- `mean(vector)`, `std(vector)`: Basic statistics.
+
 ### `itr` (Iterators)
 - `range(n)`: Returns a numeric vector `[0, 1, ..., n-1]`.
 - `while(cond_func, body_func)`: Functional `while` loop.
+
+### `container` (Docker & Kubernetes)
+- `docker_run(image, cmd)`, `docker_ps()`, `docker_build(path, tag)`, `docker_stop(id)`.
+- `k3s_apply(yaml)`, `k3s_get(resource)`, `k3s_pods()`, `k3s_nodes()`, `k3s_logs(pod)`.
+
+### `vm` (Vagrant)
+- `init(box)`, `up()`, `ssh(cmd)`, `status()`, `halt()`, `destroy()`.
 
 ### `tcp` (Networking)
 - `listen(port)`, `accept(fd)`, `connect(host, port)`: Socket communication.
@@ -120,16 +154,15 @@ The following keywords are reserved and define the structure of the Gem language
 - `go.build(file)`, `rust.cargo_new(name)`, `node.npm_install(pkg)`.
 
 ### `zip` (Compression)
-- `compress(src, archive)`, `decompress(archive, dest)`: Native ZIP support.
+- `compress(src, archive)`, `decompress(archive, dest)`: Native ZIP support via miniz.
 
 ### `chart` (Interactive Plotting)
 - `plot(traces, layout)`: Generates an interactive Plotly.js chart.
 - `show(path)`: Opens chart in browser.
 - `server(path, [port])`: Serves chart via background web server.
 
-### `bsm` (Black-Scholes-Merton)
-Inherits from `fin` and provides specialized American pricing via PDE.
-- `price_american(ticker, type, duration)`: Returns American option price.
+### `img` (ImageMagick)
+- `resize(path, w, h, dest)`: Resize an image.
 
 ---
 
@@ -156,8 +189,6 @@ end
 
 ## 5. User Defined Functions
 
-Functions are defined using `fun` and closed with `end`.
-
 ```gem
 fun square(x)
   res = x * x
@@ -167,29 +198,28 @@ val = square(5)
 sys.print("Square of 5 is", val)
 ```
 
-## 6. Running Tutorial Examples
+---
 
-All tutorial source code is located in the `tutorial/` folder.
-To run an example:
+## 6. Mobile Travel Log App
+
+Gem ships with a reference cross-platform mobile/desktop travel log app using `mobl`:
+
 ```bash
-./gem tutorial/29_quantlib_finance.g
+./gem travel_log.g          # start server on :8080
+# Android/iPhone → http://<host-ip>:8080
+# macOS/Linux/Win11 → http://localhost:8080
 ```
 
-### AI-Assisted Interop: The `use` Keyword
-
-The `use` keyword translates foreign source code into Gem on-the-fly using AI.
-
-```gem
-# Example: Using a legacy C++ function
-use "ccbevington/CppLibrary/GenUtil.cpp"
-# Now scientific functions from that file are available in Gem!
-```
+The app uses:
+- **Web Speech API** for voice dictation (Android Chrome, iPhone Safari, desktop browsers)
+- **Geolocation API** for GPS coordinates
+- **`ai.prompt()`** for NLP parsing of spoken notes → `{title, note, tags}`
+- **`geo.write_geojson()`** for GeoJSON output
+- **Plotly.js** open-street-map for the live interactive map
 
 ---
 
 ## 7. CLI Options
-
-Gem provides a robust CLI for running scripts, compiling, and managing history.
 
 - `./gem <script.g>`: Runs a Gem script.
 - `./gem -c <main.g> [modules...] [-o output]`: Compiles Gem scripts into a self-contained executable.
@@ -198,27 +228,14 @@ Gem provides a robust CLI for running scripts, compiling, and managing history.
 
 ---
 
-## 8. Testing the Language
+## 8. Testing
 
-Gem is a strictly verified language. Every keyword and built-in function is covered by an automated test suite.
-
-### Running the Tests
-To ensure your installation is correct and all modules are functional, run:
 ```bash
 make test
 ./gem_test
+# or
+./gem tests/comprehensive/all_tests.g
 ```
 
-### Test Coverage
-The suite (`tests/comprehensive/all_tests.g`) covers:
-- **Core Syntax**: `int`, `double`, `string`, `bool` declarations and assignments.
-- **Control Flow**: `if` conditions and `while` loops.
-- **OOP**: Object instantiation, method calls, and `.attr`/`..attr` shorthand.
-- **Builtins**: `math` (including symbolic), `sys`, `text`, `algo`, `file`, `itr`, and `fin`.
-
-### Creating a Test App
-The `make test` command demonstrates how to use the Gem compiler (`-c`) to bundle a script into a standalone application.
-```bash
-# How gem_test is built:
-./gem -c tests/comprehensive/all_tests.g -o gem_test
-```
+---
+*Developed with Gemini CLI and Kiro.*

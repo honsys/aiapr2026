@@ -463,9 +463,12 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, www, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro" << std::endl;
+                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, mobl, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
                 std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
+                std::cout << "\nMobile & Cross-Platform:" << std::endl;
+                std::cout << "  use \"mobl.gm\" then: mobl phone(\"name\")  phone.dictate(text)  phone.make_feature(lat,lon,text)" << std::endl;
+                std::cout << "  ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)" << std::endl;
                 std::cout << "\nDetailed help: help \"topic\" or help(topic)" << std::endl;
                 } else {
                 std::string topic = args[0]->toString();
@@ -541,6 +544,8 @@ public:
                     std::cout << "  - help([topic]): Displays this interactive help." << std::endl;
                     std::cout << "  - exit(): Exits the REPL or script." << std::endl;
                     std::cout << "  - langport(pattern, [output]): Ports foreign code (e.g. *.py) to Gem." << std::endl;
+                    std::cout << "  - redirect(url, [port]): HTTP redirect or background redirect server." << std::endl;
+                    std::cout << "  - app(port, [routes]): Background web app server. Routes map paths to strings, files, or handler fns." << std::endl;
                 } else if (topic == "math") {
                     std::cout << "Description: Mathematical constants, functions, and symbolic math." << std::endl;
                     std::cout << "Functions:" << std::endl;
@@ -576,6 +581,7 @@ public:
                     std::cout << "  - prompt_native(text): High-speed native Mistral C++ bridge call." << std::endl;
                     std::cout << "  - useMistral(model): Sets Mistral AI as the provider." << std::endl;
                     std::cout << "  - useOllama(model, [host]): Sets Ollama (local AI) as provider." << std::endl;
+                    std::cout << "  - useGemini(): Switches back to Gemini as the provider." << std::endl;
                     std::cout << "  - setKey(key), setHost(host), setPath(path): API configuration." << std::endl;
                     std::cout << "Properties: provider, model, host" << std::endl;
                 } else if (topic == "text") {
@@ -617,12 +623,26 @@ public:
                 } else if (topic == "geo") {
                     std::cout << "Description: GIS, Geolocation, and GeoJSON." << std::endl;
                     std::cout << "Functions:" << std::endl;
-                    std::cout << "  - lookup(): Returns current IP-based geolocation (stub)." << std::endl;
+                    std::cout << "  - lookup(): Returns current IP-based geolocation object (.lat, .lon, .city, .country)." << std::endl;
                     std::cout << "  - distance(lat1, lon1, lat2, lon2): Haversine distance in km." << std::endl;
-                    std::cout << "  - write_geojson(path, features): Writes a GeoJSON file collection." << std::endl;
+                    std::cout << "  - write_geojson(path, features): Writes a GeoJSON FeatureCollection file." << std::endl;
                     std::cout << "  - history(plate): Returns geological history of a tectonic plate (AI assisted)." << std::endl;
-                    std::cout << "  - plot2d(data, [layout]): Generates a 2D map visualization (Robinson projection)." << std::endl;
-                    std::cout << "  - plot3d(data, [layout]): Generates a 3D globe visualization (Orthographic)." << std::endl;
+                    std::cout << "  - plot2d(data, [layout]): Generates a 2D Plotly map (open-street-map / scattermapbox)." << std::endl;
+                    std::cout << "  - plot3d(data, [layout]): Generates a 3D globe visualization (orthographic scattergeo)." << std::endl;
+                } else if (topic == "mobl") {
+                    std::cout << "Description: Mobile & cross-platform cell phone object (mobl.gm)." << std::endl;
+                    std::cout << "Cross-platform: Android Chrome, iPhone Safari, macOS, Linux, Windows 11." << std::endl;
+                    std::cout << "Usage: use \"mobl.gm\"  then  mobl phone(\"device_name\")" << std::endl;
+                    std::cout << "Functions:" << std::endl;
+                    std::cout << "  - dictate(spoken_text): NLP parse via ai.prompt() → JSON {title, note, tags}." << std::endl;
+                    std::cout << "  - make_feature(lat, lon, spoken_text): Builds a GeoJSON Feature from GPS + dictation." << std::endl;
+                    std::cout << "Architecture:" << std::endl;
+                    std::cout << "  Browser supplies GPS (Geolocation API) + speech (Web Speech API)." << std::endl;
+                    std::cout << "  Gem server handles NLP, GeoJSON assembly, and file persistence." << std::endl;
+                    std::cout << "Reference app: ./gem travel_log.g  →  http://localhost:8080" << std::endl;
+                    std::cout << "  /       → travel_log.html  (PWA: mic + live Plotly map)" << std::endl;
+                    std::cout << "  /log    → POST {lat,lon,text} → returns GeoJSON feature" << std::endl;
+                    std::cout << "  /data   → GET full GeoJSON FeatureCollection" << std::endl;
                 } else if (topic == "www") {
                     std::cout << "Description: Web framework and mapping services (Flask-like)." << std::endl;
                     std::cout << "Functions:" << std::endl;

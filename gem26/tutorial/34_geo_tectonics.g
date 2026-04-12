@@ -1,45 +1,64 @@
 # Gem Tutorial 34: GIS, Tectonics, and Geo-Visualizations
-# This tutorial demonstrates the new 'geo' builtin features for plate history and mapping.
+# ---------------------------------------------------------
+# Covers: geo.lookup, geo.distance, geo.write_geojson,
+#         geo.plot2d, geo.plot3d, geo.history
 
 sys.print("--- Gem Geo & Tectonics Tutorial ---")
 
-# 1. Tectonic Plate History
-# Uses AI to retrieve geological history for a specific plate.
-# sys.setKey("YOUR_API_KEY") # Ensure AI is configured
-plate = "Pacific"
-sys.print("\nGeological history of the", plate, "plate:")
-# history = geo.history(plate)
-# sys.print(history)
+# 1. Current location
+location = geo.lookup()
+sys.print("You are in:", location.city, location.country)
+sys.print("Lat/Lon:", location.lat, location.lon)
 
-# 2. 2D Geo Visualization
-# Generates a Plotly-based HTML map using the Robinson projection.
+# 2. Haversine distance
+double d = geo.distance(location.lat, location.lon, 51.50, -0.12)
+sys.print("Distance to London:", d, "km")
+
+# 3. Tectonic plate history (AI-assisted)
+# history = geo.history("Pacific")
+# sys.print("Pacific plate history:", history)
+
+# 4. 2D Map — scattermapbox (open-street-map)
 city_data = obj()
-city_data.type = "scattergeo"
+city_data.type = "scattermapbox"
 city_data.lat = [34.05, 40.71, 51.50, 35.68, -33.86]
 city_data.lon = [-118.24, -74.00, -0.12, 139.65, 151.20]
 city_data.mode = "markers+text"
 city_data.text = ["LA", "NYC", "London", "Tokyo", "Sydney"]
 city_data.marker = obj()
-city_data.marker.size = 10
-city_data.marker.color = "red"
+city_data.marker.size = 12
+city_data.marker.color = "crimson"
 
-map2d_path = geo.plot2d([city_data])
-sys.print("\n2D Map generated at:", map2d_path)
+layout2d = obj()
+layout2d.title = "Global Tech Hubs"
+layout2d.mapbox = obj()
+layout2d.mapbox.style = "open-street-map"
+layout2d.mapbox.zoom = 1
 
-# 3. 3D Globe Visualization
-# Generates an interactive 3D globe using the Orthographic projection.
-map3d_path = geo.plot3d([city_data])
-sys.print("3D Globe generated at:", map3d_path)
+path2d = geo.plot2d([city_data], layout2d)
+sys.print("2D map →", path2d)
 
-# 4. Customizing Layout
-# You can pass an optional layout object to further customize the visualization.
-layout = obj()
-layout.title = "Global Tech Hubs"
-layout.geo = obj()
-layout.geo.projection = obj()
-layout.geo.projection.type = "natural earth"
+# 5. 3D Globe — scattergeo orthographic
+globe_data = obj()
+globe_data.type = "scattergeo"
+globe_data.lat = city_data.lat
+globe_data.lon = city_data.lon
+globe_data.mode = "markers+text"
+globe_data.text = city_data.text
+globe_data.marker = city_data.marker
 
-custom_map = geo.plot2d([city_data], layout)
-sys.print("Custom 2D Map generated at:", custom_map)
+layout3d = obj()
+layout3d.title = "3D Globe View"
+layout3d.geo = obj()
+layout3d.geo.projection = obj()
+layout3d.geo.projection.type = "orthographic"
 
-sys.print("\nTutorial 34: Geo-tectonics and visualizations documented.")
+path3d = geo.plot3d([globe_data], layout3d)
+sys.print("3D globe →", path3d)
+
+# 6. Write GeoJSON
+string feat = { "type": "Feature", "geometry": { "type": "Point", "coordinates": [-118.24, 34.05] }, "properties": { "name": "Los Angeles" } }
+geo.write_geojson("tectonics.geojson", [feat])
+sys.print("GeoJSON written.")
+
+sys.print("Tutorial 34 complete.")
