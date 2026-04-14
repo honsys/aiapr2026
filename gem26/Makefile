@@ -226,9 +226,9 @@ deps:
 	fi
 
 clean:
-	$(RM) $(TARGET) gem_test gem_src/gem_mistral_bridge.cpp
+	$(RM) $(TARGET) node_modules gem_test gem_src/gem_mistral_bridge.cpp
 	@# Remove any other potential Gem-compiled binaries in the root
 	@find . -maxdepth 1 -type f -perm +111 ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" -delete
 
 clean-deps:
-	rm -rf ImageMagick PDF-Writer cling mistral-common cython mistral-client-python mistral-inference mistral-finetune mapnik
+	rm -rf ImageMagick PDF-Writer cling mistral-common cython mistral-client-python mistral-inference mistral-finetune ma
