@@ -1,0 +1,1 @@
+write an android smart phone app using the gem26 computer language at https://gitlab.com/1percent1/aiapr2026.git that displays the earth globe timezones and uses geolocation to provid the current date and time at the current location and at the slected location
