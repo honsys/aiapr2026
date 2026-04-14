@@ -3,12 +3,15 @@
 
 CXX = g++
 TARGET = gem
+RM = rm -f
 
 # Detect OS and Architecture
 UNAME_S := $(shell uname -s)
 UNAME_M := $(shell uname -m)
 
 ARCH_FLAGS =
+IS_WINDOWS = 0
+
 ifeq ($(UNAME_S),Darwin)
     ifeq ($(UNAME_M),arm64)
         ARCH_FLAGS = -arch arm64
@@ -17,7 +20,13 @@ ifeq ($(UNAME_S),Darwin)
     endif
 else ifeq ($(UNAME_S),Linux)
     ARCH_FLAGS = 
+else ifneq (,$(findstring MSYS_NT,$(UNAME_S)))
+    IS_WINDOWS = 1
+    ARCH_FLAGS = 
 endif
+
+# Default Target
+.DEFAULT_GOAL := all
 
 # Dependency Paths
 PWD = $(shell pwd)
@@ -32,10 +41,9 @@ LIBZIP_PATH = $(PWD)/libzip/install
 CXXFLAGS = -std=c++2b -Igem_src -Iccbevington/CppLibrary -O2 -Wall $(ARCH_FLAGS)
 LDFLAGS = $(ARCH_FLAGS) -lpthread -lz -lreadline
 
-# Switch to C++26 (using -std=c++2b or -std=c++26 if supported, GCC 14+ / Clang 16+)
-# Fallback to c++23 or c++20 if needed, but user asked for c++26.
-# Most compilers use -std=c++2b for C++26 draft.
-
+ifeq ($(IS_WINDOWS),1)
+    LDFLAGS += -lws2_32
+endif
 
 # libzip Detection
 ifneq ("$(wildcard $(LIBZIP_PATH)/include/zip.h)","")
@@ -96,25 +104,42 @@ else ifneq ("$(wildcard $(BREW_QL_ARM_PATH)/include/ql/quantlib.hpp)","")
     LDFLAGS  += -L$(BREW_QL_ARM_PATH)/lib -lQuantLib
 endif
 
-# Python Integration (Required for Mistral Native)
-PYTHON_INC = $(shell python3-config --cflags | sed 's/-arch arm64//g' | sed 's/-arch x86_64//g')
-PYTHON_LIB = $(shell python3-config --ldflags --embed | sed 's/-arch arm64//g' | sed 's/-arch x86_64//g')
+# Python Integration
+HAS_PYCONFIG := $(shell command -v python3-config 2> /dev/null)
+ifeq ($(IS_WINDOWS),1)
+    ifndef HAS_PYCONFIG
+        PYTHON_PREFIX := $(shell python -c "import sys; import os; print(sys.base_prefix.replace(os.sep, '/'))")
+        PYTHON_VERSION := $(shell python -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
+        PYTHON_INC = -I$(PYTHON_PREFIX)/include
+        PYTHON_LIB = -L$(PYTHON_PREFIX)/libs -lpython$(PYTHON_VERSION)
+    else
+        PYTHON_INC = $(shell python3-config --cflags | sed 's/-arch [^ ]*//g')
+        PYTHON_LIB = $(shell python3-config --ldflags --embed | sed 's/-arch [^ ]*//g')
+    endif
+else
+    PYTHON_INC = $(shell python3-config --cflags | sed 's/-arch arm64//g' | sed 's/-arch x86_64//g')
+    PYTHON_LIB = $(shell python3-config --ldflags --embed | sed 's/-arch arm64//g' | sed 's/-arch x86_64//g')
+endif
 
 # Sources
 GEM_SRCS = gem_src/main.cpp gem_src/gem_mistral_bridge.cpp \
            gem_src/miniz.c gem_src/miniz_tdef.c gem_src/miniz_tinfl.c gem_src/miniz_zip.c
 BEV_SRCS = ccbevington/CppLibrary/FitUtil.cpp ccbevington/CppLibrary/GenUtil.cpp ccbevington/CppLibrary/MonteLib.cpp ccbevington/CppLibrary/QuikHist.cpp
 
-.PHONY: all deps clean help clean-deps test install
+.PHONY: all build deps clean help clean-deps test install
 
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
 LIBDIR = $(PREFIX)/lib/gem
 DATADIR = $(PREFIX)/share/gem
 
-all: $(TARGET) gem_test
+all:
+	@$(MAKE) clean
+	@$(MAKE) build
 
-install: all
+build: $(TARGET) gem_test
+
+install: build
 	@echo "Installing Gem Language to $(PREFIX)..."
 	mkdir -p $(BINDIR)
 	mkdir -p $(LIBDIR)
@@ -134,7 +159,8 @@ install: all
 help:
 	@echo "Gem Language Build System"
 	@echo "Targets:"
-	@echo "  all        - Build the gem interpreter and test suite (default)"
+	@echo "  all        - Perform a clean compile of gem interpreter and test suite (default)"
+	@echo "  build      - Build without cleaning (used internally by 'all')"
 	@echo "  gem_test   - Build the comprehensive test suite binary"
 	@echo "  deps       - Clone and build all dependencies"
 	@echo "  install    - Install binaries and modules into $(PREFIX)"
@@ -200,7 +226,7 @@ deps:
 	fi
 
 clean:
-	rm -f $(TARGET) gem_test gem_src/gem_mistral_bridge.cpp
+	$(RM) $(TARGET) gem_test gem_src/gem_mistral_bridge.cpp
 	@# Remove any other potential Gem-compiled binaries in the root
 	@find . -maxdepth 1 -type f -perm +111 ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" -delete
 
