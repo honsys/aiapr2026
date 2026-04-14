@@ -1,4 +1,0 @@
-fun bar(x)
-  sys.print("Bar", x)
-  res = x + 1
-end res
