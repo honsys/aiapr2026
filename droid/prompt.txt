@@ -1,1 +1,7 @@
-write an android smart phone app using the gem26 computer language at https://gitlab.com/1percent1/aiapr2026.git that displays the earth globe timezones and uses geolocation to provid the current date and time at the current location and at the slected location
+write an android smart phone app using the gem26 computer language at https://gitlab.com/1percent1/aiapr2026.git that displays the earth globe timezones and uses geolocation to provide the current date and time at the current location and at the selected location; also write a makefile to use the gem compiler to build binary exectables of the app for droid and iphone, and desktop linux, macos, and win11; the makefile should also submit the droid app to google play
+
+
+compare rust with go features and adoption and usage and write a markdown file
+
+
+
