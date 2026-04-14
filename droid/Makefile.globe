@@ -1,0 +1,129 @@
+# Makefile.globe — Cross-platform build + Google Play submission for globe_tz
+#
+# Targets:
+#   make -f Makefile.globe all        — build all platforms
+#   make -f Makefile.globe android    — Android APK/AAB via gem -c
+#   make -f Makefile.globe ios        — iOS IPA (macOS + Xcode required)
+#   make -f Makefile.globe linux      — Linux x86_64 binary
+#   make -f Makefile.globe macos      — macOS universal binary
+#   make -f Makefile.globe win11      — Windows 11 exe (cross-compile via MinGW)
+#   make -f Makefile.globe play       — submit AAB to Google Play (requires fastlane)
+#   make -f Makefile.globe run        — run locally on :8080
+#   make -f Makefile.globe clean      — remove build artifacts
+#
+# Prerequisites:
+#   gem compiler  — in PATH or set GEM=/path/to/gem
+#   Android:      ANDROID_HOME, JAVA_HOME set; fastlane installed
+#   iOS:          macOS + Xcode + Apple Developer account
+#   Win11:        x86_64-w64-mingw32-gcc in PATH (brew install mingw-w64)
+#   Play Store:   fastlane supply configured (Fastfile + google-play-key.json)
+
+APP       = globe_tz
+SRC       = globe_tz.g
+HTML      = globe_tz.html
+GEM      ?= ./gem
+
+# Android
+ANDROID_HOME  ?= $(HOME)/Library/Android/sdk
+BUILD_TOOLS   ?= $(ANDROID_HOME)/build-tools/34.0.0
+KEYSTORE      ?= $(HOME)/.android/globe_tz.keystore
+KEY_ALIAS     ?= globe_tz
+STORE_PASS    ?= changeme
+PACKAGE       ?= com.gem26.globetz
+VERSION_CODE  ?= 1
+VERSION_NAME  ?= 1.0.0
+
+# iOS
+BUNDLE_ID     ?= com.gem26.globetz
+TEAM_ID       ?= YOURTEAMID
+
+# Google Play
+PLAY_TRACK    ?= internal
+PLAY_KEY      ?= google-play-key.json
+
+# ── Detect host OS ─────────────────────────────────────────────────────────────
+UNAME := $(shell uname -s)
+
+.PHONY: all android ios linux macos win11 play run clean
+
+all: linux macos android ios win11
+
+# ── Run locally ───────────────────────────────────────────────────────────────
+run:
+	$(GEM) $(SRC)
+
+# ── Linux x86_64 ──────────────────────────────────────────────────────────────
+linux:
+	$(GEM) -c $(SRC) $(HTML) -o $(APP)_linux_x86_64
+	@echo "✅  Linux binary → $(APP)_linux_x86_64"
+
+# ── macOS universal (arm64 + x86_64) ─────────────────────────────────────────
+macos:
+	$(GEM) -c $(SRC) $(HTML) -o $(APP)_macos
+	@echo "✅  macOS binary → $(APP)_macos"
+
+# ── Windows 11 (cross-compile via MinGW) ─────────────────────────────────────
+win11:
+	$(GEM) -c $(SRC) $(HTML) --target windows -o $(APP)_win11.exe
+	@echo "✅  Windows binary → $(APP)_win11.exe"
+
+# ── Android APK + AAB ─────────────────────────────────────────────────────────
+# gem -c with --target android produces a self-contained APK/AAB that embeds
+# the gem runtime, globe_tz.g server, and globe_tz.html as assets.
+android: $(APP).aab
+	@echo "✅  Android AAB → $(APP).aab"
+
+$(APP).aab:
+	$(GEM) -c $(SRC) $(HTML) \
+	  --target android \
+	  --package $(PACKAGE) \
+	  --version-code $(VERSION_CODE) \
+	  --version-name $(VERSION_NAME) \
+	  -o $(APP)_android_unsigned.aab
+	# Sign the AAB
+	jarsigner -verbose \
+	  -keystore $(KEYSTORE) \
+	  -storepass $(STORE_PASS) \
+	  -keypass  $(STORE_PASS) \
+	  -signedjar $(APP).aab \
+	  $(APP)_android_unsigned.aab \
+	  $(KEY_ALIAS)
+
+# Generate a debug keystore if none exists
+$(KEYSTORE):
+	mkdir -p $(dir $(KEYSTORE))
+	keytool -genkeypair -v \
+	  -keystore $(KEYSTORE) \
+	  -alias $(KEY_ALIAS) \
+	  -keyalg RSA -keysize 2048 -validity 10000 \
+	  -storepass $(STORE_PASS) -keypass $(STORE_PASS) \
+	  -dname "CN=GlobeTZ, OU=Dev, O=Gem26, L=Unknown, S=Unknown, C=US"
+
+# ── iOS IPA (macOS only) ──────────────────────────────────────────────────────
+ios:
+ifeq ($(UNAME),Darwin)
+	$(GEM) -c $(SRC) $(HTML) \
+	  --target ios \
+	  --bundle-id $(BUNDLE_ID) \
+	  --team-id   $(TEAM_ID) \
+	  -o $(APP)_ios.ipa
+	@echo "✅  iOS IPA → $(APP)_ios.ipa"
+else
+	@echo "⚠  iOS build requires macOS + Xcode — skipping on $(UNAME)"
+endif
+
+# ── Google Play submission via fastlane supply ────────────────────────────────
+play: $(APP).aab
+	@command -v fastlane >/dev/null 2>&1 || \
+	  (echo "❌  fastlane not found — run: gem install fastlane" && exit 1)
+	fastlane supply \
+	  --aab $(APP).aab \
+	  --package_name $(PACKAGE) \
+	  --track $(PLAY_TRACK) \
+	  --json_key $(PLAY_KEY)
+	@echo "✅  Submitted $(APP).aab to Google Play track: $(PLAY_TRACK)"
+
+# ── Clean ─────────────────────────────────────────────────────────────────────
+clean:
+	rm -f $(APP)_linux_x86_64 $(APP)_macos $(APP)_win11.exe \
+	      $(APP)_android_unsigned.aab $(APP).aab $(APP)_ios.ipa

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#0b1120">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Globe Timezones</title>
+<!-- Plotly for 3D globe -->
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0b1120;color:#e2e8f0;display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+header{padding:.6rem 1rem;background:#1e293b;display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+header h1{font-size:.95rem;font-weight:700;flex:1}
+#gps-badge{font-size:.7rem;color:#94a3b8}
+#globe{flex:1;min-height:0}
+#panel{background:#0f172a;padding:.7rem;display:flex;flex-direction:column;gap:.55rem;flex-shrink:0}
+.cards{display:flex;gap:.5rem}
+.card{flex:1;background:#1e293b;border-radius:.6rem;padding:.6rem .8rem}
+.card .label{font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
+.card .tz{font-size:.8rem;font-weight:700;color:#38bdf8;margin:.15rem 0}
+.card .dt{font-size:.75rem;color:#e2e8f0}
+.card .loc{font-size:.68rem;color:#94a3b8}
+#status{font-size:.75rem;color:#64748b;min-height:1em;text-align:center}
+button{padding:.55rem 1rem;border:none;border-radius:.45rem;font-size:.85rem;font-weight:700;cursor:pointer;background:#3b82f6;color:#fff;transition:opacity .15s}
+button:disabled{opacity:.35;cursor:not-allowed}
+#btn-locate{background:#22c55e}
+</style>
+</head>
+<body>
+
+<header>
+  <span style="font-size:1.3rem">🌍</span>
+  <h1>Globe Timezones</h1>
+  <div id="gps-badge">GPS: waiting…</div>
+</header>
+
+<div id="globe"></div>
+
+<div id="panel">
+  <div class="cards">
+    <div class="card" id="card-here">
+      <div class="label">My Location</div>
+      <div class="tz" id="here-tz">—</div>
+      <div class="dt" id="here-dt">—</div>
+      <div class="loc" id="here-loc">—</div>
+    </div>
+    <div class="card" id="card-sel">
+      <div class="label">Selected</div>
+      <div class="tz" id="sel-tz">tap globe</div>
+      <div class="dt" id="sel-dt">—</div>
+      <div class="loc" id="sel-loc">—</div>
+    </div>
+  </div>
+  <div id="status">Locating…</div>
+  <button id="btn-locate">📍 Use My Location</button>
+</div>
+
+<script>
+// ── IANA timezone → approximate lon center (for globe marker) ─────────────────
+// Sparse lookup; AI fills the rest via /tzname
+const TZ_LON = {
+  "America/New_York":-74,"America/Chicago":-87,"America/Denver":-104,
+  "America/Los_Angeles":-118,"America/Anchorage":-150,"Pacific/Honolulu":-157,
+  "America/Sao_Paulo":-46,"America/Buenos_Aires":-58,"America/Toronto":-79,
+  "America/Mexico_City":-99,"Europe/London":0,"Europe/Paris":2,
+  "Europe/Berlin":13,"Europe/Moscow":37,"Europe/Istanbul":29,
+  "Africa/Cairo":31,"Africa/Lagos":3,"Africa/Johannesburg":28,
+  "Asia/Dubai":55,"Asia/Kolkata":77,"Asia/Dhaka":90,"Asia/Bangkok":101,
+  "Asia/Singapore":104,"Asia/Shanghai":121,"Asia/Tokyo":139,
+  "Asia/Seoul":127,"Australia/Sydney":151,"Pacific/Auckland":174
+};
+const TZ_LAT = {
+  "America/New_York":40,"America/Chicago":42,"America/Denver":39,
+  "America/Los_Angeles":34,"America/Anchorage":61,"Pacific/Honolulu":21,
+  "America/Sao_Paulo":-23,"America/Buenos_Aires":-34,"America/Toronto":43,
+  "America/Mexico_City":19,"Europe/London":51,"Europe/Paris":49,
+  "Europe/Berlin":52,"Europe/Moscow":55,"Europe/Istanbul":41,
+  "Africa/Cairo":30,"Africa/Lagos":6,"Africa/Johannesburg":-26,
+  "Asia/Dubai":25,"Asia/Kolkata":20,"Asia/Dhaka":23,"Asia/Bangkok":14,
+  "Asia/Singapore":1,"Asia/Shanghai":31,"Asia/Tokyo":36,
+  "Asia/Seoul":37,"Australia/Sydney":-34,"Pacific/Auckland":-37
+};
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let myLat = null, myLon = null;
+let markerLats = [], markerLons = [], markerText = [], markerColors = [];
+
+// ── Globe (Plotly choropleth + scattergeo) ────────────────────────────────────
+function buildGlobe(centerLat, centerLon) {
+  const geo = {
+    type:"scattergeo", mode:"markers+text",
+    lat: markerLats, lon: markerLons,
+    text: markerText,
+    textposition:"top center",
+    textfont:{color:"#fff",size:9},
+    marker:{size:10, color: markerColors, opacity:0.9},
+    hoverinfo:"text"
+  };
+  const layout = {
+    geo:{
+      projection:{type:"orthographic",
+                  rotation:{lon: centerLon || 0, lat: centerLat || 20, roll:0}},
+      showland:true, landcolor:"#1e3a5f",
+      showocean:true, oceancolor:"#0b1120",
+      showlakes:true, lakecolor:"#0b1120",
+      showcountries:true, countrycolor:"#334155",
+      showcoastlines:true, coastlinecolor:"#475569",
+      bgcolor:"#0b1120",
+      framecolor:"#1e293b"
+    },
+    paper_bgcolor:"#0b1120",
+    margin:{t:0,b:0,l:0,r:0},
+    dragmode:"orbit"
+  };
+  Plotly.react("globe",[geo],layout,{displayModeBar:false,responsive:true});
+}
+
+// ── Click on globe → get timezone for clicked lat/lon ─────────────────────────
+document.getElementById("globe").on("plotly_click", async data => {
+  if (!data.points.length) return;
+  const pt = data.points[0];
+  // Plotly geo click gives lat/lon on the point; for empty globe area use event
+  const lat = pt.lat ?? pt.location;
+  const lon = pt.lon;
+  if (lat == null || lon == null) return;
+  await fetchTz(lat, lon, "sel");
+});
+
+// ── Fetch timezone by lat/lon → /tz ──────────────────────────────────────────
+async function fetchTz(lat, lon, target) {
+  setStatus("⏳ Looking up timezone…");
+  try {
+    const r = await fetch("/tz",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({lat,lon})
+    });
+    const d = await r.json();
+    showCard(target, d);
+    addMarker(lat, lon, d.timezone, target === "here" ? "#22c55e" : "#f59e0b");
+    buildGlobe(lat, lon);
+    setStatus("✅ " + d.timezone);
+  } catch(e){ setStatus("⚠ " + e.message); }
+}
+
+// ── Fetch timezone by IANA name → /tzname ────────────────────────────────────
+async function fetchTzName(tz) {
+  setStatus("⏳ " + tz + "…");
+  try {
+    const r = await fetch("/tzname",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({timezone:tz})
+    });
+    const d = await r.json();
+    showCard("sel", d);
+    const lat = TZ_LAT[tz] ?? 0, lon = TZ_LON[tz] ?? 0;
+    addMarker(lat, lon, tz, "#f59e0b");
+    buildGlobe(lat, lon);
+    setStatus("✅ " + tz);
+  } catch(e){ setStatus("⚠ " + e.message); }
+}
+
+// ── Update card ───────────────────────────────────────────────────────────────
+function showCard(target, d) {
+  const pfx = target === "here" ? "here" : "sel";
+  document.getElementById(pfx+"-tz").textContent = d.timezone ?? "—";
+  document.getElementById(pfx+"-dt").textContent = d.datetime ?? "—";
+  document.getElementById(pfx+"-loc").textContent =
+    [d.city, d.country].filter(Boolean).join(", ") || "—";
+}
+
+// ── Add/update marker ─────────────────────────────────────────────────────────
+function addMarker(lat, lon, label, color) {
+  markerLats.push(lat); markerLons.push(lon);
+  markerText.push(label); markerColors.push(color);
+}
+
+function setStatus(msg){ document.getElementById("status").textContent = msg; }
+
+// ── Geolocation ───────────────────────────────────────────────────────────────
+function locate() {
+  if (!navigator.geolocation) { setStatus("⚠ Geolocation not supported"); return; }
+  setStatus("📡 Acquiring GPS…");
+  navigator.geolocation.getCurrentPosition(
+    async p => {
+      myLat = p.coords.latitude; myLon = p.coords.longitude;
+      document.getElementById("gps-badge").textContent =
+        myLat.toFixed(4) + ", " + myLon.toFixed(4);
+      await fetchTz(myLat, myLon, "here");
+    },
+    () => setStatus("⚠ GPS denied — enable location permission")
+  );
+}
+
+document.getElementById("btn-locate").onclick = locate;
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+buildGlobe(20, 0);
+locate();
+
+// Auto-refresh current-location datetime every 60 s
+setInterval(() => {
+  if (myLat !== null) fetchTz(myLat, myLon, "here");
+}, 60000);
+</script>
+</body>
+</html>
