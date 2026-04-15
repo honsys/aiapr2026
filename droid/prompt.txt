@@ -5,6 +5,6 @@ compare rust with go features and industry adoption and usage and write a detail
 compare rust with c++26 features and industry adoption and usage and write a detailed markdown file
 compare rust with gem-lang -- ~/aiapr2026/gem26 -- features and industry adoption and usage and write a detailed markdown file 
 
-write a gem-lang builtin object that supports development of new device drivers for linux and droid and macos and win11
+use ~/aiapr2026/gem26 to write a gem-lang builtin object "drvr" that supports development of new device drivers for linux and droid and macos and win11
 
 
