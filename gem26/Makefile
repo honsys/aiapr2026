@@ -173,7 +173,7 @@ gem_src/gem_mistral_bridge.cpp: gem_src/gem_mistral_bridge.pyx
 	@cython --cplus -3 gem_src/gem_mistral_bridge.pyx -o gem_src/gem_mistral_bridge.cpp
 
 $(TARGET): $(GEM_SRCS) $(BEV_SRCS)
-	@echo "Building $(TARGET)..."
+	@echo "Building $(TARGET) via $(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS)"
 	$(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS) -o $(TARGET) $(GEM_SRCS) $(BEV_SRCS) $(LDFLAGS) $(PYTHON_LIB)
 
 gem_test: $(TARGET) tests/comprehensive/all_tests.g
