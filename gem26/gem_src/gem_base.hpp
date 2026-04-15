@@ -463,7 +463,7 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, mobl, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro" << std::endl;
+                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, mobl, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
                 std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
                 std::cout << "\nMobile & Cross-Platform:" << std::endl;
@@ -546,6 +546,15 @@ public:
                     std::cout << "  - langport(pattern, [output]): Ports foreign code (e.g. *.py) to Gem." << std::endl;
                     std::cout << "  - redirect(url, [port]): HTTP redirect or background redirect server." << std::endl;
                     std::cout << "  - app(port, [routes]): Background web app server. Routes map paths to strings, files, or handler fns." << std::endl;
+                } else if (topic == "drvr") {
+                    std::cout << "Description: Device driver development module (Linux, Windows 11, macOS, Android)." << std::endl;
+                    std::cout << "Functions:" << std::endl;
+                    std::cout << "  - linux(name): Generates a Linux kernel module template." << std::endl;
+                    std::cout << "  - win11(name): Generates a Windows Driver Framework (WDF) template." << std::endl;
+                    std::cout << "  - macos(name): Generates a macOS IOKit/System Extension template." << std::endl;
+                    std::cout << "  - android(name): Generates an Android HAL template." << std::endl;
+                    std::cout << "  - build(target): Triggers cross-platform build for specified target." << std::endl;
+                    std::cout << "  - deploy(target): Deploys driver to the target device." << std::endl;
                 } else if (topic == "math") {
                     std::cout << "Description: Mathematical constants, functions, and symbolic math." << std::endl;
                     std::cout << "Functions:" << std::endl;
@@ -2346,6 +2355,7 @@ public:
 inline bool GemImg::initialized = false;
 inline bool GemAI::pythonInitialized = false;
 
+#include "gem_drvr.hpp"
 #include "gem_astro.hpp"
 
 #endif

@@ -109,6 +109,7 @@ public:
         builtins["fin"] = std::make_shared<GemFin>();
         builtins["bsm"] = std::make_shared<GemBSM>();
         builtins["astro"] = std::make_shared<GemAstro>();
+        builtins["drvr"] = std::make_shared<GemDrvr>();
 
         auto caller = [this](const std::string& name, std::vector<std::shared_ptr<GemValue>> args) {
             return this->callUserFunction(name, args);

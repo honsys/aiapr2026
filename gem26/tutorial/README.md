@@ -65,6 +65,9 @@ Welcome to the official tutorial repository for the **Gem Language** — a moder
 ### 7. Mobile & Cross-Platform
 - **[36_mobl_travel_log.g](36_mobl_travel_log.g)**: `mobl` object — NLP dictation + GPS + GeoJSON travel log PWA.
 
+### 8. System Programming & Hardware
+- **[37_device_drivers.g](37_device_drivers.g)**: `drvr` builtin — Linux, Windows 11, macOS, and Android device driver development.
+
 ---
 
 ## Help & Builtins
@@ -90,7 +93,7 @@ CLI Options:
 Available Builtin Modules:
   sys, math, ai, text, algo, bev, file, zip, img, geo, mobl,
   cpp, tcp, itr, data, container, vm, go, ruby, node, rust,
-  fin, bsm, chart
+  fin, bsm, chart, astro, drvr
 
 Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, while,
