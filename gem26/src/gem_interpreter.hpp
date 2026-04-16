@@ -112,6 +112,7 @@ public:
         builtins["astro"] = std::make_shared<GemAstro>();
         builtins["drvr"] = std::make_shared<GemDrvr>();
         builtins["mobl"] = std::make_shared<GemMobl>();
+        builtins["seo"]  = std::make_shared<GemSEO>();
         builtins["trek"] = std::make_shared<GemTrek>();
 
         auto caller = [this](const std::string& name, std::vector<std::shared_ptr<GemValue>> args) {

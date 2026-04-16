@@ -337,6 +337,16 @@ Hardware}\label{system-programming-hardware}
   and edit travel logs on OpenStreetMap with GeoJSON/GPX support.
 \end{itemize}
 
+\subsubsection{11. Search Engine Optimization}\label{search-engine-optimization}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{40_seo.g}}: \texttt{seo} builtin --- crawl URLs, extract
+  SEO signals, write JSON index, analyze report.
+\end{itemize}
+
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Help \& Builtins}\label{help-builtins}
@@ -364,7 +374,7 @@ Hardware}\label{system-programming-hardware}
 \NormalTok{Available Builtin Modules:}
 \NormalTok{  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,}
 \NormalTok{  cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,}
-\NormalTok{  fin, bsm, chart, astro, mobl, trek, drvr}
+\NormalTok{  fin, bsm, chart, astro, mobl, trek, seo, drvr}
 
 \NormalTok{Keywords for Documentation:}
 \NormalTok{  fun, obj, use, alias, his, lib, end, if, while,}
@@ -479,17 +489,25 @@ Routes: \texttt{/} $\to$ PWA HTML, \texttt{/log} $\to$ POST \texttt{\{lat,lon,te
 \item \textbf{fin}: \texttt{ticker}, \texttt{bs\_price}, \texttt{greeks}, \texttt{high\_yield\_bonds/etfs/equities}, date/calendar helpers
 \item \textbf{bsm}: inherits \texttt{fin} + \texttt{price\_american(symbol, type, duration)}
 \item \textbf{chart}: \texttt{plot(traces, [layout])}, \texttt{show(path)}, \texttt{server(path, [port])}
+\item[] \textit{Comparisons:} C++=\texttt{matplotlib-cpp/ROOT} \textperiodcentered{} Python=\texttt{plotly/matplotlib} \textperiodcentered{} Julia=\texttt{Plots.jl/Makie.jl} \textperiodcentered{} Rust=\texttt{plotters crate}
 \item \textbf{data}: \texttt{read\_csv(path)}, \texttt{mean(v)}, \texttt{std(v)}
 \item \textbf{rex}: \texttt{match}, \texttt{find}, \texttt{findall}, \texttt{groups}, \texttt{sub}, \texttt{gsub}, \texttt{split}, \texttt{count} (ECMAScript, optional flags)
+\item[] \textit{Comparisons:} C++=\texttt{std::regex} \textperiodcentered{} Python=\texttt{re} \textperiodcentered{} Julia=\texttt{Regex} \textperiodcentered{} Go=\texttt{regexp} \textperiodcentered{} Ruby=\texttt{=\textasciitilde{}/gsub} \textperiodcentered{} Rust=\texttt{regex crate}
 \item \textbf{algo}: \texttt{add}, \texttt{quicksort}, \texttt{sort}, \texttt{now()}, \texttt{date\_add}, \texttt{date\_diff}
 \item \textbf{tcp}: \texttt{listen}, \texttt{accept}, \texttt{connect}, \texttt{send}, \texttt{recv}, \texttt{close}, \texttt{nic()}, \texttt{routes()}
+\item[] \textit{Comparisons:} C++=\texttt{POSIX socket} \textperiodcentered{} Python=\texttt{socket.socket} \textperiodcentered{} Julia=\texttt{Sockets.listen} \textperiodcentered{} Go=\texttt{net.Listen} \textperiodcentered{} Ruby=\texttt{TCPServer} \textperiodcentered{} Rust=\texttt{TcpListener::bind}
 \item \textbf{thread}: \texttt{wait()} --- block until complete; \texttt{is\_finished()} --- non-blocking status check (returned by \texttt{sys.async()})
 \item \textbf{www}: \texttt{wget(url,file)}, \texttt{app(port,[routes])}, \texttt{redirect(target,[port])}, \texttt{map2d(geojson,output)}
+\item[] \textit{Comparisons:} C++=\texttt{cpp-httplib/Crow} \textperiodcentered{} Python=\texttt{Flask/FastAPI} \textperiodcentered{} Julia=\texttt{HTTP.jl} \textperiodcentered{} Go=\texttt{net/http/Gin} \textperiodcentered{} Rust=\texttt{actix-web/axum}
 \item \textbf{cdn}: inherits \texttt{www} + \texttt{start(port,routes\_map)}, \texttt{stats()}, \texttt{purge([path])}, \texttt{config(type,content)}
 \item \textbf{k3s}: Docker (\texttt{docker\_run/ps/build/stop}) + K3s (\texttt{k3s\_apply/get/pods/nodes/logs})
+\item[] \textit{Comparisons:} C++=\texttt{Docker SDK} \textperiodcentered{} Python=\texttt{docker-py/kubernetes} \textperiodcentered{} Go=\texttt{docker/client/k8s.io/client-go} \textperiodcentered{} Rust=\texttt{bollard/kube-rs}
 \item \textbf{vm}: \texttt{init}, \texttt{up}, \texttt{ssh}, \texttt{status}, \texttt{halt}, \texttt{destroy}
+\item \textbf{seo}: \texttt{index(urls, output\_path)} --- crawl URLs, extract SEO signals, write JSON; \texttt{analyze(index\_path)} --- print SEO report
 \item \textbf{trek}: \texttt{new(path)}, \texttt{add(path,lat,lon,[title],[note])}, \texttt{edit}, \texttt{remove}, \texttt{load}, \texttt{show(path,[port])} (OSM/Leaflet), \texttt{export\_gpx}, \texttt{stats(path)}
+\item[] \textit{Comparisons:} C++=\texttt{GDAL/libgpx} \textperiodcentered{} Python=\texttt{gpxpy/folium} \textperiodcentered{} Julia=\texttt{GPX.jl} \textperiodcentered{} Go=\texttt{tkrajina/gpxgo} \textperiodcentered{} Rust=\texttt{gpx crate}
 \item \textbf{mobl}: \texttt{phone(name)}, \texttt{dictate(text)}, \texttt{make\_feature(lat,lon,text)}
+\item[] \textit{Comparisons:} C++=\texttt{Qt} \textperiodcentered{} Python=\texttt{Flask+SpeechRecognition} \textperiodcentered{} Julia=no built-in \textperiodcentered{} Go=\texttt{net/http+custom JS} \textperiodcentered{} Rust=\texttt{actix-web+custom JS}
 \item \textbf{drvr}: \texttt{linux/win11/macos/android(name)}, \texttt{build(target)}, \texttt{deploy(target)}
 \item \textbf{nlp}: Natural Language Processing
 \item \textbf{bev}: \texttt{data(x,y)}, \texttt{fit\_line()}, \texttt{param(idx)} --- Bevington data reduction
@@ -526,7 +544,7 @@ Uses the \texttt{mobl} builtin + \texttt{travel\_log.html} (PWA). Voice dictatio
 \tightlist
 \item
   \textbf{macOS/Linux}: \texttt{g++} (supporting C++2b/C++26),
-  \texttt{make}, \texttt{python3}, \texttt{libreadline-dev}.
+  \texttt{make}, \texttt{python3} (3.14+), \texttt{libreadline-dev}. Python 3.14 headers required for embedded polyglot runtime.
 \item
   \textbf{Windows 11}: \href{https://www.msys2.org/}{MSYS2} with
   \texttt{mingw-w64-x86\_64-gcc}, \texttt{make}, and

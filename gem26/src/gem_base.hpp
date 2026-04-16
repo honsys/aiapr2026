@@ -470,7 +470,7 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo, mobl, trek, cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
+                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo, mobl, trek, seo, cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
                 std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
                 std::cout << "\nMobile & Cross-Platform:" << std::endl;
@@ -481,293 +481,638 @@ public:
                 std::string topic = args[0]->toString();
                 std::cout << "\n--- Help: " << topic << " ---" << std::endl;
                 if (topic == "fin") {
-                    std::cout << "Description: Financial engineering and QuantLib integration." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - ticker(symbol): Real-time market data via yfinance (returns Ticker object)." << std::endl;
-                    std::cout << "  - high_yield_bonds(): Top 50 high yield bonds from TradingView." << std::endl;
-                    std::cout << "  - high_yield_etfs(): Top 50 high yield ETFs from TradingView." << std::endl;
-                    std::cout << "  - high_yield_equities(): Top 50 high yield equities from TradingView." << std::endl;
-                    std::cout << "  - bs_price(type, strike, spot, rate, vol, t): European option pricing." << std::endl;
-                    std::cout << "  - greeks(type, strike, spot, rate, vol, t): NPV, Delta, Gamma, Theta, Vega (returns Greeks object)." << std::endl;
-                    std::cout << "  - date(d, m, y): Create a QuantLib date object." << std::endl;
-                    std::cout << "  - calendar(name): Get a market calendar (e.g., 'USA', 'UK', 'TARGET')." << std::endl;
-                    std::cout << "  - is_holiday(cal_name, d, m, y): Check if a date is a market holiday." << std::endl;
-                    std::cout << "  - add_days(d, m, y, n): Date arithmetic (returns Date object)." << std::endl;
-                    std::cout << "  - diff_days(d1, m1, y1, d2, m2, y2): Difference in days between dates." << std::endl;
+                    std::cout << "Module: fin — Financial engineering (yfinance + TradingView + QuantLib)" << std::endl;
+                    std::cout << "  ticker(symbol)                    — real-time data via yfinance (.price,.volume,...)" << std::endl;
+                    std::cout << "  high_yield_bonds()                — top 50 bonds by yield (TradingView)" << std::endl;
+                    std::cout << "  high_yield_etfs()                 — top 50 ETFs by dividend yield" << std::endl;
+                    std::cout << "  high_yield_equities()             — top 50 stocks by dividend yield" << std::endl;
+                    std::cout << "  bs_price(type,strike,spot,r,vol,t)— Black-Scholes European option price" << std::endl;
+                    std::cout << "  greeks(type,strike,spot,r,vol,t)  — NPV, Delta, Gamma, Theta, Vega" << std::endl;
+                    std::cout << "  date(d,m,y)                       — QuantLib Date object" << std::endl;
+                    std::cout << "  calendar(name)                    — market calendar (USA/UK/TARGET)" << std::endl;
+                    std::cout << "  is_holiday(cal,d,m,y)             — bool: is market holiday?" << std::endl;
+                    std::cout << "  add_days(d,m,y,n)                 — date arithmetic" << std::endl;
+                    std::cout << "  diff_days(d1,m1,y1,d2,m2,y2)     — days between two dates" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    QuantLib directly; no built-in market data" << std::endl;
+                    std::cout << "  Python: yfinance, quantlib-python, pandas-datareader" << std::endl;
+                    std::cout << "  Julia:  MarketData.jl, QuantLib.jl" << std::endl;
+                    std::cout << "  Go:     piquette/quantlib (bindings); no built-in" << std::endl;
+                    std::cout << "  Ruby:   quantlib-ruby gem; no built-in market data" << std::endl;
+                    std::cout << "  Rust:   no mature QuantLib bindings; ta crate for indicators" << std::endl;
                 } else if (topic == "bsm") {
-                    std::cout << "Description: Black-Scholes-Merton (BSM) Builtin Module." << std::endl;
-                    std::cout << "Inherits: all 'fin' methods (ticker, bs_price, greeks, etc.)" << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - price_american(symbol, type, duration): PDE-enhanced American pricing." << std::endl;
-                    std::cout << "    - duration can be 'weekly', 'monthly', or 'quarterly' (default)." << std::endl;
-                } else if (topic == "img") {
-                    std::cout << "Description: Image processing via ImageMagick." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - resize(src_path, width, height, dest_path): Resizes an image." << std::endl;
-                } else if (topic == "k3s") {
-                    std::cout << "Description: Docker and Kubernetes (K3s) management." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - docker_run(image, cmd): Runs a Docker container (--rm)." << std::endl;
-                    std::cout << "  - docker_ps(): Lists running containers." << std::endl;
-                    std::cout << "  - docker_build(path, tag): Builds a Docker image." << std::endl;
-                    std::cout << "  - docker_stop(id): Stops a Docker container." << std::endl;
-                    std::cout << "  - k3s_apply(yaml): Applies a Kubernetes manifest (inline string)." << std::endl;
-                    std::cout << "  - k3s_get(resource): Gets Kubernetes resources (e.g., 'pods', 'svc')." << std::endl;
-                    std::cout << "  - k3s_pods(): Lists all pods across all namespaces." << std::endl;
-                    std::cout << "  - k3s_nodes(): Lists cluster nodes." << std::endl;
-                    std::cout << "  - k3s_logs(pod): Returns logs for a specified pod." << std::endl;
-                } else if (topic == "vm") {
-                    std::cout << "Description: Vagrant Virtual Machine management." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - init(box): Initializes a Vagrant environment with the specified box." << std::endl;
-                    std::cout << "  - up(): Starts the VM (vagrant up)." << std::endl;
-                    std::cout << "  - ssh(cmd): Runs a command via SSH on the VM." << std::endl;
-                    std::cout << "  - status(): Checks VM status." << std::endl;
-                    std::cout << "  - halt(): Powers down the VM." << std::endl;
-                    std::cout << "  - destroy(): Destroys the VM environment." << std::endl;
-                } else if (topic == "go" || topic == "ruby" || topic == "node" || topic == "rust") {
-                    std::cout << "Description: Foreign language interop and execution (" << topic << ")." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - run(input): Runs a source file or inline code string." << std::endl;
-                    if (topic == "go") std::cout << "  - build(file): Builds a Go binary." << std::endl;
-                    if (topic == "node") std::cout << "  - npm_install(package): Installs an NPM package." << std::endl;
-                    if (topic == "rust") std::cout << "  - cargo_new(name): Creates a new Cargo project." << std::endl;
-                } else if (topic == "data") {
-                    std::cout << "Description: Data science, statistics, and CSV processing." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - read_csv(path): Reads CSV into a vector of GemObjects (rows)." << std::endl;
-                    std::cout << "  - mean(vector): Calculates arithmetic mean of a numeric vector." << std::endl;
-                    std::cout << "  - std(vector): Calculates sample standard deviation." << std::endl;
-                } else if (topic == "sys") {
-                    std::cout << "Description: System root module (inherited by all objects)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - print(...): Prints arguments to stdout." << std::endl;
-                    std::cout << "  - args(): Returns command-line arguments as a vector." << std::endl;
-                    std::cout << "  - async(func, [params], [timeout]): Executes function in a background thread." << std::endl;
-                    std::cout << "  - sethandler(signals, func): Sets custom signal handler." << std::endl;
-                    std::cout << "  - host(): Returns OS information." << std::endl;
-                    std::cout << "  - exec(cmd): Executes a shell command." << std::endl;
-                    std::cout << "  - doc([path]): Reads file comments or current script comments." << std::endl;
-                    std::cout << "  - help([topic]): Displays this interactive help." << std::endl;
-                    std::cout << "  - exit(): Exits the REPL or script." << std::endl;
-                    std::cout << "  - langport(pattern, [output]): Ports foreign code (e.g. *.py) to Gem." << std::endl;
-                    std::cout << "  - redirect(url, [port]): HTTP redirect or background redirect server." << std::endl;
-                    std::cout << "  - app(port, [routes]): Background web app server. Routes map paths to strings, files, or handler fns." << std::endl;
-                } else if (topic == "drvr") {
-                    std::cout << "Description: Device driver development module (Linux, Windows 11, macOS, Android)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - linux(name): Generates a Linux kernel module template." << std::endl;
-                    std::cout << "  - win11(name): Generates a Windows Driver Framework (WDF) template." << std::endl;
-                    std::cout << "  - macos(name): Generates a macOS IOKit/System Extension template." << std::endl;
-                    std::cout << "  - android(name): Generates an Android HAL template." << std::endl;
-                    std::cout << "  - build(target): Triggers cross-platform build for specified target." << std::endl;
-                    std::cout << "  - deploy(target): Deploys driver to the target device." << std::endl;
-                } else if (topic == "math") {
-                    std::cout << "Description: Mathematical constants, functions, and symbolic math." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - sin(x), cos(x), sqrt(x): Standard math functions." << std::endl;
-                    std::cout << "  - useSymPy(), useSage(): Switch symbolic provider (default: SymPy)." << std::endl;
-                    std::cout << "  - simplify(expr): Symbolic simplification via SymPy/Sage." << std::endl;
-                    std::cout << "  - diff(expr, [var]): Symbolic differentiation." << std::endl;
-                    std::cout << "  - integrate(expr, [var]): Symbolic integration." << std::endl;
-                    std::cout << "  - solve(expr, [var]): Solve an algebraic equation." << std::endl;
-                    std::cout << "  - sym_latex(expr): Returns LaTeX for a symbolic expression." << std::endl;
-                    std::cout << "  - to_latex(val): Converts value or matrix to LaTeX string." << std::endl;
-                    std::cout << "  - write_latex(path, content, [standalone]): Writes LaTeX to file." << std::endl;
-                    std::cout << "  - read_latex(path): Reads content from LaTeX document environment." << std::endl;
-                    std::cout << "  - parse_latex(text): Extracts math expressions from text ($...$)." << std::endl;
-                    std::cout << "  - compile_latex(path): Runs pdflatex on a file." << std::endl;
-                    std::cout << "Constants:" << std::endl;
-                    std::cout << "  - math.pi (3.14159...)" << std::endl;
-                } else if (topic == "tcp") {
-                    std::cout << "Description: TCP/IP Networking module." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - listen(port): Starts a TCP server socket." << std::endl;
-                    std::cout << "  - accept(fd): Waits for a client connection (returns Socket object)." << std::endl;
-                    std::cout << "  - connect(host, port): Connects to a server (returns Socket object)." << std::endl;
-                    std::cout << "  - send(fd, msg): Sends string message over socket." << std::endl;
-                    std::cout << "  - recv(fd, [size]): Receives data from socket." << std::endl;
-                    std::cout << "  - close(fd): Closes a socket descriptor." << std::endl;
-                    std::cout << "  - nic(): Lists network interface configurations (returns vector of NIC objects)." << std::endl;
-                    std::cout << "  - routes(): Lists system routing table info (returns vector of Route objects)." << std::endl;
-                } else if (topic == "ai") {
-                    std::cout << "Description: AI integration (Gemini, Mistral, Ollama)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - prompt(text): Sends a prompt to the current AI provider." << std::endl;
-                    std::cout << "  - prompt_native(text): High-speed native Mistral C++ bridge call." << std::endl;
-                    std::cout << "  - useMistral(model): Sets Mistral AI as the provider." << std::endl;
-                    std::cout << "  - useOllama(model, [host]): Sets Ollama (local AI) as provider." << std::endl;
-                    std::cout << "  - useGemini(): Switches back to Gemini as the provider." << std::endl;
-                    std::cout << "  - setKey(key), setHost(host), setPath(path): API configuration." << std::endl;
-                    std::cout << "Properties: provider, model, host" << std::endl;
-                } else if (topic == "text") {
-                    std::cout << "Description: String manipulation and PDF processing." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - read(path): Reads entire file into a string." << std::endl;
-                    std::cout << "  - sub(s, start, [len]): Returns a substring." << std::endl;
-                    std::cout << "  - replace(s, old, new): Replaces all occurrences in a string." << std::endl;
-                    std::cout << "  - write_pdf(path, text): Creates a simple PDF file." << std::endl;
-                    std::cout << "  - write_pdf_a(path, text): Creates a PDF/A compliant file (Archival)." << std::endl;
-                    std::cout << "  - read_pdf(path): Extracts text from a PDF file." << std::endl;
-                    std::cout << "  - read_markdown(path), write_markdown(path, text): Markdown support." << std::endl;
-                    std::cout << "  - read_yaml(path), write_yaml(path, obj): YAML support (Stubs)." << std::endl;
-                    std::cout << "  - read_html(path), write_html(path, text): HTML support." << std::endl;
-                    std::cout << "  - read_xml(path), write_xml(path, text): XML support." << std::endl;
-                    std::cout << "  - read_fits_header(path): Returns FITS header as an object." << std::endl;
-                    std::cout << "  - read_hdf_header(path): Returns HDF header as an object." << std::endl;
-                } else if (topic == "rex") {
-                    std::cout << "Description: Regular expression operations on strings." << std::endl;
-                    std::cout << "Functions (all accept optional flags string, e.g. \"i\" for case-insensitive):" << std::endl;
-                    std::cout << "  - match(text, pattern, [flags])         -> bool: true if pattern found anywhere in text." << std::endl;
-                    std::cout << "  - find(text, pattern, [flags])          -> string: first matching substring, or \"\"." << std::endl;
-                    std::cout << "  - findall(text, pattern, [flags])       -> list: all non-overlapping matches." << std::endl;
-                    std::cout << "  - groups(text, pattern, [flags])        -> list: capture groups from first match." << std::endl;
-                    std::cout << "  - sub(text, pattern, repl, [flags])     -> string: replace first match." << std::endl;
-                    std::cout << "  - gsub(text, pattern, repl, [flags])    -> string: replace all matches (global)." << std::endl;
-                    std::cout << "  - split(text, pattern, [flags])         -> list: split text on pattern." << std::endl;
-                    std::cout << "  - count(text, pattern, [flags])         -> int: number of non-overlapping matches." << std::endl;
-                    std::cout << "Flags: \"i\" = case-insensitive." << std::endl;
-                    std::cout << "Example: rex.gsub(\"Hello World\", \"[aeiou]\", \"*\", \"i\")  -> \"H*ll* W*rld\"" << std::endl;
-                } else if (topic == "algo") {
-                    std::cout << "Description: Algorithms, sorting, and time." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - add(...): Sums all numeric arguments." << std::endl;
-                    std::cout << "  - quicksort(v), sort(v, [start], [end]): Sorts numeric vectors." << std::endl;
-                    std::cout << "  - now(): Returns current local time as a string." << std::endl;
-                    std::cout << "  - date_add(ts, days): Adds days to a unix timestamp." << std::endl;
-                    std::cout << "  - date_diff(t1, t2): Difference in days between timestamps." << std::endl;
-                } else if (topic == "nlp") {
-                    std::cout << "Description: Natural Language Processing (Stub)." << std::endl;
-                } else if (topic == "bev") {
-                    std::cout << "Description: Bevington Data Reduction (Legacy Scientific Analysis)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - data(x_vec, y_vec): Loads data into Bevington buffers." << std::endl;
-                    std::cout << "  - fit_line(): Performs a linear regression." << std::endl;
-                    std::cout << "  - param(idx): Returns fitted parameter (0=intercept, 1=slope)." << std::endl;
-                } else if (topic == "file") {
-                    std::cout << "Description: File system operations." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - write(path, content): Writes string to file." << std::endl;
-                    std::cout << "  - exists(path): Returns true if file or directory exists." << std::endl;
-                } else if (topic == "geo") {
-                    std::cout << "Description: GIS, Geolocation, and GeoJSON." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - lookup(): Returns current IP-based geolocation object (.lat, .lon, .city, .country)." << std::endl;
-                    std::cout << "  - distance(lat1, lon1, lat2, lon2): Haversine distance in km." << std::endl;
-                    std::cout << "  - write_geojson(path, features): Writes a GeoJSON FeatureCollection file." << std::endl;
-                    std::cout << "  - history(plate): Returns geological history of a tectonic plate (AI assisted)." << std::endl;
-                    std::cout << "  - plot2d(data, [layout]): Generates a 2D Plotly map (open-street-map / scattermapbox)." << std::endl;
-                    std::cout << "  - plot3d(data, [layout]): Generates a 3D globe visualization (orthographic scattergeo)." << std::endl;
-                } else if (topic == "mobl") {
-                    std::cout << "Description: Mobile & cross-platform PWA builtin." << std::endl;
-                    std::cout << "Cross-platform: Android Chrome, iPhone Safari, macOS, Linux, Windows 11." << std::endl;
-                    std::cout << "Usage: mobl phone(\"device_name\")" << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - phone(name): Instantiate a phone object." << std::endl;
-                    std::cout << "  - dictate(spoken_text): NLP parse via ai.prompt() → JSON {title, note, tags}." << std::endl;
-                    std::cout << "  - make_feature(lat, lon, spoken_text): Builds a GeoJSON Feature from GPS + dictation." << std::endl;
-                    std::cout << "Architecture:" << std::endl;
-                    std::cout << "  Browser supplies GPS (Geolocation API) + speech (Web Speech API)." << std::endl;
-                    std::cout << "  Gem server handles NLP, GeoJSON assembly, and file persistence." << std::endl;
-                    std::cout << "Reference app: ./gem travel_log.g  →  http://localhost:8080" << std::endl;
-                    std::cout << "  /       → travel_log.html  (PWA: mic + live Plotly map)" << std::endl;
-                    std::cout << "  /log    → POST {lat,lon,text} → returns GeoJSON feature" << std::endl;
-                    std::cout << "  /data   → GET full GeoJSON FeatureCollection" << std::endl;
-                } else if (topic == "trek") {
-                    std::cout << "Description: Travel log creation, display, and editing using OSM/geo/GIS." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - new(path): Create a new empty GeoJSON travel log file." << std::endl;
-                    std::cout << "  - add(path, lat, lon, [title], [note]): Append a waypoint to the log." << std::endl;
-                    std::cout << "  - edit(path, index, title, note): Update title/note of waypoint at index." << std::endl;
-                    std::cout << "  - remove(path, index): Remove waypoint at index." << std::endl;
-                    std::cout << "  - load(path): Return GeoJSON string of the travel log." << std::endl;
-                    std::cout << "  - show(path, [port]): Serve interactive OSM (Leaflet) map with live edit UI (default port 8090)." << std::endl;
-                    std::cout << "  - export_gpx(geojson_path, gpx_path): Export waypoints to GPX format." << std::endl;
-                    std::cout << "  - stats(path): Return object with .waypoints count and .distance_km total." << std::endl;
-                    std::cout << "Map tiles: OpenStreetMap (Leaflet.js). Edits persist to GeoJSON file." << std::endl;
+                    std::cout << "Module: bsm — Black-Scholes-Merton (inherits all fin methods)" << std::endl;
+                    std::cout << "  price_american(symbol,type,duration) — PDE American option pricing" << std::endl;
+                    std::cout << "    duration: 'weekly' | 'monthly' | 'quarterly' (default)" << std::endl;
+                    std::cout << "  + all fin methods: ticker, bs_price, greeks, date, calendar, ..." << std::endl;
                     std::cout << "Example:" << std::endl;
-                    std::cout << "  trek.new(\"my_trip.geojson\")" << std::endl;
-                    std::cout << "  trek.add(\"my_trip.geojson\", 48.8566, 2.3522, \"Paris\", \"Eiffel Tower\")" << std::endl;
-                    std::cout << "  trek.show(\"my_trip.geojson\")  # opens OSM map in browser" << std::endl;
+                    std::cout << "  double p = bsm.price_american(\"AAPL\", \"call\", \"monthly\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    QuantLib AmericanOption + FDBlackScholesVanillaEngine" << std::endl;
+                    std::cout << "  Python: quantlib-python AmericanOption + FDBlackScholesVanillaEngine" << std::endl;
+                    std::cout << "  Julia:  QuantLib.jl AmericanExercise" << std::endl;
+                    std::cout << "  Go/Ruby/Rust: no mature American option PDE solvers" << std::endl;
+                } else if (topic == "img") {
+                    std::cout << "Module: img — Image processing via ImageMagick" << std::endl;
+                    std::cout << "  resize(src,width,height,dest) — resize image file" << std::endl;
+                    std::cout << "Example: img.resize(\"photo.jpg\", 800, 600, \"thumb.jpg\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    Magick++ (ImageMagick C++ API), OpenCV" << std::endl;
+                    std::cout << "  Python: Pillow (PIL), OpenCV, imageio" << std::endl;
+                    std::cout << "  Julia:  Images.jl, ImageMagick.jl" << std::endl;
+                    std::cout << "  Go:     imaging package, disintegration/imaging" << std::endl;
+                    std::cout << "  Ruby:   rmagick gem, mini_magick gem" << std::endl;
+                    std::cout << "  Rust:   image crate, magick_rust crate" << std::endl;
+                } else if (topic == "k3s") {
+                    std::cout << "Module: k3s — Docker and Kubernetes (K3s) management" << std::endl;
+                    std::cout << "Docker:" << std::endl;
+                    std::cout << "  docker_run(image,cmd)  — run container (--rm)" << std::endl;
+                    std::cout << "  docker_ps()            — list running containers" << std::endl;
+                    std::cout << "  docker_build(path,tag) — build image from Dockerfile" << std::endl;
+                    std::cout << "  docker_stop(id)        — stop container" << std::endl;
+                    std::cout << "Kubernetes (K3s):" << std::endl;
+                    std::cout << "  k3s_apply(yaml)        — apply manifest (kubectl apply)" << std::endl;
+                    std::cout << "  k3s_get(resource)      — get resources (pods/svc/deploy)" << std::endl;
+                    std::cout << "  k3s_pods()             — list all pods" << std::endl;
+                    std::cout << "  k3s_nodes()            — list cluster nodes" << std::endl;
+                    std::cout << "  k3s_logs(pod)          — get pod logs" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    Docker SDK (HTTP API); no built-in k8s client" << std::endl;
+                    std::cout << "  Python: docker-py, kubernetes Python client" << std::endl;
+                    std::cout << "  Julia:  no official Docker/k8s SDK" << std::endl;
+                    std::cout << "  Go:     docker/docker/client, k8s.io/client-go (official)" << std::endl;
+                    std::cout << "  Ruby:   docker-api gem, kubeclient gem" << std::endl;
+                    std::cout << "  Rust:   bollard (Docker), kube-rs (Kubernetes)" << std::endl;
+                } else if (topic == "vm") {
+                    std::cout << "Module: vm — Vagrant virtual machine management" << std::endl;
+                    std::cout << "  init(box)    — vagrant init <box> (e.g. \"ubuntu/focal64\")" << std::endl;
+                    std::cout << "  up()         — vagrant up (start VM)" << std::endl;
+                    std::cout << "  ssh(cmd)     — vagrant ssh -c \"cmd\"" << std::endl;
+                    std::cout << "  status()     — vagrant status" << std::endl;
+                    std::cout << "  halt()       — vagrant halt (power off)" << std::endl;
+                    std::cout << "  destroy()    — vagrant destroy -f" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    libvirt C API; no built-in Vagrant" << std::endl;
+                    std::cout << "  Python: python-vagrant, libvirt-python" << std::endl;
+                    std::cout << "  Julia:  no official Vagrant bindings" << std::endl;
+                    std::cout << "  Go:     no official Vagrant SDK; use os/exec" << std::endl;
+                    std::cout << "  Ruby:   Vagrant itself is written in Ruby" << std::endl;
+                    std::cout << "  Rust:   no official Vagrant bindings; use std::process::Command" << std::endl;
+                } else if (topic == "go" || topic == "ruby" || topic == "node" || topic == "rust") {
+                    std::cout << "Module: " << topic << " — Polyglot interop (direct execution)" << std::endl;
+                    std::cout << "  run(input)       — execute source file or inline code string" << std::endl;
+                    if (topic == "go")   std::cout << "  build(file)      — compile Go binary (go build)" << std::endl;
+                    if (topic == "node") std::cout << "  npm_install(pkg) — install NPM package" << std::endl;
+                    if (topic == "rust") std::cout << "  cargo_new(name)  — create new Cargo project" << std::endl;
+                    std::cout << "Note: Unlike 'use', these run code natively without AI translation." << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    if (topic == "go")   std::cout << "  go.run(\"hello.go\")  # or go.run(\"package main...\")" << std::endl;
+                    if (topic == "ruby") std::cout << "  ruby.run(\"puts 'hello'\")" << std::endl;
+                    if (topic == "node") std::cout << "  node.run(\"console.log('hello')\")" << std::endl;
+                    if (topic == "rust") std::cout << "  rust.run(\"fn main(){println!(\\\"hi\\\");}\")" << std::endl;
+                    std::cout << "Comparisons (calling " << topic << " from other languages):" << std::endl;
+                    std::cout << "  C++:    std::system() or popen() to invoke " << topic << " subprocess" << std::endl;
+                    std::cout << "  Python: subprocess.run([\"" << topic << "\", ...]) or ctypes FFI" << std::endl;
+                    std::cout << "  Julia:  run(`" << topic << " script`) or ccall for native libs" << std::endl;
+                } else if (topic == "data") {
+                    std::cout << "Module: data — Data science, statistics, and CSV" << std::endl;
+                    std::cout << "  read_csv(path)   — read CSV into vector of row objects" << std::endl;
+                    std::cout << "  mean(vector)     — arithmetic mean of numeric vector" << std::endl;
+                    std::cout << "  std(vector)      — sample standard deviation" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string rows = data.read_csv(\"data.csv\")" << std::endl;
+                    std::cout << "  double m = data.mean([1.0, 2.0, 3.0])" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    Eigen, Armadillo, csv-parser" << std::endl;
+                    std::cout << "  Python: pandas, numpy (pd.read_csv, np.mean, np.std)" << std::endl;
+                    std::cout << "  Julia:  DataFrames.jl, CSV.jl, Statistics.mean()" << std::endl;
+                    std::cout << "  Go:     gonum.org/v1/gonum/stat, encoding/csv" << std::endl;
+                    std::cout << "  Ruby:   csv stdlib, daru gem" << std::endl;
+                    std::cout << "  Rust:   polars crate, csv crate, statrs crate" << std::endl;
+                } else if (topic == "sys") {
+                    std::cout << "Module: sys — System root (inherited by all objects)" << std::endl;
+                    std::cout << "  print(...)                     — print to stdout" << std::endl;
+                    std::cout << "  args()                         — CLI args as vector" << std::endl;
+                    std::cout << "  async(func,[params],[timeout]) — background thread; returns thread handle" << std::endl;
+                    std::cout << "  sethandler(signals,func)       — custom signal handler" << std::endl;
+                    std::cout << "  host()                         — OS info string" << std::endl;
+                    std::cout << "  exec(cmd)                      — run shell command, returns exit code" << std::endl;
+                    std::cout << "  doc([path])                    — read file comments" << std::endl;
+                    std::cout << "  help([topic])                  — this help system" << std::endl;
+                    std::cout << "  exit()                         — exit interpreter" << std::endl;
+                    std::cout << "  langport(pattern,[output])     — AI-port foreign code to Gem" << std::endl;
+                    std::cout << "  redirect(url,[port])           — HTTP redirect server" << std::endl;
+                    std::cout << "  app(port,[routes])             — background HTTP server" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::cout, std::system(), std::thread, signal()" << std::endl;
+                    std::cout << "  Python: print(), os.system(), threading.Thread, signal" << std::endl;
+                    std::cout << "  Julia:  println(), run(), @async, Sys.KERNEL" << std::endl;
+                    std::cout << "  Go:     fmt.Println(), os.Args, go func(), os/signal" << std::endl;
+                    std::cout << "  Ruby:   puts, system(), Thread.new, Signal.trap" << std::endl;
+                    std::cout << "  Rust:   println!(), std::process::Command, std::thread::spawn" << std::endl;
+                } else if (topic == "drvr") {
+                    std::cout << "Module: drvr — Device driver development (Linux/Win11/macOS/Android)" << std::endl;
+                    std::cout << "  linux(name)   — generate Linux kernel module template (.c + Makefile)" << std::endl;
+                    std::cout << "  win11(name)   — generate Windows Driver Framework (WDF) template" << std::endl;
+                    std::cout << "  macos(name)   — generate macOS IOKit/DriverKit template" << std::endl;
+                    std::cout << "  android(name) — generate Android HAL template" << std::endl;
+                    std::cout << "  build(target) — cross-compile driver for target platform" << std::endl;
+                    std::cout << "  deploy(target)— deploy driver to target device" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    Linux: module_init/module_exit macros; Win: WDK/WDF" << std::endl;
+                    std::cout << "  Python: no native driver support (use ctypes/cffi for userspace)" << std::endl;
+                    std::cout << "  Julia:  no native driver support" << std::endl;
+                    std::cout << "  Go:     TinyGo for embedded; no kernel driver support" << std::endl;
+                    std::cout << "  Ruby:   no native driver support" << std::endl;
+                    std::cout << "  Rust:   linux-kernel-module-rust crate; growing kernel support" << std::endl;
+                } else if (topic == "math") {
+                    std::cout << "Module: math — Numeric + symbolic math (SymPy/Sage backend)" << std::endl;
+                    std::cout << "Numeric:  sin(x), cos(x), sqrt(x), math.pi" << std::endl;
+                    std::cout << "Symbolic:" << std::endl;
+                    std::cout << "  useSymPy()/useSage()          — switch backend (default: SymPy)" << std::endl;
+                    std::cout << "  simplify(expr)                — algebraic simplification" << std::endl;
+                    std::cout << "  diff(expr,[var])              — symbolic derivative" << std::endl;
+                    std::cout << "  integrate(expr,[var])         — symbolic integral" << std::endl;
+                    std::cout << "  solve(expr,[var])             — solve equation symbolically" << std::endl;
+                    std::cout << "  sym_latex(expr)               — LaTeX string for expression" << std::endl;
+                    std::cout << "  to_latex(val)                 — value/matrix → LaTeX" << std::endl;
+                    std::cout << "  write_latex(path,content)     — write .tex file" << std::endl;
+                    std::cout << "  read_latex(path)              — read LaTeX document body" << std::endl;
+                    std::cout << "  parse_latex(text)             — extract $...$ expressions" << std::endl;
+                    std::cout << "  compile_latex(path)           — run pdflatex" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    <cmath>; no built-in symbolic (use GiNaC/SymEngine)" << std::endl;
+                    std::cout << "  Python: math.sin(); sympy.diff(), sympy.integrate()" << std::endl;
+                    std::cout << "  Julia:  sin(); Symbolics.jl, SymEngine.jl" << std::endl;
+                    std::cout << "  Go:     math.Sin(); no built-in symbolic" << std::endl;
+                    std::cout << "  Ruby:   Math::sin(); no built-in symbolic" << std::endl;
+                    std::cout << "  Rust:   f64::sin(); no built-in symbolic" << std::endl;
+                } else if (topic == "tcp") {
+                    std::cout << "Module: tcp — TCP/IP networking" << std::endl;
+                    std::cout << "  listen(port)          — create server socket, returns fd" << std::endl;
+                    std::cout << "  accept(fd)            — block for client connection, returns Socket" << std::endl;
+                    std::cout << "  connect(host,port)    — connect to server, returns Socket" << std::endl;
+                    std::cout << "  send(fd,msg)          — send string over socket" << std::endl;
+                    std::cout << "  recv(fd,[size])       — receive data from socket" << std::endl;
+                    std::cout << "  close(fd)             — close socket descriptor" << std::endl;
+                    std::cout << "  nic()                 — list network interfaces (vector of NIC objects)" << std::endl;
+                    std::cout << "  routes()              — list routing table (vector of Route objects)" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  int fd = tcp.listen(8080)" << std::endl;
+                    std::cout << "  string msg = tcp.recv(tcp.accept(fd))" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    POSIX socket()/bind()/listen()/accept()/send()/recv()" << std::endl;
+                    std::cout << "  Python: socket.socket(); s.bind(); s.listen(); s.accept()" << std::endl;
+                    std::cout << "  Julia:  Sockets.listen(), accept(), read(), write()" << std::endl;
+                    std::cout << "  Go:     net.Listen(), l.Accept(), conn.Read(), conn.Write()" << std::endl;
+                    std::cout << "  Ruby:   TCPServer.new, server.accept, socket.gets" << std::endl;
+                    std::cout << "  Rust:   TcpListener::bind(), listener.accept(), stream.read()" << std::endl;
+                } else if (topic == "ai") {
+                    std::cout << "Module: ai — AI integration (Gemini, Mistral, Ollama)" << std::endl;
+                    std::cout << "  prompt(text)                  — send prompt to current provider" << std::endl;
+                    std::cout << "  prompt_native(text)           — Mistral C++ bridge (mistralai>=1.0, Python 3.14)" << std::endl;
+                    std::cout << "  useMistral(model)             — switch to Mistral API" << std::endl;
+                    std::cout << "  useOllama(model,[host])       — switch to local Ollama" << std::endl;
+                    std::cout << "  useGemini()                   — switch back to Gemini (default)" << std::endl;
+                    std::cout << "  setKey(key)                   — set API key" << std::endl;
+                    std::cout << "  setHost(host), setPath(path)  — override endpoint" << std::endl;
+                    std::cout << "Properties: provider, model, host" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  ai.setKey(\"sk-...\")" << std::endl;
+                    std::cout << "  string r = ai.prompt(\"Explain black holes\")" << std::endl;
+                    std::cout << "  ai.useMistral(\"mistral-small\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    libcurl + nlohmann/json; mistralai C++ SDK" << std::endl;
+                    std::cout << "  Python: google-generativeai, mistralai, openai packages" << std::endl;
+                    std::cout << "  Julia:  HTTP.jl + JSON3.jl (no official SDK)" << std::endl;
+                    std::cout << "  Go:     google/generative-ai-go; sashabaranov/go-openai" << std::endl;
+                    std::cout << "  Ruby:   ruby-openai gem" << std::endl;
+                    std::cout << "  Rust:   async-openai crate" << std::endl;
+                } else if (topic == "text") {
+                    std::cout << "Module: text — String, document, and file-format processing" << std::endl;
+                    std::cout << "  read(path)                    — read file into string" << std::endl;
+                    std::cout << "  sub(s,start,[len])            — substring" << std::endl;
+                    std::cout << "  replace(s,old,new)            — replace all occurrences" << std::endl;
+                    std::cout << "  write_pdf(path,text)          — create PDF" << std::endl;
+                    std::cout << "  write_pdf_a(path,text)        — create PDF/A (archival)" << std::endl;
+                    std::cout << "  read_pdf(path)                — extract text from PDF" << std::endl;
+                    std::cout << "  read_markdown/write_markdown  — Markdown I/O" << std::endl;
+                    std::cout << "  read_yaml/write_yaml          — YAML I/O" << std::endl;
+                    std::cout << "  read_html/write_html          — HTML I/O" << std::endl;
+                    std::cout << "  read_xml/write_xml            — XML I/O" << std::endl;
+                    std::cout << "  read_fits_header(path)        — FITS header as object" << std::endl;
+                    std::cout << "  read_hdf_header(path)         — HDF5 header as object" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::string, fstream; pdfium/libharu for PDF; pugixml for XML" << std::endl;
+                    std::cout << "  Python: str, open(); pypdf, markdown, pyyaml, lxml" << std::endl;
+                    std::cout << "  Julia:  String, read(); no built-in PDF; YAML.jl, LightXML.jl" << std::endl;
+                    std::cout << "  Go:     strings, os; no built-in PDF; encoding/xml" << std::endl;
+                    std::cout << "  Ruby:   String, File; prawn (PDF); nokogiri (XML/HTML)" << std::endl;
+                    std::cout << "  Rust:   String, std::fs; lopdf (PDF); quick-xml" << std::endl;
+                } else if (topic == "rex") {
+                    std::cout << "Module: rex — ECMAScript regular expressions" << std::endl;
+                    std::cout << "All functions accept optional flags: \"i\"=case-insensitive" << std::endl;
+                    std::cout << "  match(text,pattern,[flags])      -> bool   — true if pattern found" << std::endl;
+                    std::cout << "  find(text,pattern,[flags])       -> string — first match or \"\"" << std::endl;
+                    std::cout << "  findall(text,pattern,[flags])    -> list   — all non-overlapping matches" << std::endl;
+                    std::cout << "  groups(text,pattern,[flags])     -> list   — capture groups from first match" << std::endl;
+                    std::cout << "  sub(text,pattern,repl,[flags])   -> string — replace first match" << std::endl;
+                    std::cout << "  gsub(text,pattern,repl,[flags])  -> string — replace all matches" << std::endl;
+                    std::cout << "  split(text,pattern,[flags])      -> list   — split on pattern" << std::endl;
+                    std::cout << "  count(text,pattern,[flags])      -> int    — count non-overlapping matches" << std::endl;
+                    std::cout << "Example: rex.gsub(\"Hello World\", \"[aeiou]\", \"*\", \"i\") -> \"H*ll* W*rld\"" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::regex_search/replace (ECMAScript default)" << std::endl;
+                    std::cout << "  Python: re.search(), re.sub(), re.findall(), re.split()" << std::endl;
+                    std::cout << "  Julia:  match(), replace(), eachmatch(), split() with Regex" << std::endl;
+                    std::cout << "  Go:     regexp.MatchString(), re.ReplaceAllString()" << std::endl;
+                    std::cout << "  Ruby:   =~, .match(), .gsub(), .scan(), .split()" << std::endl;
+                    std::cout << "  Rust:   regex crate: Regex::new(), re.find(), re.replace_all()" << std::endl;
+                } else if (topic == "algo") {
+                    std::cout << "Module: algo — Algorithms, sorting, and time" << std::endl;
+                    std::cout << "  add(...)                — sum all numeric arguments" << std::endl;
+                    std::cout << "  quicksort(v)            — sort numeric vector in-place (quicksort)" << std::endl;
+                    std::cout << "  sort(v,[start],[end])   — sort slice of vector" << std::endl;
+                    std::cout << "  now()                   — current local time as string" << std::endl;
+                    std::cout << "  date_add(ts,days)       — add days to unix timestamp" << std::endl;
+                    std::cout << "  date_diff(t1,t2)        — difference in days between timestamps" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::sort(), std::chrono::system_clock::now()" << std::endl;
+                    std::cout << "  Python: sorted(), list.sort(), datetime.now()" << std::endl;
+                    std::cout << "  Julia:  sort!(), Dates.now()" << std::endl;
+                    std::cout << "  Go:     sort.Slice(), time.Now()" << std::endl;
+                    std::cout << "  Ruby:   Array#sort!, Time.now" << std::endl;
+                    std::cout << "  Rust:   slice.sort(), std::time::SystemTime::now()" << std::endl;
+                } else if (topic == "nlp") {
+                    std::cout << "Module: nlp — Natural Language Processing" << std::endl;
+                    std::cout << "  Used internally by mobl.dictate() for speech-to-structured-JSON." << std::endl;
+                    std::cout << "  Delegates to ai.prompt() for NLP tasks." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    no built-in NLP (use OpenNLP/CRFsuite via FFI)" << std::endl;
+                    std::cout << "  Python: nltk, spacy, transformers (HuggingFace)" << std::endl;
+                    std::cout << "  Julia:  TextAnalysis.jl, WordTokenizers.jl" << std::endl;
+                    std::cout << "  Go:     jdkato/prose, neurosnap/sentences" << std::endl;
+                    std::cout << "  Ruby:   ruby-nlp, treat gem" << std::endl;
+                    std::cout << "  Rust:   rust-bert crate (HuggingFace models)" << std::endl;
+                } else if (topic == "bev") {
+                    std::cout << "Module: bev — Bevington data reduction (scientific curve fitting)" << std::endl;
+                    std::cout << "  data(x_vec,y_vec)  — load x/y data into Bevington buffers" << std::endl;
+                    std::cout << "  fit_line()         — linear regression (least squares)" << std::endl;
+                    std::cout << "  param(idx)         — fitted parameter: 0=intercept, 1=slope" << std::endl;
+                    std::cout << "Based on: Bevington & Robinson 'Data Reduction and Error Analysis'" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    Eigen, GSL gsl_fit_linear()" << std::endl;
+                    std::cout << "  Python: numpy.polyfit(), scipy.stats.linregress()" << std::endl;
+                    std::cout << "  Julia:  GLM.jl lm(@formula(y~x), df)" << std::endl;
+                    std::cout << "  Go:     gonum.org/v1/gonum/stat" << std::endl;
+                    std::cout << "  Ruby:   statsample gem" << std::endl;
+                    std::cout << "  Rust:   linregress crate" << std::endl;
+                } else if (topic == "file") {
+                    std::cout << "Module: file — File system operations" << std::endl;
+                    std::cout << "  write(path,content)  — write string to file (creates/overwrites)" << std::endl;
+                    std::cout << "  exists(path)         — true if file or directory exists" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  file.write(\"out.txt\", \"Hello Gem\")" << std::endl;
+                    std::cout << "  if file.exists(\"out.txt\") sys.print(\"ok\") end" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::ofstream, std::filesystem::exists()" << std::endl;
+                    std::cout << "  Python: open('f','w').write(), os.path.exists()" << std::endl;
+                    std::cout << "  Julia:  write(\"f\",s), isfile(\"f\")" << std::endl;
+                    std::cout << "  Go:     os.WriteFile(), os.Stat()" << std::endl;
+                    std::cout << "  Ruby:   File.write(), File.exist?()" << std::endl;
+                    std::cout << "  Rust:   std::fs::write(), std::path::Path::exists()" << std::endl;
+                } else if (topic == "geo") {
+                    std::cout << "Module: geo — GIS, geolocation, and GeoJSON" << std::endl;
+                    std::cout << "  lookup()                      — IP geolocation (.lat,.lon,.city,.country)" << std::endl;
+                    std::cout << "  distance(lat1,lon1,lat2,lon2) — Haversine distance in km" << std::endl;
+                    std::cout << "  write_geojson(path,features)  — write GeoJSON FeatureCollection" << std::endl;
+                    std::cout << "  history(plate)                — tectonic plate history (AI-assisted)" << std::endl;
+                    std::cout << "  plot2d(data,[layout])         — 2D Plotly map (OpenStreetMap)" << std::endl;
+                    std::cout << "  plot3d(data,[layout])         — 3D globe (orthographic scattergeo)" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    GDAL, GEOS, Proj libraries" << std::endl;
+                    std::cout << "  Python: geopandas, shapely, folium, geopy" << std::endl;
+                    std::cout << "  Julia:  GeoStats.jl, Geodesy.jl" << std::endl;
+                    std::cout << "  Go:     paulmach/orb, twpayne/go-geom" << std::endl;
+                    std::cout << "  Ruby:   rgeo gem, geocoder gem" << std::endl;
+                    std::cout << "  Rust:   geo crate, geojson crate" << std::endl;
+                } else if (topic == "mobl") {
+                    std::cout << "Module: mobl — Mobile & cross-platform PWA builtin" << std::endl;
+                    std::cout << "Platforms: Android Chrome, iPhone Safari, macOS, Linux, Windows 11" << std::endl;
+                    std::cout << "  phone(name)                   — instantiate a phone object" << std::endl;
+                    std::cout << "  dictate(spoken_text)          — NLP parse → JSON {title,note,tags}" << std::endl;
+                    std::cout << "  make_feature(lat,lon,text)    — GPS + dictation → GeoJSON Feature" << std::endl;
+                    std::cout << "Architecture: Browser (GPS + Web Speech) → POST /log → Gem NLP → GeoJSON" << std::endl;
+                    std::cout << "  /       → PWA HTML (mic + live Plotly map)" << std::endl;
+                    std::cout << "  /log    → POST {lat,lon,text} → GeoJSON feature" << std::endl;
+                    std::cout << "  /data   → GET full FeatureCollection" << std::endl;
+                    std::cout << "Example: mobl phone(\"MyPhone\")  phone.dictate(\"Arrived at Yosemite\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    Qt for mobile; no built-in PWA/speech" << std::endl;
+                    std::cout << "  Python: Flask + SpeechRecognition + geopy" << std::endl;
+                    std::cout << "  Julia:  no built-in mobile/PWA support" << std::endl;
+                    std::cout << "  Go:     net/http + custom JS; no built-in speech" << std::endl;
+                    std::cout << "  Ruby:   Rails + Web Speech API (custom)" << std::endl;
+                    std::cout << "  Rust:   actix-web + custom JS; no built-in speech" << std::endl;
+                } else if (topic == "trek") {
+                    std::cout << "Module: trek — Travel log creation, display, and editing (OSM/GeoJSON/GPX)" << std::endl;
+                    std::cout << "  new(path)                     — create empty GeoJSON travel log" << std::endl;
+                    std::cout << "  add(path,lat,lon,[title],[note]) — append waypoint" << std::endl;
+                    std::cout << "  edit(path,index,title,note)   — update waypoint at index" << std::endl;
+                    std::cout << "  remove(path,index)            — remove waypoint at index" << std::endl;
+                    std::cout << "  load(path)                    — return GeoJSON string" << std::endl;
+                    std::cout << "  show(path,[port])             — serve OSM/Leaflet map with live edit UI (default :8090)" << std::endl;
+                    std::cout << "  export_gpx(geojson,gpx)       — export to GPX format" << std::endl;
+                    std::cout << "  stats(path)                   — {.waypoints, .distance_km}" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  trek.new(\"trip.geojson\")" << std::endl;
+                    std::cout << "  trek.add(\"trip.geojson\", 48.85, 2.35, \"Paris\", \"Eiffel Tower\")" << std::endl;
+                    std::cout << "  trek.show(\"trip.geojson\")   # opens browser with OSM map" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    GDAL + libgpx; no built-in travel log" << std::endl;
+                    std::cout << "  Python: gpxpy, folium, geojson packages" << std::endl;
+                    std::cout << "  Julia:  no built-in travel log; GPX.jl" << std::endl;
+                    std::cout << "  Go:     tkrajina/gpxgo; no built-in" << std::endl;
+                    std::cout << "  Ruby:   gpx gem; no built-in" << std::endl;
+                    std::cout << "  Rust:   gpx crate; no built-in" << std::endl;
+                } else if (topic == "seo") {
+                    std::cout << "Module: seo — Search Engine Optimization indexer" << std::endl;
+                    std::cout << "  index(urls, output_path)  — crawl list of URLs, extract SEO signals, write JSON index" << std::endl;
+                    std::cout << "  analyze(index_path)       — load index JSON and print SEO report to stdout" << std::endl;
+                    std::cout << "SEO signals extracted per URL:" << std::endl;
+                    std::cout << "  title, meta description, meta keywords, og:title, og:description" << std::endl;
+                    std::cout << "  canonical URL, word count, image count, images with alt text" << std::endl;
+                    std::cout << "  internal links, external links, h1/h2/h3 headings" << std::endl;
+                    std::cout << "Output: JSON array written to output_path, one object per URL." << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  seo.index([\"https://example.com\", \"https://example.com/about\"], \"index.json\")" << std::endl;
+                    std::cout << "  seo.analyze(\"index.json\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    no built-in SEO; use libcurl + custom HTML parser" << std::endl;
+                    std::cout << "  Python: scrapy, beautifulsoup4, requests + custom extraction" << std::endl;
+                    std::cout << "  Julia:  HTTP.jl + Gumbo.jl for HTML parsing" << std::endl;
+                    std::cout << "  Go:     colly, goquery (jQuery-like HTML scraper)" << std::endl;
+                    std::cout << "  Ruby:   nokogiri + mechanize gems" << std::endl;
+                    std::cout << "  Rust:   scraper crate + reqwest" << std::endl;
                 } else if (topic == "www") {
-                    std::cout << "Description: Web framework and mapping services (Flask-like)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - wget(url, file): Downloads a file from the internet." << std::endl;
-                    std::cout << "  - app(port, [routes]): Starts a web server. Routes is a map of path->content." << std::endl;
-                    std::cout << "  - redirect(target, [port]): Returns a redirect header or starts a redirect server." << std::endl;
-                    std::cout << "  - map2d(geojson, output): Renders a 2D map from GeoJSON via Mapnik." << std::endl;
+                    std::cout << "Module: www — Web framework (Flask-like, built on cpp-httplib)" << std::endl;
+                    std::cout << "  wget(url,file)         — download file via curl" << std::endl;
+                    std::cout << "  app(port,[routes])     — background HTTP server; routes: path→HTML string" << std::endl;
+                    std::cout << "  redirect(target,[port])— redirect server or return 302 header string" << std::endl;
+                    std::cout << "  map2d(geojson,output)  — render 2D map via Mapnik (requires HAS_MAPNIK)" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  www.app(8080, {\"/\": \"<h1>Hello</h1>\", \"/api\": \"{}\"})" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    cpp-httplib, Crow, Drogon, Pistache" << std::endl;
+                    std::cout << "  Python: Flask, FastAPI, http.server" << std::endl;
+                    std::cout << "  Julia:  HTTP.jl, Genie.jl" << std::endl;
+                    std::cout << "  Go:     net/http (built-in), Gin, Echo" << std::endl;
+                    std::cout << "  Ruby:   Sinatra, Rails, WEBrick" << std::endl;
+                    std::cout << "  Rust:   actix-web, axum, warp, hyper" << std::endl;
                 } else if (topic == "cdn") {
-                    std::cout << "Description: Caching reverse-proxy server. Inherits all www methods." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - start(port, routes_map): Start caching proxy; routes map path prefixes to origin URLs." << std::endl;
-                    std::cout << "  - stats(): Returns object with .hits, .misses, .bytes, .cached_items." << std::endl;
-                    std::cout << "  - purge([path]): Evict one path or \"*\" to clear entire cache." << std::endl;
-                    std::cout << "  - config(type, content): Generate nginx/apache config string." << std::endl;
+                    std::cout << "Module: cdn — Caching reverse-proxy (inherits all www methods)" << std::endl;
+                    std::cout << "  start(port,routes_map) — start proxy; routes: path-prefix→origin URL" << std::endl;
+                    std::cout << "  stats()                — {.hits, .misses, .bytes, .cached_items}" << std::endl;
+                    std::cout << "  purge([path])          — evict path or \"*\" to clear all" << std::endl;
+                    std::cout << "  config(type,content)   — generate nginx/apache config string" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  cdn.start(8081, {\"/api\": \"http://origin:3000\"})" << std::endl;
+                    std::cout << "  sys.print(cdn.stats().hits)" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    nginx/Varnish (external); no built-in CDN" << std::endl;
+                    std::cout << "  Python: no built-in CDN; use nginx + Flask" << std::endl;
+                    std::cout << "  Julia:  no built-in CDN" << std::endl;
+                    std::cout << "  Go:     groupcache, caddyserver (external)" << std::endl;
+                    std::cout << "  Ruby:   rack-cache middleware" << std::endl;
+                    std::cout << "  Rust:   no built-in CDN; use nginx reverse proxy" << std::endl;
                 } else if (topic == "thread") {
-                    std::cout << "Description: Background thread handle returned by sys.async()." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - wait(): Block until thread completes, returns result (or timeout error string)." << std::endl;
-                    std::cout << "  - is_finished(): Non-blocking bool status check." << std::endl;
+                    std::cout << "Module: thread — Background thread handle (returned by sys.async())" << std::endl;
+                    std::cout << "  wait()        — block until complete; returns result or timeout error" << std::endl;
+                    std::cout << "  is_finished() — non-blocking bool status check" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string t = sys.async(\"my_func\", [arg1], 30.0)" << std::endl;
+                    std::cout << "  while !t.is_finished() sys.print(\"waiting...\") end" << std::endl;
+                    std::cout << "  string result = t.wait()" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::future/std::async, std::thread + join()" << std::endl;
+                    std::cout << "  Python: concurrent.futures.Future, threading.Thread" << std::endl;
+                    std::cout << "  Julia:  @async / @spawn returns Task; fetch(task)" << std::endl;
+                    std::cout << "  Go:     goroutine + channel; no explicit thread handle" << std::endl;
+                    std::cout << "  Ruby:   Thread.new { ... }; thread.join; thread.alive?" << std::endl;
+                    std::cout << "  Rust:   std::thread::spawn returns JoinHandle; handle.join()" << std::endl;
                 } else if (topic == "cpp") {
-                    std::cout << "Description: C++ Interop and JIT execution via Cling." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - repl(): Starts an interactive C++26 REPL." << std::endl;
-                    std::cout << "  - exec(code): Executes C++ code string directly." << std::endl;
+                    std::cout << "Module: cpp — C++26 JIT interop via Cling" << std::endl;
+                    std::cout << "  repl()       — start interactive C++26 REPL (Cling)" << std::endl;
+                    std::cout << "  exec(code)   — execute C++ code string directly via Cling JIT" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  cpp.exec(\"#include <iostream>\\nstd::cout << 42;\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    native (this IS C++)" << std::endl;
+                    std::cout << "  Python: ctypes, cffi, pybind11, Cython for C++ interop" << std::endl;
+                    std::cout << "  Julia:  ccall(), @cxx macro (Cxx.jl)" << std::endl;
+                    std::cout << "  Go:     cgo for C interop; no direct C++ JIT" << std::endl;
+                    std::cout << "  Ruby:   RubyInline, fiddle for C; no C++ JIT" << std::endl;
+                    std::cout << "  Rust:   bindgen for C/C++ FFI; no JIT" << std::endl;
                 } else if (topic == "itr") {
-                    std::cout << "Description: Iterators, Ranges, and Functional Loops." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - range(n): Returns a vector [0, 1, ..., n-1]." << std::endl;
-                    std::cout << "  - while(cond_fun, body_fun): Executes body function while condition is true." << std::endl;
+                    std::cout << "Module: itr — Iterators, ranges, and functional loops" << std::endl;
+                    std::cout << "  range(n)              — vector [0,1,...,n-1]" << std::endl;
+                    std::cout << "  while(cond_fun,body_fun) — functional while loop" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string v = itr.range(5)   # [0,1,2,3,4]" << std::endl;
+                    std::cout << "  itr.while(fun() i<10 end, fun() i=i+1 end)" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::ranges::iota_view, std::views::iota (C++20)" << std::endl;
+                    std::cout << "  Python: range(n), itertools" << std::endl;
+                    std::cout << "  Julia:  1:n, eachindex(), Iterators.take()" << std::endl;
+                    std::cout << "  Go:     for i := range n { } (Go 1.22+)" << std::endl;
+                    std::cout << "  Ruby:   (0...n).each, Enumerator" << std::endl;
+                    std::cout << "  Rust:   (0..n), Iterator trait, .map()/.filter()" << std::endl;
                 } else if (topic == "zip") {
-                    std::cout << "Description: Native file compression and decompression (miniz)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - compress(src, archive): Recursively zips files/folders." << std::endl;
-                    std::cout << "  - decompress(archive, dest): Unzips archive to destination." << std::endl;
+                    std::cout << "Module: zip — File compression/decompression (miniz/libzip)" << std::endl;
+                    std::cout << "  compress(src,archive)    — zip files/folders to archive" << std::endl;
+                    std::cout << "  decompress(archive,dest) — unzip archive to destination" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  zip.compress(\"mydir\", \"mydir.zip\")" << std::endl;
+                    std::cout << "  zip.decompress(\"mydir.zip\", \"output/\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    libzip, miniz, zlib" << std::endl;
+                    std::cout << "  Python: zipfile stdlib, shutil.make_archive()" << std::endl;
+                    std::cout << "  Julia:  ZipFile.jl" << std::endl;
+                    std::cout << "  Go:     archive/zip stdlib" << std::endl;
+                    std::cout << "  Ruby:   zip gem (rubyzip)" << std::endl;
+                    std::cout << "  Rust:   zip crate" << std::endl;
                 } else if (topic == "chart") {
-                    std::cout << "Description: Interactive 2D/3D Plotting (Plotly.js)." << std::endl;
-                    std::cout << "Functions:" << std::endl;
-                    std::cout << "  - plot(traces, [layout]): Generates an interactive HTML chart." << std::endl;
-                    std::cout << "  - show(path): Opens the chart HTML in a browser." << std::endl;
-                    std::cout << "  - server(path, [port]): Starts a background server to serve the chart." << std::endl;
+                    std::cout << "Module: chart — Interactive 2D/3D plotting (Plotly.js)" << std::endl;
+                    std::cout << "  plot(traces,[layout])  — generate interactive HTML chart" << std::endl;
+                    std::cout << "  show(path)             — open chart HTML in browser" << std::endl;
+                    std::cout << "  server(path,[port])    — serve chart via background HTTP server" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string c = chart.plot([{x:[1,2,3],y:[4,5,6],type:\"scatter\"}])" << std::endl;
+                    std::cout << "  chart.show(c)" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    matplotlib-cpp, gnuplot-iostream, ROOT" << std::endl;
+                    std::cout << "  Python: plotly, matplotlib, seaborn, bokeh" << std::endl;
+                    std::cout << "  Julia:  Plots.jl, Makie.jl, PlotlyJS.jl" << std::endl;
+                    std::cout << "  Go:     gonum/plot, go-echarts" << std::endl;
+                    std::cout << "  Ruby:   gruff, gnuplot gem" << std::endl;
+                    std::cout << "  Rust:   plotters crate, charming crate" << std::endl;
                 } else if (topic == "fun") {
-                    std::cout << "Keyword: fun" << std::endl;
-                    std::cout << "Usage: fun name(p1, p2) ... end [return_expr]" << std::endl;
-                    std::cout << "Description: Defines a first-class function. Supports recursion and closures." << std::endl;
+                    std::cout << "Keyword: fun — Define a named function" << std::endl;
+                    std::cout << "Usage:   fun name(p1, p2) ... end  [last expr is return value]" << std::endl;
+                    std::cout << "Example: fun add(a, b) a + b end" << std::endl;
+                    std::cout << "         fun fact(n) if n <= 1 1 else n * fact(n-1) end end" << std::endl;
+                    std::cout << "Notes:   First-class; supports recursion and closures." << std::endl;
+                    std::cout << "         No explicit 'return' needed — last expression is returned." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    int add(int a, int b) { return a + b; }" << std::endl;
+                    std::cout << "  Python: def add(a, b): return a + b" << std::endl;
+                    std::cout << "  Julia:  add(a, b) = a + b" << std::endl;
+                    std::cout << "  Go:     func add(a, b int) int { return a + b }" << std::endl;
+                    std::cout << "  Ruby:   def add(a, b) = a + b" << std::endl;
+                    std::cout << "  Rust:   fn add(a: i64, b: i64) -> i64 { a + b }" << std::endl;
                 } else if (topic == "obj") {
-                    std::cout << "Keyword: obj" << std::endl;
-                    std::cout << "Usage: obj Name(params) : Parent ... end" << std::endl;
-                    std::cout << "Description: Defines a new object/class with single inheritance." << std::endl;
-                    std::cout << "Syntax: .attr accesses own attribute, ..attr accesses parent attribute." << std::endl;
-                    std::cout << "Tip: All objects automatically inherit from 'sys'." << std::endl;
+                    std::cout << "Keyword: obj — Define an object (class) with single inheritance" << std::endl;
+                    std::cout << "Usage:   obj Name(params) : Parent ... end" << std::endl;
+                    std::cout << "Example: obj Dog(name) : Animal" << std::endl;
+                    std::cout << "           .name = name" << std::endl;
+                    std::cout << "           fun speak() sys.print(\"Woof!\") end" << std::endl;
+                    std::cout << "         end" << std::endl;
+                    std::cout << "         Dog d = Dog(\"Rex\")" << std::endl;
+                    std::cout << "         d.speak()" << std::endl;
+                    std::cout << "Notes:   .attr = own attribute; ..attr = parent attribute." << std::endl;
+                    std::cout << "         All objects auto-inherit from 'sys' (gives sys.print etc)." << std::endl;
+                    std::cout << "         Single inheritance only (chain for multiple: obj C : B where obj B : A)." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    class Dog : public Animal { public: std::string name; void speak(); };" << std::endl;
+                    std::cout << "  Python: class Dog(Animal): def __init__(self, name): self.name = name" << std::endl;
+                    std::cout << "  Julia:  struct Dog <: Animal; name::String; end" << std::endl;
+                    std::cout << "  Go:     type Dog struct { name string }  (no inheritance; use embedding)" << std::endl;
+                    std::cout << "  Ruby:   class Dog < Animal; def initialize(name) @name = name end; end" << std::endl;
+                    std::cout << "  Rust:   struct Dog { name: String }  (traits for behavior, no inheritance)" << std::endl;
                 } else if (topic == "use") {
-                    std::cout << "Keyword: use" << std::endl;
-                    std::cout << "Usage: use \"filename.g\" OR use \"filename.py\"" << std::endl;
-                    std::cout << "Description: Includes a Gem file or translates and runs foreign code (Python, Julia, C++)." << std::endl;
-                } else if (topic == "alias") {
-                    std::cout << "Keyword: alias" << std::endl;
-                    std::cout << "Usage: alias shortcut = expansion" << std::endl;
-                    std::cout << "Description: Creates a REPL shortcut (e.g., alias ? = sys.help())." << std::endl;
-                } else if (topic == "his") {
-                    std::cout << "Keyword: his" << std::endl;
-                    std::cout << "Description: Displays today's session history and prompts for prior days." << std::endl;
-                } else if (topic == "lib") {
-                    std::cout << "Keyword: lib" << std::endl;
-                    std::cout << "Description: Lists all currently loaded builtin modules." << std::endl;
+                    std::cout << "Keyword: use — Include a Gem module or run foreign code" << std::endl;
+                    std::cout << "Usage:   use \"file.g\"      # include Gem source" << std::endl;
+                    std::cout << "         use \"file.gm\"     # include Gem module" << std::endl;
+                    std::cout << "         use \"file.py\"     # AI-translate Python → Gem and run" << std::endl;
+                    std::cout << "         use \"file.jl\"     # AI-translate Julia → Gem and run" << std::endl;
+                    std::cout << "         use \"file.r\"      # AI-translate R → Gem and run" << std::endl;
+                    std::cout << "         use \"file.cpp\"    # AI-translate C++ → Gem and run" << std::endl;
+                    std::cout << "         use \"file.go\"     # AI-translate Go → Gem and run" << std::endl;
+                    std::cout << "         use \"file.rb\"     # AI-translate Ruby → Gem and run" << std::endl;
+                    std::cout << "         use \"file.rs\"     # AI-translate Rust → Gem and run" << std::endl;
+                    std::cout << "         use \"file.js\"     # AI-translate Node.js → Gem and run" << std::endl;
+                    std::cout << "Notes:   Foreign files are AI-translated to Gem on-the-fly via ai.prompt()." << std::endl;
+                    std::cout << "         Use langport(\"*.py\", \"out.gm\") to save the translation." << std::endl;
+                    std::cout << "         For direct execution without translation use go.run(), ruby.run(), etc." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    #include \"file.h\"  /  import (C++20 modules)" << std::endl;
+                    std::cout << "  Python: import module  /  from module import x" << std::endl;
+                    std::cout << "  Julia:  include(\"file.jl\")  /  using Module" << std::endl;
+                    std::cout << "  Go:     import \"package\"" << std::endl;
+                    std::cout << "  Ruby:   require 'file'  /  require_relative 'file'" << std::endl;
+                    std::cout << "  Rust:   mod module;  /  use crate::module;" << std::endl;
                 } else if (topic == "if") {
-                    std::cout << "Keyword: if" << std::endl;
-                    std::cout << "Usage: if condition ... end" << std::endl;
-                    std::cout << "Description: Conditional execution. Condition evaluates to true if non-zero or true." << std::endl;
+                    std::cout << "Keyword: if — Conditional execution" << std::endl;
+                    std::cout << "Usage:   if condition ... end" << std::endl;
+                    std::cout << "         if condition ... else ... end" << std::endl;
+                    std::cout << "Example: if x > 0" << std::endl;
+                    std::cout << "           sys.print(\"positive\")" << std::endl;
+                    std::cout << "         else" << std::endl;
+                    std::cout << "           sys.print(\"non-positive\")" << std::endl;
+                    std::cout << "         end" << std::endl;
+                    std::cout << "Notes:   Condition is truthy if non-zero, non-empty, or boolean true." << std::endl;
+                    std::cout << "         No parentheses required around condition." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    if (x > 0) { ... } else { ... }" << std::endl;
+                    std::cout << "  Python: if x > 0: ... else: ..." << std::endl;
+                    std::cout << "  Julia:  if x > 0 ... else ... end" << std::endl;
+                    std::cout << "  Go:     if x > 0 { ... } else { ... }" << std::endl;
+                    std::cout << "  Ruby:   if x > 0 ... else ... end" << std::endl;
+                    std::cout << "  Rust:   if x > 0 { ... } else { ... }" << std::endl;
                 } else if (topic == "while") {
-                    std::cout << "Keyword: while" << std::endl;
-                    std::cout << "Usage: while condition ... end" << std::endl;
-                    std::cout << "Description: Standard while loop." << std::endl;
+                    std::cout << "Keyword: while — Loop while condition is true" << std::endl;
+                    std::cout << "Usage:   while condition ... end" << std::endl;
+                    std::cout << "Example: int i = 0" << std::endl;
+                    std::cout << "         while i < 10" << std::endl;
+                    std::cout << "           sys.print(i)" << std::endl;
+                    std::cout << "           i = i + 1" << std::endl;
+                    std::cout << "         end" << std::endl;
+                    std::cout << "Notes:   For range-based iteration use itr.range(n)." << std::endl;
+                    std::cout << "         Functional loops: itr.while(cond_fun, body_fun)." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    while (i < 10) { ... }  /  for (int i=0; i<10; i++) { ... }" << std::endl;
+                    std::cout << "  Python: while i < 10: ...  /  for i in range(10): ..." << std::endl;
+                    std::cout << "  Julia:  while i < 10 ... end  /  for i in 1:10 ... end" << std::endl;
+                    std::cout << "  Go:     for i < 10 { ... }  /  for i := 0; i < 10; i++ { ... }" << std::endl;
+                    std::cout << "  Ruby:   while i < 10 do ... end  /  10.times { ... }" << std::endl;
+                    std::cout << "  Rust:   while i < 10 { ... }  /  for i in 0..10 { ... }" << std::endl;
                 } else if (topic == "int" || topic == "double" || topic == "string" || topic == "bool") {
-                    std::cout << "Keyword: " << topic << " (Type Declaration)" << std::endl;
-                    std::cout << "Usage: " << topic << " var = value" << std::endl;
-                    std::cout << "Description: Declares and initializes a variable of the specified type." << std::endl;
+                    std::cout << "Keyword: " << topic << " — Declare and initialize a typed variable" << std::endl;
+                    std::cout << "Usage:   " << topic << " var = value" << std::endl;
+                    std::cout << "Example: int x = 42" << std::endl;
+                    std::cout << "         double pi = 3.14159" << std::endl;
+                    std::cout << "         string name = \"Gem\"" << std::endl;
+                    std::cout << "         bool flag = true" << std::endl;
+                    std::cout << "Notes:   All variables MUST be initialized at declaration." << std::endl;
+                    std::cout << "         Global scope: prefix with _ (e.g. _config = 1)." << std::endl;
+                    std::cout << "         Local scope: all other names." << std::endl;
+                    std::cout << "         Type is inferred from initial value; annotation is explicit." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    int x = 42;  double pi = 3.14;  std::string s = \"hi\";  bool b = true;" << std::endl;
+                    std::cout << "  Python: x = 42  (dynamic; no declaration needed)" << std::endl;
+                    std::cout << "  Julia:  x::Int = 42  (optional annotation; dynamic by default)" << std::endl;
+                    std::cout << "  Go:     x := 42  /  var x int = 42" << std::endl;
+                    std::cout << "  Ruby:   x = 42  (dynamic; no declaration needed)" << std::endl;
+                    std::cout << "  Rust:   let x: i64 = 42;  let s: String = String::from(\"hi\");" << std::endl;
+                } else if (topic == "alias") {
+                    std::cout << "Keyword: alias — Create a REPL shortcut" << std::endl;
+                    std::cout << "Usage:   alias shortcut = expansion" << std::endl;
+                    std::cout << "Example: alias ? = sys.help()" << std::endl;
+                    std::cout << "         alias h = sys.help" << std::endl;
+                    std::cout << "Notes:   Aliases are REPL-only; not available in scripts." << std::endl;
+                    std::cout << "         Useful for frequently-used commands." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    #define ALIAS expr  /  using alias = type;" << std::endl;
+                    std::cout << "  Python: alias = lambda: expr  (no built-in alias)" << std::endl;
+                    std::cout << "  Julia:  const alias = expr" << std::endl;
+                    std::cout << "  Go:     type Alias = OriginalType  (type aliases only)" << std::endl;
+                    std::cout << "  Ruby:   alias new_name old_name  (method aliases)" << std::endl;
+                    std::cout << "  Rust:   type Alias = OriginalType;" << std::endl;
+                } else if (topic == "his") {
+                    std::cout << "Keyword: his — View session history" << std::endl;
+                    std::cout << "Usage:   his" << std::endl;
+                    std::cout << "Notes:   Displays today's REPL session log (~/.gem/YYYYDDD.txt)." << std::endl;
+                    std::cout << "         Prompts to view prior days." << std::endl;
+                    std::cout << "         CLI equivalent: gem -h" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  Bash:   history" << std::endl;
+                    std::cout << "  Python: readline history via readline module" << std::endl;
+                    std::cout << "  Julia:  REPL history in ~/.julia/logs/repl_history.jl" << std::endl;
+                    std::cout << "  (No direct equivalent in Go/Ruby/Rust REPLs)" << std::endl;
+                } else if (topic == "lib") {
+                    std::cout << "Keyword: lib — List loaded builtin modules" << std::endl;
+                    std::cout << "Usage:   lib" << std::endl;
+                    std::cout << "Notes:   Shows all registered builtins: sys, math, ai, text, rex, ..." << std::endl;
+                    std::cout << "         Use 'help \"module\"' for details on any listed module." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  Python: help('modules')  /  sys.modules" << std::endl;
+                    std::cout << "  Julia:  Base.loaded_modules" << std::endl;
+                    std::cout << "  Go:     go list (CLI)" << std::endl;
+                    std::cout << "  Ruby:   $LOADED_FEATURES" << std::endl;
+                    std::cout << "  Rust:   cargo metadata (CLI)" << std::endl;
                 } else if (topic == "exit") {
-                    std::cout << "Keyword: exit" << std::endl;
-                    std::cout << "Description: Exits the Gem interpreter." << std::endl;
+                    std::cout << "Keyword: exit — Exit the Gem interpreter or script" << std::endl;
+                    std::cout << "Usage:   exit  /  sys.exit()" << std::endl;
+                    std::cout << "Notes:   In REPL: terminates the session." << std::endl;
+                    std::cout << "         In script: terminates execution immediately." << std::endl;
+                    std::cout << "         Also triggered by Ctrl+D (EOF) in REPL." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::exit(0);  /  return 0; (from main)" << std::endl;
+                    std::cout << "  Python: sys.exit(0)  /  exit()" << std::endl;
+                    std::cout << "  Julia:  exit(0)" << std::endl;
+                    std::cout << "  Go:     os.Exit(0)" << std::endl;
+                    std::cout << "  Ruby:   exit(0)  /  Kernel.exit" << std::endl;
+                    std::cout << "  Rust:   std::process::exit(0);" << std::endl;
                 } else if (topic == "astro") {
                     std::cout << "Description: Astrophysics, Solar Physics, and Planetary Science module." << std::endl;
                     std::cout << "Constants: G, c, AU, pc, ly, Msun, Rsun, Lsun, Tsun, Mearth, Rearth, H0, sigma_sb" << std::endl;
@@ -865,6 +1210,13 @@ public:
 
     GemAI() : GemSys() {
         name = "ai";
+        // Initialize embedded Python once (Python 3.14 compatible)
+        if (!pythonInitialized) {
+            PyImport_AppendInittab("gem_mistral_bridge", PyInit_gem_mistral_bridge);
+            Py_Initialize();
+            PyImport_ImportModule("gem_mistral_bridge");
+            pythonInitialized = true;
+        }
         properties["provider"] = std::make_shared<GemValue>(provider);
         properties["model"] = std::make_shared<GemValue>(model);
         properties["host"] = std::make_shared<GemValue>(host);
@@ -2912,6 +3264,327 @@ renderFeatures();
             obj->set("waypoints", std::make_shared<GemValue>((double)pts.size()));
             obj->set("distance_km", std::make_shared<GemValue>(totalDist));
             return std::make_shared<GemValue>(obj);
+        }, true };
+    }
+};
+
+// GemSEO — Search Engine Optimization: crawl URLs, extract SEO signals, write index
+class GemSEO : public GemSys {
+public:
+    GemSEO() : GemSys() {
+        name = "seo";
+
+        // seo.index(urls, output_path) — crawl list of URLs, extract SEO data, write JSON index
+        methods["index"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2) return std::make_shared<GemValue>(false);
+
+            // Collect URLs from a vector value or single string
+            std::vector<std::string> urls;
+            if (std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(args[0]->value)) {
+                for (auto& v : std::get<std::vector<std::shared_ptr<GemValue>>>(args[0]->value))
+                    urls.push_back(v->toString());
+            } else {
+                urls.push_back(args[0]->toString());
+            }
+            std::string outPath = args[1]->toString();
+
+            // Helper: extract first occurrence of a tag's content
+            auto extractTag = [](const std::string& html, const std::string& tag) -> std::string {
+                std::string open = "<" + tag;
+                size_t p = html.find(open);
+                if (p == std::string::npos) return "";
+                size_t end = html.find('>', p);
+                if (end == std::string::npos) return "";
+                size_t close = html.find("</" + tag + ">", end);
+                if (close == std::string::npos) return "";
+                std::string content = html.substr(end + 1, close - end - 1);
+                // Strip inner tags
+                std::string result;
+                bool inTag = false;
+                for (char c : content) {
+                    if (c == '<') inTag = true;
+                    else if (c == '>') inTag = false;
+                    else if (!inTag) result += c;
+                }
+                return result;
+            };
+
+            // Helper: extract meta tag content by name/property
+            auto extractMeta = [](const std::string& html, const std::string& attr, const std::string& val) -> std::string {
+                std::string needle = "name=\"" + val + "\"";
+                if (attr == "property") needle = "property=\"" + val + "\"";
+                size_t p = html.find(needle);
+                if (p == std::string::npos) {
+                    // try single quotes
+                    needle = "name='" + val + "'";
+                    if (attr == "property") needle = "property='" + val + "'";
+                    p = html.find(needle);
+                }
+                if (p == std::string::npos) return "";
+                // find content= on same tag (search backwards to <meta and forwards to >)
+                size_t tagStart = html.rfind("<meta", p);
+                size_t tagEnd   = html.find('>', p);
+                if (tagStart == std::string::npos || tagEnd == std::string::npos) return "";
+                std::string tag = html.substr(tagStart, tagEnd - tagStart);
+                size_t cp = tag.find("content=\"");
+                if (cp == std::string::npos) cp = tag.find("content='");
+                if (cp == std::string::npos) return "";
+                char q = tag[cp + 8];
+                size_t vs = cp + 9;
+                size_t ve = tag.find(q, vs);
+                return ve == std::string::npos ? "" : tag.substr(vs, ve - vs);
+            };
+
+            // Helper: count occurrences of a substring
+            auto countOccurrences = [](const std::string& text, const std::string& needle) -> int {
+                int count = 0;
+                size_t pos = 0;
+                while ((pos = text.find(needle, pos)) != std::string::npos) { count++; pos += needle.size(); }
+                return count;
+            };
+
+            // Helper: extract all href links
+            auto extractLinks = [](const std::string& html) -> std::vector<std::string> {
+                std::vector<std::string> links;
+                size_t pos = 0;
+                while ((pos = html.find("href=\"", pos)) != std::string::npos) {
+                    pos += 6;
+                    size_t end = html.find('"', pos);
+                    if (end != std::string::npos) {
+                        std::string href = html.substr(pos, end - pos);
+                        if (!href.empty() && href[0] != '#') links.push_back(href);
+                    }
+                }
+                return links;
+            };
+
+            // Helper: extract all h1/h2/h3 headings
+            auto extractHeadings = [&](const std::string& html, const std::string& tag) -> std::vector<std::string> {
+                std::vector<std::string> headings;
+                size_t pos = 0;
+                std::string open = "<" + tag;
+                std::string close = "</" + tag + ">";
+                while ((pos = html.find(open, pos)) != std::string::npos) {
+                    size_t end = html.find('>', pos);
+                    if (end == std::string::npos) break;
+                    size_t cpos = html.find(close, end);
+                    if (cpos == std::string::npos) break;
+                    std::string content = html.substr(end + 1, cpos - end - 1);
+                    // strip tags
+                    std::string text;
+                    bool inT = false;
+                    for (char c : content) {
+                        if (c == '<') inT = true;
+                        else if (c == '>') inT = false;
+                        else if (!inT) text += c;
+                    }
+                    if (!text.empty()) headings.push_back(text);
+                    pos = cpos + close.size();
+                }
+                return headings;
+            };
+
+            // Helper: strip all HTML tags to get plain text
+            auto stripHtml = [](const std::string& html) -> std::string {
+                std::string text;
+                bool inTag = false;
+                for (char c : html) {
+                    if (c == '<') inTag = true;
+                    else if (c == '>') inTag = false;
+                    else if (!inTag) text += c;
+                }
+                return text;
+            };
+
+            // Helper: JSON-escape a string
+            auto jsonEscape = [](const std::string& s) -> std::string {
+                std::string out;
+                for (char c : s) {
+                    if (c == '"') out += "\\\"";
+                    else if (c == '\\') out += "\\\\";
+                    else if (c == '\n') out += "\\n";
+                    else if (c == '\r') out += "\\r";
+                    else if (c == '\t') out += "\\t";
+                    else out += c;
+                }
+                return out;
+            };
+
+            std::string json = "[\n";
+            bool first = true;
+
+            for (const auto& url : urls) {
+                // Parse host and path from URL
+                std::string host, path = "/";
+                int port = 80;
+                std::string u = url;
+                if (u.substr(0, 8) == "https://") { port = 443; u = u.substr(8); }
+                else if (u.substr(0, 7) == "http://") { u = u.substr(7); }
+                size_t slash = u.find('/');
+                if (slash != std::string::npos) { host = u.substr(0, slash); path = u.substr(slash); }
+                else { host = u; }
+                // Handle port in host
+                size_t colon = host.find(':');
+                if (colon != std::string::npos) { port = std::stoi(host.substr(colon + 1)); host = host.substr(0, colon); }
+
+                // Fetch HTML
+                std::string html;
+                try {
+                    httplib::Client cli(host, port);
+                    cli.set_follow_location(true);
+                    cli.set_connection_timeout(10);
+                    cli.set_read_timeout(10);
+                    auto res = cli.Get(path.c_str());
+                    if (res && res->status == 200) html = res->body;
+                } catch (...) {}
+
+                if (html.empty()) {
+                    // fallback: curl
+                    std::string cmd = "curl -sL --max-time 10 \"" + url + "\"";
+                    FILE* pipe = popen(cmd.c_str(), "r");
+                    if (pipe) {
+                        char buf[4096];
+                        while (fgets(buf, sizeof(buf), pipe)) html += buf;
+                        pclose(pipe);
+                    }
+                }
+
+                // Extract SEO signals
+                std::string title       = extractTag(html, "title");
+                std::string desc        = extractMeta(html, "name", "description");
+                std::string keywords    = extractMeta(html, "name", "keywords");
+                std::string ogTitle     = extractMeta(html, "property", "og:title");
+                std::string ogDesc      = extractMeta(html, "property", "og:description");
+                std::string canonical;
+                {
+                    size_t cp = html.find("rel=\"canonical\"");
+                    if (cp == std::string::npos) cp = html.find("rel='canonical'");
+                    if (cp != std::string::npos) {
+                        size_t ts = html.rfind("<link", cp);
+                        size_t te = html.find('>', cp);
+                        if (ts != std::string::npos && te != std::string::npos) {
+                            std::string tag = html.substr(ts, te - ts);
+                            size_t hp = tag.find("href=\"");
+                            if (hp != std::string::npos) {
+                                size_t hs = hp + 6, he = tag.find('"', hs);
+                                if (he != std::string::npos) canonical = tag.substr(hs, he - hs);
+                            }
+                        }
+                    }
+                }
+
+                auto h1s = extractHeadings(html, "h1");
+                auto h2s = extractHeadings(html, "h2");
+                auto h3s = extractHeadings(html, "h3");
+                auto links = extractLinks(html);
+                std::string plainText = stripHtml(html);
+                int wordCount = 0;
+                bool inWord = false;
+                for (char c : plainText) {
+                    if (std::isalnum(c)) { if (!inWord) { wordCount++; inWord = true; } }
+                    else inWord = false;
+                }
+                int imgCount = countOccurrences(html, "<img");
+                int imgAlt   = countOccurrences(html, "alt=\"");
+                int internalLinks = 0, externalLinks = 0;
+                for (auto& lnk : links) {
+                    if (lnk.find("http") == 0 && lnk.find(host) == std::string::npos) externalLinks++;
+                    else internalLinks++;
+                }
+
+                // Build JSON entry
+                if (!first) json += ",\n";
+                first = false;
+                json += "  {\n";
+                json += "    \"url\": \"" + jsonEscape(url) + "\",\n";
+                json += "    \"title\": \"" + jsonEscape(title) + "\",\n";
+                json += "    \"description\": \"" + jsonEscape(desc) + "\",\n";
+                json += "    \"keywords\": \"" + jsonEscape(keywords) + "\",\n";
+                json += "    \"og_title\": \"" + jsonEscape(ogTitle) + "\",\n";
+                json += "    \"og_description\": \"" + jsonEscape(ogDesc) + "\",\n";
+                json += "    \"canonical\": \"" + jsonEscape(canonical) + "\",\n";
+                json += "    \"word_count\": " + std::to_string(wordCount) + ",\n";
+                json += "    \"img_count\": " + std::to_string(imgCount) + ",\n";
+                json += "    \"img_with_alt\": " + std::to_string(imgAlt) + ",\n";
+                json += "    \"internal_links\": " + std::to_string(internalLinks) + ",\n";
+                json += "    \"external_links\": " + std::to_string(externalLinks) + ",\n";
+                // h1/h2/h3 arrays
+                auto jsonArr = [&jsonEscape](const std::vector<std::string>& v) {
+                    std::string s = "[";
+                    for (size_t i = 0; i < v.size(); ++i) {
+                        if (i) s += ", ";
+                        s += "\"" + jsonEscape(v[i]) + "\"";
+                    }
+                    return s + "]";
+                };
+                json += "    \"h1\": " + jsonArr(h1s) + ",\n";
+                json += "    \"h2\": " + jsonArr(h2s) + ",\n";
+                json += "    \"h3\": " + jsonArr(h3s) + "\n";
+                json += "  }";
+
+                std::cout << "seo.index: crawled " << url << " (" << wordCount << " words)" << std::endl;
+            }
+
+            json += "\n]\n";
+            std::ofstream out(outPath);
+            out << json;
+            return std::make_shared<GemValue>(outPath);
+        }, true };
+
+        // seo.analyze(index_path) — load index JSON and print SEO report to stdout
+        methods["analyze"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::ifstream in(args[0]->toString());
+            if (!in.good()) return std::make_shared<GemValue>(false);
+            std::string json((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+
+            std::cout << "\n=== Gem SEO Analysis Report ===" << std::endl;
+
+            // Simple extraction of url/title/description/word_count per entry
+            size_t pos = 0;
+            int entry = 0;
+            auto field = [&](const std::string& key) -> std::string {
+                size_t kp = json.find("\"" + key + "\": \"", pos);
+                if (kp == std::string::npos) kp = json.find("\"" + key + "\":", pos);
+                if (kp == std::string::npos) return "";
+                size_t vs = json.find('"', kp + key.size() + 4);
+                if (vs == std::string::npos) return "";
+                size_t ve = json.find('"', vs + 1);
+                return ve == std::string::npos ? "" : json.substr(vs + 1, ve - vs - 1);
+            };
+            auto numField = [&](const std::string& key) -> int {
+                size_t kp = json.find("\"" + key + "\": ", pos);
+                if (kp == std::string::npos) return 0;
+                size_t vs = kp + key.size() + 4;
+                size_t ve = json.find_first_of(",\n}", vs);
+                try { return std::stoi(json.substr(vs, ve - vs)); } catch (...) { return 0; }
+            };
+
+            while ((pos = json.find("\"url\":", pos)) != std::string::npos) {
+                entry++;
+                std::string url   = field("url");
+                std::string title = field("title");
+                std::string desc  = field("description");
+                int words = numField("word_count");
+                int imgs  = numField("img_count");
+                int alts  = numField("img_with_alt");
+                int ilinks = numField("internal_links");
+                int elinks = numField("external_links");
+
+                std::cout << "\n[" << entry << "] " << url << std::endl;
+                std::cout << "  Title:       " << (title.empty() ? "MISSING" : title)
+                          << (title.size() > 60 ? " [TOO LONG >60]" : "") << std::endl;
+                std::cout << "  Description: " << (desc.empty() ? "MISSING" : desc.substr(0, 80))
+                          << (desc.size() > 160 ? " [TOO LONG >160]" : "") << std::endl;
+                std::cout << "  Words:       " << words
+                          << (words < 300 ? " [LOW <300]" : "") << std::endl;
+                std::cout << "  Images:      " << imgs << "  (with alt: " << alts
+                          << (imgs > 0 && alts < imgs ? " [MISSING ALT]" : "") << ")" << std::endl;
+                std::cout << "  Links:       internal=" << ilinks << "  external=" << elinks << std::endl;
+                pos++;
+            }
+            std::cout << "\nTotal pages analyzed: " << entry << std::endl;
+            return std::make_shared<GemValue>((double)entry);
         }, true };
     }
 };

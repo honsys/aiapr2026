@@ -337,6 +337,16 @@ Hardware}\label{system-programming-hardware}
   and edit travel logs on OpenStreetMap with GeoJSON/GPX support.
 \end{itemize}
 
+\subsubsection{11. Search Engine Optimization}\label{search-engine-optimization}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{40_seo.g}}: \texttt{seo} builtin --- crawl URLs, extract
+  SEO signals, write JSON index, analyze report.
+\end{itemize}
+
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Help \& Builtins}\label{help-builtins}
@@ -364,7 +374,7 @@ Hardware}\label{system-programming-hardware}
 \NormalTok{Available Builtin Modules:}
 \NormalTok{  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,}
 \NormalTok{  cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,}
-\NormalTok{  fin, bsm, chart, astro, mobl, trek, drvr}
+\NormalTok{  fin, bsm, chart, astro, mobl, trek, seo, drvr}
 
 \NormalTok{Keywords for Documentation:}
 \NormalTok{  fun, obj, use, alias, his, lib, end, if, while,}
@@ -401,6 +411,8 @@ Every object inherits from \texttt{sys}. Methods:
 \item \texttt{sys.app(port, [routes])} --- background web app server; routes map paths to strings, files, or handler functions
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{std::cout/thread/signal} 	extperiodcentered{} Python=	exttt{print/threading/signal} 	extperiodcentered{} Julia=	exttt{println/@async} 	extperiodcentered{} Go=	exttt{fmt.Println/goroutine} 	extperiodcentered{} Ruby=	exttt{puts/Thread.new} 	extperiodcentered{} Rust=	exttt{println!/thread::spawn}
+
 \subsubsection{math --- Mathematics \& Symbolic Math}\label{math-mathematics-symbolic-math}
 
 Standard functions: \texttt{sin(x)}, \texttt{cos(x)}, \texttt{sqrt(x)}, constant \texttt{math.pi}.
@@ -421,17 +433,21 @@ Symbolic math (SymPy/Sage backend):
 \item \texttt{math.compile\_latex(path)} --- run pdflatex on a file
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{<cmath>/GiNaC} 	extperiodcentered{} Python=	exttt{math/sympy} 	extperiodcentered{} Julia=	exttt{sin()/Symbolics.jl} 	extperiodcentered{} Go=	exttt{math.Sin()} 	extperiodcentered{} Ruby=	exttt{Math::sin()} 	extperiodcentered{} Rust=	exttt{f64::sin()}
+
 \subsubsection{ai --- AI Integration}\label{ai-integration}
 
 Supports Gemini (default), Mistral, and Ollama:
 \begin{itemize}
 \tightlist
 \item \texttt{ai.prompt(text)} --- send prompt to current provider
-\item \texttt{ai.prompt\_native(text)} --- high-speed native Mistral C++ bridge
+\item \texttt{ai.prompt\_native(text)} --- high-speed native Mistral C++ bridge (requires \texttt{mistralai} >= 1.0, Python 3.14 embedded)
 \item \texttt{ai.useMistral(model)}, \texttt{ai.useOllama(model, [host])}, \texttt{ai.useGemini()} --- switch provider
 \item \texttt{ai.setKey(key)}, \texttt{ai.setHost(host)}, \texttt{ai.setPath(path)} --- API configuration
 \item Properties: \texttt{provider}, \texttt{model}, \texttt{host}
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{libcurl+json} 	extperiodcentered{} Python=	exttt{google-generativeai/mistralai} 	extperiodcentered{} Julia=	exttt{HTTP.jl} 	extperiodcentered{} Go=	exttt{generative-ai-go} 	extperiodcentered{} Ruby=	exttt{ruby-openai} 	extperiodcentered{} Rust=	exttt{async-openai}
 
 \subsubsection{text --- String \& Document Processing}\label{text-string-document-processing}
 
@@ -450,6 +466,8 @@ Supports Gemini (default), Mistral, and Ollama:
 \item \texttt{text.read\_hdf\_header(path)} --- read HDF5 file header as object
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{std::string/fstream/pugixml} 	extperiodcentered{} Python=	exttt{str/pypdf/pyyaml/lxml} 	extperiodcentered{} Julia=	exttt{String/YAML.jl} 	extperiodcentered{} Go=	exttt{strings/encoding/xml} 	extperiodcentered{} Ruby=	exttt{String/prawn/nokogiri} 	extperiodcentered{} Rust=	exttt{String/lopdf/quick-xml}
+
 \subsubsection{geo --- GIS \& Geolocation}\label{geo-gis-geolocation}
 
 \begin{itemize}
@@ -461,6 +479,8 @@ Supports Gemini (default), Mistral, and Ollama:
 \item \texttt{geo.plot2d(data, [layout])} --- 2D Plotly map (open-street-map / scattermapbox)
 \item \texttt{geo.plot3d(data, [layout])} --- 3D globe visualization (orthographic scattergeo)
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{GDAL/GEOS} 	extperiodcentered{} Python=	exttt{geopandas/folium/geopy} 	extperiodcentered{} Julia=	exttt{GeoStats.jl} 	extperiodcentered{} Go=	exttt{paulmach/orb} 	extperiodcentered{} Ruby=	exttt{rgeo} 	extperiodcentered{} Rust=	exttt{geo crate}
 
 \subsubsection{astro --- Astrophysics \& Planetary Science}\label{astro-astrophysics}
 
@@ -485,6 +505,19 @@ Exoplanet: \texttt{transit\_depth(rp\_rearth,rs\_rsun)}, \texttt{habitable\_zone
 
 Pulsar: \texttt{pulsar\_spindown(P\_s, Pdot)} $\to$ \texttt{\{age\_yr, Bfield\_G, edot\_W\}}
 
+
+\subsubsection{seo --- Search Engine Optimization}\label{seo-search-engine-optimization}
+
+\begin{itemize}
+\tightlist
+\item \texttt{seo.index(urls, output\_path)} --- crawl list of URLs, extract SEO signals, write JSON index
+\item \texttt{seo.analyze(index\_path)} --- load index JSON and print SEO report to stdout
+\end{itemize}
+
+Signals extracted: \texttt{title}, \texttt{description}, \texttt{keywords}, \texttt{og:title}, \texttt{og:description}, \texttt{canonical}, \texttt{word\_count}, \texttt{img\_count}, \texttt{img\_with\_alt}, \texttt{internal\_links}, \texttt{external\_links}, \texttt{h1}/\texttt{h2}/\texttt{h3} headings
+
+\textit{Comparisons:} C++=\texttt{libcurl+custom parser} \textperiodcentered{} Python=\texttt{scrapy/beautifulsoup4} \textperiodcentered{} Julia=\texttt{HTTP.jl/Gumbo.jl} \textperiodcentered{} Go=\texttt{colly/goquery} \textperiodcentered{} Ruby=\texttt{nokogiri/mechanize} \textperiodcentered{} Rust=\texttt{scraper/reqwest}
+
 \subsubsection{trek --- Travel Logs \& OSM Mapping}\label{trek-travel-logs-osm}
 
 \begin{itemize}
@@ -498,6 +531,8 @@ Pulsar: \texttt{pulsar\_spindown(P\_s, Pdot)} $\to$ \texttt{\{age\_yr, Bfield\_G
 \item \texttt{trek.export\_gpx(geojson\_path, gpx\_path)} --- export waypoints to GPX format
 \item \texttt{trek.stats(path)} --- returns object with \texttt{.waypoints} count and \texttt{.distance\_km} total
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{GDAL/libgpx} 	extperiodcentered{} Python=	exttt{gpxpy/folium} 	extperiodcentered{} Julia=	exttt{GPX.jl} 	extperiodcentered{} Go=	exttt{tkrajina/gpxgo} 	extperiodcentered{} Ruby=	exttt{gpx gem} 	extperiodcentered{} Rust=	exttt{gpx crate}
 
 Map tiles: OpenStreetMap (Leaflet.js). Waypoints stored as GeoJSON FeatureCollection. Edits persist to file.
 
@@ -526,6 +561,10 @@ Routes: \texttt{/} $\to$ PWA HTML, \texttt{/log} $\to$ POST \texttt{\{lat,lon,te
 \item \texttt{fin.date(d,m,y)}, \texttt{fin.calendar(name)}, \texttt{fin.is\_holiday(cal,d,m,y)}, \texttt{fin.add\_days(...)}, \texttt{fin.diff\_days(...)}
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{QuantLib} 	extperiodcentered{} Python=	exttt{yfinance/quantlib-python} 	extperiodcentered{} Julia=	exttt{MarketData.jl} 	extperiodcentered{} Go=	exttt{piquette/quantlib} 	extperiodcentered{} Ruby=	exttt{quantlib-ruby} 	extperiodcentered{} Rust=	exttt{ta crate}
+
+\textit{Comparisons:} C++=	exttt{Qt} 	extperiodcentered{} Python=	exttt{Flask+SpeechRecognition} 	extperiodcentered{} Julia=no built-in 	extperiodcentered{} Go=	exttt{net/http+custom JS} 	extperiodcentered{} Ruby=	exttt{Rails+Web Speech} 	extperiodcentered{} Rust=	exttt{actix-web+custom JS}
+
 \subsubsection{bsm --- Black-Scholes-Merton}\label{bsm-black-scholes-merton}
 
 Inherits all \texttt{fin} methods, plus:
@@ -533,6 +572,8 @@ Inherits all \texttt{fin} methods, plus:
 \tightlist
 \item \texttt{bsm.price\_american(symbol, type, duration)} --- PDE-enhanced American option pricing (\texttt{weekly}/\texttt{monthly}/\texttt{quarterly})
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{QuantLib FDBlackScholesVanillaEngine} 	extperiodcentered{} Python=	exttt{quantlib-python AmericanOption} 	extperiodcentered{} Julia=	exttt{QuantLib.jl AmericanExercise}
 
 \subsubsection{chart --- Interactive Plotting (Plotly.js)}\label{chart-interactive-plotting}
 
@@ -543,6 +584,8 @@ Inherits all \texttt{fin} methods, plus:
 \item \texttt{chart.server(path, [port])} --- serve chart via background HTTP server
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{matplotlib-cpp/ROOT} 	extperiodcentered{} Python=	exttt{plotly/matplotlib/seaborn} 	extperiodcentered{} Julia=	exttt{Plots.jl/Makie.jl} 	extperiodcentered{} Go=	exttt{gonum/plot} 	extperiodcentered{} Ruby=	exttt{gruff} 	extperiodcentered{} Rust=	exttt{plotters crate}
+
 \subsubsection{data --- Data Science}\label{data-data-science}
 
 \begin{itemize}
@@ -551,6 +594,8 @@ Inherits all \texttt{fin} methods, plus:
 \item \texttt{data.mean(vector)} --- arithmetic mean
 \item \texttt{data.std(vector)} --- sample standard deviation
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{Eigen/Armadillo} 	extperiodcentered{} Python=	exttt{pandas/numpy} 	extperiodcentered{} Julia=	exttt{DataFrames.jl/CSV.jl} 	extperiodcentered{} Go=	exttt{gonum/stat} 	extperiodcentered{} Ruby=	exttt{daru gem} 	extperiodcentered{} Rust=	exttt{polars crate}
 
 \subsubsection{rex --- Regular Expressions (ECMAScript)}\label{rex-regular-expressions}
 
@@ -567,6 +612,8 @@ All functions accept optional flags string (\texttt{"i"} = case-insensitive):
 \item \texttt{rex.count(text, pattern, [flags])} $\to$ count non-overlapping matches
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{std::regex} 	extperiodcentered{} Python=	exttt{re} 	extperiodcentered{} Julia=	exttt{Regex/match()} 	extperiodcentered{} Go=	exttt{regexp} 	extperiodcentered{} Ruby=	exttt{=	extasciitilde{}/gsub} 	extperiodcentered{} Rust=	exttt{regex crate}
+
 \subsubsection{algo --- Algorithms \& Time}\label{algo-algorithms-time}
 
 \begin{itemize}
@@ -576,6 +623,8 @@ All functions accept optional flags string (\texttt{"i"} = case-insensitive):
 \item \texttt{algo.now()} --- current local time as string
 \item \texttt{algo.date\_add(ts, days)}, \texttt{algo.date\_diff(t1, t2)} --- date arithmetic
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{std::sort/std::chrono} 	extperiodcentered{} Python=	exttt{sorted()/datetime} 	extperiodcentered{} Julia=	exttt{sort!()/Dates} 	extperiodcentered{} Go=	exttt{sort.Slice/time} 	extperiodcentered{} Ruby=	exttt{Array\#sort!/Time} 	extperiodcentered{} Rust=	exttt{slice.sort/SystemTime}
 
 \subsubsection{tcp --- TCP/IP Networking}\label{tcp-networking}
 
@@ -587,6 +636,8 @@ All functions accept optional flags string (\texttt{"i"} = case-insensitive):
 \item \texttt{tcp.routes()} --- system routing table
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{POSIX socket/bind/listen} 	extperiodcentered{} Python=	exttt{socket.socket} 	extperiodcentered{} Julia=	exttt{Sockets.listen} 	extperiodcentered{} Go=	exttt{net.Listen} 	extperiodcentered{} Ruby=	exttt{TCPServer} 	extperiodcentered{} Rust=	exttt{TcpListener::bind}
+
 \subsubsection{thread --- Background Threads}\label{thread-background-threads}
 
 Returned by \texttt{sys.async()}. Methods on the thread handle:
@@ -595,6 +646,8 @@ Returned by \texttt{sys.async()}. Methods on the thread handle:
 \item \texttt{thread.wait()} --- block until complete, returns result (or timeout error string)
 \item \texttt{thread.is\_finished()} --- bool, non-blocking status check
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{std::future/std::async} 	extperiodcentered{} Python=	exttt{concurrent.futures.Future} 	extperiodcentered{} Julia=	exttt{@async/fetch()} 	extperiodcentered{} Go=	exttt{goroutine+channel} 	extperiodcentered{} Ruby=	exttt{Thread\#join/alive?} 	extperiodcentered{} Rust=	exttt{JoinHandle\#join}
 
 \subsubsection{www --- Web Framework}\label{www-web-framework}
 
@@ -605,6 +658,8 @@ Returned by \texttt{sys.async()}. Methods on the thread handle:
 \item \texttt{www.redirect(target, [port])} --- start redirect server or return redirect header string
 \item \texttt{www.map2d(geojson, output)} --- render 2D map via Mapnik (requires HAS\_MAPNIK)
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{cpp-httplib/Crow} 	extperiodcentered{} Python=	exttt{Flask/FastAPI} 	extperiodcentered{} Julia=	exttt{HTTP.jl/Genie.jl} 	extperiodcentered{} Go=	exttt{net/http/Gin} 	extperiodcentered{} Ruby=	exttt{Sinatra/Rails} 	extperiodcentered{} Rust=	exttt{actix-web/axum}
 
 \subsubsection{cdn --- Caching Proxy Server}\label{cdn-caching-proxy-server}
 
@@ -617,6 +672,8 @@ Inherits all \texttt{www} methods, plus:
 \item \texttt{cdn.config(type, content)} --- generate nginx/apache config
 \end{itemize}
 
+\textit{Comparisons:} C++=	exttt{nginx/Varnish} 	extperiodcentered{} Python=no built-in 	extperiodcentered{} Julia=no built-in 	extperiodcentered{} Go=	exttt{groupcache} 	extperiodcentered{} Ruby=	exttt{rack-cache} 	extperiodcentered{} Rust=no built-in
+
 \subsubsection{k3s --- Docker \& Kubernetes}\label{k3s-docker-kubernetes}
 
 \begin{itemize}
@@ -624,6 +681,8 @@ Inherits all \texttt{www} methods, plus:
 \item \texttt{k3s.docker\_run(image, cmd)}, \texttt{k3s.docker\_ps()}, \texttt{k3s.docker\_build(path, tag)}, \texttt{k3s.docker\_stop(id)}
 \item \texttt{k3s.k3s\_apply(yaml)}, \texttt{k3s.k3s\_get(resource)}, \texttt{k3s.k3s\_pods()}, \texttt{k3s.k3s\_nodes()}, \texttt{k3s.k3s\_logs(pod)}
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{Docker SDK/HTTP API} 	extperiodcentered{} Python=	exttt{docker-py/kubernetes} 	extperiodcentered{} Julia=no official SDK 	extperiodcentered{} Go=	exttt{docker/client/k8s.io/client-go} 	extperiodcentered{} Ruby=	exttt{docker-api/kubeclient} 	extperiodcentered{} Rust=	exttt{bollard/kube-rs}
 
 \subsubsection{vm --- Vagrant VMs}\label{vm-vagrant-vms}
 
@@ -636,6 +695,10 @@ Inherits all \texttt{www} methods, plus:
 \item \texttt{drvr.linux(name)}, \texttt{drvr.win11(name)}, \texttt{drvr.macos(name)}, \texttt{drvr.android(name)} --- generate driver templates
 \item \texttt{drvr.build(target)}, \texttt{drvr.deploy(target)} --- cross-platform build and deploy
 \end{itemize}
+
+\textit{Comparisons:} C++=	exttt{Linux module\_init/WDK/WDF} 	extperiodcentered{} Python=	exttt{ctypes/cffi} (userspace only) 	extperiodcentered{} Julia=no support 	extperiodcentered{} Go=	exttt{TinyGo} 	extperiodcentered{} Ruby=no support 	extperiodcentered{} Rust=	exttt{linux-kernel-module-rust}
+
+\textit{Comparisons:} C++=	exttt{libvirt C API} 	extperiodcentered{} Python=	exttt{python-vagrant} 	extperiodcentered{} Julia=no official bindings 	extperiodcentered{} Go=	exttt{os/exec} 	extperiodcentered{} Ruby=Vagrant is Ruby 	extperiodcentered{} Rust=	exttt{std::process::Command}
 
 \subsubsection{Other Builtins}\label{other-builtins}
 
@@ -676,7 +739,7 @@ Uses the \texttt{mobl} builtin + \texttt{travel\_log.html} (PWA). Voice dictatio
 \tightlist
 \item
   \textbf{macOS/Linux}: \texttt{g++} (supporting C++2b/C++26),
-  \texttt{make}, \texttt{python3}, \texttt{libreadline-dev}.
+  \texttt{make}, \texttt{python3} (3.14+), \texttt{libreadline-dev}. Python 3.14 headers required for embedded polyglot runtime.
 \item
   \textbf{Windows 11}: \href{https://www.msys2.org/}{MSYS2} with
   \texttt{mingw-w64-x86\_64-gcc}, \texttt{make}, and

@@ -1347,7 +1347,7 @@ static const char *__pyx_filename;
 /* #### Code section: filename_table ### */
 
 static const char* const __pyx_f[] = {
-  "src/gem_mistral_bridge.pyx",
+  "gem_mistral_bridge.pyx",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* Atomics.proto (used by CodeObjectCache) */
@@ -2068,8 +2068,8 @@ typedef struct {
   PyObject *__pyx_empty_tuple;
   PyObject *__pyx_empty_bytes;
   PyObject *__pyx_empty_unicode;
-  PyObject *__pyx_string_tab[84];
-  PyObject *__pyx_number_tab[4];
+  PyObject *__pyx_string_tab[83];
+  PyObject *__pyx_number_tab[5];
 /* #### Code section: module_state_contents ### */
 /* CodeObjectCache.module_state_decls */
 struct __Pyx_CodeObjectCache __pyx_code_cache;
@@ -2102,26 +2102,26 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_u_ __pyx_string_tab[0]
 #define __pyx_kp_u_Content_Type __pyx_string_tab[1]
 #define __pyx_kp_u_Error __pyx_string_tab[2]
-#define __pyx_kp_u_Mozilla_5_0_Macintosh_Intel_Mac __pyx_string_tab[3]
+#define __pyx_kp_u_Mozilla_5_0 __pyx_string_tab[3]
 #define __pyx_kp_u_User_Agent __pyx_string_tab[4]
 #define __pyx_kp_u__2 __pyx_string_tab[5]
 #define __pyx_kp_u_application_json __pyx_string_tab[6]
 #define __pyx_kp_u_https_scanner_tradingview_com_am __pyx_string_tab[7]
 #define __pyx_kp_u_https_scanner_tradingview_com_bo __pyx_string_tab[8]
 #define __pyx_kp_u_utf_8 __pyx_string_tab[9]
-#define __pyx_n_u_ChatMessage __pyx_string_tab[10]
-#define __pyx_n_u_MistralClient __pyx_string_tab[11]
-#define __pyx_n_u_Ticker __pyx_string_tab[12]
-#define __pyx_n_u_america __pyx_string_tab[13]
-#define __pyx_n_u_api_key __pyx_string_tab[14]
-#define __pyx_n_u_bond __pyx_string_tab[15]
-#define __pyx_n_u_change __pyx_string_tab[16]
-#define __pyx_n_u_chat __pyx_string_tab[17]
-#define __pyx_n_u_choices __pyx_string_tab[18]
-#define __pyx_n_u_class_getitem __pyx_string_tab[19]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[20]
-#define __pyx_n_u_close __pyx_string_tab[21]
-#define __pyx_n_u_columns __pyx_string_tab[22]
+#define __pyx_n_u_Mistral __pyx_string_tab[10]
+#define __pyx_n_u_Ticker __pyx_string_tab[11]
+#define __pyx_n_u_america __pyx_string_tab[12]
+#define __pyx_n_u_api_key __pyx_string_tab[13]
+#define __pyx_n_u_bond __pyx_string_tab[14]
+#define __pyx_n_u_change __pyx_string_tab[15]
+#define __pyx_n_u_chat __pyx_string_tab[16]
+#define __pyx_n_u_choices __pyx_string_tab[17]
+#define __pyx_n_u_class_getitem __pyx_string_tab[18]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[19]
+#define __pyx_n_u_close __pyx_string_tab[20]
+#define __pyx_n_u_columns __pyx_string_tab[21]
+#define __pyx_n_u_complete __pyx_string_tab[22]
 #define __pyx_n_u_content __pyx_string_tab[23]
 #define __pyx_n_u_coupon __pyx_string_tab[24]
 #define __pyx_n_u_currency __pyx_string_tab[25]
@@ -2136,57 +2136,57 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_dumps __pyx_string_tab[34]
 #define __pyx_n_u_encode __pyx_string_tab[35]
 #define __pyx_n_u_enumerate __pyx_string_tab[36]
-#define __pyx_n_u_equit __pyx_string_tab[37]
-#define __pyx_n_u_etf __pyx_string_tab[38]
-#define __pyx_n_u_filter __pyx_string_tab[39]
-#define __pyx_n_u_fund __pyx_string_tab[40]
-#define __pyx_n_u_get __pyx_string_tab[41]
-#define __pyx_n_u_greater __pyx_string_tab[42]
-#define __pyx_n_u_headers __pyx_string_tab[43]
-#define __pyx_n_u_high __pyx_string_tab[44]
-#define __pyx_n_u_in_range __pyx_string_tab[45]
-#define __pyx_n_u_info __pyx_string_tab[46]
-#define __pyx_n_u_json __pyx_string_tab[47]
-#define __pyx_n_u_left __pyx_string_tab[48]
-#define __pyx_n_u_low __pyx_string_tab[49]
-#define __pyx_n_u_lower __pyx_string_tab[50]
-#define __pyx_n_u_main __pyx_string_tab[51]
-#define __pyx_n_u_markets __pyx_string_tab[52]
-#define __pyx_n_u_maturity_date __pyx_string_tab[53]
-#define __pyx_n_u_message __pyx_string_tab[54]
-#define __pyx_n_u_messages __pyx_string_tab[55]
-#define __pyx_n_u_mistralai_client __pyx_string_tab[56]
-#define __pyx_n_u_mistralai_models_chat_completion __pyx_string_tab[57]
-#define __pyx_n_u_model __pyx_string_tab[58]
-#define __pyx_n_u_module __pyx_string_tab[59]
-#define __pyx_n_u_name __pyx_string_tab[60]
-#define __pyx_n_u_name_2 __pyx_string_tab[61]
-#define __pyx_n_u_open __pyx_string_tab[62]
-#define __pyx_n_u_operation __pyx_string_tab[63]
-#define __pyx_n_u_post __pyx_string_tab[64]
-#define __pyx_n_u_price __pyx_string_tab[65]
-#define __pyx_n_u_qualname __pyx_string_tab[66]
-#define __pyx_n_u_range __pyx_string_tab[67]
-#define __pyx_n_u_regularMarketPrice __pyx_string_tab[68]
-#define __pyx_n_u_requests __pyx_string_tab[69]
-#define __pyx_n_u_right __pyx_string_tab[70]
-#define __pyx_n_u_role __pyx_string_tab[71]
-#define __pyx_n_u_setdefault __pyx_string_tab[72]
-#define __pyx_n_u_sort __pyx_string_tab[73]
-#define __pyx_n_u_sortBy __pyx_string_tab[74]
-#define __pyx_n_u_sortOrder __pyx_string_tab[75]
-#define __pyx_n_u_stock __pyx_string_tab[76]
-#define __pyx_n_u_symbol __pyx_string_tab[77]
-#define __pyx_n_u_test __pyx_string_tab[78]
-#define __pyx_n_u_type __pyx_string_tab[79]
-#define __pyx_n_u_user __pyx_string_tab[80]
-#define __pyx_n_u_volume __pyx_string_tab[81]
-#define __pyx_n_u_yfinance __pyx_string_tab[82]
-#define __pyx_n_u_yield_to_maturity __pyx_string_tab[83]
+#define __pyx_n_u_etf __pyx_string_tab[37]
+#define __pyx_n_u_filter __pyx_string_tab[38]
+#define __pyx_n_u_fund __pyx_string_tab[39]
+#define __pyx_n_u_get __pyx_string_tab[40]
+#define __pyx_n_u_greater __pyx_string_tab[41]
+#define __pyx_n_u_headers __pyx_string_tab[42]
+#define __pyx_n_u_high __pyx_string_tab[43]
+#define __pyx_n_u_in_range __pyx_string_tab[44]
+#define __pyx_n_u_info __pyx_string_tab[45]
+#define __pyx_n_u_json __pyx_string_tab[46]
+#define __pyx_n_u_left __pyx_string_tab[47]
+#define __pyx_n_u_low __pyx_string_tab[48]
+#define __pyx_n_u_lower __pyx_string_tab[49]
+#define __pyx_n_u_main __pyx_string_tab[50]
+#define __pyx_n_u_markets __pyx_string_tab[51]
+#define __pyx_n_u_maturity_date __pyx_string_tab[52]
+#define __pyx_n_u_message __pyx_string_tab[53]
+#define __pyx_n_u_messages __pyx_string_tab[54]
+#define __pyx_n_u_mistralai __pyx_string_tab[55]
+#define __pyx_n_u_model __pyx_string_tab[56]
+#define __pyx_n_u_module __pyx_string_tab[57]
+#define __pyx_n_u_name __pyx_string_tab[58]
+#define __pyx_n_u_name_2 __pyx_string_tab[59]
+#define __pyx_n_u_open __pyx_string_tab[60]
+#define __pyx_n_u_operation __pyx_string_tab[61]
+#define __pyx_n_u_post __pyx_string_tab[62]
+#define __pyx_n_u_price __pyx_string_tab[63]
+#define __pyx_n_u_qualname __pyx_string_tab[64]
+#define __pyx_n_u_range __pyx_string_tab[65]
+#define __pyx_n_u_regularMarketPrice __pyx_string_tab[66]
+#define __pyx_n_u_requests __pyx_string_tab[67]
+#define __pyx_n_u_right __pyx_string_tab[68]
+#define __pyx_n_u_role __pyx_string_tab[69]
+#define __pyx_n_u_setdefault __pyx_string_tab[70]
+#define __pyx_n_u_sort __pyx_string_tab[71]
+#define __pyx_n_u_sortBy __pyx_string_tab[72]
+#define __pyx_n_u_sortOrder __pyx_string_tab[73]
+#define __pyx_n_u_stock __pyx_string_tab[74]
+#define __pyx_n_u_symbol __pyx_string_tab[75]
+#define __pyx_n_u_test __pyx_string_tab[76]
+#define __pyx_n_u_timeout __pyx_string_tab[77]
+#define __pyx_n_u_type __pyx_string_tab[78]
+#define __pyx_n_u_user __pyx_string_tab[79]
+#define __pyx_n_u_volume __pyx_string_tab[80]
+#define __pyx_n_u_yfinance __pyx_string_tab[81]
+#define __pyx_n_u_yield_to_maturity __pyx_string_tab[82]
 #define __pyx_int_0 __pyx_number_tab[0]
 #define __pyx_int_1 __pyx_number_tab[1]
 #define __pyx_int_5 __pyx_number_tab[2]
-#define __pyx_int_50 __pyx_number_tab[3]
+#define __pyx_int_10 __pyx_number_tab[3]
+#define __pyx_int_50 __pyx_number_tab[4]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2201,8 +2201,8 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   __Pyx_State_RemoveModule(NULL);
   #endif
-  for (int i=0; i<84; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
-  for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
+  for (int i=0; i<83; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* #### Code section: module_state_clear_end ### */
 return 0;
@@ -2219,8 +2219,8 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_tuple);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_bytes);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_unicode);
-  for (int i=0; i<84; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
-  for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
+  for (int i=0; i<83; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* #### Code section: module_state_traverse_end ### */
 return 0;
@@ -2239,11 +2239,9 @@ return 0;
 char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__pyx_v_prompt) {
   char *__pyx_v_c_string;
   char *__pyx_v_c_err;
-  PyObject *__pyx_v_MistralClient = NULL;
-  PyObject *__pyx_v_ChatMessage = NULL;
+  PyObject *__pyx_v_Mistral = NULL;
   PyObject *__pyx_v_client = NULL;
-  PyObject *__pyx_v_messages = NULL;
-  PyObject *__pyx_v_chat_response = NULL;
+  PyObject *__pyx_v_response = NULL;
   PyObject *__pyx_v_response_str = NULL;
   PyObject *__pyx_v_byte_str = NULL;
   PyObject *__pyx_v_e = NULL;
@@ -2261,17 +2259,18 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
   PyObject *__pyx_t_9 = NULL;
   size_t __pyx_t_10;
   PyObject *__pyx_t_11 = NULL;
-  int __pyx_t_12;
-  char const *__pyx_t_13;
-  int __pyx_t_14;
+  PyObject *__pyx_t_12 = NULL;
+  int __pyx_t_13;
+  char const *__pyx_t_14;
   int __pyx_t_15;
-  char const *__pyx_t_16;
-  PyObject *__pyx_t_17 = NULL;
+  int __pyx_t_16;
+  char const *__pyx_t_17;
   PyObject *__pyx_t_18 = NULL;
   PyObject *__pyx_t_19 = NULL;
   PyObject *__pyx_t_20 = NULL;
   PyObject *__pyx_t_21 = NULL;
-  char *__pyx_t_22;
+  PyObject *__pyx_t_22 = NULL;
+  char *__pyx_t_23;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2281,8 +2280,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *     cdef char* c_string
  *     cdef char* c_err
  *     try:             # <<<<<<<<<<<<<<
- *         from mistralai.client import MistralClient
- *         from mistralai.models.chat_completion import ChatMessage
+ *         from mistralai import Mistral
+ * 
 */
   {
     __Pyx_PyThreadState_declare
@@ -2296,25 +2295,25 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
       /* "gem_mistral_bridge.pyx":11
  *     cdef char* c_err
  *     try:
- *         from mistralai.client import MistralClient             # <<<<<<<<<<<<<<
- *         from mistralai.models.chat_completion import ChatMessage
+ *         from mistralai import Mistral             # <<<<<<<<<<<<<<
  * 
+ *         client = Mistral(api_key=api_key.decode('utf-8'))
 */
       {
-        PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_MistralClient};
-        __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_mistralai_client, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 11, __pyx_L3_error)
+        PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_Mistral};
+        __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_mistralai, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 11, __pyx_L3_error)
       }
       __pyx_t_4 = __pyx_t_5;
       __Pyx_GOTREF(__pyx_t_4);
       {
-        PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_MistralClient};
+        PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_Mistral};
         __pyx_t_6 = 0; {
           __pyx_t_7 = __Pyx_ImportFrom(__pyx_t_4, __pyx_imported_names[__pyx_t_6]); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 11, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_7);
           switch (__pyx_t_6) {
             case 0:
             __Pyx_INCREF(__pyx_t_7);
-            __pyx_v_MistralClient = __pyx_t_7;
+            __pyx_v_Mistral = __pyx_t_7;
             break;
             default:;
           }
@@ -2323,48 +2322,18 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":12
- *     try:
- *         from mistralai.client import MistralClient
- *         from mistralai.models.chat_completion import ChatMessage             # <<<<<<<<<<<<<<
+      /* "gem_mistral_bridge.pyx":13
+ *         from mistralai import Mistral
  * 
- *         client = MistralClient(api_key=api_key.decode('utf-8'))
-*/
-      {
-        PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_ChatMessage};
-        __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_mistralai_models_chat_completion, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 12, __pyx_L3_error)
-      }
-      __pyx_t_4 = __pyx_t_5;
-      __Pyx_GOTREF(__pyx_t_4);
-      {
-        PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_ChatMessage};
-        __pyx_t_6 = 0; {
-          __pyx_t_7 = __Pyx_ImportFrom(__pyx_t_4, __pyx_imported_names[__pyx_t_6]); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 12, __pyx_L3_error)
-          __Pyx_GOTREF(__pyx_t_7);
-          switch (__pyx_t_6) {
-            case 0:
-            __Pyx_INCREF(__pyx_t_7);
-            __pyx_v_ChatMessage = __pyx_t_7;
-            break;
-            default:;
-          }
-          __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        }
-      }
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-      /* "gem_mistral_bridge.pyx":14
- *         from mistralai.models.chat_completion import ChatMessage
- * 
- *         client = MistralClient(api_key=api_key.decode('utf-8'))             # <<<<<<<<<<<<<<
- *         messages = [ChatMessage(role="user", content=prompt.decode('utf-8'))]
- *         chat_response = client.chat(model=model.decode('utf-8'), messages=messages)
+ *         client = Mistral(api_key=api_key.decode('utf-8'))             # <<<<<<<<<<<<<<
+ *         response = client.chat.complete(
+ *             model=model.decode('utf-8'),
 */
       __pyx_t_7 = NULL;
-      __Pyx_INCREF(__pyx_v_MistralClient);
-      __pyx_t_8 = __pyx_v_MistralClient; 
-      __pyx_t_6 = __Pyx_ssize_strlen(__pyx_v_api_key); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 14, __pyx_L3_error)
-      __pyx_t_9 = __Pyx_decode_c_string(__pyx_v_api_key, 0, __pyx_t_6, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 14, __pyx_L3_error)
+      __Pyx_INCREF(__pyx_v_Mistral);
+      __pyx_t_8 = __pyx_v_Mistral; 
+      __pyx_t_6 = __Pyx_ssize_strlen(__pyx_v_api_key); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 13, __pyx_L3_error)
+      __pyx_t_9 = __Pyx_decode_c_string(__pyx_v_api_key, 0, __pyx_t_6, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 13, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_10 = 1;
       #if CYTHON_UNPACK_METHODS
@@ -2380,136 +2349,122 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
       #endif
       {
         PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_7, NULL};
-        __pyx_t_11 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 14, __pyx_L3_error)
+        __pyx_t_11 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 13, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_11);
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_api_key, __pyx_t_9, __pyx_t_11, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 14, __pyx_L3_error)
+        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_api_key, __pyx_t_9, __pyx_t_11, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 13, __pyx_L3_error)
         __pyx_t_4 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_8, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (__pyx_t_10*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_11);
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 14, __pyx_L3_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 13, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __pyx_v_client = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":15
+      /* "gem_mistral_bridge.pyx":14
  * 
- *         client = MistralClient(api_key=api_key.decode('utf-8'))
- *         messages = [ChatMessage(role="user", content=prompt.decode('utf-8'))]             # <<<<<<<<<<<<<<
- *         chat_response = client.chat(model=model.decode('utf-8'), messages=messages)
- * 
+ *         client = Mistral(api_key=api_key.decode('utf-8'))
+ *         response = client.chat.complete(             # <<<<<<<<<<<<<<
+ *             model=model.decode('utf-8'),
+ *             messages=[{"role": "user", "content": prompt.decode('utf-8')}]
 */
-      __pyx_t_8 = NULL;
-      __Pyx_INCREF(__pyx_v_ChatMessage);
-      __pyx_t_11 = __pyx_v_ChatMessage; 
-      __pyx_t_6 = __Pyx_ssize_strlen(__pyx_v_prompt); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 15, __pyx_L3_error)
-      __pyx_t_9 = __Pyx_decode_c_string(__pyx_v_prompt, 0, __pyx_t_6, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 15, __pyx_L3_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_10 = 1;
-      #if CYTHON_UNPACK_METHODS
-      if (unlikely(PyMethod_Check(__pyx_t_11))) {
-        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_11);
-        assert(__pyx_t_8);
-        PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_11);
-        __Pyx_INCREF(__pyx_t_8);
-        __Pyx_INCREF(__pyx__function);
-        __Pyx_DECREF_SET(__pyx_t_11, __pyx__function);
-        __pyx_t_10 = 0;
-      }
-      #endif
-      {
-        PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_8, NULL};
-        __pyx_t_7 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_7);
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_role, __pyx_mstate_global->__pyx_n_u_user, __pyx_t_7, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 15, __pyx_L3_error)
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_content, __pyx_t_9, __pyx_t_7, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 15, __pyx_L3_error)
-        __pyx_t_4 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_11, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (__pyx_t_10*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_7);
-        __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_4);
-      }
-      __pyx_t_11 = PyList_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 15, __pyx_L3_error)
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_client, __pyx_mstate_global->__pyx_n_u_chat); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 14, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __Pyx_GIVEREF(__pyx_t_4);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_11, 0, __pyx_t_4) != (0)) __PYX_ERR(0, 15, __pyx_L3_error);
-      __pyx_t_4 = 0;
-      __pyx_v_messages = ((PyObject*)__pyx_t_11);
-      __pyx_t_11 = 0;
+      __pyx_t_8 = __pyx_t_11;
+      __Pyx_INCREF(__pyx_t_8);
+
+      /* "gem_mistral_bridge.pyx":15
+ *         client = Mistral(api_key=api_key.decode('utf-8'))
+ *         response = client.chat.complete(
+ *             model=model.decode('utf-8'),             # <<<<<<<<<<<<<<
+ *             messages=[{"role": "user", "content": prompt.decode('utf-8')}]
+ *         )
+*/
+      __pyx_t_6 = __Pyx_ssize_strlen(__pyx_v_model); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 15, __pyx_L3_error)
+      __pyx_t_9 = __Pyx_decode_c_string(__pyx_v_model, 0, __pyx_t_6, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 15, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_9);
 
       /* "gem_mistral_bridge.pyx":16
- *         client = MistralClient(api_key=api_key.decode('utf-8'))
- *         messages = [ChatMessage(role="user", content=prompt.decode('utf-8'))]
- *         chat_response = client.chat(model=model.decode('utf-8'), messages=messages)             # <<<<<<<<<<<<<<
- * 
- *         response_str = chat_response.choices[0].message.content
+ *         response = client.chat.complete(
+ *             model=model.decode('utf-8'),
+ *             messages=[{"role": "user", "content": prompt.decode('utf-8')}]             # <<<<<<<<<<<<<<
+ *         )
+ *         response_str = response.choices[0].message.content
 */
-      __pyx_t_4 = __pyx_v_client;
-      __Pyx_INCREF(__pyx_t_4);
-      __pyx_t_6 = __Pyx_ssize_strlen(__pyx_v_model); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 16, __pyx_L3_error)
-      __pyx_t_7 = __Pyx_decode_c_string(__pyx_v_model, 0, __pyx_t_6, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
+      if (PyDict_SetItem(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_role, __pyx_mstate_global->__pyx_n_u_user) < (0)) __PYX_ERR(0, 16, __pyx_L3_error)
+      __pyx_t_6 = __Pyx_ssize_strlen(__pyx_v_prompt); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 16, __pyx_L3_error)
+      __pyx_t_12 = __Pyx_decode_c_string(__pyx_v_prompt, 0, __pyx_t_6, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 16, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_12);
+      if (PyDict_SetItem(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_content, __pyx_t_12) < (0)) __PYX_ERR(0, 16, __pyx_L3_error)
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+      __pyx_t_12 = PyList_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 16, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_12);
+      __Pyx_GIVEREF(__pyx_t_7);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_t_7) != (0)) __PYX_ERR(0, 16, __pyx_L3_error);
+      __pyx_t_7 = 0;
       __pyx_t_10 = 0;
       {
-        PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_4, NULL};
-        __pyx_t_9 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 16, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_9);
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_model, __pyx_t_7, __pyx_t_9, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 16, __pyx_L3_error)
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_messages, __pyx_v_messages, __pyx_t_9, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 16, __pyx_L3_error)
-        __pyx_t_11 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_chat, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_9);
-        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_8, NULL};
+        __pyx_t_7 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 14, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_model, __pyx_t_9, __pyx_t_7, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 14, __pyx_L3_error)
+        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_messages, __pyx_t_12, __pyx_t_7, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 14, __pyx_L3_error)
+        __pyx_t_4 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_complete, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_7);
+        __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 16, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_11);
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 14, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_4);
       }
-      __pyx_v_chat_response = __pyx_t_11;
-      __pyx_t_11 = 0;
+      __pyx_v_response = __pyx_t_4;
+      __pyx_t_4 = 0;
 
       /* "gem_mistral_bridge.pyx":18
- *         chat_response = client.chat(model=model.decode('utf-8'), messages=messages)
- * 
- *         response_str = chat_response.choices[0].message.content             # <<<<<<<<<<<<<<
+ *             messages=[{"role": "user", "content": prompt.decode('utf-8')}]
+ *         )
+ *         response_str = response.choices[0].message.content             # <<<<<<<<<<<<<<
  *         byte_str = response_str.encode('utf-8')
  * 
 */
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_chat_response, __pyx_mstate_global->__pyx_n_u_choices); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 18, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_response, __pyx_mstate_global->__pyx_n_u_choices); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_4, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 18, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_11, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 18, __pyx_L3_error)
-      __Pyx_GOTREF(__pyx_t_9);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_message); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_message); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 18, __pyx_L3_error)
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_content); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 18, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_content); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 18, __pyx_L3_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_v_response_str = __pyx_t_9;
-      __pyx_t_9 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_v_response_str = __pyx_t_11;
+      __pyx_t_11 = 0;
 
       /* "gem_mistral_bridge.pyx":19
- * 
- *         response_str = chat_response.choices[0].message.content
+ *         )
+ *         response_str = response.choices[0].message.content
  *         byte_str = response_str.encode('utf-8')             # <<<<<<<<<<<<<<
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)
 */
-      __pyx_t_11 = __pyx_v_response_str;
-      __Pyx_INCREF(__pyx_t_11);
+      __pyx_t_4 = __pyx_v_response_str;
+      __Pyx_INCREF(__pyx_t_4);
       __pyx_t_10 = 0;
       {
-        PyObject *__pyx_callargs[2] = {__pyx_t_11, __pyx_mstate_global->__pyx_kp_u_utf_8};
-        __pyx_t_9 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_encode, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-        __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-        if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 19, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_9);
+        PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_utf_8};
+        __pyx_t_11 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_encode, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 19, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_11);
       }
-      __pyx_v_byte_str = __pyx_t_9;
-      __pyx_t_9 = 0;
+      __pyx_v_byte_str = __pyx_t_11;
+      __pyx_t_11 = 0;
 
       /* "gem_mistral_bridge.pyx":21
  *         byte_str = response_str.encode('utf-8')
@@ -2528,8 +2483,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *             return NULL
  *         strcpy(c_string, byte_str)
 */
-      __pyx_t_12 = (__pyx_v_c_string == NULL);
-      if (__pyx_t_12) {
+      __pyx_t_13 = (__pyx_v_c_string == NULL);
+      if (__pyx_t_13) {
 
         /* "gem_mistral_bridge.pyx":23
  *         c_string = <char*>malloc(len(byte_str) + 1)
@@ -2557,8 +2512,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *         return c_string
  *     except Exception as e:
 */
-      __pyx_t_13 = __Pyx_PyObject_AsString(__pyx_v_byte_str); if (unlikely((!__pyx_t_13) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L3_error)
-      (void)(strcpy(__pyx_v_c_string, __pyx_t_13));
+      __pyx_t_14 = __Pyx_PyObject_AsString(__pyx_v_byte_str); if (unlikely((!__pyx_t_14) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L3_error)
+      (void)(strcpy(__pyx_v_c_string, __pyx_t_14));
 
       /* "gem_mistral_bridge.pyx":25
  *             return NULL
@@ -2574,12 +2529,13 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *     cdef char* c_string
  *     cdef char* c_err
  *     try:             # <<<<<<<<<<<<<<
- *         from mistralai.client import MistralClient
- *         from mistralai.models.chat_completion import ChatMessage
+ *         from mistralai import Mistral
+ * 
 */
     }
     __pyx_L3_error:;
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -2592,15 +2548,15 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)
 */
-    __pyx_t_14 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(((PyTypeObject*)PyExc_Exception))));
-    if (__pyx_t_14) {
+    __pyx_t_15 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(((PyTypeObject*)PyExc_Exception))));
+    if (__pyx_t_15) {
       __Pyx_AddTraceback("gem_mistral_bridge.call_mistral_native", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_9, &__pyx_t_11, &__pyx_t_7) < 0) __PYX_ERR(0, 26, __pyx_L5_except_error)
-      __Pyx_XGOTREF(__pyx_t_9);
+      if (__Pyx_GetException(&__pyx_t_11, &__pyx_t_4, &__pyx_t_7) < 0) __PYX_ERR(0, 26, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_11);
+      __Pyx_XGOTREF(__pyx_t_4);
       __Pyx_XGOTREF(__pyx_t_7);
-      __Pyx_INCREF(__pyx_t_11);
-      __pyx_v_e = __pyx_t_11;
+      __Pyx_INCREF(__pyx_t_4);
+      __pyx_v_e = __pyx_t_4;
       /*try:*/ {
 
         /* "gem_mistral_bridge.pyx":27
@@ -2610,16 +2566,16 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:
 */
-        __pyx_t_4 = __Pyx_PyObject_Unicode(__pyx_v_e); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L15_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_8 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Error, __pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 27, __pyx_L15_error)
-        __Pyx_GOTREF(__pyx_t_8);
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L15_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_v_err_msg = ((PyObject*)__pyx_t_4);
-        __pyx_t_4 = 0;
+        __pyx_t_12 = __Pyx_PyObject_Unicode(__pyx_v_e); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 27, __pyx_L15_error)
+        __Pyx_GOTREF(__pyx_t_12);
+        __pyx_t_9 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Error, __pyx_t_12); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 27, __pyx_L15_error)
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        __pyx_t_12 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_9)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 27, __pyx_L15_error)
+        __Pyx_GOTREF(__pyx_t_12);
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __pyx_v_err_msg = ((PyObject*)__pyx_t_12);
+        __pyx_t_12 = 0;
 
         /* "gem_mistral_bridge.pyx":28
  *     except Exception as e:
@@ -2638,8 +2594,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *             return NULL
  *         strcpy(c_err, err_msg)
 */
-        __pyx_t_12 = (__pyx_v_c_err == NULL);
-        if (__pyx_t_12) {
+        __pyx_t_13 = (__pyx_v_c_err == NULL);
+        if (__pyx_t_13) {
 
           /* "gem_mistral_bridge.pyx":30
  *         c_err = <char*>malloc(len(err_msg) + 1)
@@ -2649,8 +2605,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *         return c_err
 */
           __pyx_r = NULL;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           goto __pyx_L14_return;
 
@@ -2670,8 +2626,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *         return c_err
  * 
 */
-        __pyx_t_13 = __Pyx_PyBytes_AsString(__pyx_v_err_msg); if (unlikely((!__pyx_t_13) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L15_error)
-        (void)(strcpy(__pyx_v_c_err, __pyx_t_13));
+        __pyx_t_14 = __Pyx_PyBytes_AsString(__pyx_v_err_msg); if (unlikely((!__pyx_t_14) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L15_error)
+        (void)(strcpy(__pyx_v_c_err, __pyx_t_14));
 
         /* "gem_mistral_bridge.pyx":32
  *             return NULL
@@ -2681,8 +2637,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  * cdef public char* call_yfinance_ticker(char* symbol):
 */
         __pyx_r = __pyx_v_c_err;
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         goto __pyx_L14_return;
       }
@@ -2699,37 +2655,38 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
         /*exception exit:*/{
           __Pyx_PyThreadState_declare
           __Pyx_PyThreadState_assign
-          __pyx_t_5 = 0; __pyx_t_17 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0; __pyx_t_21 = 0;
-          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+          __pyx_t_5 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0; __pyx_t_21 = 0; __pyx_t_22 = 0;
+          __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-           __Pyx_ExceptionSwap(&__pyx_t_19, &__pyx_t_20, &__pyx_t_21);
-          if ( unlikely(__Pyx_GetException(&__pyx_t_5, &__pyx_t_17, &__pyx_t_18) < 0)) __Pyx_ErrFetch(&__pyx_t_5, &__pyx_t_17, &__pyx_t_18);
+          __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+           __Pyx_ExceptionSwap(&__pyx_t_20, &__pyx_t_21, &__pyx_t_22);
+          if ( unlikely(__Pyx_GetException(&__pyx_t_5, &__pyx_t_18, &__pyx_t_19) < 0)) __Pyx_ErrFetch(&__pyx_t_5, &__pyx_t_18, &__pyx_t_19);
           __Pyx_XGOTREF(__pyx_t_5);
-          __Pyx_XGOTREF(__pyx_t_17);
           __Pyx_XGOTREF(__pyx_t_18);
           __Pyx_XGOTREF(__pyx_t_19);
           __Pyx_XGOTREF(__pyx_t_20);
           __Pyx_XGOTREF(__pyx_t_21);
-          __pyx_t_14 = __pyx_lineno; __pyx_t_15 = __pyx_clineno; __pyx_t_16 = __pyx_filename;
+          __Pyx_XGOTREF(__pyx_t_22);
+          __pyx_t_15 = __pyx_lineno; __pyx_t_16 = __pyx_clineno; __pyx_t_17 = __pyx_filename;
           {
             __Pyx_DECREF(__pyx_v_e); __pyx_v_e = 0;
           }
-          __Pyx_XGIVEREF(__pyx_t_19);
           __Pyx_XGIVEREF(__pyx_t_20);
           __Pyx_XGIVEREF(__pyx_t_21);
-          __Pyx_ExceptionReset(__pyx_t_19, __pyx_t_20, __pyx_t_21);
+          __Pyx_XGIVEREF(__pyx_t_22);
+          __Pyx_ExceptionReset(__pyx_t_20, __pyx_t_21, __pyx_t_22);
           __Pyx_XGIVEREF(__pyx_t_5);
-          __Pyx_XGIVEREF(__pyx_t_17);
           __Pyx_XGIVEREF(__pyx_t_18);
-          __Pyx_ErrRestore(__pyx_t_5, __pyx_t_17, __pyx_t_18);
-          __pyx_t_5 = 0; __pyx_t_17 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0; __pyx_t_21 = 0;
-          __pyx_lineno = __pyx_t_14; __pyx_clineno = __pyx_t_15; __pyx_filename = __pyx_t_16;
+          __Pyx_XGIVEREF(__pyx_t_19);
+          __Pyx_ErrRestore(__pyx_t_5, __pyx_t_18, __pyx_t_19);
+          __pyx_t_5 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0; __pyx_t_20 = 0; __pyx_t_21 = 0; __pyx_t_22 = 0;
+          __pyx_lineno = __pyx_t_15; __pyx_clineno = __pyx_t_16; __pyx_filename = __pyx_t_17;
           goto __pyx_L5_except_error;
         }
         __pyx_L14_return: {
-          __pyx_t_22 = __pyx_r;
+          __pyx_t_23 = __pyx_r;
           __Pyx_DECREF(__pyx_v_e); __pyx_v_e = 0;
-          __pyx_r = __pyx_t_22;
+          __pyx_r = __pyx_t_23;
           goto __pyx_L6_except_return;
         }
       }
@@ -2740,8 +2697,8 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
  *     cdef char* c_string
  *     cdef char* c_err
  *     try:             # <<<<<<<<<<<<<<
- *         from mistralai.client import MistralClient
- *         from mistralai.models.chat_completion import ChatMessage
+ *         from mistralai import Mistral
+ * 
 */
     __pyx_L5_except_error:;
     __Pyx_XGIVEREF(__pyx_t_1);
@@ -2778,14 +2735,13 @@ char *call_mistral_native(char *__pyx_v_api_key, char *__pyx_v_model, char *__py
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_12);
   __Pyx_AddTraceback("gem_mistral_bridge.call_mistral_native", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_MistralClient);
-  __Pyx_XDECREF(__pyx_v_ChatMessage);
+  __Pyx_XDECREF(__pyx_v_Mistral);
   __Pyx_XDECREF(__pyx_v_client);
-  __Pyx_XDECREF(__pyx_v_messages);
-  __Pyx_XDECREF(__pyx_v_chat_response);
+  __Pyx_XDECREF(__pyx_v_response);
   __Pyx_XDECREF(__pyx_v_response_str);
   __Pyx_XDECREF(__pyx_v_byte_str);
   __Pyx_XDECREF(__pyx_v_e);
@@ -2914,21 +2870,21 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
  *         ticker = yf.Ticker(symbol.decode('utf-8'))
  *         info = ticker.info             # <<<<<<<<<<<<<<
  * 
- *         # Filter some useful info to avoid massive JSON
+ *         data = {
 */
       __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ticker, __pyx_mstate_global->__pyx_n_u_info); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_v_info = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":46
- *         # Filter some useful info to avoid massive JSON
+      /* "gem_mistral_bridge.pyx":45
+ * 
  *         data = {
  *             "symbol": info.get("symbol"),             # <<<<<<<<<<<<<<
  *             "price": info.get("currentPrice") or info.get("regularMarketPrice"),
  *             "open": info.get("open"),
 */
-      __pyx_t_4 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_6 = __pyx_v_info;
       __Pyx_INCREF(__pyx_t_6);
@@ -2937,13 +2893,13 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_n_u_symbol};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 46, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 45, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_symbol, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_symbol, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":47
+      /* "gem_mistral_bridge.pyx":46
  *         data = {
  *             "symbol": info.get("symbol"),
  *             "price": info.get("currentPrice") or info.get("regularMarketPrice"),             # <<<<<<<<<<<<<<
@@ -2957,10 +2913,10 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_mstate_global->__pyx_n_u_currentPrice};
         __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 47, __pyx_L3_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 46, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
       }
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 47, __pyx_L3_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 46, __pyx_L3_error)
       if (!__pyx_t_11) {
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
@@ -2976,17 +2932,17 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_mstate_global->__pyx_n_u_regularMarketPrice};
         __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 47, __pyx_L3_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 46, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
       }
       __Pyx_INCREF(__pyx_t_6);
       __pyx_t_8 = __pyx_t_6;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_L9_bool_binop_done:;
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_price, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_price, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":48
+      /* "gem_mistral_bridge.pyx":47
  *             "symbol": info.get("symbol"),
  *             "price": info.get("currentPrice") or info.get("regularMarketPrice"),
  *             "open": info.get("open"),             # <<<<<<<<<<<<<<
@@ -3000,13 +2956,13 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_n_u_open};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 48, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 47, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_open, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_open, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":49
+      /* "gem_mistral_bridge.pyx":48
  *             "price": info.get("currentPrice") or info.get("regularMarketPrice"),
  *             "open": info.get("open"),
  *             "high": info.get("dayHigh"),             # <<<<<<<<<<<<<<
@@ -3020,13 +2976,13 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_n_u_dayHigh};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 49, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 48, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_high, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_high, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":50
+      /* "gem_mistral_bridge.pyx":49
  *             "open": info.get("open"),
  *             "high": info.get("dayHigh"),
  *             "low": info.get("dayLow"),             # <<<<<<<<<<<<<<
@@ -3040,13 +2996,13 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_n_u_dayLow};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 50, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 49, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_low, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_low, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":51
+      /* "gem_mistral_bridge.pyx":50
  *             "high": info.get("dayHigh"),
  *             "low": info.get("dayLow"),
  *             "volume": info.get("volume"),             # <<<<<<<<<<<<<<
@@ -3060,13 +3016,13 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_n_u_volume};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 50, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_volume, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_volume, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":52
+      /* "gem_mistral_bridge.pyx":51
  *             "low": info.get("dayLow"),
  *             "volume": info.get("volume"),
  *             "currency": info.get("currency")             # <<<<<<<<<<<<<<
@@ -3080,15 +3036,15 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_n_u_currency};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 52, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_currency, __pyx_t_8) < (0)) __PYX_ERR(0, 46, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_currency, __pyx_t_8) < (0)) __PYX_ERR(0, 45, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_v_data = ((PyObject*)__pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":55
+      /* "gem_mistral_bridge.pyx":54
  *         }
  * 
  *         response_str = json.dumps(data)             # <<<<<<<<<<<<<<
@@ -3102,13 +3058,13 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_v_data};
         __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dumps, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L3_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __pyx_v_response_str = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":56
+      /* "gem_mistral_bridge.pyx":55
  * 
  *         response_str = json.dumps(data)
  *         byte_str = response_str.encode('utf-8')             # <<<<<<<<<<<<<<
@@ -3122,23 +3078,23 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_mstate_global->__pyx_kp_u_utf_8};
         __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_encode, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L3_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __pyx_v_byte_str = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":58
+      /* "gem_mistral_bridge.pyx":57
  *         byte_str = response_str.encode('utf-8')
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)             # <<<<<<<<<<<<<<
  *         if c_string == NULL:
  *             return NULL
 */
-      __pyx_t_7 = PyObject_Length(__pyx_v_byte_str); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 58, __pyx_L3_error)
+      __pyx_t_7 = PyObject_Length(__pyx_v_byte_str); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 57, __pyx_L3_error)
       __pyx_v_c_string = ((char *)malloc((__pyx_t_7 + 1)));
 
-      /* "gem_mistral_bridge.pyx":59
+      /* "gem_mistral_bridge.pyx":58
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)
  *         if c_string == NULL:             # <<<<<<<<<<<<<<
@@ -3148,7 +3104,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
       __pyx_t_11 = (__pyx_v_c_string == NULL);
       if (__pyx_t_11) {
 
-        /* "gem_mistral_bridge.pyx":60
+        /* "gem_mistral_bridge.pyx":59
  *         c_string = <char*>malloc(len(byte_str) + 1)
  *         if c_string == NULL:
  *             return NULL             # <<<<<<<<<<<<<<
@@ -3158,7 +3114,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         __pyx_r = NULL;
         goto __pyx_L7_try_return;
 
-        /* "gem_mistral_bridge.pyx":59
+        /* "gem_mistral_bridge.pyx":58
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)
  *         if c_string == NULL:             # <<<<<<<<<<<<<<
@@ -3167,17 +3123,17 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
 */
       }
 
-      /* "gem_mistral_bridge.pyx":61
+      /* "gem_mistral_bridge.pyx":60
  *         if c_string == NULL:
  *             return NULL
  *         strcpy(c_string, byte_str)             # <<<<<<<<<<<<<<
  *         return c_string
  *     except Exception as e:
 */
-      __pyx_t_12 = __Pyx_PyObject_AsString(__pyx_v_byte_str); if (unlikely((!__pyx_t_12) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
+      __pyx_t_12 = __Pyx_PyObject_AsString(__pyx_v_byte_str); if (unlikely((!__pyx_t_12) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L3_error)
       (void)(strcpy(__pyx_v_c_string, __pyx_t_12));
 
-      /* "gem_mistral_bridge.pyx":62
+      /* "gem_mistral_bridge.pyx":61
  *             return NULL
  *         strcpy(c_string, byte_str)
  *         return c_string             # <<<<<<<<<<<<<<
@@ -3201,7 +3157,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "gem_mistral_bridge.pyx":63
+    /* "gem_mistral_bridge.pyx":62
  *         strcpy(c_string, byte_str)
  *         return c_string
  *     except Exception as e:             # <<<<<<<<<<<<<<
@@ -3211,7 +3167,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
     __pyx_t_13 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(((PyTypeObject*)PyExc_Exception))));
     if (__pyx_t_13) {
       __Pyx_AddTraceback("gem_mistral_bridge.call_yfinance_ticker", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_8, &__pyx_t_6) < 0) __PYX_ERR(0, 63, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_8, &__pyx_t_6) < 0) __PYX_ERR(0, 62, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_4);
       __Pyx_XGOTREF(__pyx_t_8);
       __Pyx_XGOTREF(__pyx_t_6);
@@ -3219,35 +3175,35 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
       __pyx_v_e = __pyx_t_8;
       /*try:*/ {
 
-        /* "gem_mistral_bridge.pyx":64
+        /* "gem_mistral_bridge.pyx":63
  *         return c_string
  *     except Exception as e:
  *         err_msg = ("Error: " + str(e)).encode('utf-8')             # <<<<<<<<<<<<<<
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:
 */
-        __pyx_t_10 = __Pyx_PyObject_Unicode(__pyx_v_e); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 64, __pyx_L17_error)
+        __pyx_t_10 = __Pyx_PyObject_Unicode(__pyx_v_e); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 63, __pyx_L17_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_14 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Error, __pyx_t_10); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 64, __pyx_L17_error)
+        __pyx_t_14 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Error, __pyx_t_10); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 63, __pyx_L17_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_14)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 64, __pyx_L17_error)
+        __pyx_t_10 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_14)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 63, __pyx_L17_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
         __pyx_v_err_msg = ((PyObject*)__pyx_t_10);
         __pyx_t_10 = 0;
 
-        /* "gem_mistral_bridge.pyx":65
+        /* "gem_mistral_bridge.pyx":64
  *     except Exception as e:
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)             # <<<<<<<<<<<<<<
  *         if c_err == NULL:
  *             return NULL
 */
-        __pyx_t_7 = __Pyx_PyBytes_GET_SIZE(__pyx_v_err_msg); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 65, __pyx_L17_error)
+        __pyx_t_7 = __Pyx_PyBytes_GET_SIZE(__pyx_v_err_msg); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 64, __pyx_L17_error)
         __pyx_v_c_err = ((char *)malloc((__pyx_t_7 + 1)));
 
-        /* "gem_mistral_bridge.pyx":66
+        /* "gem_mistral_bridge.pyx":65
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:             # <<<<<<<<<<<<<<
@@ -3257,7 +3213,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         __pyx_t_11 = (__pyx_v_c_err == NULL);
         if (__pyx_t_11) {
 
-          /* "gem_mistral_bridge.pyx":67
+          /* "gem_mistral_bridge.pyx":66
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:
  *             return NULL             # <<<<<<<<<<<<<<
@@ -3270,7 +3226,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           goto __pyx_L16_return;
 
-          /* "gem_mistral_bridge.pyx":66
+          /* "gem_mistral_bridge.pyx":65
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:             # <<<<<<<<<<<<<<
@@ -3279,17 +3235,17 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
 */
         }
 
-        /* "gem_mistral_bridge.pyx":68
+        /* "gem_mistral_bridge.pyx":67
  *         if c_err == NULL:
  *             return NULL
  *         strcpy(c_err, err_msg)             # <<<<<<<<<<<<<<
  *         return c_err
  * 
 */
-        __pyx_t_12 = __Pyx_PyBytes_AsString(__pyx_v_err_msg); if (unlikely((!__pyx_t_12) && PyErr_Occurred())) __PYX_ERR(0, 68, __pyx_L17_error)
+        __pyx_t_12 = __Pyx_PyBytes_AsString(__pyx_v_err_msg); if (unlikely((!__pyx_t_12) && PyErr_Occurred())) __PYX_ERR(0, 67, __pyx_L17_error)
         (void)(strcpy(__pyx_v_c_err, __pyx_t_12));
 
-        /* "gem_mistral_bridge.pyx":69
+        /* "gem_mistral_bridge.pyx":68
  *             return NULL
  *         strcpy(c_err, err_msg)
  *         return c_err             # <<<<<<<<<<<<<<
@@ -3303,7 +3259,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
         goto __pyx_L16_return;
       }
 
-      /* "gem_mistral_bridge.pyx":63
+      /* "gem_mistral_bridge.pyx":62
  *         strcpy(c_string, byte_str)
  *         return c_string
  *     except Exception as e:             # <<<<<<<<<<<<<<
@@ -3410,7 +3366,7 @@ char *call_yfinance_ticker(char *__pyx_v_symbol) {
   return __pyx_r;
 }
 
-/* "gem_mistral_bridge.pyx":71
+/* "gem_mistral_bridge.pyx":70
  *         return c_err
  * 
  * cdef public char* call_tradingview_high_yield(char* type):             # <<<<<<<<<<<<<<
@@ -3425,22 +3381,21 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
   PyObject *__pyx_v_json = NULL;
   PyObject *__pyx_v_type_str = NULL;
   PyObject *__pyx_v_url = NULL;
-  PyObject *__pyx_v_filter_type = NULL;
-  CYTHON_UNUSED PyObject *__pyx_v_sort_by = NULL;
   PyObject *__pyx_v_columns = NULL;
   PyObject *__pyx_v_payload = NULL;
+  PyObject *__pyx_v_filter_type = NULL;
   PyObject *__pyx_v_headers = NULL;
   PyObject *__pyx_v_response = NULL;
   PyObject *__pyx_v_data = NULL;
   PyObject *__pyx_v_results = NULL;
   PyObject *__pyx_v_item = NULL;
   PyObject *__pyx_v_d = NULL;
-  PyObject *__pyx_v_i = NULL;
-  PyObject *__pyx_v_col = NULL;
   PyObject *__pyx_v_response_str = NULL;
   PyObject *__pyx_v_byte_str = NULL;
   PyObject *__pyx_v_e = NULL;
   PyObject *__pyx_v_err_msg = NULL;
+  PyObject *__pyx_7genexpr__pyx_v_i = NULL;
+  PyObject *__pyx_7genexpr__pyx_v_col = NULL;
   char *__pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3453,29 +3408,30 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
   PyObject *__pyx_t_8 = NULL;
   size_t __pyx_t_9;
   int __pyx_t_10;
-  int __pyx_t_11;
-  PyObject *__pyx_t_12 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  int __pyx_t_12;
   PyObject *(*__pyx_t_13)(PyObject *);
   Py_ssize_t __pyx_t_14;
-  Py_ssize_t __pyx_t_15;
-  PyObject *__pyx_t_16 = NULL;
-  int __pyx_t_17;
-  char const *__pyx_t_18;
-  int __pyx_t_19;
+  PyObject *__pyx_t_15 = NULL;
+  Py_ssize_t __pyx_t_16;
+  PyObject *__pyx_t_17 = NULL;
+  int __pyx_t_18;
+  char const *__pyx_t_19;
   int __pyx_t_20;
-  char const *__pyx_t_21;
-  PyObject *__pyx_t_22 = NULL;
+  int __pyx_t_21;
+  char const *__pyx_t_22;
   PyObject *__pyx_t_23 = NULL;
   PyObject *__pyx_t_24 = NULL;
   PyObject *__pyx_t_25 = NULL;
   PyObject *__pyx_t_26 = NULL;
-  char *__pyx_t_27;
+  PyObject *__pyx_t_27 = NULL;
+  char *__pyx_t_28;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("call_tradingview_high_yield", 0);
 
-  /* "gem_mistral_bridge.pyx":74
+  /* "gem_mistral_bridge.pyx":73
  *     cdef char* c_string
  *     cdef char* c_err
  *     try:             # <<<<<<<<<<<<<<
@@ -3491,41 +3447,41 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "gem_mistral_bridge.pyx":75
+      /* "gem_mistral_bridge.pyx":74
  *     cdef char* c_err
  *     try:
  *         import requests             # <<<<<<<<<<<<<<
  *         import json
  * 
 */
-      __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_requests, 0, 0, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_requests, 0, 0, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L3_error)
       __pyx_t_4 = __pyx_t_5;
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_v_requests = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":76
+      /* "gem_mistral_bridge.pyx":75
  *     try:
  *         import requests
  *         import json             # <<<<<<<<<<<<<<
  * 
  *         type_str = type.decode('utf-8').lower()
 */
-      __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_json, 0, 0, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 76, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_json, 0, 0, NULL, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L3_error)
       __pyx_t_4 = __pyx_t_5;
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_v_json = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":78
+      /* "gem_mistral_bridge.pyx":77
  *         import json
  * 
  *         type_str = type.decode('utf-8').lower()             # <<<<<<<<<<<<<<
  * 
  *         url = "https://scanner.tradingview.com/america/scan"
 */
-      __pyx_t_7 = __Pyx_ssize_strlen(__pyx_v_type); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 78, __pyx_L3_error)
-      __pyx_t_8 = __Pyx_decode_c_string(__pyx_v_type, 0, __pyx_t_7, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 78, __pyx_L3_error)
+      __pyx_t_7 = __Pyx_ssize_strlen(__pyx_v_type); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 77, __pyx_L3_error)
+      __pyx_t_8 = __Pyx_decode_c_string(__pyx_v_type, 0, __pyx_t_7, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 77, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_6 = __pyx_t_8;
       __Pyx_INCREF(__pyx_t_6);
@@ -3535,91 +3491,63 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_lower, __pyx_callargs+__pyx_t_9, (1-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 78, __pyx_L3_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __pyx_v_type_str = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":80
+      /* "gem_mistral_bridge.pyx":79
  *         type_str = type.decode('utf-8').lower()
  * 
  *         url = "https://scanner.tradingview.com/america/scan"             # <<<<<<<<<<<<<<
- *         filter_type = ["stock", "fund"]
- *         sort_by = "dividend_yield_recent"
+ *         columns = ["name", "close", "change", "dividend_yield_recent", "description", "type"]
+ * 
 */
       __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_https_scanner_tradingview_com_am);
       __pyx_v_url = __pyx_mstate_global->__pyx_kp_u_https_scanner_tradingview_com_am;
 
-      /* "gem_mistral_bridge.pyx":81
+      /* "gem_mistral_bridge.pyx":80
  * 
  *         url = "https://scanner.tradingview.com/america/scan"
- *         filter_type = ["stock", "fund"]             # <<<<<<<<<<<<<<
- *         sort_by = "dividend_yield_recent"
- *         columns = ["name", "close", "change", "dividend_yield_recent", "description", "type"]
-*/
-      __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 81, __pyx_L3_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_stock);
-      __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_stock);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_stock) != (0)) __PYX_ERR(0, 81, __pyx_L3_error);
-      __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_fund);
-      __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_fund);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_n_u_fund) != (0)) __PYX_ERR(0, 81, __pyx_L3_error);
-      __pyx_v_filter_type = ((PyObject*)__pyx_t_4);
-      __pyx_t_4 = 0;
-
-      /* "gem_mistral_bridge.pyx":82
- *         url = "https://scanner.tradingview.com/america/scan"
- *         filter_type = ["stock", "fund"]
- *         sort_by = "dividend_yield_recent"             # <<<<<<<<<<<<<<
- *         columns = ["name", "close", "change", "dividend_yield_recent", "description", "type"]
- * 
-*/
-      __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_dividend_yield_recent);
-      __pyx_v_sort_by = __pyx_mstate_global->__pyx_n_u_dividend_yield_recent;
-
-      /* "gem_mistral_bridge.pyx":83
- *         filter_type = ["stock", "fund"]
- *         sort_by = "dividend_yield_recent"
  *         columns = ["name", "close", "change", "dividend_yield_recent", "description", "type"]             # <<<<<<<<<<<<<<
  * 
  *         if "bond" in type_str:
 */
-      __pyx_t_4 = PyList_New(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 83, __pyx_L3_error)
+      __pyx_t_4 = PyList_New(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_name);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_name);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_name) != (0)) __PYX_ERR(0, 83, __pyx_L3_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_name) != (0)) __PYX_ERR(0, 80, __pyx_L3_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_close);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_close);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_n_u_close) != (0)) __PYX_ERR(0, 83, __pyx_L3_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_n_u_close) != (0)) __PYX_ERR(0, 80, __pyx_L3_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_change);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_change);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 2, __pyx_mstate_global->__pyx_n_u_change) != (0)) __PYX_ERR(0, 83, __pyx_L3_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 2, __pyx_mstate_global->__pyx_n_u_change) != (0)) __PYX_ERR(0, 80, __pyx_L3_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_dividend_yield_recent);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_dividend_yield_recent);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 3, __pyx_mstate_global->__pyx_n_u_dividend_yield_recent) != (0)) __PYX_ERR(0, 83, __pyx_L3_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 3, __pyx_mstate_global->__pyx_n_u_dividend_yield_recent) != (0)) __PYX_ERR(0, 80, __pyx_L3_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_description);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_description);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 4, __pyx_mstate_global->__pyx_n_u_description) != (0)) __PYX_ERR(0, 83, __pyx_L3_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 4, __pyx_mstate_global->__pyx_n_u_description) != (0)) __PYX_ERR(0, 80, __pyx_L3_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_type);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_type);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 5, __pyx_mstate_global->__pyx_n_u_type) != (0)) __PYX_ERR(0, 83, __pyx_L3_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 5, __pyx_mstate_global->__pyx_n_u_type) != (0)) __PYX_ERR(0, 80, __pyx_L3_error);
       __pyx_v_columns = ((PyObject*)__pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":85
+      /* "gem_mistral_bridge.pyx":82
  *         columns = ["name", "close", "change", "dividend_yield_recent", "description", "type"]
  * 
  *         if "bond" in type_str:             # <<<<<<<<<<<<<<
  *             url = "https://scanner.tradingview.com/bond/scan"
  *             columns = ["name", "description", "yield_to_maturity", "close", "coupon", "maturity_date"]
 */
-      __pyx_t_10 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_bond, __pyx_v_type_str, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 85, __pyx_L3_error)
+      __pyx_t_10 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_bond, __pyx_v_type_str, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 82, __pyx_L3_error)
       if (__pyx_t_10) {
 
-        /* "gem_mistral_bridge.pyx":86
+        /* "gem_mistral_bridge.pyx":83
  * 
  *         if "bond" in type_str:
  *             url = "https://scanner.tradingview.com/bond/scan"             # <<<<<<<<<<<<<<
@@ -3629,117 +3557,117 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_https_scanner_tradingview_com_bo);
         __Pyx_DECREF_SET(__pyx_v_url, __pyx_mstate_global->__pyx_kp_u_https_scanner_tradingview_com_bo);
 
-        /* "gem_mistral_bridge.pyx":87
+        /* "gem_mistral_bridge.pyx":84
  *         if "bond" in type_str:
  *             url = "https://scanner.tradingview.com/bond/scan"
  *             columns = ["name", "description", "yield_to_maturity", "close", "coupon", "maturity_date"]             # <<<<<<<<<<<<<<
  *             payload = {
  *                 "filter": [{"left": "yield_to_maturity", "operation": "greater", "right": 0}],
 */
-        __pyx_t_4 = PyList_New(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L3_error)
+        __pyx_t_4 = PyList_New(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_name);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_name);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_name) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_name) != (0)) __PYX_ERR(0, 84, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_description);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_description);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_n_u_description) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_n_u_description) != (0)) __PYX_ERR(0, 84, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_yield_to_maturity);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_yield_to_maturity);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 2, __pyx_mstate_global->__pyx_n_u_yield_to_maturity) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 2, __pyx_mstate_global->__pyx_n_u_yield_to_maturity) != (0)) __PYX_ERR(0, 84, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_close);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_close);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 3, __pyx_mstate_global->__pyx_n_u_close) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 3, __pyx_mstate_global->__pyx_n_u_close) != (0)) __PYX_ERR(0, 84, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_coupon);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_coupon);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 4, __pyx_mstate_global->__pyx_n_u_coupon) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 4, __pyx_mstate_global->__pyx_n_u_coupon) != (0)) __PYX_ERR(0, 84, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_maturity_date);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_maturity_date);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 5, __pyx_mstate_global->__pyx_n_u_maturity_date) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 5, __pyx_mstate_global->__pyx_n_u_maturity_date) != (0)) __PYX_ERR(0, 84, __pyx_L3_error);
         __Pyx_DECREF_SET(__pyx_v_columns, ((PyObject*)__pyx_t_4));
         __pyx_t_4 = 0;
 
-        /* "gem_mistral_bridge.pyx":89
+        /* "gem_mistral_bridge.pyx":86
  *             columns = ["name", "description", "yield_to_maturity", "close", "coupon", "maturity_date"]
  *             payload = {
  *                 "filter": [{"left": "yield_to_maturity", "operation": "greater", "right": 0}],             # <<<<<<<<<<<<<<
  *                 "markets": ["bond"],
  *                 "columns": columns,
 */
-        __pyx_t_4 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L3_error)
+        __pyx_t_4 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 89, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_left, __pyx_mstate_global->__pyx_n_u_yield_to_maturity) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_operation, __pyx_mstate_global->__pyx_n_u_greater) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_right, __pyx_mstate_global->__pyx_int_0) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
-        __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_left, __pyx_mstate_global->__pyx_n_u_yield_to_maturity) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_operation, __pyx_mstate_global->__pyx_n_u_greater) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_right, __pyx_mstate_global->__pyx_int_0) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
+        __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_8);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_t_8) != (0)) __PYX_ERR(0, 89, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_t_8) != (0)) __PYX_ERR(0, 86, __pyx_L3_error);
         __pyx_t_8 = 0;
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_filter, __pyx_t_6) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_filter, __pyx_t_6) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "gem_mistral_bridge.pyx":90
+        /* "gem_mistral_bridge.pyx":87
  *             payload = {
  *                 "filter": [{"left": "yield_to_maturity", "operation": "greater", "right": 0}],
  *                 "markets": ["bond"],             # <<<<<<<<<<<<<<
  *                 "columns": columns,
  *                 "sort": {"sortBy": "yield_to_maturity", "sortOrder": "desc"},
 */
-        __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L3_error)
+        __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 87, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_bond);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_bond);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_n_u_bond) != (0)) __PYX_ERR(0, 90, __pyx_L3_error);
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_markets, __pyx_t_6) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_n_u_bond) != (0)) __PYX_ERR(0, 87, __pyx_L3_error);
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_markets, __pyx_t_6) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "gem_mistral_bridge.pyx":91
+        /* "gem_mistral_bridge.pyx":88
  *                 "filter": [{"left": "yield_to_maturity", "operation": "greater", "right": 0}],
  *                 "markets": ["bond"],
  *                 "columns": columns,             # <<<<<<<<<<<<<<
  *                 "sort": {"sortBy": "yield_to_maturity", "sortOrder": "desc"},
  *                 "range": [0, 50]
 */
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_columns, __pyx_v_columns) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_columns, __pyx_v_columns) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
 
-        /* "gem_mistral_bridge.pyx":92
+        /* "gem_mistral_bridge.pyx":89
  *                 "markets": ["bond"],
  *                 "columns": columns,
  *                 "sort": {"sortBy": "yield_to_maturity", "sortOrder": "desc"},             # <<<<<<<<<<<<<<
  *                 "range": [0, 50]
  *             }
 */
-        __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 92, __pyx_L3_error)
+        __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
-        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sortBy, __pyx_mstate_global->__pyx_n_u_yield_to_maturity) < (0)) __PYX_ERR(0, 92, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sortOrder, __pyx_mstate_global->__pyx_n_u_desc) < (0)) __PYX_ERR(0, 92, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_sort, __pyx_t_6) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sortBy, __pyx_mstate_global->__pyx_n_u_yield_to_maturity) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sortOrder, __pyx_mstate_global->__pyx_n_u_desc) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_sort, __pyx_t_6) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "gem_mistral_bridge.pyx":93
+        /* "gem_mistral_bridge.pyx":90
  *                 "columns": columns,
  *                 "sort": {"sortBy": "yield_to_maturity", "sortOrder": "desc"},
  *                 "range": [0, 50]             # <<<<<<<<<<<<<<
  *             }
  *         else:
 */
-        __pyx_t_6 = PyList_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L3_error)
+        __pyx_t_6 = PyList_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_0);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 93, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 90, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_50);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_50);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_mstate_global->__pyx_int_50) != (0)) __PYX_ERR(0, 93, __pyx_L3_error);
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_range, __pyx_t_6) < (0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_mstate_global->__pyx_int_50) != (0)) __PYX_ERR(0, 90, __pyx_L3_error);
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_range, __pyx_t_6) < (0)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_v_payload = ((PyObject*)__pyx_t_4);
         __pyx_t_4 = 0;
 
-        /* "gem_mistral_bridge.pyx":85
+        /* "gem_mistral_bridge.pyx":82
  *         columns = ["name", "close", "change", "dividend_yield_recent", "description", "type"]
  * 
  *         if "bond" in type_str:             # <<<<<<<<<<<<<<
@@ -3749,241 +3677,192 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         goto __pyx_L9;
       }
 
-      /* "gem_mistral_bridge.pyx":96
+      /* "gem_mistral_bridge.pyx":93
  *             }
  *         else:
- *             if "etf" in type_str:             # <<<<<<<<<<<<<<
- *                 filter_type = ["fund"]
- *             elif "equit" in type_str or "stock" in type_str:
+ *             filter_type = ["fund"] if "etf" in type_str else ["stock"]             # <<<<<<<<<<<<<<
+ *             payload = {
+ *                 "filter": [
 */
       /*else*/ {
-        __pyx_t_10 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_etf, __pyx_v_type_str, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 96, __pyx_L3_error)
+        __pyx_t_10 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_etf, __pyx_v_type_str, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 93, __pyx_L3_error)
         if (__pyx_t_10) {
-
-          /* "gem_mistral_bridge.pyx":97
- *         else:
- *             if "etf" in type_str:
- *                 filter_type = ["fund"]             # <<<<<<<<<<<<<<
- *             elif "equit" in type_str or "stock" in type_str:
- *                 filter_type = ["stock"]
-*/
-          __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L3_error)
-          __Pyx_GOTREF(__pyx_t_4);
+          __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_GOTREF(__pyx_t_6);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_fund);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_fund);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_fund) != (0)) __PYX_ERR(0, 97, __pyx_L3_error);
-          __Pyx_DECREF_SET(__pyx_v_filter_type, ((PyObject*)__pyx_t_4));
-          __pyx_t_4 = 0;
-
-          /* "gem_mistral_bridge.pyx":96
- *             }
- *         else:
- *             if "etf" in type_str:             # <<<<<<<<<<<<<<
- *                 filter_type = ["fund"]
- *             elif "equit" in type_str or "stock" in type_str:
-*/
-          goto __pyx_L10;
-        }
-
-        /* "gem_mistral_bridge.pyx":98
- *             if "etf" in type_str:
- *                 filter_type = ["fund"]
- *             elif "equit" in type_str or "stock" in type_str:             # <<<<<<<<<<<<<<
- *                 filter_type = ["stock"]
- * 
-*/
-        __pyx_t_11 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_equit, __pyx_v_type_str, Py_EQ)); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 98, __pyx_L3_error)
-        if (!__pyx_t_11) {
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_n_u_fund) != (0)) __PYX_ERR(0, 93, __pyx_L3_error);
+          __pyx_t_4 = __pyx_t_6;
+          __pyx_t_6 = 0;
         } else {
-          __pyx_t_10 = __pyx_t_11;
-          goto __pyx_L11_bool_binop_done;
-        }
-        __pyx_t_11 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_stock, __pyx_v_type_str, Py_EQ)); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 98, __pyx_L3_error)
-        __pyx_t_10 = __pyx_t_11;
-        __pyx_L11_bool_binop_done:;
-        if (__pyx_t_10) {
-
-          /* "gem_mistral_bridge.pyx":99
- *                 filter_type = ["fund"]
- *             elif "equit" in type_str or "stock" in type_str:
- *                 filter_type = ["stock"]             # <<<<<<<<<<<<<<
- * 
- *             payload = {
-*/
-          __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 99, __pyx_L3_error)
-          __Pyx_GOTREF(__pyx_t_4);
+          __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_GOTREF(__pyx_t_6);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_stock);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_stock);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_n_u_stock) != (0)) __PYX_ERR(0, 99, __pyx_L3_error);
-          __Pyx_DECREF_SET(__pyx_v_filter_type, ((PyObject*)__pyx_t_4));
-          __pyx_t_4 = 0;
-
-          /* "gem_mistral_bridge.pyx":98
- *             if "etf" in type_str:
- *                 filter_type = ["fund"]
- *             elif "equit" in type_str or "stock" in type_str:             # <<<<<<<<<<<<<<
- *                 filter_type = ["stock"]
- * 
-*/
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_n_u_stock) != (0)) __PYX_ERR(0, 93, __pyx_L3_error);
+          __pyx_t_4 = __pyx_t_6;
+          __pyx_t_6 = 0;
         }
-        __pyx_L10:;
+        __pyx_v_filter_type = ((PyObject*)__pyx_t_4);
+        __pyx_t_4 = 0;
 
-        /* "gem_mistral_bridge.pyx":102
- * 
+        /* "gem_mistral_bridge.pyx":95
+ *             filter_type = ["fund"] if "etf" in type_str else ["stock"]
  *             payload = {
  *                 "filter": [             # <<<<<<<<<<<<<<
  *                     {"left": "dividend_yield_recent", "operation": "greater", "right": 5},
  *                     {"left": "type", "operation": "in_range", "right": filter_type}
 */
-        __pyx_t_4 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 102, __pyx_L3_error)
+        __pyx_t_4 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
 
-        /* "gem_mistral_bridge.pyx":103
+        /* "gem_mistral_bridge.pyx":96
  *             payload = {
  *                 "filter": [
  *                     {"left": "dividend_yield_recent", "operation": "greater", "right": 5},             # <<<<<<<<<<<<<<
  *                     {"left": "type", "operation": "in_range", "right": filter_type}
  *                 ],
 */
-        __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 103, __pyx_L3_error)
+        __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 96, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
-        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_left, __pyx_mstate_global->__pyx_n_u_dividend_yield_recent) < (0)) __PYX_ERR(0, 103, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_operation, __pyx_mstate_global->__pyx_n_u_greater) < (0)) __PYX_ERR(0, 103, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_right, __pyx_mstate_global->__pyx_int_5) < (0)) __PYX_ERR(0, 103, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_left, __pyx_mstate_global->__pyx_n_u_dividend_yield_recent) < (0)) __PYX_ERR(0, 96, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_operation, __pyx_mstate_global->__pyx_n_u_greater) < (0)) __PYX_ERR(0, 96, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_right, __pyx_mstate_global->__pyx_int_5) < (0)) __PYX_ERR(0, 96, __pyx_L3_error)
 
-        /* "gem_mistral_bridge.pyx":104
+        /* "gem_mistral_bridge.pyx":97
  *                 "filter": [
  *                     {"left": "dividend_yield_recent", "operation": "greater", "right": 5},
  *                     {"left": "type", "operation": "in_range", "right": filter_type}             # <<<<<<<<<<<<<<
  *                 ],
  *                 "markets": ["america"],
 */
-        __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 104, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 97, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_left, __pyx_mstate_global->__pyx_n_u_type) < (0)) __PYX_ERR(0, 104, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_operation, __pyx_mstate_global->__pyx_n_u_in_range) < (0)) __PYX_ERR(0, 104, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_right, __pyx_v_filter_type) < (0)) __PYX_ERR(0, 104, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_left, __pyx_mstate_global->__pyx_n_u_type) < (0)) __PYX_ERR(0, 97, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_operation, __pyx_mstate_global->__pyx_n_u_in_range) < (0)) __PYX_ERR(0, 97, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_right, __pyx_v_filter_type) < (0)) __PYX_ERR(0, 97, __pyx_L3_error)
 
-        /* "gem_mistral_bridge.pyx":102
- * 
+        /* "gem_mistral_bridge.pyx":95
+ *             filter_type = ["fund"] if "etf" in type_str else ["stock"]
  *             payload = {
  *                 "filter": [             # <<<<<<<<<<<<<<
  *                     {"left": "dividend_yield_recent", "operation": "greater", "right": 5},
  *                     {"left": "type", "operation": "in_range", "right": filter_type}
 */
-        __pyx_t_12 = PyList_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 102, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_12);
+        __pyx_t_11 = PyList_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 95, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_6);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_t_6) != (0)) __PYX_ERR(0, 102, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_11, 0, __pyx_t_6) != (0)) __PYX_ERR(0, 95, __pyx_L3_error);
         __Pyx_GIVEREF(__pyx_t_8);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 1, __pyx_t_8) != (0)) __PYX_ERR(0, 102, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_11, 1, __pyx_t_8) != (0)) __PYX_ERR(0, 95, __pyx_L3_error);
         __pyx_t_6 = 0;
         __pyx_t_8 = 0;
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_filter, __pyx_t_12) < (0)) __PYX_ERR(0, 102, __pyx_L3_error)
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_filter, __pyx_t_11) < (0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "gem_mistral_bridge.pyx":106
+        /* "gem_mistral_bridge.pyx":99
  *                     {"left": "type", "operation": "in_range", "right": filter_type}
  *                 ],
  *                 "markets": ["america"],             # <<<<<<<<<<<<<<
  *                 "columns": columns,
  *                 "sort": {"sortBy": "dividend_yield_recent", "sortOrder": "desc"},
 */
-        __pyx_t_12 = PyList_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 106, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_12);
+        __pyx_t_11 = PyList_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 99, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_11);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_america);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_n_u_america);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_mstate_global->__pyx_n_u_america) != (0)) __PYX_ERR(0, 106, __pyx_L3_error);
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_markets, __pyx_t_12) < (0)) __PYX_ERR(0, 102, __pyx_L3_error)
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_11, 0, __pyx_mstate_global->__pyx_n_u_america) != (0)) __PYX_ERR(0, 99, __pyx_L3_error);
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_markets, __pyx_t_11) < (0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "gem_mistral_bridge.pyx":107
+        /* "gem_mistral_bridge.pyx":100
  *                 ],
  *                 "markets": ["america"],
  *                 "columns": columns,             # <<<<<<<<<<<<<<
  *                 "sort": {"sortBy": "dividend_yield_recent", "sortOrder": "desc"},
  *                 "range": [0, 50]
 */
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_columns, __pyx_v_columns) < (0)) __PYX_ERR(0, 102, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_columns, __pyx_v_columns) < (0)) __PYX_ERR(0, 95, __pyx_L3_error)
 
-        /* "gem_mistral_bridge.pyx":108
+        /* "gem_mistral_bridge.pyx":101
  *                 "markets": ["america"],
  *                 "columns": columns,
  *                 "sort": {"sortBy": "dividend_yield_recent", "sortOrder": "desc"},             # <<<<<<<<<<<<<<
  *                 "range": [0, 50]
  *             }
 */
-        __pyx_t_12 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 108, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_12);
-        if (PyDict_SetItem(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_sortBy, __pyx_mstate_global->__pyx_n_u_dividend_yield_recent) < (0)) __PYX_ERR(0, 108, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_sortOrder, __pyx_mstate_global->__pyx_n_u_desc) < (0)) __PYX_ERR(0, 108, __pyx_L3_error)
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_sort, __pyx_t_12) < (0)) __PYX_ERR(0, 102, __pyx_L3_error)
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        __pyx_t_11 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 101, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        if (PyDict_SetItem(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_sortBy, __pyx_mstate_global->__pyx_n_u_dividend_yield_recent) < (0)) __PYX_ERR(0, 101, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_sortOrder, __pyx_mstate_global->__pyx_n_u_desc) < (0)) __PYX_ERR(0, 101, __pyx_L3_error)
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_sort, __pyx_t_11) < (0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "gem_mistral_bridge.pyx":109
+        /* "gem_mistral_bridge.pyx":102
  *                 "columns": columns,
  *                 "sort": {"sortBy": "dividend_yield_recent", "sortOrder": "desc"},
  *                 "range": [0, 50]             # <<<<<<<<<<<<<<
  *             }
  * 
 */
-        __pyx_t_12 = PyList_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 109, __pyx_L3_error)
-        __Pyx_GOTREF(__pyx_t_12);
+        __pyx_t_11 = PyList_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 102, __pyx_L3_error)
+        __Pyx_GOTREF(__pyx_t_11);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_0);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 109, __pyx_L3_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_11, 0, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 102, __pyx_L3_error);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_50);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_50);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 1, __pyx_mstate_global->__pyx_int_50) != (0)) __PYX_ERR(0, 109, __pyx_L3_error);
-        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_range, __pyx_t_12) < (0)) __PYX_ERR(0, 102, __pyx_L3_error)
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_11, 1, __pyx_mstate_global->__pyx_int_50) != (0)) __PYX_ERR(0, 102, __pyx_L3_error);
+        if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_range, __pyx_t_11) < (0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_v_payload = ((PyObject*)__pyx_t_4);
         __pyx_t_4 = 0;
       }
       __pyx_L9:;
 
-      /* "gem_mistral_bridge.pyx":113
+      /* "gem_mistral_bridge.pyx":106
  * 
  *         headers = {
  *             "Content-Type": "application/json",             # <<<<<<<<<<<<<<
- *             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+ *             "User-Agent": "Mozilla/5.0"
  *         }
 */
-      __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 113, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Content_Type, __pyx_mstate_global->__pyx_kp_u_application_json) < (0)) __PYX_ERR(0, 113, __pyx_L3_error)
-      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_User_Agent, __pyx_mstate_global->__pyx_kp_u_Mozilla_5_0_Macintosh_Intel_Mac) < (0)) __PYX_ERR(0, 113, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_Content_Type, __pyx_mstate_global->__pyx_kp_u_application_json) < (0)) __PYX_ERR(0, 106, __pyx_L3_error)
+      if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_User_Agent, __pyx_mstate_global->__pyx_kp_u_Mozilla_5_0) < (0)) __PYX_ERR(0, 106, __pyx_L3_error)
       __pyx_v_headers = ((PyObject*)__pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":116
- *             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+      /* "gem_mistral_bridge.pyx":109
+ *             "User-Agent": "Mozilla/5.0"
  *         }
- *         response = requests.post(url, json=payload, headers=headers)             # <<<<<<<<<<<<<<
+ *         response = requests.post(url, json=payload, headers=headers, timeout=10)             # <<<<<<<<<<<<<<
  *         data = response.json()
  * 
 */
-      __pyx_t_12 = __pyx_v_requests;
-      __Pyx_INCREF(__pyx_t_12);
+      __pyx_t_11 = __pyx_v_requests;
+      __Pyx_INCREF(__pyx_t_11);
       __pyx_t_9 = 0;
       {
-        PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_12, __pyx_v_url};
-        __pyx_t_8 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 116, __pyx_L3_error)
+        PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_11, __pyx_v_url};
+        __pyx_t_8 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 109, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_json, __pyx_v_payload, __pyx_t_8, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 116, __pyx_L3_error)
-        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_headers, __pyx_v_headers, __pyx_t_8, __pyx_callargs+2, 1) < (0)) __PYX_ERR(0, 116, __pyx_L3_error)
+        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_json, __pyx_v_payload, __pyx_t_8, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 109, __pyx_L3_error)
+        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_headers, __pyx_v_headers, __pyx_t_8, __pyx_callargs+2, 1) < (0)) __PYX_ERR(0, 109, __pyx_L3_error)
+        if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_timeout, __pyx_mstate_global->__pyx_int_10, __pyx_t_8, __pyx_callargs+2, 2) < (0)) __PYX_ERR(0, 109, __pyx_L3_error)
         __pyx_t_4 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_post, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_8);
-        __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+        __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 116, __pyx_L3_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __pyx_v_response = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":117
+      /* "gem_mistral_bridge.pyx":110
  *         }
- *         response = requests.post(url, json=payload, headers=headers)
+ *         response = requests.post(url, json=payload, headers=headers, timeout=10)
  *         data = response.json()             # <<<<<<<<<<<<<<
  * 
  *         results = []
@@ -3995,68 +3874,68 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         PyObject *__pyx_callargs[2] = {__pyx_t_8, NULL};
         __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_json, __pyx_callargs+__pyx_t_9, (1-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 117, __pyx_L3_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __pyx_v_data = __pyx_t_4;
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":119
+      /* "gem_mistral_bridge.pyx":112
  *         data = response.json()
  * 
  *         results = []             # <<<<<<<<<<<<<<
  *         if data and "data" in data and data["data"] is not None:
  *             for item in data["data"]:
 */
-      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L3_error)
+      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 112, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_v_results = ((PyObject*)__pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "gem_mistral_bridge.pyx":120
+      /* "gem_mistral_bridge.pyx":113
  * 
  *         results = []
  *         if data and "data" in data and data["data"] is not None:             # <<<<<<<<<<<<<<
  *             for item in data["data"]:
- *                 d = {}
+ *                 d = {col: item["d"][i] for i, col in enumerate(columns) if i < len(item["d"])}
 */
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_v_data); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 120, __pyx_L3_error)
-      if (__pyx_t_11) {
+      __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_v_data); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 113, __pyx_L3_error)
+      if (__pyx_t_12) {
       } else {
-        __pyx_t_10 = __pyx_t_11;
-        goto __pyx_L14_bool_binop_done;
+        __pyx_t_10 = __pyx_t_12;
+        goto __pyx_L11_bool_binop_done;
       }
-      __pyx_t_11 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_data, __pyx_v_data, Py_EQ)); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 120, __pyx_L3_error)
-      if (__pyx_t_11) {
+      __pyx_t_12 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_data, __pyx_v_data, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 113, __pyx_L3_error)
+      if (__pyx_t_12) {
       } else {
-        __pyx_t_10 = __pyx_t_11;
-        goto __pyx_L14_bool_binop_done;
+        __pyx_t_10 = __pyx_t_12;
+        goto __pyx_L11_bool_binop_done;
       }
-      __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_mstate_global->__pyx_n_u_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 120, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_mstate_global->__pyx_n_u_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 113, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_11 = (__pyx_t_4 != Py_None);
+      __pyx_t_12 = (__pyx_t_4 != Py_None);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_10 = __pyx_t_11;
-      __pyx_L14_bool_binop_done:;
+      __pyx_t_10 = __pyx_t_12;
+      __pyx_L11_bool_binop_done:;
       if (__pyx_t_10) {
 
-        /* "gem_mistral_bridge.pyx":121
+        /* "gem_mistral_bridge.pyx":114
  *         results = []
  *         if data and "data" in data and data["data"] is not None:
  *             for item in data["data"]:             # <<<<<<<<<<<<<<
- *                 d = {}
- *                 for i, col in enumerate(columns):
+ *                 d = {col: item["d"][i] for i, col in enumerate(columns) if i < len(item["d"])}
+ *                 results.append(d)
 */
-        __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_mstate_global->__pyx_n_u_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 121, __pyx_L3_error)
+        __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_data, __pyx_mstate_global->__pyx_n_u_data); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_4);
         if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
           __pyx_t_8 = __pyx_t_4; __Pyx_INCREF(__pyx_t_8);
           __pyx_t_7 = 0;
           __pyx_t_13 = NULL;
         } else {
-          __pyx_t_7 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 121, __pyx_L3_error)
+          __pyx_t_7 = -1; __pyx_t_8 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 114, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_8);
-          __pyx_t_13 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_8); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 121, __pyx_L3_error)
+          __pyx_t_13 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_8); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 114, __pyx_L3_error)
         }
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         for (;;) {
@@ -4065,7 +3944,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_8);
                 #if !CYTHON_ASSUME_SAFE_SIZE
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 121, __pyx_L3_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 114, __pyx_L3_error)
                 #endif
                 if (__pyx_t_7 >= __pyx_temp) break;
               }
@@ -4075,7 +3954,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_8);
                 #if !CYTHON_ASSUME_SAFE_SIZE
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 121, __pyx_L3_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 114, __pyx_L3_error)
                 #endif
                 if (__pyx_t_7 >= __pyx_temp) break;
               }
@@ -4086,13 +3965,13 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
               #endif
               ++__pyx_t_7;
             }
-            if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 121, __pyx_L3_error)
+            if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L3_error)
           } else {
             __pyx_t_4 = __pyx_t_13(__pyx_t_8);
             if (unlikely(!__pyx_t_4)) {
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
-                if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 121, __pyx_L3_error)
+                if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 114, __pyx_L3_error)
                 PyErr_Clear();
               }
               break;
@@ -4102,134 +3981,104 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
           __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_4);
           __pyx_t_4 = 0;
 
-          /* "gem_mistral_bridge.pyx":122
+          /* "gem_mistral_bridge.pyx":115
  *         if data and "data" in data and data["data"] is not None:
  *             for item in data["data"]:
- *                 d = {}             # <<<<<<<<<<<<<<
- *                 for i, col in enumerate(columns):
- *                     if i < len(item["d"]):
-*/
-          __pyx_t_4 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 122, __pyx_L3_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_XDECREF_SET(__pyx_v_d, ((PyObject*)__pyx_t_4));
-          __pyx_t_4 = 0;
-
-          /* "gem_mistral_bridge.pyx":123
- *             for item in data["data"]:
- *                 d = {}
- *                 for i, col in enumerate(columns):             # <<<<<<<<<<<<<<
- *                     if i < len(item["d"]):
- *                         d[col] = item["d"][i]
-*/
-          __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
-          __pyx_t_4 = __pyx_mstate_global->__pyx_int_0;
-          __pyx_t_12 = __pyx_v_columns; __Pyx_INCREF(__pyx_t_12);
-          __pyx_t_14 = 0;
-          for (;;) {
-            {
-              Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_12);
-              #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 123, __pyx_L3_error)
-              #endif
-              if (__pyx_t_14 >= __pyx_temp) break;
-            }
-            __pyx_t_6 = __Pyx_PyList_GetItemRefFast(__pyx_t_12, __pyx_t_14, __Pyx_ReferenceSharing_OwnStrongReference);
-            ++__pyx_t_14;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L3_error)
-            __Pyx_GOTREF(__pyx_t_6);
-            __Pyx_XDECREF_SET(__pyx_v_col, __pyx_t_6);
-            __pyx_t_6 = 0;
-            __Pyx_INCREF(__pyx_t_4);
-            __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_4);
-            __pyx_t_6 = __Pyx_PyLong_AddObjC(__pyx_t_4, __pyx_mstate_global->__pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L3_error)
-            __Pyx_GOTREF(__pyx_t_6);
-            __Pyx_DECREF(__pyx_t_4);
-            __pyx_t_4 = __pyx_t_6;
-            __pyx_t_6 = 0;
-
-            /* "gem_mistral_bridge.pyx":124
- *                 d = {}
- *                 for i, col in enumerate(columns):
- *                     if i < len(item["d"]):             # <<<<<<<<<<<<<<
- *                         d[col] = item["d"][i]
- *                 results.append(d)
-*/
-            __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_item, __pyx_mstate_global->__pyx_n_u_d); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 124, __pyx_L3_error)
-            __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_15 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 124, __pyx_L3_error)
-            __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = PyLong_FromSsize_t(__pyx_t_15); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 124, __pyx_L3_error)
-            __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_16 = PyObject_RichCompare(__pyx_v_i, __pyx_t_6, Py_LT); __Pyx_XGOTREF(__pyx_t_16); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 124, __pyx_L3_error)
-            __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_16); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 124, __pyx_L3_error)
-            __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-            if (__pyx_t_10) {
-
-              /* "gem_mistral_bridge.pyx":125
- *                 for i, col in enumerate(columns):
- *                     if i < len(item["d"]):
- *                         d[col] = item["d"][i]             # <<<<<<<<<<<<<<
+ *                 d = {col: item["d"][i] for i, col in enumerate(columns) if i < len(item["d"])}             # <<<<<<<<<<<<<<
  *                 results.append(d)
  * 
 */
-              __pyx_t_16 = __Pyx_PyObject_Dict_GetItem(__pyx_v_item, __pyx_mstate_global->__pyx_n_u_d); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 125, __pyx_L3_error)
-              __Pyx_GOTREF(__pyx_t_16);
-              __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_16, __pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 125, __pyx_L3_error)
-              __Pyx_GOTREF(__pyx_t_6);
-              __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-              if (unlikely((PyDict_SetItem(__pyx_v_d, __pyx_v_col, __pyx_t_6) < 0))) __PYX_ERR(0, 125, __pyx_L3_error)
-              __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-              /* "gem_mistral_bridge.pyx":124
- *                 d = {}
- *                 for i, col in enumerate(columns):
- *                     if i < len(item["d"]):             # <<<<<<<<<<<<<<
- *                         d[col] = item["d"][i]
- *                 results.append(d)
-*/
+          { /* enter inner scope */
+            __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 115, __pyx_L18_error)
+            __Pyx_GOTREF(__pyx_t_4);
+            __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
+            __pyx_t_11 = __pyx_mstate_global->__pyx_int_0;
+            __pyx_t_6 = __pyx_v_columns; __Pyx_INCREF(__pyx_t_6);
+            __pyx_t_14 = 0;
+            for (;;) {
+              {
+                Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
+                #if !CYTHON_ASSUME_SAFE_SIZE
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 115, __pyx_L18_error)
+                #endif
+                if (__pyx_t_14 >= __pyx_temp) break;
+              }
+              __pyx_t_15 = __Pyx_PyList_GetItemRefFast(__pyx_t_6, __pyx_t_14, __Pyx_ReferenceSharing_OwnStrongReference);
+              ++__pyx_t_14;
+              if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_GOTREF(__pyx_t_15);
+              __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_col, __pyx_t_15);
+              __pyx_t_15 = 0;
+              __Pyx_INCREF(__pyx_t_11);
+              __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_i, __pyx_t_11);
+              __pyx_t_15 = __Pyx_PyLong_AddObjC(__pyx_t_11, __pyx_mstate_global->__pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_GOTREF(__pyx_t_15);
+              __Pyx_DECREF(__pyx_t_11);
+              __pyx_t_11 = __pyx_t_15;
+              __pyx_t_15 = 0;
+              __pyx_t_15 = __Pyx_PyObject_Dict_GetItem(__pyx_v_item, __pyx_mstate_global->__pyx_n_u_d); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_GOTREF(__pyx_t_15);
+              __pyx_t_16 = PyObject_Length(__pyx_t_15); if (unlikely(__pyx_t_16 == ((Py_ssize_t)-1))) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+              __pyx_t_15 = PyLong_FromSsize_t(__pyx_t_16); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_GOTREF(__pyx_t_15);
+              __pyx_t_17 = PyObject_RichCompare(__pyx_7genexpr__pyx_v_i, __pyx_t_15, Py_LT); __Pyx_XGOTREF(__pyx_t_17); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+              __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 115, __pyx_L18_error)
+              __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+              if (__pyx_t_10) {
+                __pyx_t_17 = __Pyx_PyObject_Dict_GetItem(__pyx_v_item, __pyx_mstate_global->__pyx_n_u_d); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 115, __pyx_L18_error)
+                __Pyx_GOTREF(__pyx_t_17);
+                __pyx_t_15 = __Pyx_PyObject_GetItem(__pyx_t_17, __pyx_7genexpr__pyx_v_i); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L18_error)
+                __Pyx_GOTREF(__pyx_t_15);
+                __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+                if (unlikely(PyDict_SetItem(__pyx_t_4, (PyObject*)__pyx_7genexpr__pyx_v_col, (PyObject*)__pyx_t_15))) __PYX_ERR(0, 115, __pyx_L18_error)
+                __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+              }
             }
+            __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            __Pyx_XDECREF(__pyx_7genexpr__pyx_v_col); __pyx_7genexpr__pyx_v_col = 0;
+            __Pyx_XDECREF(__pyx_7genexpr__pyx_v_i); __pyx_7genexpr__pyx_v_i = 0;
+            goto __pyx_L23_exit_scope;
+            __pyx_L18_error:;
+            __Pyx_XDECREF(__pyx_7genexpr__pyx_v_col); __pyx_7genexpr__pyx_v_col = 0;
+            __Pyx_XDECREF(__pyx_7genexpr__pyx_v_i); __pyx_7genexpr__pyx_v_i = 0;
+            goto __pyx_L3_error;
+            __pyx_L23_exit_scope:;
+          } /* exit inner scope */
+          __Pyx_XDECREF_SET(__pyx_v_d, ((PyObject*)__pyx_t_4));
+          __pyx_t_4 = 0;
 
-            /* "gem_mistral_bridge.pyx":123
+          /* "gem_mistral_bridge.pyx":116
  *             for item in data["data"]:
- *                 d = {}
- *                 for i, col in enumerate(columns):             # <<<<<<<<<<<<<<
- *                     if i < len(item["d"]):
- *                         d[col] = item["d"][i]
-*/
-          }
-          __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-          /* "gem_mistral_bridge.pyx":126
- *                     if i < len(item["d"]):
- *                         d[col] = item["d"][i]
+ *                 d = {col: item["d"][i] for i, col in enumerate(columns) if i < len(item["d"])}
  *                 results.append(d)             # <<<<<<<<<<<<<<
  * 
  *         response_str = json.dumps(results)
 */
-          __pyx_t_17 = __Pyx_PyList_Append(__pyx_v_results, __pyx_v_d); if (unlikely(__pyx_t_17 == ((int)-1))) __PYX_ERR(0, 126, __pyx_L3_error)
+          __pyx_t_18 = __Pyx_PyList_Append(__pyx_v_results, __pyx_v_d); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 116, __pyx_L3_error)
 
-          /* "gem_mistral_bridge.pyx":121
+          /* "gem_mistral_bridge.pyx":114
  *         results = []
  *         if data and "data" in data and data["data"] is not None:
  *             for item in data["data"]:             # <<<<<<<<<<<<<<
- *                 d = {}
- *                 for i, col in enumerate(columns):
+ *                 d = {col: item["d"][i] for i, col in enumerate(columns) if i < len(item["d"])}
+ *                 results.append(d)
 */
         }
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-        /* "gem_mistral_bridge.pyx":120
+        /* "gem_mistral_bridge.pyx":113
  * 
  *         results = []
  *         if data and "data" in data and data["data"] is not None:             # <<<<<<<<<<<<<<
  *             for item in data["data"]:
- *                 d = {}
+ *                 d = {col: item["d"][i] for i, col in enumerate(columns) if i < len(item["d"])}
 */
       }
 
-      /* "gem_mistral_bridge.pyx":128
+      /* "gem_mistral_bridge.pyx":118
  *                 results.append(d)
  * 
  *         response_str = json.dumps(results)             # <<<<<<<<<<<<<<
@@ -4243,13 +4092,13 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_results};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dumps, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 128, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 118, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
       __pyx_v_response_str = __pyx_t_8;
       __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":129
+      /* "gem_mistral_bridge.pyx":119
  * 
  *         response_str = json.dumps(results)
  *         byte_str = response_str.encode('utf-8')             # <<<<<<<<<<<<<<
@@ -4263,23 +4112,23 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_utf_8};
         __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_encode, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 129, __pyx_L3_error)
+        if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 119, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
       }
       __pyx_v_byte_str = __pyx_t_8;
       __pyx_t_8 = 0;
 
-      /* "gem_mistral_bridge.pyx":131
+      /* "gem_mistral_bridge.pyx":121
  *         byte_str = response_str.encode('utf-8')
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)             # <<<<<<<<<<<<<<
  *         if c_string == NULL:
  *             return NULL
 */
-      __pyx_t_7 = PyObject_Length(__pyx_v_byte_str); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 131, __pyx_L3_error)
+      __pyx_t_7 = PyObject_Length(__pyx_v_byte_str); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 121, __pyx_L3_error)
       __pyx_v_c_string = ((char *)malloc((__pyx_t_7 + 1)));
 
-      /* "gem_mistral_bridge.pyx":132
+      /* "gem_mistral_bridge.pyx":122
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)
  *         if c_string == NULL:             # <<<<<<<<<<<<<<
@@ -4289,7 +4138,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
       __pyx_t_10 = (__pyx_v_c_string == NULL);
       if (__pyx_t_10) {
 
-        /* "gem_mistral_bridge.pyx":133
+        /* "gem_mistral_bridge.pyx":123
  *         c_string = <char*>malloc(len(byte_str) + 1)
  *         if c_string == NULL:
  *             return NULL             # <<<<<<<<<<<<<<
@@ -4299,7 +4148,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         __pyx_r = NULL;
         goto __pyx_L7_try_return;
 
-        /* "gem_mistral_bridge.pyx":132
+        /* "gem_mistral_bridge.pyx":122
  * 
  *         c_string = <char*>malloc(len(byte_str) + 1)
  *         if c_string == NULL:             # <<<<<<<<<<<<<<
@@ -4308,17 +4157,17 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
 */
       }
 
-      /* "gem_mistral_bridge.pyx":134
+      /* "gem_mistral_bridge.pyx":124
  *         if c_string == NULL:
  *             return NULL
  *         strcpy(c_string, byte_str)             # <<<<<<<<<<<<<<
  *         return c_string
  *     except Exception as e:
 */
-      __pyx_t_18 = __Pyx_PyObject_AsString(__pyx_v_byte_str); if (unlikely((!__pyx_t_18) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
-      (void)(strcpy(__pyx_v_c_string, __pyx_t_18));
+      __pyx_t_19 = __Pyx_PyObject_AsString(__pyx_v_byte_str); if (unlikely((!__pyx_t_19) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L3_error)
+      (void)(strcpy(__pyx_v_c_string, __pyx_t_19));
 
-      /* "gem_mistral_bridge.pyx":135
+      /* "gem_mistral_bridge.pyx":125
  *             return NULL
  *         strcpy(c_string, byte_str)
  *         return c_string             # <<<<<<<<<<<<<<
@@ -4328,7 +4177,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
       __pyx_r = __pyx_v_c_string;
       goto __pyx_L7_try_return;
 
-      /* "gem_mistral_bridge.pyx":74
+      /* "gem_mistral_bridge.pyx":73
  *     cdef char* c_string
  *     cdef char* c_err
  *     try:             # <<<<<<<<<<<<<<
@@ -4337,59 +4186,60 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
 */
     }
     __pyx_L3_error:;
-    __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
+    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+    __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "gem_mistral_bridge.pyx":136
+    /* "gem_mistral_bridge.pyx":126
  *         strcpy(c_string, byte_str)
  *         return c_string
  *     except Exception as e:             # <<<<<<<<<<<<<<
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)
 */
-    __pyx_t_19 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(((PyTypeObject*)PyExc_Exception))));
-    if (__pyx_t_19) {
+    __pyx_t_20 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(((PyTypeObject*)PyExc_Exception))));
+    if (__pyx_t_20) {
       __Pyx_AddTraceback("gem_mistral_bridge.call_tradingview_high_yield", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_4, &__pyx_t_12) < 0) __PYX_ERR(0, 136, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_8, &__pyx_t_4, &__pyx_t_11) < 0) __PYX_ERR(0, 126, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_8);
       __Pyx_XGOTREF(__pyx_t_4);
-      __Pyx_XGOTREF(__pyx_t_12);
+      __Pyx_XGOTREF(__pyx_t_11);
       __Pyx_INCREF(__pyx_t_4);
       __pyx_v_e = __pyx_t_4;
       /*try:*/ {
 
-        /* "gem_mistral_bridge.pyx":137
+        /* "gem_mistral_bridge.pyx":127
  *         return c_string
  *     except Exception as e:
  *         err_msg = ("Error: " + str(e)).encode('utf-8')             # <<<<<<<<<<<<<<
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:
 */
-        __pyx_t_6 = __Pyx_PyObject_Unicode(__pyx_v_e); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L30_error)
+        __pyx_t_6 = __Pyx_PyObject_Unicode(__pyx_v_e); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L31_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_16 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Error, __pyx_t_6); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 137, __pyx_L30_error)
-        __Pyx_GOTREF(__pyx_t_16);
+        __pyx_t_15 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Error, __pyx_t_6); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 127, __pyx_L31_error)
+        __Pyx_GOTREF(__pyx_t_15);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_16)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L30_error)
+        __pyx_t_6 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_15)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L31_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+        __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
         __pyx_v_err_msg = ((PyObject*)__pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "gem_mistral_bridge.pyx":138
+        /* "gem_mistral_bridge.pyx":128
  *     except Exception as e:
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)             # <<<<<<<<<<<<<<
  *         if c_err == NULL:
  *             return NULL
 */
-        __pyx_t_7 = __Pyx_PyBytes_GET_SIZE(__pyx_v_err_msg); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 138, __pyx_L30_error)
+        __pyx_t_7 = __Pyx_PyBytes_GET_SIZE(__pyx_v_err_msg); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 128, __pyx_L31_error)
         __pyx_v_c_err = ((char *)malloc((__pyx_t_7 + 1)));
 
-        /* "gem_mistral_bridge.pyx":139
+        /* "gem_mistral_bridge.pyx":129
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:             # <<<<<<<<<<<<<<
@@ -4399,7 +4249,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         __pyx_t_10 = (__pyx_v_c_err == NULL);
         if (__pyx_t_10) {
 
-          /* "gem_mistral_bridge.pyx":140
+          /* "gem_mistral_bridge.pyx":130
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:
  *             return NULL             # <<<<<<<<<<<<<<
@@ -4409,10 +4259,10 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
           __pyx_r = NULL;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-          __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-          goto __pyx_L29_return;
+          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+          goto __pyx_L30_return;
 
-          /* "gem_mistral_bridge.pyx":139
+          /* "gem_mistral_bridge.pyx":129
  *         err_msg = ("Error: " + str(e)).encode('utf-8')
  *         c_err = <char*>malloc(len(err_msg) + 1)
  *         if c_err == NULL:             # <<<<<<<<<<<<<<
@@ -4421,16 +4271,16 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
 */
         }
 
-        /* "gem_mistral_bridge.pyx":141
+        /* "gem_mistral_bridge.pyx":131
  *         if c_err == NULL:
  *             return NULL
  *         strcpy(c_err, err_msg)             # <<<<<<<<<<<<<<
  *         return c_err
 */
-        __pyx_t_18 = __Pyx_PyBytes_AsString(__pyx_v_err_msg); if (unlikely((!__pyx_t_18) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L30_error)
-        (void)(strcpy(__pyx_v_c_err, __pyx_t_18));
+        __pyx_t_19 = __Pyx_PyBytes_AsString(__pyx_v_err_msg); if (unlikely((!__pyx_t_19) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L31_error)
+        (void)(strcpy(__pyx_v_c_err, __pyx_t_19));
 
-        /* "gem_mistral_bridge.pyx":142
+        /* "gem_mistral_bridge.pyx":132
  *             return NULL
  *         strcpy(c_err, err_msg)
  *         return c_err             # <<<<<<<<<<<<<<
@@ -4438,11 +4288,11 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
         __pyx_r = __pyx_v_c_err;
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        goto __pyx_L29_return;
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        goto __pyx_L30_return;
       }
 
-      /* "gem_mistral_bridge.pyx":136
+      /* "gem_mistral_bridge.pyx":126
  *         strcpy(c_string, byte_str)
  *         return c_string
  *     except Exception as e:             # <<<<<<<<<<<<<<
@@ -4450,48 +4300,49 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
  *         c_err = <char*>malloc(len(err_msg) + 1)
 */
       /*finally:*/ {
-        __pyx_L30_error:;
+        __pyx_L31_error:;
         /*exception exit:*/{
           __Pyx_PyThreadState_declare
           __Pyx_PyThreadState_assign
-          __pyx_t_5 = 0; __pyx_t_22 = 0; __pyx_t_23 = 0; __pyx_t_24 = 0; __pyx_t_25 = 0; __pyx_t_26 = 0;
-          __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
+          __pyx_t_5 = 0; __pyx_t_23 = 0; __pyx_t_24 = 0; __pyx_t_25 = 0; __pyx_t_26 = 0; __pyx_t_27 = 0;
+          __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+          __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-           __Pyx_ExceptionSwap(&__pyx_t_24, &__pyx_t_25, &__pyx_t_26);
-          if ( unlikely(__Pyx_GetException(&__pyx_t_5, &__pyx_t_22, &__pyx_t_23) < 0)) __Pyx_ErrFetch(&__pyx_t_5, &__pyx_t_22, &__pyx_t_23);
+           __Pyx_ExceptionSwap(&__pyx_t_25, &__pyx_t_26, &__pyx_t_27);
+          if ( unlikely(__Pyx_GetException(&__pyx_t_5, &__pyx_t_23, &__pyx_t_24) < 0)) __Pyx_ErrFetch(&__pyx_t_5, &__pyx_t_23, &__pyx_t_24);
           __Pyx_XGOTREF(__pyx_t_5);
-          __Pyx_XGOTREF(__pyx_t_22);
           __Pyx_XGOTREF(__pyx_t_23);
           __Pyx_XGOTREF(__pyx_t_24);
           __Pyx_XGOTREF(__pyx_t_25);
           __Pyx_XGOTREF(__pyx_t_26);
-          __pyx_t_19 = __pyx_lineno; __pyx_t_20 = __pyx_clineno; __pyx_t_21 = __pyx_filename;
+          __Pyx_XGOTREF(__pyx_t_27);
+          __pyx_t_20 = __pyx_lineno; __pyx_t_21 = __pyx_clineno; __pyx_t_22 = __pyx_filename;
           {
             __Pyx_DECREF(__pyx_v_e); __pyx_v_e = 0;
           }
-          __Pyx_XGIVEREF(__pyx_t_24);
           __Pyx_XGIVEREF(__pyx_t_25);
           __Pyx_XGIVEREF(__pyx_t_26);
-          __Pyx_ExceptionReset(__pyx_t_24, __pyx_t_25, __pyx_t_26);
+          __Pyx_XGIVEREF(__pyx_t_27);
+          __Pyx_ExceptionReset(__pyx_t_25, __pyx_t_26, __pyx_t_27);
           __Pyx_XGIVEREF(__pyx_t_5);
-          __Pyx_XGIVEREF(__pyx_t_22);
           __Pyx_XGIVEREF(__pyx_t_23);
-          __Pyx_ErrRestore(__pyx_t_5, __pyx_t_22, __pyx_t_23);
-          __pyx_t_5 = 0; __pyx_t_22 = 0; __pyx_t_23 = 0; __pyx_t_24 = 0; __pyx_t_25 = 0; __pyx_t_26 = 0;
-          __pyx_lineno = __pyx_t_19; __pyx_clineno = __pyx_t_20; __pyx_filename = __pyx_t_21;
+          __Pyx_XGIVEREF(__pyx_t_24);
+          __Pyx_ErrRestore(__pyx_t_5, __pyx_t_23, __pyx_t_24);
+          __pyx_t_5 = 0; __pyx_t_23 = 0; __pyx_t_24 = 0; __pyx_t_25 = 0; __pyx_t_26 = 0; __pyx_t_27 = 0;
+          __pyx_lineno = __pyx_t_20; __pyx_clineno = __pyx_t_21; __pyx_filename = __pyx_t_22;
           goto __pyx_L5_except_error;
         }
-        __pyx_L29_return: {
-          __pyx_t_27 = __pyx_r;
+        __pyx_L30_return: {
+          __pyx_t_28 = __pyx_r;
           __Pyx_DECREF(__pyx_v_e); __pyx_v_e = 0;
-          __pyx_r = __pyx_t_27;
+          __pyx_r = __pyx_t_28;
           goto __pyx_L6_except_return;
         }
       }
     }
     goto __pyx_L5_except_error;
 
-    /* "gem_mistral_bridge.pyx":74
+    /* "gem_mistral_bridge.pyx":73
  *     cdef char* c_string
  *     cdef char* c_err
  *     try:             # <<<<<<<<<<<<<<
@@ -4518,7 +4369,7 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
     goto __pyx_L0;
   }
 
-  /* "gem_mistral_bridge.pyx":71
+  /* "gem_mistral_bridge.pyx":70
  *         return c_err
  * 
  * cdef public char* call_tradingview_high_yield(char* type):             # <<<<<<<<<<<<<<
@@ -4531,8 +4382,9 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_XDECREF(__pyx_t_16);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_15);
+  __Pyx_XDECREF(__pyx_t_17);
   __Pyx_AddTraceback("gem_mistral_bridge.call_tradingview_high_yield", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -4540,22 +4392,21 @@ char *call_tradingview_high_yield(char *__pyx_v_type) {
   __Pyx_XDECREF(__pyx_v_json);
   __Pyx_XDECREF(__pyx_v_type_str);
   __Pyx_XDECREF(__pyx_v_url);
-  __Pyx_XDECREF(__pyx_v_filter_type);
-  __Pyx_XDECREF(__pyx_v_sort_by);
   __Pyx_XDECREF(__pyx_v_columns);
   __Pyx_XDECREF(__pyx_v_payload);
+  __Pyx_XDECREF(__pyx_v_filter_type);
   __Pyx_XDECREF(__pyx_v_headers);
   __Pyx_XDECREF(__pyx_v_response);
   __Pyx_XDECREF(__pyx_v_data);
   __Pyx_XDECREF(__pyx_v_results);
   __Pyx_XDECREF(__pyx_v_item);
   __Pyx_XDECREF(__pyx_v_d);
-  __Pyx_XDECREF(__pyx_v_i);
-  __Pyx_XDECREF(__pyx_v_col);
   __Pyx_XDECREF(__pyx_v_response_str);
   __Pyx_XDECREF(__pyx_v_byte_str);
   __Pyx_XDECREF(__pyx_v_e);
   __Pyx_XDECREF(__pyx_v_err_msg);
+  __Pyx_XDECREF(__pyx_7genexpr__pyx_v_i);
+  __Pyx_XDECREF(__pyx_7genexpr__pyx_v_col);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -4909,8 +4760,8 @@ __Pyx_RefNannySetupContext("PyInit_gem_mistral_bridge", 0);
   /*--- Execution code ---*/
 
   /* "gem_mistral_bridge.pyx":1
- * # Cython bridge for Mistral AI Python Client             # <<<<<<<<<<<<<<
- * # This will be compiled to C++ and linked with Gem
+ * # Cython bridge for Mistral AI Python Client (mistralai >= 1.0, Python 3.14)             # <<<<<<<<<<<<<<
+ * # Regenerate with: cython --cplus gem_mistral_bridge.pyx
  * 
 */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -4954,7 +4805,7 @@ __Pyx_RefNannySetupContext("PyInit_gem_mistral_bridge", 0);
 
 static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 115, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4973,39 +4824,39 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 7; } index[] = {{1},{12},{7},{121},{10},{1},{16},{44},{41},{5},{11},{13},{6},{7},{7},{4},{6},{4},{7},{17},{18},{5},{7},{7},{6},{8},{12},{1},{4},{7},{6},{4},{11},{21},{5},{6},{9},{5},{3},{6},{4},{3},{7},{7},{4},{8},{4},{4},{4},{3},{5},{8},{7},{13},{7},{8},{16},{32},{5},{10},{4},{8},{4},{9},{4},{5},{12},{5},{18},{8},{5},{4},{10},{4},{6},{9},{5},{6},{8},{4},{4},{6},{8},{17}};
-    #if (CYTHON_COMPRESS_STRINGS) == 3 && __PYX_LIMITED_VERSION_HEX >= 0x030e0000 /* compression: zstd (529 bytes) */
-const char* const cstring = "(\265/\375`7\002=\020\000v\344f$\000u\233\003aM\022\231MB\243\022\263\226K\026\327\2549\360h\200UO\"\000\036v\216\274J\377\377\377!\004n\000Y\000T\000\354\275|\350\375\0031\300\207\034\312\351\244\006sP0i\n\024\016\016\032\202f\302 ys\014Q\230\000wQ\237`~Q\306\010\\T6(,\000\230\004\203F\301\000A\322jay\307\331{\020L\200BB\230$\202\t\343\301h`0\014{o\005\343\000A\327\253*+\000\014A\203 I\306t\304U\230\006v\314\022\177\321\306@\357{\035\245\t-2\247\016\035S\027\225\226\253\344N\253\351\253\355\255\375'A\230L\245\004\257\324AJ\375\331\204T\364K\322\227\374\213\322\215\336+\2430\250\225?\t\341+\235\020ea\300\351\270\326Y\370-%\315\251F\344\032\362\254\256\344n\370\273\251\240D\322\000_7\264\016~H\326i\247\322-%\276\210c\355\2349g\225\323*\004\371+\017\361;\317O\377Y\033\035~3u\234~k\004\371;\371-\356\277\234\332\303\327\342\352\275:\247\305\256QZ\373\245!\272\326i?e\005\277D\334\005\364(E\224+;\327\272R\316\350H\355\231\243Z\367\242S\nn\311\365\325\346\252\023=\204\017\343_\324\360\235\022s\226\026\301\213r\315\030Q\004;\330,\246\363\325\207g\216\233a\303G\220s\205\223\305\347\3142\202(\345\327\320\275\344\375s-7\245\263\230\322\331kN\245\006\262/\327T\243\331`{\347JQ+\307\316\006\373\027^\315-( \0061u\303\003!aH+\355\377g\003p\260\351\201%9\276\002\026G\300\346\005*?u}\036AC,&\357\370J\361\261$\230K\306\234A\371\346&\242\315\002D\026\tbQp\230\223CRt\366\033#\327\220(T\231c\023\034\316\250\350\334\021\332\362\233^il\372\357\013\340'_\307\030\360\263\014\221~G(\023{";
-    PyObject *data = __Pyx_DecompressString(cstring, 529, 3);
+    const struct { const unsigned int length: 6; } index[] = {{1},{12},{7},{11},{10},{1},{16},{44},{41},{5},{7},{6},{7},{7},{4},{6},{4},{7},{17},{18},{5},{7},{8},{7},{6},{8},{12},{1},{4},{7},{6},{4},{11},{21},{5},{6},{9},{3},{6},{4},{3},{7},{7},{4},{8},{4},{4},{4},{3},{5},{8},{7},{13},{7},{8},{9},{5},{10},{4},{8},{4},{9},{4},{5},{12},{5},{18},{8},{5},{4},{10},{4},{6},{9},{5},{6},{8},{7},{4},{4},{6},{8},{17}};
+    #if (CYTHON_COMPRESS_STRINGS) == 3 && __PYX_LIMITED_VERSION_HEX >= 0x030e0000 /* compression: zstd (413 bytes) */
+const char* const cstring = "(\265/\375`\233\001\235\014\000v\236P PM\332\006\006\203V\213-\322\372c[kYYU\3662\324f\027g\033\035\375g\263333\004N\000E\000C\000\250l\3778t@\266\315\350\030X \275N*\204\035\356\2235\222\036\203\3428\221$\036\333f\3543\355\270\321 `\325\255\244rD#\025\333\016\221RV\320\371\304`\261\347\207\000\206@\303\020\302\nu\000\020\254\356&\\-\016\213\316w*\002#?8\201'\025[\341\036\377P\350\202\222\240\302b\307\332\316\371\3416\364r\371\335u\251j\351\335\373H%=\316\264\220\336Y\321=\316 ~&\321<1\275\261\237\030fCg\014\377P\225kS\356I\232r\313\037&\232\320\022'\306\374\364\266c\226\306]m\211\373\217M\264d\314\236BQ#G\212$\256IT\022Tx\177\354\312\276\355\233\364\223\223\013\3317B\004\351\277m\237V\376G/\317*\255\323\371\373\232\203\216\2139\031F\373\227\226\210,\237\330\363\272Z\272\227>a\033\323\3746\006)DZ\370q\332\313\260\034\254r\243e\310O\237\217t{\271\371K\342\353XC+\371\"[\022\306\374pU\263\252\275\322\274\322di\314\3212\006\375\004\037( \0101bS\017`\\\235\264\377\277\001\3437\216x4\t\236\226qr\354y\3402A\026^D#X\313\254\316`\361)*\351\003\333P\343\240Q\337aI\226\226\315\374\246\023.Q\367\207\321\331\020~\354\236\241\224\001<\362e\204\003.3";
+    PyObject *data = __Pyx_DecompressString(cstring, 413, 3);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (592 bytes) */
-const char* const cstring = "BZh91AY&SY\013\262\033.\000\000\r\237\200@g\377\370\272\356\316\300\277\377\377\260@\002\002\350\326\326\006\246Sj4\004\233O!=H<\223\324\364\217P\036\243\324i\243j\006\246\023@jhS\3256D?T\320\006\206\206@`C\230\000\000\000\000\000\000\000\001\251\352\rS4\324=A\240\004\323\000\000\000\010\235\227\240\305\271;\032o\236`\354\367\371\361\344\3736\2607O\314\364\005 \3302\231u\375\216Ih\371\270k\276\2703\330\220\007\007\036\351\024\227\206\020]\350\332\207\027%\007\201\335=Pz\356>\037Y/4MSF\260j\370?x5yB\235\257m\262\332\326(\024\257\005\255\211r\014\tA\205q\021\231\307\3409n\\\036\312:^\023\030Xx<7C\334\303\201\357\373S\247;$\306\205C\305Q\204\342\"\031\t\3418\210\004\225\224\"\234\230[Y\0022\305\204>\245sC_)t\304U\006\t\rV\267\251\007m>|\223PM,\365\357\356\314 \241O+\367D\345\375\331y\034\255)*\350\010\302J*\361\212\262L\365R\233\215s\316\326\255\202\213\212)\207n,%\317Z#H\226\270\007;Kl\0377\r\027V@_\243=x\274+6\032_\370CK\251\242\234E\203hCRV\336\032R\020\030\303\246%\377U*6\004\245\302\226\201#\354\030\257r\010\255lo$\024\030\2332l\220V1\034\251\302H9\233\340W\241\357\235\243j\200\217\017G:\326\014A\201\306g\227\256Y\032^\246\010\255\357q$\241l\200\271D1d\020\345\316\260\257L\013qv\030\010\261O\177u}p\250\312[\020\033A\013\021\264\262\0256\211\"\315c\252\307\002l[\n\271\367\244\312\206\244l\250L\213@\242\320F\274le`T\204Q\366+\327\210A5\271Z=\274RQ\236\000\354\007@\007\2614|(\253[\247\210>\0040\240E\274\320M\356\205\026#\211d\2604#(\231\214\036\312\354\027\006e\274\345C'\t\320\022\033I\335TT8\237\2248\373\242\364\t\226\270\034F%z\214(\224%`I2r\307\312>S\377\213\271\"\234(H\005\331\r\227\000";
-    PyObject *data = __Pyx_DecompressString(cstring, 592, 2);
+    #elif (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (471 bytes) */
+const char* const cstring = "BZh91AY&SY<\3417\341\000\000\002\237\200@\003\302P\272F\306\000\277\377\377\260@\001\256\306`\206\246F\204\312zb\032\2154\004\017SF\3205S\364b4\231\023\010\006\200\003@1\246\203@\014\232\003#M\014M\030%OD#M5&\302L\215\032\006\206\231\007i\257\213\266\33004i\37059\016\327\235\357\377\022Y'\304\203p\253U\372\374a7\315\261P+\375Lo\227\314N\212\005\353$&T\346W\23689Rvs\266\020\325\333\355\212\207\177\026\351'Y\030\272\214\365\030\240G\317\014\006p\010\212\262R\026E\366\242a\200\3120\332$\346q\324B\340Si\334m9\025\026\334o\211\202X{\245\342\004\263\221\226V\261\347q2\253\353\010\037\004J\221\r\321\262g\031\213/II\244\014T\030\334(\250\027[Ei\000r\274\035\321\203\213~Se\014c\334\316\266\222\240\366\210\211\302\246\262`\242\n\222\255\343j\202\032\346\337V\246A1f\3542\016U\334\370-a\234\353`\301\023\224\022+\321\020\035\233`\231\270\370\354\215\367\005+\017\r\370B\353\230\230\322Q\235\316\236\016Y\256\272I%5\033\nPC\262D\233&\200\302z\226\221\256\274\263\3410\256\222\033!}K=\264\2343\244\366\364\211\303v\242\327Jn\264wBYm\260a6\234\005\021\037\236n\371\212\006=M4\356*V\367:\320\264\026\002\2448\203d\245.\327\306\2307\350\332\242\321\204\251\240\377\030\222\023\354\270wI\246\234\336\332Zc?r\177(\320\260\334\3079N\325\214J\340X\303\370\341\354\224\200\\\360x\314M\314\214\004\3201N\210%\274\252T\373OO\366.\344\212p\241 y\302o\302";
+    PyObject *data = __Pyx_DecompressString(cstring, 471, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (518 bytes) */
-const char* const cstring = "x\332\205S]O\3350\014\375+}\004i\364r\371\030\033{\230\330\3254&\270b\022L\333[\344\233\270\255\3274.\216\003\352~=n/h\217\223j[\211?r\316IZo8)&=z\230F\374*\302rYm\371/\305\010\253\363\372\270:\330\202\247\244\234\273O\325w\253\214\225mTw\367\325\357j}\354\326\347\356\342\260\272\032\307\210\277pwC\272:?\275\250O\337W\0077\327\017\333\333wU\244\036\253o\350{>\2546\235\360\200\253\217\353\372\270>;\2738\251\327'g\325=4 \364\332\3663\243\034]\265\006\3473\330L\362\240\304i\365's\352T\307|\271Ze\017)\241\324*\020(\265O\204\317\265\347a\005\003\212\325/\371\377\325\3568\205%Y\2649\372\260\351@\267\2303\264\270\245l\265q\023\311 <\220\357Q^\347\302H\256\307i\356\364\035\244\026\315\253\357\230<f\347|\204\234]\213J\212\303\274\244\204\216\222\263a\036w\340{\0379\243\347X\206\224\375^p\317e\344\344\213\010&?\355\243\376\260\2630\004P\0100]S\333Y\270\345\347\200\331\317&4\316\202\004z\242\200)\270\2110\006'\350\2555\224a\3146\212\003b*\206\032\024\361\261\030\"m\032\212\212\322\224\024\014c+h)\351\020\002J\356\354\020C*3'J\r\317ZGl4\362\263}(\316\r`y\363\322\243\346\001\264\010\351\344\014#\016{\325^C\036\366\352\001\325~\021\360\337z0P1\327\263f\316.\300^\313Lc\331\265\311\034JD\347\222I\375\346y\304d&\313\375\217\234u\234\205q\356\261@\334W,\200\005\333\022A\266\013\266E;1\312\2305\213\321R\341\210\0315`\003%jfY\354\3134\373;\231\331+\373>O\303\216\r\207Z\237y\373\r\212=\303\247\371\262pj(A\362\270\027Z\331\275\361\177\001N'@6";
-    PyObject *data = __Pyx_DecompressString(cstring, 518, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (401 bytes) */
+const char* const cstring = "x\332\205R\301\216\0231\014\375\025~\240-\027$\264\027\004\010\211\003\325rX\316Q\232\274\2311M\342\254\355\264\032\276\036\317\224=#\215me\374l?\277\344\370\225\233\241\331\341e\355\370&\302\362\364\356\314\177\250\224x\372p|\377K!\207\317\263\003>\305\336\013\245h\304\355\364[\271-f]\237N'M\2615\310\321$fj\363\215p?&\256\247X!\216\337\363\377\303^\270\345=9l:|<\223:\240\274P\272B\376\265\211\235\302\025\353\006LKl3\334[Z\230\0224\204T\242j\230ad\250\333\221\032\002\265\340m\022.1]SaE\3422jS\037\330\013\314\217\373\346\211G\347\226\206\010ZZ\037\321~\372L\344\034-\346\270~\247y\361\360\203\357\031\2326\023\352\233\016\231n\224\321rX\t%\007A\362\322<jWo\305\031h\303\331G\003l\232\250\030d\032-;\315Y\340\177eA\314\020]\274\277\223\225m-j\023o\352\026LV\370\356\037$\204\032=\357^\2560\255\321\206\220\255\301\351\241B5\316oA\353C\272H\325\307\027/\341<\nBh.\343\233\347\216\346&\373UvV\353\333\262!\274\216X\036\210\235\211`\036%\312y\037\272\353!x\035PSq\276&\\\240\260\214)\216b\312\262\333\227u\363\317\262\255e\234\256\272\326\013;\017\363:\367T\301\303\314\237\332\360\207u\333\356\003\353D-\266\204\207\206\306\341m\277\277\321\276\016\315";
+    PyObject *data = __Pyx_DecompressString(cstring, 401, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (823 bytes) */
-const char* const bytes = ".Content-TypeError: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36User-Agent?application/jsonhttps://scanner.tradingview.com/america/scanhttps://scanner.tradingview.com/bond/scanutf-8ChatMessageMistralClientTickeramericaapi_keybondchangechatchoices__class_getitem__cline_in_tracebackclosecolumnscontentcouponcurrencycurrentPriceddatadayHighdayLowdescdescriptiondividend_yield_recentdumpsencodeenumerateequitetffilterfundgetgreaterheadershighin_rangeinfojsonleftlowlower__main__marketsmaturity_datemessagemessagesmistralai.clientmistralai.models.chat_completionmodel__module__name__name__openoperationpostprice__qualname__rangeregularMarketPricerequestsrightrolesetdefaultsortsortBysortOrderstocksymbol__test__typeuservolumeyfinanceyield_to_maturity";
+    #else /* compression: none (667 bytes) */
+const char* const bytes = ".Content-TypeError: Mozilla/5.0User-Agent?application/jsonhttps://scanner.tradingview.com/america/scanhttps://scanner.tradingview.com/bond/scanutf-8MistralTickeramericaapi_keybondchangechatchoices__class_getitem__cline_in_tracebackclosecolumnscompletecontentcouponcurrencycurrentPriceddatadayHighdayLowdescdescriptiondividend_yield_recentdumpsencodeenumerateetffilterfundgetgreaterheadershighin_rangeinfojsonleftlowlower__main__marketsmaturity_datemessagemessagesmistralaimodel__module__name__name__openoperationpostprice__qualname__rangeregularMarketPricerequestsrightrolesetdefaultsortsortBysortOrderstocksymbol__test__timeouttypeuservolumeyfinanceyield_to_maturity";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 84; i++) {
+    for (int i = 0; i < 83; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
       if (likely(string) && i >= 10) PyUnicode_InternInPlace(&string);
@@ -5017,7 +4868,7 @@ const char* const bytes = ".Content-TypeError: Mozilla/5.0 (Macintosh; Intel Mac
       pos += bytes_length;
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 84; i++) {
+    for (Py_ssize_t i = 0; i < 83; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
@@ -5025,8 +4876,8 @@ const char* const bytes = ".Content-TypeError: Mozilla/5.0 (Macintosh; Intel Mac
   }
   {
     PyObject **numbertab = __pyx_mstate->__pyx_number_tab + 0;
-    int8_t const cint_constants_1[] = {0,1,5,50};
-    for (int i = 0; i < 4; i++) {
+    int8_t const cint_constants_1[] = {0,1,5,10,50};
+    for (int i = 0; i < 5; i++) {
       numbertab[i] = PyLong_FromLong(cint_constants_1[i - 0]);
       if (unlikely(!numbertab[i])) __PYX_ERR(0, 1, __pyx_L1_error)
     }
@@ -5034,7 +4885,7 @@ const char* const bytes = ".Content-TypeError: Mozilla/5.0 (Macintosh; Intel Mac
   #if CYTHON_IMMORTAL_CONSTANTS
   {
     PyObject **table = __pyx_mstate->__pyx_number_tab;
-    for (Py_ssize_t i=0; i<4; ++i) {
+    for (Py_ssize_t i=0; i<5; ++i) {
       #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
       #if PY_VERSION_HEX < 0x030E0000
       if (_Py_IsOwnedByCurrentThread(table[i]) && Py_REFCNT(table[i]) == 1)
