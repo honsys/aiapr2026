@@ -20,6 +20,7 @@
 #include <iomanip>
 #include <csignal>
 #include <atomic>
+#include <regex>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -469,7 +470,7 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, algo, bev, file, zip, nlp, img, geo, mobl, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
+                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, geo, mobl, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
                 std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
                 std::cout << "\nMobile & Cross-Platform:" << std::endl;
@@ -614,6 +615,19 @@ public:
                     std::cout << "  - read_xml(path), write_xml(path, text): XML support." << std::endl;
                     std::cout << "  - read_fits_header(path): Returns FITS header as an object." << std::endl;
                     std::cout << "  - read_hdf_header(path): Returns HDF header as an object." << std::endl;
+                } else if (topic == "rex") {
+                    std::cout << "Description: Regular expression operations on strings." << std::endl;
+                    std::cout << "Functions (all accept optional flags string, e.g. \"i\" for case-insensitive):" << std::endl;
+                    std::cout << "  - match(text, pattern, [flags])         -> bool: true if pattern found anywhere in text." << std::endl;
+                    std::cout << "  - find(text, pattern, [flags])          -> string: first matching substring, or \"\"." << std::endl;
+                    std::cout << "  - findall(text, pattern, [flags])       -> list: all non-overlapping matches." << std::endl;
+                    std::cout << "  - groups(text, pattern, [flags])        -> list: capture groups from first match." << std::endl;
+                    std::cout << "  - sub(text, pattern, repl, [flags])     -> string: replace first match." << std::endl;
+                    std::cout << "  - gsub(text, pattern, repl, [flags])    -> string: replace all matches (global)." << std::endl;
+                    std::cout << "  - split(text, pattern, [flags])         -> list: split text on pattern." << std::endl;
+                    std::cout << "  - count(text, pattern, [flags])         -> int: number of non-overlapping matches." << std::endl;
+                    std::cout << "Flags: \"i\" = case-insensitive." << std::endl;
+                    std::cout << "Example: rex.gsub(\"Hello World\", \"[aeiou]\", \"*\", \"i\")  -> \"H*ll* W*rld\"" << std::endl;
                 } else if (topic == "algo") {
                     std::cout << "Description: Algorithms, sorting, and time." << std::endl;
                     std::cout << "Functions:" << std::endl;
@@ -983,6 +997,151 @@ public:
 };
 
 
+
+// Rex (Regex) Object
+class GemRex : public GemSys {
+public:
+    GemRex() : GemSys() {
+        name = "rex";
+
+        // match(text, pattern, [flags]) -> bool
+        methods["match"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2) return std::make_shared<GemValue>(false);
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string flags = (args.size() > 2) ? args[2]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                return std::make_shared<GemValue>(std::regex_search(text, std::regex(pat, rf)));
+            } catch (...) { return std::make_shared<GemValue>(false); }
+        }, true };
+
+        // find(text, pattern, [flags]) -> first match string or ""
+        methods["find"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2) return std::make_shared<GemValue>("");
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string flags = (args.size() > 2) ? args[2]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                std::smatch m;
+                if (std::regex_search(text, m, std::regex(pat, rf)))
+                    return std::make_shared<GemValue>(m[0].str());
+            } catch (...) {}
+            return std::make_shared<GemValue>("");
+        }, true };
+
+        // findall(text, pattern, [flags]) -> vector of all match strings
+        methods["findall"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            auto result = std::make_shared<GemValue>();
+            result->value = std::vector<std::shared_ptr<GemValue>>{};
+            if (args.size() < 2) return result;
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string flags = (args.size() > 2) ? args[2]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                std::regex re(pat, rf);
+                auto begin = std::sregex_iterator(text.begin(), text.end(), re);
+                auto end   = std::sregex_iterator();
+                auto& vec  = std::get<std::vector<std::shared_ptr<GemValue>>>(result->value);
+                for (auto it = begin; it != end; ++it)
+                    vec.push_back(std::make_shared<GemValue>((*it)[0].str()));
+            } catch (...) {}
+            return result;
+        }, true };
+
+        // groups(text, pattern, [flags]) -> vector of capture groups from first match
+        methods["groups"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            auto result = std::make_shared<GemValue>();
+            result->value = std::vector<std::shared_ptr<GemValue>>{};
+            if (args.size() < 2) return result;
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string flags = (args.size() > 2) ? args[2]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                std::smatch m;
+                if (std::regex_search(text, m, std::regex(pat, rf))) {
+                    auto& vec = std::get<std::vector<std::shared_ptr<GemValue>>>(result->value);
+                    for (size_t i = 1; i < m.size(); ++i)
+                        vec.push_back(std::make_shared<GemValue>(m[i].str()));
+                }
+            } catch (...) {}
+            return result;
+        }, true };
+
+        // sub(text, pattern, replacement, [flags]) -> string with first replacement
+        methods["sub"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 3) return std::make_shared<GemValue>("");
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string repl = args[2]->toString();
+            std::string flags = (args.size() > 3) ? args[3]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                return std::make_shared<GemValue>(
+                    std::regex_replace(text, std::regex(pat, rf), repl,
+                        std::regex_constants::format_first_only));
+            } catch (...) { return std::make_shared<GemValue>(text); }
+        }, true };
+
+        // gsub(text, pattern, replacement, [flags]) -> string with all replacements
+        methods["gsub"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 3) return std::make_shared<GemValue>("");
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string repl = args[2]->toString();
+            std::string flags = (args.size() > 3) ? args[3]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                return std::make_shared<GemValue>(
+                    std::regex_replace(text, std::regex(pat, rf), repl));
+            } catch (...) { return std::make_shared<GemValue>(text); }
+        }, true };
+
+        // split(text, pattern, [flags]) -> vector of substrings
+        methods["split"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            auto result = std::make_shared<GemValue>();
+            result->value = std::vector<std::shared_ptr<GemValue>>{};
+            if (args.size() < 2) return result;
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string flags = (args.size() > 2) ? args[2]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                std::regex re(pat, rf);
+                std::sregex_token_iterator it(text.begin(), text.end(), re, -1), end;
+                auto& vec = std::get<std::vector<std::shared_ptr<GemValue>>>(result->value);
+                for (; it != end; ++it)
+                    vec.push_back(std::make_shared<GemValue>(it->str()));
+            } catch (...) {}
+            return result;
+        }, true };
+
+        // count(text, pattern, [flags]) -> number of non-overlapping matches
+        methods["count"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2) return std::make_shared<GemValue>(0.0);
+            std::string text = args[0]->toString();
+            std::string pat  = args[1]->toString();
+            std::string flags = (args.size() > 2) ? args[2]->toString() : "";
+            auto rf = std::regex_constants::ECMAScript;
+            if (flags.find('i') != std::string::npos) rf |= std::regex_constants::icase;
+            try {
+                std::regex re(pat, rf);
+                auto begin = std::sregex_iterator(text.begin(), text.end(), re);
+                return std::make_shared<GemValue>((double)std::distance(begin, std::sregex_iterator()));
+            } catch (...) { return std::make_shared<GemValue>(0.0); }
+        }, true };
+    }
+};
 
 // Text Object
 class GemText : public GemSys {

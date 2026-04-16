@@ -88,6 +88,7 @@ public:
         builtins["itr"] = std::make_shared<GemItr>();
         builtins["thread"] = std::make_shared<GemThread>();
         builtins["text"] = std::make_shared<GemText>();
+        builtins["rex"]  = std::make_shared<GemRex>();
         builtins["algo"] = std::make_shared<GemAlgo>();
         builtins["nlp"] = std::make_shared<GemNLP>();
         builtins["zip"] = std::make_shared<GemZip>();
