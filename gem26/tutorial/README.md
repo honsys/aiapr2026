@@ -10,10 +10,12 @@ Welcome to the official tutorial repository for the **Gem Language** — a moder
 - **Global vs. Local Scope**: Variables starting with `_` (e.g., `_config`) are global; all others are local.
 - **Universal Inheritance**: Every object inherits from `sys`, giving immediate access to `sys.print`, etc.
 - **First-Class AI Support**: Built-in `ai` object supports Gemini, Mistral, and Ollama.
-- **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++ on-the-fly.
+- **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
-- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl` built into the runtime.
+- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `astro`, `nlp` built into the runtime.
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
+- **Symbolic Math**: `math` builtin supports symbolic differentiation, integration, simplification, and LaTeX output via SymPy/Sage.
+- **Astrophysics**: `astro` builtin covers stellar physics, orbital mechanics, cosmology, solar physics, and exoplanets.
 
 ---
 
@@ -86,6 +88,7 @@ Usage Tips:
   - All variables must be initialized: 'int x = 0'
   - Global variables start with underscore: '_config = 1'
   - Use 'use "file.py"' to translate and run foreign code.
+  - Use 'langport("*.py", "out.gm")' to port and save code.
   - Use 'lib' to see all loaded modules.
   - Use 'his' to view today's session history.
 
@@ -97,7 +100,7 @@ CLI Options:
   gem -t <file> [-o output] - AI-assisted translation to Gem.
 
 Available Builtin Modules:
-  sys, math, ai, text, rex, algo, bev, file, zip, img, geo, mobl,
+  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, geo, mobl,
   cpp, tcp, itr, data, container, vm, go, ruby, node, rust,
   fin, bsm, chart, astro, drvr
 
@@ -105,8 +108,174 @@ Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, while,
   int, double, string, bool, exit
 
+Mobile & Cross-Platform:
+  use "mobl.gm" then: mobl phone("name")  phone.dictate(text)  phone.make_feature(lat,lon,text)
+  ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)
+
 Detailed help: help "topic"  or  help(topic)
 ```
+
+---
+
+## Builtin Module Reference
+
+### sys — System Root Module
+Every object inherits from `sys`. Methods:
+- `sys.print(...)` — print to stdout
+- `sys.args()` — command-line arguments as a vector
+- `sys.async(func, [params], [timeout])` — run function in background thread
+- `sys.sethandler(signals, func)` — set custom signal handler
+- `sys.host()` — OS information string
+- `sys.exec(cmd)` — execute a shell command
+- `sys.doc([path])` — read file comments or current script comments
+- `sys.help([topic])` — interactive help
+- `sys.exit()` — exit the REPL or script
+- `sys.langport(pattern, [output])` — port foreign code (e.g. `*.py`) to Gem
+- `sys.redirect(url, [port])` — HTTP redirect or background redirect server
+- `sys.app(port, [routes])` — background web app server; routes map paths to strings, files, or handler functions
+
+### math — Mathematics & Symbolic Math
+Standard functions: `sin(x)`, `cos(x)`, `sqrt(x)`, constant `math.pi`.
+
+Symbolic math (SymPy/Sage backend):
+- `math.useSymPy()`, `math.useSage()` — switch symbolic provider
+- `math.simplify(expr)` — symbolic simplification
+- `math.diff(expr, [var])` — symbolic differentiation
+- `math.integrate(expr, [var])` — symbolic integration
+- `math.solve(expr, [var])` — solve algebraic equation
+- `math.sym_latex(expr)` — LaTeX for a symbolic expression
+- `math.to_latex(val)` — convert value or matrix to LaTeX string
+- `math.write_latex(path, content, [standalone])` — write LaTeX to file
+- `math.read_latex(path)` — read content from LaTeX document environment
+- `math.parse_latex(text)` — extract math expressions from text (`$...$`)
+- `math.compile_latex(path)` — run pdflatex on a file
+
+### ai — AI Integration
+Supports Gemini (default), Mistral, and Ollama:
+- `ai.prompt(text)` — send prompt to current provider
+- `ai.prompt_native(text)` — high-speed native Mistral C++ bridge
+- `ai.useMistral(model)`, `ai.useOllama(model, [host])`, `ai.useGemini()` — switch provider
+- `ai.setKey(key)`, `ai.setHost(host)`, `ai.setPath(path)` — API configuration
+- Properties: `provider`, `model`, `host`
+
+### text — String & Document Processing
+- `text.read(path)` — read file into string
+- `text.sub(s, start, [len])` — substring
+- `text.replace(s, old, new)` — replace all occurrences
+- `text.write_pdf(path, text)` — create PDF; `write_pdf_a` for PDF/A archival
+- `text.read_pdf(path)` — extract text from PDF
+- `text.read_markdown(path)`, `text.write_markdown(path, text)` — Markdown
+- `text.read_yaml(path)`, `text.write_yaml(path, obj)` — YAML
+- `text.read_html(path)`, `text.write_html(path, text)` — HTML
+- `text.read_xml(path)`, `text.write_xml(path, text)` — XML
+- `text.read_fits_header(path)` — read FITS file header as object
+- `text.read_hdf_header(path)` — read HDF5 file header as object
+
+### geo — GIS & Geolocation
+- `geo.lookup()` — IP-based geolocation (`.lat`, `.lon`, `.city`, `.country`)
+- `geo.distance(lat1, lon1, lat2, lon2)` — Haversine distance in km
+- `geo.write_geojson(path, features)` — write GeoJSON FeatureCollection
+- `geo.history(plate)` — geological history of a tectonic plate (AI-assisted)
+- `geo.plot2d(data, [layout])` — 2D Plotly map (open-street-map / scattermapbox)
+- `geo.plot3d(data, [layout])` — 3D globe visualization (orthographic scattergeo)
+
+### astro — Astrophysics & Planetary Science
+Constants: `G`, `c`, `AU`, `pc`, `ly`, `Msun`, `Rsun`, `Lsun`, `Tsun`, `Mearth`, `Rearth`, `H0`, `sigma_sb`
+
+Unit conversions: `to_ly(pc)`, `to_pc(ly)`, `to_au(m)`, `deg_to_rad(d)`, `rad_to_deg(r)`
+
+Stellar: `luminosity(R,T)`, `stefan_boltzmann(T,R)`, `wien(T)`, `abs_magnitude(m,d_pc)`,
+`distance_modulus(d_pc)`, `spectral_class(T)`, `schwarzschild_radius(M)`, `escape_velocity(M,R)`
+
+Orbital: `orbital_period(a_au,M_msun)`, `orbital_velocity(a_m,M_kg)`, `hill_sphere(a,mp,ms)`,
+`roche_limit(R,rho_p,rho_s)`, `synodic_period(p1,p2)`, `planet(name)` → Mercury…Neptune
+
+Solar: `solar_flux(dist_au)`, `solar_wind_pressure(n_cm3,v_km_s)`, `sunspot_cycle(year)`,
+`parker_spiral_angle(v_sw,dist_au)`, `solar_activity()`
+
+Cosmology: `hubble_distance(z)`, `redshift_velocity(z)`, `lookback_time(z)`, `critical_density()`
+
+Coordinates: `equatorial_to_galactic(ra,dec)`, `angular_separation(ra1,dec1,ra2,dec2)`
+
+Exoplanet: `transit_depth(rp_rearth,rs_rsun)`, `habitable_zone(L_lsun)`, `equilibrium_temp(L,d,A)`
+
+Pulsar: `pulsar_spindown(P_s, Pdot)` → `{age_yr, Bfield_G, edot_W}`
+
+### mobl — Mobile & Cross-Platform PWA
+```
+use "mobl.gm"
+mobl phone("device_name")
+phone.dictate(spoken_text)          # NLP parse → JSON {title, note, tags}
+phone.make_feature(lat, lon, text)  # GPS + dictation → GeoJSON Feature
+```
+Browser supplies GPS (Geolocation API) + speech (Web Speech API). Gem server handles NLP, GeoJSON assembly, and file persistence.
+
+Routes: `/` → PWA HTML, `/log` → POST `{lat,lon,text}`, `/data` → GET GeoJSON FeatureCollection
+
+### fin — Financial Engineering
+- `fin.ticker(symbol)` — real-time market data via yfinance
+- `fin.high_yield_bonds()`, `fin.high_yield_etfs()`, `fin.high_yield_equities()` — top 50 from TradingView
+- `fin.bs_price(type, strike, spot, rate, vol, t)` — European option pricing
+- `fin.greeks(type, strike, spot, rate, vol, t)` → NPV, Delta, Gamma, Theta, Vega
+- `fin.date(d,m,y)`, `fin.calendar(name)`, `fin.is_holiday(cal,d,m,y)`, `fin.add_days(...)`, `fin.diff_days(...)`
+
+### bsm — Black-Scholes-Merton
+Inherits all `fin` methods, plus:
+- `bsm.price_american(symbol, type, duration)` — PDE-enhanced American option pricing (`weekly`/`monthly`/`quarterly`)
+
+### chart — Interactive Plotting (Plotly.js)
+- `chart.plot(traces, [layout])` — generate interactive HTML chart
+- `chart.show(path)` — open chart in browser
+- `chart.server(path, [port])` — serve chart via background HTTP server
+
+### data — Data Science
+- `data.read_csv(path)` — read CSV into vector of row objects
+- `data.mean(vector)` — arithmetic mean
+- `data.std(vector)` — sample standard deviation
+
+### rex — Regular Expressions (ECMAScript)
+All functions accept optional flags string (`"i"` = case-insensitive):
+- `rex.match(text, pattern, [flags])` → bool
+- `rex.find(text, pattern, [flags])` → first match string
+- `rex.findall(text, pattern, [flags])` → list of all matches
+- `rex.groups(text, pattern, [flags])` → capture groups from first match
+- `rex.sub(text, pattern, repl, [flags])` → replace first match
+- `rex.gsub(text, pattern, repl, [flags])` → replace all matches
+- `rex.split(text, pattern, [flags])` → split on pattern
+- `rex.count(text, pattern, [flags])` → count non-overlapping matches
+
+### algo — Algorithms & Time
+- `algo.add(...)` — sum all numeric arguments
+- `algo.quicksort(v)`, `algo.sort(v, [start], [end])` — sort numeric vectors
+- `algo.now()` — current local time as string
+- `algo.date_add(ts, days)`, `algo.date_diff(t1, t2)` — date arithmetic
+
+### tcp — TCP/IP Networking
+- `tcp.listen(port)`, `tcp.accept(fd)`, `tcp.connect(host, port)` — socket management
+- `tcp.send(fd, msg)`, `tcp.recv(fd, [size])`, `tcp.close(fd)` — data transfer
+- `tcp.nic()` — network interface configurations
+- `tcp.routes()` — system routing table
+
+### container — Docker & Kubernetes
+- `container.docker_run(image, cmd)`, `docker_ps()`, `docker_build(path, tag)`, `docker_stop(id)`
+- `container.k3s_apply(yaml)`, `k3s_get(resource)`, `k3s_pods()`, `k3s_nodes()`, `k3s_logs(pod)`
+
+### vm — Vagrant VMs
+- `vm.init(box)`, `vm.up()`, `vm.ssh(cmd)`, `vm.status()`, `vm.halt()`, `vm.destroy()`
+
+### drvr — Device Driver Development
+- `drvr.linux(name)`, `drvr.win11(name)`, `drvr.macos(name)`, `drvr.android(name)` — generate driver templates
+- `drvr.build(target)`, `drvr.deploy(target)` — cross-platform build and deploy
+
+### Other Builtins
+- **`nlp`** — Natural Language Processing
+- **`bev`** — Bevington data reduction: `data(x,y)`, `fit_line()`, `param(idx)`
+- **`file`** — `file.write(path, content)`, `file.exists(path)`
+- **`zip`** — `zip.compress(src, archive)`, `zip.decompress(archive, dest)`
+- **`img`** — `img.resize(src, width, height, dest)`
+- **`cpp`** — `cpp.repl()`, `cpp.exec(code)` — C++26 JIT via Cling
+- **`itr`** — `itr.range(n)`, `itr.while(cond_fun, body_fun)`
+- **`go`**, **`ruby`**, **`node`**, **`rust`** — polyglot `run(input)` + language-specific helpers
 
 ---
 

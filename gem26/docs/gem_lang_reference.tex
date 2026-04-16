@@ -140,7 +140,7 @@ development.
   Gemini, Mistral, and Ollama.
 \item
   \textbf{Polyglot Interop}: \texttt{use} keyword bridges Python, Julia,
-  R, Fortran, C++ on-the-fly.
+  R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly.
 \item
   \textbf{Mobile \& Cross-Platform}: \texttt{mobl} object + browser PWA
   (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and
@@ -148,11 +148,18 @@ development.
 \item
   \textbf{Domain-Specific Built-ins}: \texttt{fin}, \texttt{bsm},
   \texttt{bev}, \texttt{geo}, \texttt{data}, \texttt{chart},
-  \texttt{mobl} built into the runtime.
+  \texttt{mobl}, \texttt{astro}, \texttt{nlp} built into the runtime.
 \item
   \textbf{Regular Expressions}: \texttt{rex} builtin provides full
   ECMAScript regex --- match, find, findall, groups, sub, gsub, split,
   count.
+\item
+  \textbf{Symbolic Math}: \texttt{math} builtin supports symbolic
+  differentiation, integration, simplification, and LaTeX output via
+  SymPy/Sage.
+\item
+  \textbf{Astrophysics}: \texttt{astro} builtin covers stellar physics,
+  orbital mechanics, cosmology, solar physics, and exoplanets.
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -334,6 +341,7 @@ Hardware}\label{system-programming-hardware}
 \NormalTok{  {-} All variables must be initialized: \textquotesingle{}int x = 0\textquotesingle{}}
 \NormalTok{  {-} Global variables start with underscore: \textquotesingle{}\_config = 1\textquotesingle{}}
 \NormalTok{  {-} Use \textquotesingle{}use "file.py"\textquotesingle{} to translate and run foreign code.}
+\NormalTok{  {-} Use \textquotesingle{}langport("*.py", "out.gm")\textquotesingle{} to port and save code.}
 \NormalTok{  {-} Use \textquotesingle{}lib\textquotesingle{} to see all loaded modules.}
 \NormalTok{  {-} Use \textquotesingle{}his\textquotesingle{} to view today\textquotesingle{}s session history.}
 
@@ -345,7 +353,7 @@ Hardware}\label{system-programming-hardware}
 \NormalTok{  gem {-}t \textless{}file\textgreater{} [{-}o output] {-} AI{-}assisted translation to Gem.}
 
 \NormalTok{Available Builtin Modules:}
-\NormalTok{  sys, math, ai, text, rex, algo, bev, file, zip, img, geo, mobl,}
+\NormalTok{  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, geo, mobl,}
 \NormalTok{  cpp, tcp, itr, data, container, vm, go, ruby, node, rust,}
 \NormalTok{  fin, bsm, chart, astro, drvr}
 
@@ -353,9 +361,241 @@ Hardware}\label{system-programming-hardware}
 \NormalTok{  fun, obj, use, alias, his, lib, end, if, while,}
 \NormalTok{  int, double, string, bool, exit}
 
+\NormalTok{Mobile \& Cross{-}Platform:}
+\NormalTok{  use "mobl.gm" then: mobl phone("name")  phone.dictate(text)  phone.make\_feature(lat,lon,text)}
+\NormalTok{  ./gem travel\_log.g  ->  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)}
+
 \NormalTok{Detailed help: help "topic"  or  help(topic)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Builtin Module Reference}\label{builtin-module-reference}
+
+\subsubsection{sys --- System Root Module}\label{sys-system-root-module}
+
+Every object inherits from \texttt{sys}. Methods:
+\begin{itemize}
+\tightlist
+\item \texttt{sys.print(...)} --- print to stdout
+\item \texttt{sys.args()} --- command-line arguments as a vector
+\item \texttt{sys.async(func, [params], [timeout])} --- run function in background thread
+\item \texttt{sys.sethandler(signals, func)} --- set custom signal handler
+\item \texttt{sys.host()} --- OS information string
+\item \texttt{sys.exec(cmd)} --- execute a shell command
+\item \texttt{sys.doc([path])} --- read file comments or current script comments
+\item \texttt{sys.help([topic])} --- interactive help
+\item \texttt{sys.exit()} --- exit the REPL or script
+\item \texttt{sys.langport(pattern, [output])} --- port foreign code (e.g.\ \texttt{*.py}) to Gem
+\item \texttt{sys.redirect(url, [port])} --- HTTP redirect or background redirect server
+\item \texttt{sys.app(port, [routes])} --- background web app server; routes map paths to strings, files, or handler functions
+\end{itemize}
+
+\subsubsection{math --- Mathematics \& Symbolic Math}\label{math-mathematics-symbolic-math}
+
+Standard functions: \texttt{sin(x)}, \texttt{cos(x)}, \texttt{sqrt(x)}, constant \texttt{math.pi}.
+
+Symbolic math (SymPy/Sage backend):
+\begin{itemize}
+\tightlist
+\item \texttt{math.useSymPy()}, \texttt{math.useSage()} --- switch symbolic provider
+\item \texttt{math.simplify(expr)} --- symbolic simplification
+\item \texttt{math.diff(expr, [var])} --- symbolic differentiation
+\item \texttt{math.integrate(expr, [var])} --- symbolic integration
+\item \texttt{math.solve(expr, [var])} --- solve algebraic equation
+\item \texttt{math.sym\_latex(expr)} --- LaTeX for a symbolic expression
+\item \texttt{math.to\_latex(val)} --- convert value or matrix to LaTeX string
+\item \texttt{math.write\_latex(path, content, [standalone])} --- write LaTeX to file
+\item \texttt{math.read\_latex(path)} --- read content from LaTeX document environment
+\item \texttt{math.parse\_latex(text)} --- extract math expressions from text (\texttt{\$...\$})
+\item \texttt{math.compile\_latex(path)} --- run pdflatex on a file
+\end{itemize}
+
+\subsubsection{ai --- AI Integration}\label{ai-integration}
+
+Supports Gemini (default), Mistral, and Ollama:
+\begin{itemize}
+\tightlist
+\item \texttt{ai.prompt(text)} --- send prompt to current provider
+\item \texttt{ai.prompt\_native(text)} --- high-speed native Mistral C++ bridge
+\item \texttt{ai.useMistral(model)}, \texttt{ai.useOllama(model, [host])}, \texttt{ai.useGemini()} --- switch provider
+\item \texttt{ai.setKey(key)}, \texttt{ai.setHost(host)}, \texttt{ai.setPath(path)} --- API configuration
+\item Properties: \texttt{provider}, \texttt{model}, \texttt{host}
+\end{itemize}
+
+\subsubsection{text --- String \& Document Processing}\label{text-string-document-processing}
+
+\begin{itemize}
+\tightlist
+\item \texttt{text.read(path)} --- read file into string
+\item \texttt{text.sub(s, start, [len])} --- substring
+\item \texttt{text.replace(s, old, new)} --- replace all occurrences
+\item \texttt{text.write\_pdf(path, text)} --- create PDF; \texttt{write\_pdf\_a} for PDF/A archival
+\item \texttt{text.read\_pdf(path)} --- extract text from PDF
+\item \texttt{text.read\_markdown(path)}, \texttt{text.write\_markdown(path, text)} --- Markdown
+\item \texttt{text.read\_yaml(path)}, \texttt{text.write\_yaml(path, obj)} --- YAML
+\item \texttt{text.read\_html(path)}, \texttt{text.write\_html(path, text)} --- HTML
+\item \texttt{text.read\_xml(path)}, \texttt{text.write\_xml(path, text)} --- XML
+\item \texttt{text.read\_fits\_header(path)} --- read FITS file header as object
+\item \texttt{text.read\_hdf\_header(path)} --- read HDF5 file header as object
+\end{itemize}
+
+\subsubsection{geo --- GIS \& Geolocation}\label{geo-gis-geolocation}
+
+\begin{itemize}
+\tightlist
+\item \texttt{geo.lookup()} --- IP-based geolocation (\texttt{.lat}, \texttt{.lon}, \texttt{.city}, \texttt{.country})
+\item \texttt{geo.distance(lat1, lon1, lat2, lon2)} --- Haversine distance in km
+\item \texttt{geo.write\_geojson(path, features)} --- write GeoJSON FeatureCollection
+\item \texttt{geo.history(plate)} --- geological history of a tectonic plate (AI-assisted)
+\item \texttt{geo.plot2d(data, [layout])} --- 2D Plotly map (open-street-map / scattermapbox)
+\item \texttt{geo.plot3d(data, [layout])} --- 3D globe visualization (orthographic scattergeo)
+\end{itemize}
+
+\subsubsection{astro --- Astrophysics \& Planetary Science}\label{astro-astrophysics}
+
+Constants: \texttt{G}, \texttt{c}, \texttt{AU}, \texttt{pc}, \texttt{ly}, \texttt{Msun}, \texttt{Rsun}, \texttt{Lsun}, \texttt{Tsun}, \texttt{Mearth}, \texttt{Rearth}, \texttt{H0}, \texttt{sigma\_sb}
+
+Unit conversions: \texttt{to\_ly(pc)}, \texttt{to\_pc(ly)}, \texttt{to\_au(m)}, \texttt{deg\_to\_rad(d)}, \texttt{rad\_to\_deg(r)}
+
+Stellar: \texttt{luminosity(R,T)}, \texttt{stefan\_boltzmann(T,R)}, \texttt{wien(T)}, \texttt{abs\_magnitude(m,d\_pc)},
+\texttt{distance\_modulus(d\_pc)}, \texttt{spectral\_class(T)}, \texttt{schwarzschild\_radius(M)}, \texttt{escape\_velocity(M,R)}
+
+Orbital: \texttt{orbital\_period(a\_au,M\_msun)}, \texttt{orbital\_velocity(a\_m,M\_kg)}, \texttt{hill\_sphere(a,mp,ms)},
+\texttt{roche\_limit(R,rho\_p,rho\_s)}, \texttt{synodic\_period(p1,p2)}, \texttt{planet(name)} $\to$ Mercury\ldots{}Neptune
+
+Solar: \texttt{solar\_flux(dist\_au)}, \texttt{solar\_wind\_pressure(n\_cm3,v\_km\_s)}, \texttt{sunspot\_cycle(year)},
+\texttt{parker\_spiral\_angle(v\_sw,dist\_au)}, \texttt{solar\_activity()}
+
+Cosmology: \texttt{hubble\_distance(z)}, \texttt{redshift\_velocity(z)}, \texttt{lookback\_time(z)}, \texttt{critical\_density()}
+
+Coordinates: \texttt{equatorial\_to\_galactic(ra,dec)}, \texttt{angular\_separation(ra1,dec1,ra2,dec2)}
+
+Exoplanet: \texttt{transit\_depth(rp\_rearth,rs\_rsun)}, \texttt{habitable\_zone(L\_lsun)}, \texttt{equilibrium\_temp(L,d,A)}
+
+Pulsar: \texttt{pulsar\_spindown(P\_s, Pdot)} $\to$ \texttt{\{age\_yr, Bfield\_G, edot\_W\}}
+
+\subsubsection{mobl --- Mobile \& Cross-Platform PWA}\label{mobl-mobile}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{use "mobl.gm"}
+\NormalTok{mobl phone("device\_name")}
+\NormalTok{phone.dictate(spoken\_text)         \# NLP parse -> JSON \{title, note, tags\}}
+\NormalTok{phone.make\_feature(lat, lon, text) \# GPS + dictation -> GeoJSON Feature}
+\end{Highlighting}
+\end{Shaded}
+
+Browser supplies GPS (Geolocation API) + speech (Web Speech API). Gem server handles NLP, GeoJSON assembly, and file persistence.
+
+Routes: \texttt{/} $\to$ PWA HTML, \texttt{/log} $\to$ POST \texttt{\{lat,lon,text\}}, \texttt{/data} $\to$ GET GeoJSON FeatureCollection
+
+\subsubsection{fin --- Financial Engineering}\label{fin-financial-engineering}
+
+\begin{itemize}
+\tightlist
+\item \texttt{fin.ticker(symbol)} --- real-time market data via yfinance
+\item \texttt{fin.high\_yield\_bonds()}, \texttt{fin.high\_yield\_etfs()}, \texttt{fin.high\_yield\_equities()} --- top 50 from TradingView
+\item \texttt{fin.bs\_price(type, strike, spot, rate, vol, t)} --- European option pricing
+\item \texttt{fin.greeks(type, strike, spot, rate, vol, t)} $\to$ NPV, Delta, Gamma, Theta, Vega
+\item \texttt{fin.date(d,m,y)}, \texttt{fin.calendar(name)}, \texttt{fin.is\_holiday(cal,d,m,y)}, \texttt{fin.add\_days(...)}, \texttt{fin.diff\_days(...)}
+\end{itemize}
+
+\subsubsection{bsm --- Black-Scholes-Merton}\label{bsm-black-scholes-merton}
+
+Inherits all \texttt{fin} methods, plus:
+\begin{itemize}
+\tightlist
+\item \texttt{bsm.price\_american(symbol, type, duration)} --- PDE-enhanced American option pricing (\texttt{weekly}/\texttt{monthly}/\texttt{quarterly})
+\end{itemize}
+
+\subsubsection{chart --- Interactive Plotting (Plotly.js)}\label{chart-interactive-plotting}
+
+\begin{itemize}
+\tightlist
+\item \texttt{chart.plot(traces, [layout])} --- generate interactive HTML chart
+\item \texttt{chart.show(path)} --- open chart in browser
+\item \texttt{chart.server(path, [port])} --- serve chart via background HTTP server
+\end{itemize}
+
+\subsubsection{data --- Data Science}\label{data-data-science}
+
+\begin{itemize}
+\tightlist
+\item \texttt{data.read\_csv(path)} --- read CSV into vector of row objects
+\item \texttt{data.mean(vector)} --- arithmetic mean
+\item \texttt{data.std(vector)} --- sample standard deviation
+\end{itemize}
+
+\subsubsection{rex --- Regular Expressions (ECMAScript)}\label{rex-regular-expressions}
+
+All functions accept optional flags string (\texttt{"i"} = case-insensitive):
+\begin{itemize}
+\tightlist
+\item \texttt{rex.match(text, pattern, [flags])} $\to$ bool
+\item \texttt{rex.find(text, pattern, [flags])} $\to$ first match string
+\item \texttt{rex.findall(text, pattern, [flags])} $\to$ list of all matches
+\item \texttt{rex.groups(text, pattern, [flags])} $\to$ capture groups from first match
+\item \texttt{rex.sub(text, pattern, repl, [flags])} $\to$ replace first match
+\item \texttt{rex.gsub(text, pattern, repl, [flags])} $\to$ replace all matches
+\item \texttt{rex.split(text, pattern, [flags])} $\to$ split on pattern
+\item \texttt{rex.count(text, pattern, [flags])} $\to$ count non-overlapping matches
+\end{itemize}
+
+\subsubsection{algo --- Algorithms \& Time}\label{algo-algorithms-time}
+
+\begin{itemize}
+\tightlist
+\item \texttt{algo.add(...)} --- sum all numeric arguments
+\item \texttt{algo.quicksort(v)}, \texttt{algo.sort(v, [start], [end])} --- sort numeric vectors
+\item \texttt{algo.now()} --- current local time as string
+\item \texttt{algo.date\_add(ts, days)}, \texttt{algo.date\_diff(t1, t2)} --- date arithmetic
+\end{itemize}
+
+\subsubsection{tcp --- TCP/IP Networking}\label{tcp-networking}
+
+\begin{itemize}
+\tightlist
+\item \texttt{tcp.listen(port)}, \texttt{tcp.accept(fd)}, \texttt{tcp.connect(host, port)} --- socket management
+\item \texttt{tcp.send(fd, msg)}, \texttt{tcp.recv(fd, [size])}, \texttt{tcp.close(fd)} --- data transfer
+\item \texttt{tcp.nic()} --- network interface configurations
+\item \texttt{tcp.routes()} --- system routing table
+\end{itemize}
+
+\subsubsection{container --- Docker \& Kubernetes}\label{container-docker-kubernetes}
+
+\begin{itemize}
+\tightlist
+\item \texttt{container.docker\_run(image, cmd)}, \texttt{docker\_ps()}, \texttt{docker\_build(path, tag)}, \texttt{docker\_stop(id)}
+\item \texttt{container.k3s\_apply(yaml)}, \texttt{k3s\_get(resource)}, \texttt{k3s\_pods()}, \texttt{k3s\_nodes()}, \texttt{k3s\_logs(pod)}
+\end{itemize}
+
+\subsubsection{vm --- Vagrant VMs}\label{vm-vagrant-vms}
+
+\texttt{vm.init(box)}, \texttt{vm.up()}, \texttt{vm.ssh(cmd)}, \texttt{vm.status()}, \texttt{vm.halt()}, \texttt{vm.destroy()}
+
+\subsubsection{drvr --- Device Driver Development}\label{drvr-device-driver-development}
+
+\begin{itemize}
+\tightlist
+\item \texttt{drvr.linux(name)}, \texttt{drvr.win11(name)}, \texttt{drvr.macos(name)}, \texttt{drvr.android(name)} --- generate driver templates
+\item \texttt{drvr.build(target)}, \texttt{drvr.deploy(target)} --- cross-platform build and deploy
+\end{itemize}
+
+\subsubsection{Other Builtins}\label{other-builtins}
+
+\begin{itemize}
+\tightlist
+\item \textbf{nlp} --- Natural Language Processing
+\item \textbf{bev} --- Bevington data reduction: \texttt{data(x,y)}, \texttt{fit\_line()}, \texttt{param(idx)}
+\item \textbf{file} --- \texttt{file.write(path, content)}, \texttt{file.exists(path)}
+\item \textbf{zip} --- \texttt{zip.compress(src, archive)}, \texttt{zip.decompress(archive, dest)}
+\item \textbf{img} --- \texttt{img.resize(src, width, height, dest)}
+\item \textbf{cpp} --- \texttt{cpp.repl()}, \texttt{cpp.exec(code)} --- C++26 JIT via Cling
+\item \textbf{itr} --- \texttt{itr.range(n)}, \texttt{itr.while(cond\_fun, body\_fun)}
+\item \textbf{go}, \textbf{ruby}, \textbf{node}, \textbf{rust} --- polyglot \texttt{run(input)} + language-specific helpers
+\end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
