@@ -114,6 +114,7 @@ public:
         builtins["mobl"] = std::make_shared<GemMobl>();
         builtins["seo"]  = std::make_shared<GemSEO>();
         builtins["trek"] = std::make_shared<GemTrek>();
+        builtins["art"]  = std::make_shared<GemArt>();
 
         auto caller = [this](const std::string& name, std::vector<std::shared_ptr<GemValue>> args) {
             return this->callUserFunction(name, args);
@@ -399,10 +400,12 @@ public:
             if (rawTokens[0].type == GEM_TOKEN_KEYWORD_END) {
                 if (skipDepth > 0) skipDepth--;
                 else {
-                    // Only resume if it's a plain 'end' (for if/while)
-                    // If there's a return expression, it's a function 'end'
                     if (rawTokens.size() <= 2) isSkipping = false;
                 }
+            }
+            // else at depth 0 flips execution: start running the else branch
+            if (rawTokens[0].type == GEM_TOKEN_KEYWORD_ELSE && skipDepth == 0) {
+                isSkipping = false;
             }
             return;
         }
@@ -424,6 +427,17 @@ public:
                     if (condBool) {
                         skippingStack.push(false); skipDepthStack.push(0);
                         for (const auto& bLine : rec.body) execute(bLine, true);
+                        skippingStack.pop(); skipDepthStack.pop();
+                    } else {
+                        // Run else branch if present (lines after "else" in body)
+                        bool inElse = false;
+                        skippingStack.push(false); skipDepthStack.push(0);
+                        for (const auto& bLine : rec.body) {
+                            GemTokenizer bt(bLine);
+                            auto bt0 = bt.nextToken();
+                            if (bt0.type == GEM_TOKEN_KEYWORD_ELSE) { inElse = true; continue; }
+                            if (inElse) execute(bLine, true);
+                        }
                         skippingStack.pop(); skipDepthStack.pop();
                     }
                 } else {
@@ -692,7 +706,12 @@ public:
                                     && !currentScope->resolve(tokens[p].text)
                                     && !builtins.count(tokens[p].text)
                                     && !userFunctions.count(tokens[p].text)
-                                    && !userClasses.count(tokens[p].text));
+                                    && !userClasses.count(tokens[p].text)
+                                    && tokens[p].text != "true"
+                                    && tokens[p].text != "false"
+                                    && tokens[p].text != "null"
+                                    && tokens[p].text != "nil"
+                                    && tokens[p].text != "nan");
                 auto val = rhsIsBareId
                     ? std::make_shared<GemValue>(tokens[p].text)
                     : parseExpression(tokens, p);
@@ -755,7 +774,26 @@ public:
             return;
         }
 
-        if (tokens[0].type == GEM_TOKEN_ID && tokens[0].text == "exit") running = false;
+        if (tokens[0].type == GEM_TOKEN_ID && tokens[0].text == "helpfull") {
+            auto sysVal = globalScope->resolve("sys");
+            if (sysVal && std::holds_alternative<std::shared_ptr<GemObject>>(sysVal->value))
+                std::get<std::shared_ptr<GemObject>>(sysVal->value)->call("helpfull", {});
+            return;
+        }
+
+        if (tokens[0].type == GEM_TOKEN_ID && tokens[0].text == "helpless") {
+            auto sysVal = globalScope->resolve("sys");
+            if (sysVal && std::holds_alternative<std::shared_ptr<GemObject>>(sysVal->value))
+                std::get<std::shared_ptr<GemObject>>(sysVal->value)->call("helpless", {});
+            return;
+        }
+
+        else if (tokens[0].type == GEM_TOKEN_ID && tokens[0].text == "quit") running = false;
+        else if (tokens[0].type == GEM_TOKEN_KEYWORD_ELSE) {
+            // Reached else after executing the true branch — skip until end
+            isSkipping = true;
+            skipDepth = 0;
+        }
         else if (tokens[0].type == GEM_TOKEN_KEYWORD_END) return;
         else if (tokens[0].type == GEM_TOKEN_DOT || tokens[0].type == GEM_TOKEN_DOT_DOT) {
             size_t p = 0;
@@ -770,7 +808,27 @@ public:
 
     std::shared_ptr<GemValue> parseExpression(const std::vector<GemToken>& tokens, size_t& pos) {
         std::lock_guard<std::recursive_mutex> lock(interpreterMutex);
+        return parseLogical(tokens, pos);
+    }
+
+    std::shared_ptr<GemValue> parseLogical(const std::vector<GemToken>& tokens, size_t& pos) {
         auto left = parseCompare(tokens, pos);
+        if (!left) return std::make_shared<GemValue>();
+        while (pos < tokens.size()) {
+            if (tokens[pos].type == GEM_TOKEN_AND || tokens[pos].type == GEM_TOKEN_OR) {
+                GemTokenType op = tokens[pos].type;
+                pos++;
+                auto right = parseCompare(tokens, pos);
+                bool l = left && !std::holds_alternative<std::monostate>(left->value) &&
+                         !(std::holds_alternative<double>(left->value) && std::get<double>(left->value) == 0.0) &&
+                         !(std::holds_alternative<bool>(left->value) && !std::get<bool>(left->value));
+                bool r = right && !std::holds_alternative<std::monostate>(right->value) &&
+                         !(std::holds_alternative<double>(right->value) && std::get<double>(right->value) == 0.0) &&
+                         !(std::holds_alternative<bool>(right->value) && !std::get<bool>(right->value));
+                if (op == GEM_TOKEN_AND) left = std::make_shared<GemValue>((bool)(l && r));
+                else                     left = std::make_shared<GemValue>((bool)(l || r));
+            } else break;
+        }
         return left;
     }
 
@@ -779,20 +837,29 @@ public:
         if (!left) return std::make_shared<GemValue>();
 
         while (pos < tokens.size()) {
-            if (tokens[pos].type == GEM_TOKEN_GREATER || tokens[pos].type == GEM_TOKEN_LESS || tokens[pos].type == GEM_TOKEN_COMPARE_EQUALS) {
-                GemTokenType op = tokens[pos].type;
+            GemTokenType op = tokens[pos].type;
+            if (op == GEM_TOKEN_GREATER || op == GEM_TOKEN_LESS || op == GEM_TOKEN_COMPARE_EQUALS ||
+                op == GEM_TOKEN_GREATER_EQ || op == GEM_TOKEN_LESS_EQ || op == GEM_TOKEN_NOT_EQUAL) {
                 pos++;
                 auto right = parseAddSub(tokens, pos);
                 if (left && right) {
                     if (std::holds_alternative<double>(left->value) && std::holds_alternative<double>(right->value)) {
                         double l = std::get<double>(left->value);
                         double r = std::get<double>(right->value);
-                        if (op == GEM_TOKEN_GREATER) left = std::make_shared<GemValue>((bool)(l > r));
-                        else if (op == GEM_TOKEN_LESS) left = std::make_shared<GemValue>((bool)(l < r));
+                        if      (op == GEM_TOKEN_GREATER)    left = std::make_shared<GemValue>((bool)(l > r));
+                        else if (op == GEM_TOKEN_LESS)       left = std::make_shared<GemValue>((bool)(l < r));
                         else if (op == GEM_TOKEN_COMPARE_EQUALS) left = std::make_shared<GemValue>((bool)(l == r));
-                    } else if (op == GEM_TOKEN_COMPARE_EQUALS) {
-                        // std::cout << "DEBUG Comparison: [" << left->toString() << "] == [" << right->toString() << "]" << std::endl;
-                        left = std::make_shared<GemValue>((bool)(left->toString() == right->toString()));
+                        else if (op == GEM_TOKEN_GREATER_EQ) left = std::make_shared<GemValue>((bool)(l >= r));
+                        else if (op == GEM_TOKEN_LESS_EQ)    left = std::make_shared<GemValue>((bool)(l <= r));
+                        else if (op == GEM_TOKEN_NOT_EQUAL)  left = std::make_shared<GemValue>((bool)(l != r));
+                    } else {
+                        std::string ls = left->toString(), rs = right->toString();
+                        if      (op == GEM_TOKEN_COMPARE_EQUALS) left = std::make_shared<GemValue>((bool)(ls == rs));
+                        else if (op == GEM_TOKEN_NOT_EQUAL)      left = std::make_shared<GemValue>((bool)(ls != rs));
+                        else if (op == GEM_TOKEN_GREATER)        left = std::make_shared<GemValue>((bool)(ls > rs));
+                        else if (op == GEM_TOKEN_LESS)           left = std::make_shared<GemValue>((bool)(ls < rs));
+                        else if (op == GEM_TOKEN_GREATER_EQ)     left = std::make_shared<GemValue>((bool)(ls >= rs));
+                        else if (op == GEM_TOKEN_LESS_EQ)        left = std::make_shared<GemValue>((bool)(ls <= rs));
                     }
                 }
             } else break;
@@ -930,6 +997,17 @@ public:
     std::shared_ptr<GemValue> parseTerm(const std::vector<GemToken>& tokens, size_t& pos) {
         if (pos >= tokens.size()) return std::make_shared<GemValue>();
 
+        // Handle ! prefix (logical not)
+        if (tokens[pos].type == GEM_TOKEN_UNKNOWN && tokens[pos].text == "!") {
+            pos++;
+            auto operand = parseTerm(tokens, pos);
+            if (!operand) return std::make_shared<GemValue>(true);
+            if (std::holds_alternative<bool>(operand->value)) return std::make_shared<GemValue>(!std::get<bool>(operand->value));
+            if (std::holds_alternative<double>(operand->value)) return std::make_shared<GemValue>(std::get<double>(operand->value) == 0.0);
+            if (std::holds_alternative<std::monostate>(operand->value)) return std::make_shared<GemValue>(true);
+            return std::make_shared<GemValue>(false);
+        }
+
         if (tokens[pos].type == GEM_TOKEN_NUMBER) {
             double v = tokens[pos].numberVal;
             pos++;
@@ -999,6 +1077,30 @@ public:
             pos++;
             
             if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_LPAREN) {
+                 // Built-in global functions
+                 if (name == "isnil" || name == "isnan" || name == "tonum" || name == "tostr") {
+                     pos++; // consume (
+                     std::shared_ptr<GemValue> arg = std::make_shared<GemValue>();
+                     if (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN) {
+                         arg = parseExpression(tokens, pos);
+                     }
+                     if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RPAREN) pos++;
+                     if (name == "isnil") {
+                         return std::make_shared<GemValue>((bool)(!arg || std::holds_alternative<std::monostate>(arg->value)));
+                     } else if (name == "isnan") {
+                         if (arg && std::holds_alternative<double>(arg->value))
+                             return std::make_shared<GemValue>((bool)std::isnan(std::get<double>(arg->value)));
+                         return std::make_shared<GemValue>(false);
+                     } else if (name == "tonum") {
+                         if (!arg || std::holds_alternative<std::monostate>(arg->value)) return std::make_shared<GemValue>(0.0);
+                         if (std::holds_alternative<double>(arg->value)) return arg;
+                         if (std::holds_alternative<bool>(arg->value)) return std::make_shared<GemValue>(std::get<bool>(arg->value) ? 1.0 : 0.0);
+                         try { return std::make_shared<GemValue>(std::stod(arg->toString())); } catch(...) {}
+                         return std::make_shared<GemValue>(std::numeric_limits<double>::quiet_NaN());
+                     } else { // tostr
+                         return std::make_shared<GemValue>(arg ? arg->toString() : std::string(""));
+                     }
+                 }
                  if (userClasses.count(name) || userFunctions.count(name)) {
                      bool isClass = userClasses.count(name);
                      pos++; // (
@@ -1017,7 +1119,14 @@ public:
             }
 
             auto res = currentScope->resolve(name);
-            return res ? res : std::make_shared<GemValue>();
+            if (res) return res;
+            // Built-in literals
+            if (name == "true")  return std::make_shared<GemValue>(true);
+            if (name == "false") return std::make_shared<GemValue>(false);
+            if (name == "null" || name == "nil") return std::make_shared<GemValue>();
+            if (name == "nan")   return std::make_shared<GemValue>(std::numeric_limits<double>::quiet_NaN());
+            // Built-in functions (no-arg call or with args already consumed above)
+            return std::make_shared<GemValue>();
         } else if (tokens[pos].type == GEM_TOKEN_KEYWORD_OBJ) {
             pos++;
             std::shared_ptr<GemObject> parent = GemObject::sysInstance;

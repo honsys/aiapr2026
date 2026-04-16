@@ -12,7 +12,7 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 - **First-Class AI Support**: Built-in `ai` object supports Gemini, Mistral, and Ollama.
 - **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
-- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread` built into the runtime.
+- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art` built into the runtime.
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
 - **Symbolic Math**: `math` builtin supports symbolic differentiation, integration, simplification, and LaTeX output via SymPy/Sage.
 - **Astrophysics**: `astro` builtin covers stellar physics, orbital mechanics, cosmology, solar physics, and exoplanets.
@@ -82,6 +82,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 11. Search Engine Optimization
 - **[40_seo.g](40_seo.g)**: `seo` builtin — crawl URLs, extract SEO signals (title, meta, headings, links), write JSON index, and print analysis report.
 
+### 12. ASCII Art & SVG
+- **[41_art.g](41_art.g)**: `art` builtin — generate ASCII art from text, convert to/from SVG, render mindmap/README/tutorial as ASCII art.
+
 ---
 
 ## Help & Builtins
@@ -108,20 +111,47 @@ CLI Options:
 Available Builtin Modules:
   sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
   cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
-  fin, bsm, chart, astro, mobl, trek, seo, drvr
+  fin, bsm, chart, astro, mobl, trek, seo, drvr, art
 
 Keywords for Documentation:
-  fun, obj, use, alias, his, lib, end, if, while,
-  int, double, string, bool, exit
+  fun, obj, use, alias, his, lib, end, if, else, while,
+  int, double, string, bool, exit, quit, langport,
+  true, false, null, nil, nan
+
+Builtin Functions:
+  isnil(x)  isnan(x)  tonum(x)  tostr(x)
+
+Operators:
+  Arithmetic:   +  -  *  /
+  Compound:     +=  -=  *=  /=
+  Comparison:   ==  !=  >  >=  <  <=
+  Logical:      !  (prefix not)  &&  ||
+  Separator:    ;  (multiple statements per line)
+  String concat: +
 
 Mobile & Cross-Platform:
   mobl phone("name")  phone.dictate(text)  phone.make_feature(lat,lon,text)
   ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)
 
 Detailed help: help "topic"  or  help(topic)
+Full reference: helpfull  or  sys.helpfull()  (writes helpfull_DATETIME.md, opens in viewer)
+Paged reference: helpless  or  sys.helpless()  (writes helpfull_DATETIME.md, pipes through less)
 ```
 
 ---
+
+## Builtin Functions & Literals
+
+| Item | Type | Description |
+|------|------|-------------|
+| `true` | literal bool | Boolean true |
+| `false` | literal bool | Boolean false |
+| `null` / `nil` | literal void | Null/void value (interchangeable) |
+| `nan` | literal double | IEEE 754 Not-a-Number |
+| `isnil(x)` | function | `→ bool` — true if x is nil/null/void |
+| `isnan(x)` | function | `→ bool` — true if x is NaN |
+| `tonum(x)` | function | `→ double` — parse to number; nan on failure |
+| `tostr(x)` | function | `→ string` — convert to string |
 
 ## Builtin Module Reference
 
@@ -216,6 +246,19 @@ Signals extracted: `title`, `description`, `keywords`, `og:title`, `og:descripti
 
 Comparisons: C++=`libcurl+custom parser` · Python=`scrapy/beautifulsoup4` · Julia=`HTTP.jl/Gumbo.jl` · Go=`colly/goquery` · Ruby=`nokogiri/mechanize` · Rust=`scraper/reqwest`
 
+### art — ASCII Art & SVG
+- `art.text_to_art(text, [font])` — render text as ASCII art via figlet/toilet (fallback: box)
+- `art.art_to_file(text, path)` — write ASCII art string to a text file
+- `art.art_to_svg(text, [path])` — convert ASCII art to SVG; returns SVG string
+- `art.svg_to_art(svg_path, [width])` — convert SVG to ASCII art via rsvg-convert + jp2a
+- `art.mindmap([path])` — render `docs/gem_mindmap.md` as ASCII art (mermaid mindmap)
+- `art.readme([path])` — render `README.md` headings as ASCII art summary
+- `art.tutorial([path])` — render `tutorial/README.md` as ASCII art summary
+
+Optional deps: `figlet`/`toilet` (text→art) · `mmdc` (mermaid CLI) · `rsvg-convert`+`jp2a` (SVG→art)
+
+Comparisons: C++=`libaa/figlet CLI` · Python=`pyfiglet/ascii_magic` · Julia=`no built-in` · Go=`no built-in` · Ruby=`artii gem` · Rust=`figlet-rs crate`
+
 ### trek — Travel Logs & OSM Mapping
 - `trek.new(path)` — create empty GeoJSON travel log
 - `trek.add(path, lat, lon, [title], [note])` — append waypoint
@@ -241,11 +284,12 @@ Routes: `/` → PWA HTML, `/log` → POST `{lat,lon,text}`, `/data` → GET GeoJ
 Comparisons: C++=`Qt` · Python=`Flask+SpeechRecognition` · Julia=`no built-in` · Go=`net/http+custom JS` · Ruby=`Rails+Web Speech` · Rust=`actix-web+custom JS`
 
 ### fin — Financial Engineering
-- `fin.ticker(symbol)` — real-time market data via yfinance
+- `fin.ticker(symbol)` — real-time market data via yfinance → `{.price,.volume,.open,.high,.low,.close,.pe_ratio,.market_cap,.dividend_yield}`
 - `fin.high_yield_bonds()`, `fin.high_yield_etfs()`, `fin.high_yield_equities()` — top 50 from TradingView
-- `fin.bs_price(type, strike, spot, rate, vol, t)` — European option pricing
-- `fin.greeks(type, strike, spot, rate, vol, t)` → NPV, Delta, Gamma, Theta, Vega
-- `fin.date(d,m,y)`, `fin.calendar(name)`, `fin.is_holiday(cal,d,m,y)`, `fin.add_days(...)`, `fin.diff_days(...)`
+- `fin.dashboard()` — serve financial dashboard on port 8082
+- `fin.bs_price(type, strike, spot, rate, vol, t)` — European option pricing → double
+- `fin.greeks(type, strike, spot, rate, vol, t)` → `{.npv, .delta, .gamma, .theta, .vega}`
+- `fin.date(d,m,y)` → `{.day,.month,.year,.serial,.str}`, `fin.calendar(name)`, `fin.is_holiday(cal,d,m,y)→bool`, `fin.add_days(d,m,y,n)→{.day,.month,.year,.str}`, `fin.diff_days(d1,m1,y1,d2,m2,y2)→double`
 
 Comparisons: C++=`QuantLib` · Python=`yfinance/quantlib-python` · Julia=`MarketData.jl/QuantLib.jl` · Go=`piquette/quantlib` · Ruby=`quantlib-ruby` · Rust=`ta crate`
 
@@ -291,10 +335,14 @@ Comparisons: C++=`std::regex` · Python=`re` · Julia=`Regex/match()` · Go=`reg
 Comparisons: C++=`std::sort/std::chrono` · Python=`sorted()/datetime` · Julia=`sort!()/Dates` · Go=`sort.Slice/time` · Ruby=`Array#sort!/Time` · Rust=`slice.sort/SystemTime`
 
 ### tcp — TCP/IP Networking
-- `tcp.listen(port)`, `tcp.accept(fd)`, `tcp.connect(host, port)` — socket management
-- `tcp.send(fd, msg)`, `tcp.recv(fd, [size])`, `tcp.close(fd)` — data transfer
-- `tcp.nic()` — network interface configurations
-- `tcp.routes()` — system routing table
+- `tcp.listen(port)→int` — bind server socket
+- `tcp.accept(fd)→{.fd,.addr}` — block for client connection
+- `tcp.connect(host, port)→int` — connect to server
+- `tcp.send(fd, msg)→int` — send string, returns bytes sent
+- `tcp.recv(fd, [size])→string` — receive data (default size 4096)
+- `tcp.close(fd)→bool` — close socket
+- `tcp.nic()→[{.name,.ip,.status}]` — network interface list
+- `tcp.routes()→[{.dest,.gw,.iface}]` — routing table
 
 Comparisons: C++=`POSIX socket/bind/listen` · Python=`socket.socket` · Julia=`Sockets.listen` · Go=`net.Listen` · Ruby=`TCPServer` · Rust=`TcpListener::bind`
 
@@ -319,6 +367,7 @@ Inherits all `www` methods, plus:
 - `cdn.stats()` — returns object with `.hits`, `.misses`, `.bytes`, `.cached_items`
 - `cdn.purge([path])` — evict one path or `"*"` to clear entire cache
 - `cdn.config(type, content)` — generate nginx/apache config
+- `cdn.dashboard()` — serve CDN stats dashboard on port 8083
 
 Comparisons: C++=`nginx/Varnish` · Python=`no built-in` · Julia=`no built-in` · Go=`groupcache` · Ruby=`rack-cache` · Rust=`no built-in`
 

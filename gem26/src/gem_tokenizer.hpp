@@ -16,8 +16,11 @@ enum GemTokenType {
     GEM_TOKEN_PLUS, GEM_TOKEN_MINUS, GEM_TOKEN_MUL, GEM_TOKEN_DIV,
     GEM_TOKEN_PLUS_EQUALS, GEM_TOKEN_MINUS_EQUALS, GEM_TOKEN_MUL_EQUALS, GEM_TOKEN_DIV_EQUALS,
     GEM_TOKEN_GREATER, GEM_TOKEN_LESS, GEM_TOKEN_COMPARE_EQUALS,
+    GEM_TOKEN_GREATER_EQ, GEM_TOKEN_LESS_EQ, GEM_TOKEN_NOT_EQUAL,
+    GEM_TOKEN_AND, GEM_TOKEN_OR,
     GEM_TOKEN_KEYWORD_FUN, GEM_TOKEN_KEYWORD_OBJ, GEM_TOKEN_KEYWORD_END, GEM_TOKEN_KEYWORD_USE, GEM_TOKEN_KEYWORD_LIB, GEM_TOKEN_KEYWORD_ALIAS,
     GEM_TOKEN_KEYWORD_IF, GEM_TOKEN_KEYWORD_WHILE, GEM_TOKEN_KEYWORD_HIS,
+    GEM_TOKEN_KEYWORD_ELSE,
     GEM_TOKEN_TYPE_INT, GEM_TOKEN_TYPE_DOUBLE, GEM_TOKEN_TYPE_STRING, GEM_TOKEN_TYPE_BOOL,
     GEM_TOKEN_EOF,
     GEM_TOKEN_UNKNOWN
@@ -99,8 +102,21 @@ public:
                     return {GEM_TOKEN_DIV_EQUALS, "/=", 0};
                 }
                 return {GEM_TOKEN_DIV, "/", 0};
-            case '>': return {GEM_TOKEN_GREATER, ">", 0};
-            case '<': return {GEM_TOKEN_LESS, "<", 0};
+            case '>':
+                if (pos < src.size() && src[pos] == '=') { pos++; return {GEM_TOKEN_GREATER_EQ, ">=", 0}; }
+                return {GEM_TOKEN_GREATER, ">", 0};
+            case '<':
+                if (pos < src.size() && src[pos] == '=') { pos++; return {GEM_TOKEN_LESS_EQ, "<=", 0}; }
+                return {GEM_TOKEN_LESS, "<", 0};
+            case '!':
+                if (pos < src.size() && src[pos] == '=') { pos++; return {GEM_TOKEN_NOT_EQUAL, "!=", 0}; }
+                return {GEM_TOKEN_UNKNOWN, "!", 0};
+            case '&':
+                if (pos < src.size() && src[pos] == '&') { pos++; return {GEM_TOKEN_AND, "&&", 0}; }
+                return {GEM_TOKEN_UNKNOWN, "&", 0};
+            case '|':
+                if (pos < src.size() && src[pos] == '|') { pos++; return {GEM_TOKEN_OR, "||", 0}; }
+                return {GEM_TOKEN_UNKNOWN, "|", 0};
             default: return {GEM_TOKEN_UNKNOWN, std::string(1, c), 0};
         }
     }
@@ -128,6 +144,7 @@ private:
         if (text == "lib") return {GEM_TOKEN_KEYWORD_LIB, text, 0};
         if (text == "alias") return {GEM_TOKEN_KEYWORD_ALIAS, text, 0};
         if (text == "if") return {GEM_TOKEN_KEYWORD_IF, text, 0};
+        if (text == "else") return {GEM_TOKEN_KEYWORD_ELSE, text, 0};
         if (text == "while") return {GEM_TOKEN_KEYWORD_WHILE, text, 0};
         if (text == "his") return {GEM_TOKEN_KEYWORD_HIS, text, 0};
         if (text == "int") return {GEM_TOKEN_TYPE_INT, text, 0};

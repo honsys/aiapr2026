@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.1)  16 APR 2026 15:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.1)  16 APR 2026 18:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -718,8 +718,7 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ef
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count337
-)
-No file gem_lang_tutorials.aux.
+) (./gem_lang_tutorials.aux)
 \openout1 = `gem_lang_tutorials.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
@@ -740,6 +739,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
+
 (/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count338
@@ -905,13 +905,19 @@ File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 al/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}
 
 ] [2]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-360.
+Underfull \hbox (badness 2042) in paragraph at lines 354--355
+[][]$\T1/lmr/bx/n/10 (+20) 41 _ art . g$[]\T1/lmr/m/n/10 (+20) : \T1/lmtt/m/n/1
+0 art \T1/lmr/m/n/10 (+20) builtin --- gen-er-ate ASCII art from text, con-vert
+ to/from SVG, ren-der
+ []
 
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+368.
 (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3]
-Overfull \hbox (3.24884pt too wide) in paragraph at lines 465--466
+) [3] [4{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.e
+nc}]
+Overfull \hbox (3.24884pt too wide) in paragraph at lines 497--498
 []\T1/lmr/m/n/10 (-20) Orbital: \T1/lmtt/m/n/10 orbital_period\T1/lmr/m/n/10 (-
 20) , \T1/lmtt/m/n/10 orbital_velocity\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 hi
 ll_sphere\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 roche_limit\T1/lmr/m/n/10 (-20)
@@ -919,8 +925,8 @@ ll_sphere\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 roche_limit\T1/lmr/m/n/10 (-20)
 name) 
  []
 
-[4]
-Overfull \hbox (16.24977pt too wide) in paragraph at lines 492--493
+
+Overfull \hbox (16.24977pt too wide) in paragraph at lines 524--525
 []\T1/lmr/m/it/10 (-20) Comparisons: \T1/lmr/m/n/10 (-20) C++=\T1/lmtt/m/n/10 m
 atplotlib-cpp/ROOT \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Python=\T1/lmtt
 /m/n/10 plotly/matplotlib \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Ju-lia=\
@@ -928,7 +934,7 @@ T1/lmtt/m/n/10 Plots.jl/Makie.jl
  []
 
 
-Underfull \hbox (badness 2469) in paragraph at lines 498--499
+Underfull \hbox (badness 2469) in paragraph at lines 530--531
 []\T1/lmr/m/it/10 (+20) Comparisons: \T1/lmr/m/n/10 (+20) C++=\T1/lmtt/m/n/10 P
 OSIX socket \TS1/lmr/m/n/10 (+20) · \T1/lmr/m/n/10 (+20) Python=\T1/lmtt/m/n/10
  socket.socket \TS1/lmr/m/n/10 (+20) · \T1/lmr/m/n/10 (+20) Ju-lia=\T1/lmtt/m/n
@@ -936,7 +942,7 @@ OSIX socket \TS1/lmr/m/n/10 (+20) · \T1/lmr/m/n/10 (+20) Python=\T1/lmtt/m/n/10
  []
 
 
-Overfull \hbox (0.79666pt too wide) in paragraph at lines 500--501
+Overfull \hbox (0.79666pt too wide) in paragraph at lines 532--533
 []\T1/lmr/bx/n/10 (-20) www\T1/lmr/m/n/10 (-20) : \T1/lmtt/m/n/10 wget(url,file
 )\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 app(port,[routes])\T1/lmr/m/n/10 (-20) 
 , \T1/lmtt/m/n/10 redirect(target,[port])\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10
@@ -944,7 +950,7 @@ Overfull \hbox (0.79666pt too wide) in paragraph at lines 500--501
  []
 
 
-Underfull \hbox (badness 7740) in paragraph at lines 501--502
+Underfull \hbox (badness 7740) in paragraph at lines 533--534
 []\T1/lmr/m/it/10 (+20) Comparisons: \T1/lmr/m/n/10 (+20) C++=\T1/lmtt/m/n/10 c
 pp-httplib/Crow \TS1/lmr/m/n/10 (+20) · \T1/lmr/m/n/10 (+20) Python=\T1/lmtt/m/
 n/10 Flask/FastAPI \TS1/lmr/m/n/10 (+20) · \T1/lmr/m/n/10 (+20) Ju-lia=\T1/lmtt
@@ -952,7 +958,7 @@ n/10 Flask/FastAPI \TS1/lmr/m/n/10 (+20) · \T1/lmr/m/n/10 (+20) Ju-lia=\T1/lmtt
  []
 
 
-Overfull \hbox (44.76472pt too wide) in paragraph at lines 504--505
+Overfull \hbox (44.76472pt too wide) in paragraph at lines 536--537
 []\T1/lmr/m/it/10 (-20) Comparisons: \T1/lmr/m/n/10 (-20) C++=\T1/lmtt/m/n/10 D
 ocker SDK \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Python=\T1/lmtt/m/n/10 d
 ocker-py/kubernetes \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Go=\T1/lmtt/m/
@@ -960,14 +966,14 @@ n/10 docker/client/k8s.io/client-go
  []
 
 
-Overfull \hbox (14.09006pt too wide) in paragraph at lines 506--507
+Overfull \hbox (14.09006pt too wide) in paragraph at lines 538--539
 []\T1/lmr/bx/n/10 (-20) seo\T1/lmr/m/n/10 (-20) : \T1/lmtt/m/n/10 index(urls, o
 utput_path) \T1/lmr/m/n/10 (-20) --- crawl URLs, ex-tract SEO sig-nals, write J
 SON; \T1/lmtt/m/n/10 analyze(index_path)
  []
 
-
-Overfull \hbox (24.42462pt too wide) in paragraph at lines 510--511
+[5]
+Overfull \hbox (24.42462pt too wide) in paragraph at lines 542--543
 []\T1/lmr/m/it/10 (-20) Comparisons: \T1/lmr/m/n/10 (-20) C++=\T1/lmtt/m/n/10 Q
 t \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Python=\T1/lmtt/m/n/10 Flask+Spe
 echRecognition \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Ju-lia=no built-in 
@@ -975,25 +981,20 @@ echRecognition \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Ju-lia=no built-in
 
  []
 
-[5{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
 [6] (./gem_lang_tutorials.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 24547 strings out of 469006
- 450154 string characters out of 5454814
- 873921 words of memory out of 5000000
- 52683 multiletter control sequences out of 15000+600000
+ 24556 strings out of 469006
+ 450312 string characters out of 5454814
+ 875448 words of memory out of 5000000
+ 52688 multiletter control sequences out of 15000+600000
  693468 words of font info for 142 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 102i,12n,107p,1015b,879s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,12n,107p,1015b,784s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
 sr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
 cal/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/te
@@ -1006,10 +1007,10 @@ ts/type1/public/lm/lmss10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/p
 ublic/lm/lmtt10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public
 /lm/lmtti10.pfb>
-Output written on gem_lang_tutorials.pdf (6 pages, 306024 bytes).
+Output written on gem_lang_tutorials.pdf (6 pages, 307464 bytes).
 PDF statistics:
- 269 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
- 34 named destinations out of 1000 (max. 500000)
- 39141 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 278 PDF objects out of 1000 (max. 8388607)
+ 239 compressed objects within 3 object streams
+ 36 named destinations out of 1000 (max. 500000)
+ 39157 words of extra memory for PDF output out of 42996 (max. 10000000)
 

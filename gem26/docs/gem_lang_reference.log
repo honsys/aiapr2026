@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.1)  16 APR 2026 15:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.1)  16 APR 2026 18:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -718,8 +718,7 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ef
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count337
-)
-No file gem_lang_reference.aux.
+) (./gem_lang_reference.aux)
 \openout1 = `gem_lang_reference.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
@@ -740,6 +739,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
+
 (/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count338
@@ -905,19 +905,25 @@ File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 al/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}
 
 ] [2]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-360.
+Underfull \hbox (badness 2042) in paragraph at lines 354--355
+[][]$\T1/lmr/bx/n/10 (+20) 41 _ art . g$[]\T1/lmr/m/n/10 (+20) : \T1/lmtt/m/n/1
+0 art \T1/lmr/m/n/10 (+20) builtin --- gen-er-ate ASCII art from text, con-vert
+ to/from SVG, ren-der
+ []
 
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+368.
 (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3] [4]
-Overfull \hbox (7.48688pt too wide) in paragraph at lines 469--470
+) [3] [4{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.e
+nc}]
+Overfull \hbox (7.48688pt too wide) in paragraph at lines 501--502
 []\T1/lmr/m/it/10 (-20) Comparisons: \T1/lmr/m/n/10 (-20) C++= extttstd::string
 /fstream/pugixml extpe-ri-od-cen-tered Python= extttstr/pypdf/pyyaml/lxml
  []
 
 
-Overfull \hbox (37.48079pt too wide) in paragraph at lines 491--493
+Overfull \hbox (37.48079pt too wide) in paragraph at lines 523--525
 []\T1/lmr/m/n/10 (-20) Stellar: \T1/lmtt/m/n/10 luminosity(R,T)\T1/lmr/m/n/10 (
 -20) , \T1/lmtt/m/n/10 stefan_boltzmann(T,R)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n
 /10 wien(T)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 abs_magnitude(m,d_pc)\T1/lmr/
@@ -925,74 +931,63 @@ m/n/10 (-20) , \T1/lmtt/m/n/10 distance_modulus(d_pc)\T1/lmr/m/n/10 (-20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 494--496
+Underfull \hbox (badness 10000) in paragraph at lines 526--528
 []\T1/lmr/m/n/10 (+20) Orbital: \T1/lmtt/m/n/10 orbital_period(a_au,M_msun)\T1/
 lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 orbital_velocity(a_m,M_kg)\T1/lmr/m/n/10 (+2
 0) , \T1/lmtt/m/n/10 hill_sphere(a,mp,ms)\T1/lmr/m/n/10 (+20) ,
  []
 
 
-Overfull \hbox (121.4915pt too wide) in paragraph at lines 497--499
+Overfull \hbox (121.4915pt too wide) in paragraph at lines 529--531
 []\T1/lmr/m/n/10 (-20) Solar: \T1/lmtt/m/n/10 solar_flux(dist_au)\T1/lmr/m/n/10
  (-20) , \T1/lmtt/m/n/10 solar_wind_pressure(n_cm3,v_km_s)\T1/lmr/m/n/10 (-20) 
 , \T1/lmtt/m/n/10 sunspot_cycle(year)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 par
 ker_spiral_angle(v_sw,dist_au)\T1/lmr/m/n/10 (-20) ,
  []
 
-
-Overfull \hbox (17.50076pt too wide) in paragraph at lines 519--520
+[5]
+Overfull \hbox (17.50076pt too wide) in paragraph at lines 551--552
 []\T1/lmr/m/it/10 (-20) Comparisons: \T1/lmr/m/n/10 (-20) C++=\T1/lmtt/m/n/10 l
 ibcurl+custom parser \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Python=\T1/lm
 tt/m/n/10 scrapy/beautifulsoup4 \TS1/lmr/m/n/10 (-20) · \T1/lmr/m/n/10 (-20) Ju
 -lia=\T1/lmtt/m/n/10 HTTP.jl/Gumbo.jl
  []
 
-[5{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 561--562
-[]\T1/lmtt/m/n/10 fin.date(d,m,y)\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 fin.cal
-endar(name)\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 fin.is_holiday(cal,d,m,y)\T1/
-lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 fin.add_days(...)\T1/lmr/m/n/10 (+20) ,
- []
-
-
-Underfull \hbox (badness 4279) in paragraph at lines 573--574
+[6]
+Underfull \hbox (badness 4279) in paragraph at lines 622--623
 []\T1/lmtt/m/n/10 bsm.price_american(symbol, type, duration) \T1/lmr/m/n/10 (+2
 0) --- PDE-enhanced Amer-i-can op-tion pric-ing
  []
 
-[6] [7]
-Overfull \hbox (27.4936pt too wide) in paragraph at lines 681--682
+[7] [8]
+Overfull \hbox (27.4936pt too wide) in paragraph at lines 730--731
 []\T1/lmtt/m/n/10 k3s.docker_run(image, cmd)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n
 /10 k3s.docker_ps()\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 k3s.docker_build(path
 , tag)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 k3s.docker_stop(id) 
  []
 
 
-Overfull \hbox (27.41026pt too wide) in paragraph at lines 682--683
+Overfull \hbox (27.41026pt too wide) in paragraph at lines 731--732
 []\T1/lmtt/m/n/10 k3s.k3s_apply(yaml)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 k3s
 .k3s_get(resource)\T1/lmr/m/n/10 (-20) , \T1/lmtt/m/n/10 k3s.k3s_pods()\T1/lmr/
 m/n/10 (-20) , \T1/lmtt/m/n/10 k3s.k3s_nodes()\T1/lmr/m/n/10 (-20) , \T1/lmtt/m
 /n/10 k3s.k3s_logs(pod) 
  []
 
-[8] [9] (./gem_lang_reference.aux)
+[9] [10] (./gem_lang_reference.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 24654 strings out of 469006
- 451502 string characters out of 5454814
- 874915 words of memory out of 5000000
- 52724 multiletter control sequences out of 15000+600000
- 695818 words of font info for 165 fonts, out of 8000000 for 9000
+ 24671 strings out of 469006
+ 451768 string characters out of 5454814
+ 877486 words of memory out of 5000000
+ 52733 multiletter control sequences out of 15000+600000
+ 695883 words of font info for 166 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 102i,12n,107p,1015b,778s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,13n,107p,1015b,875s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
 sr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
 cal/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/te
@@ -1005,10 +1000,10 @@ ts/type1/public/lm/lmss10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/p
 ublic/lm/lmtt10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public
 /lm/lmtti10.pfb>
-Output written on gem_lang_reference.pdf (9 pages, 319626 bytes).
+Output written on gem_lang_reference.pdf (10 pages, 322760 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 314 compressed objects within 4 object streams
- 54 named destinations out of 1000 (max. 500000)
- 39277 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 375 PDF objects out of 1000 (max. 8388607)
+ 331 compressed objects within 4 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 39301 words of extra memory for PDF output out of 42996 (max. 10000000)
 

@@ -135,7 +135,7 @@ MINIZ_SRCS = src/miniz.c src/miniz_tdef.c src/miniz_tinfl.c src/miniz_zip.c
 MINIZ_OBJS = $(MINIZ_SRCS:.c=.o)
 BEV_SRCS   = ccbevington/CppLibrary/FitUtil.cpp ccbevington/CppLibrary/GenUtil.cpp ccbevington/CppLibrary/MonteLib.cpp ccbevington/CppLibrary/QuikHist.cpp
 
-.PHONY: all build deps clean help clean-deps test install docs update-docs
+.PHONY: all build deps clean help clean-deps test install docs update-docs mindmap
 
 # Docs: stamp markdown with current version/date, then regenerate LaTeX + PDF
 # Requires: pandoc, MacTeX/TeX Live (xelatex)
@@ -156,7 +156,15 @@ update-docs:
 	@rm -f README.md.bak tutorial/README.md.bak
 	@echo "Stamped README.md and tutorial/README.md with v$(GEM_VERSION) / $(GEM_DATE)"
 
-docs: update-docs $(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_tutorials.pdf
+docs: update-docs mindmap $(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_tutorials.pdf
+
+mindmap: $(DOCSDIR)/gem_mindmap.svg
+
+$(DOCSDIR)/gem_mindmap.svg: $(DOCSDIR)/gem_mindmap.md
+	@mkdir -p $(DOCSDIR)
+	cd $(DOCSDIR) && $(shell which mmdc 2>/dev/null || echo npx --yes @mermaid-js/mermaid-cli) -i gem_mindmap.md -o gem_mindmap.svg
+	@echo "Mindmap diagrams → $(DOCSDIR)/gem_mindmap-1.svg (mindmap) $(DOCSDIR)/gem_mindmap-2.svg (inheritance)"
+	@touch $(DOCSDIR)/gem_mindmap.svg
 
 $(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_reference.tex: README.md gem_latex_header.tex
 	@mkdir -p $(DOCSDIR)
@@ -258,6 +266,9 @@ $(GEM_TEST_TARGET): $(TARGET) tests/comprehensive/all_tests.g
 test: $(GEM_TEST_TARGET)
 	@echo "Running comprehensive tests..."
 	./$(GEM_TEST_TARGET)
+	@echo ""
+	@echo "Running help tests..."
+	./$(TARGET) tests/test_help.g
 
 test-async: $(TARGET)
 	@echo "Running async builtin tests..."

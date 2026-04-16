@@ -148,7 +148,7 @@ development.
 \item
   \textbf{Domain-Specific Built-ins}: \texttt{fin}, \texttt{bsm},
   \texttt{bev}, \texttt{geo}, \texttt{data}, \texttt{chart},
-  \texttt{mobl}, \texttt{trek}, \texttt{astro}, \texttt{nlp}, \texttt{www}, \texttt{cdn}, \texttt{thread} built into the runtime.
+  \texttt{mobl}, \texttt{trek}, \texttt{astro}, \texttt{nlp}, \texttt{www}, \texttt{cdn}, \texttt{thread}, \texttt{rex}, \texttt{seo}, \texttt{drvr}, \texttt{art} built into the runtime.
 \item
   \textbf{Regular Expressions}: \texttt{rex} builtin provides full
   ECMAScript regex --- match, find, findall, groups, sub, gsub, split,
@@ -346,6 +346,14 @@ Hardware}\label{system-programming-hardware}
   SEO signals, write JSON index, analyze report.
 \end{itemize}
 
+\subsubsection{12. ASCII Art \& SVG}\label{ascii-art-svg}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{41_art.g}}: \texttt{art} builtin --- generate ASCII art from text, convert to/from SVG, render mindmap/README/tutorial as ASCII art.
+\end{itemize}
+
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -374,21 +382,46 @@ Hardware}\label{system-programming-hardware}
 \NormalTok{Available Builtin Modules:}
 \NormalTok{  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,}
 \NormalTok{  cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,}
-\NormalTok{  fin, bsm, chart, astro, mobl, trek, seo, drvr}
+\NormalTok{  fin, bsm, chart, astro, mobl, trek, seo, drvr, art}
 
 \NormalTok{Keywords for Documentation:}
-\NormalTok{  fun, obj, use, alias, his, lib, end, if, while,}
-\NormalTok{  int, double, string, bool, exit}
+\NormalTok{  fun, obj, use, alias, his, lib, end, if, else, while,}
+\NormalTok{  int, double, string, bool, exit, quit, langport,}
+\NormalTok{  true, false, null, nil, nan}
+
+\NormalTok{Operators:}
+\NormalTok{  Arithmetic:   +  -  *  /}
+\NormalTok{  Compound:     +=  -=  *=  /=}
+\NormalTok{  Comparison:   ==  !=  >  >=  <  <=}
+\NormalTok{  Logical:      !  (prefix not)  \&\&  ||}
+\NormalTok{  Separator:    ;  (multiple statements per line)}
+\NormalTok{  String concat: +}
 
 \NormalTok{Mobile \& Cross{-}Platform:}
 \NormalTok{  mobl phone("name")  phone.dictate(text)  phone.make\_feature(lat,lon,text)}
 \NormalTok{  ./gem travel\_log.g  ->  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)}
 
-\NormalTok{Detailed help: help "topic"  or  help(topic)}
+\NormalTok{Detailed help: help "topic"  or  help(topic)
+Full reference: helpfull  or  sys.helpfull()  (writes helpfull_DATETIME.md, opens in viewer)
+Paged reference: helpless  or  sys.helpless()  (writes helpfull_DATETIME.md, pipes through less)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+\subsection{Builtin Functions \& Literals}\label{builtin-functions-literals}
+
+\begin{itemize}
+\tightlist
+\item \texttt{true} / \texttt{false} --- boolean literals
+\item \texttt{null} / \texttt{nil} --- null/void value (interchangeable)
+\item \texttt{nan} --- IEEE 754 Not-a-Number double
+\item \texttt{isnil(x) $\to$ bool} --- true if x is nil/null/void
+\item \texttt{isnan(x) $\to$ bool} --- true if x is IEEE 754 NaN
+\item \texttt{tonum(x) $\to$ double} --- parse any value to number; returns nan on failure
+\item \texttt{tostr(x) $\to$ string} --- convert any value to string
+\end{itemize}
 
 \subsection{Builtin Module Reference}\label{builtin-module-reference}
 
@@ -405,6 +438,8 @@ Every object inherits from \texttt{sys}. Methods:
 \item \texttt{sys.exec(cmd)} --- execute a shell command
 \item \texttt{sys.doc([path])} --- read file comments or current script comments
 \item \texttt{sys.help([topic])} --- interactive help
+\item \texttt{sys.helpfull()} --- write complete reference to \texttt{helpfull\_DATETIME.md}, open in system viewer; returns filename
+\item \texttt{sys.helpless()} --- same as helpfull but pipes through \texttt{less} instead of opening viewer; returns filename
 \item \texttt{sys.exit()} --- exit the REPL or script
 \item \texttt{sys.langport(pattern, [output])} --- port foreign code (e.g.\ \texttt{*.py}) to Gem
 \item \texttt{sys.redirect(url, [port])} --- HTTP redirect or background redirect server
@@ -518,6 +553,23 @@ Signals extracted: \texttt{title}, \texttt{description}, \texttt{keywords}, \tex
 
 \textit{Comparisons:} C++=\texttt{libcurl+custom parser} \textperiodcentered{} Python=\texttt{scrapy/beautifulsoup4} \textperiodcentered{} Julia=\texttt{HTTP.jl/Gumbo.jl} \textperiodcentered{} Go=\texttt{colly/goquery} \textperiodcentered{} Ruby=\texttt{nokogiri/mechanize} \textperiodcentered{} Rust=\texttt{scraper/reqwest}
 
+\subsubsection{art --- ASCII Art \& SVG}\label{art-ascii-art-svg}
+
+\begin{itemize}
+\tightlist
+\item \texttt{art.text\_to\_art(text, [font])} --- render text as ASCII art via figlet/toilet (fallback: box)
+\item \texttt{art.art\_to\_file(text, path)} --- write ASCII art string to a text file
+\item \texttt{art.art\_to\_svg(text, [path])} --- convert ASCII art to SVG; returns SVG string
+\item \texttt{art.svg\_to\_art(svg\_path, [width])} --- convert SVG to ASCII art via rsvg-convert + jp2a
+\item \texttt{art.mindmap([path])} --- render \texttt{docs/gem\_mindmap.md} as ASCII art (mermaid mindmap)
+\item \texttt{art.readme([path])} --- render \texttt{README.md} headings as ASCII art summary
+\item \texttt{art.tutorial([path])} --- render \texttt{tutorial/README.md} as ASCII art summary
+\end{itemize}
+
+Optional deps: \texttt{figlet}/\texttt{toilet} (text$\to$art) $\cdot$ \texttt{mmdc} (mermaid CLI) $\cdot$ \texttt{rsvg-convert}+\texttt{jp2a} (SVG$\to$art)
+
+\textit{Comparisons:} C++=\texttt{libaa/figlet CLI} \textperiodcentered{} Python=\texttt{pyfiglet/ascii\_magic} \textperiodcentered{} Julia=no built-in \textperiodcentered{} Go=no built-in \textperiodcentered{} Ruby=\texttt{artii gem} \textperiodcentered{} Rust=\texttt{figlet-rs crate}
+
 \subsubsection{trek --- Travel Logs \& OSM Mapping}\label{trek-travel-logs-osm}
 
 \begin{itemize}
@@ -558,7 +610,7 @@ Routes: \texttt{/} $\to$ PWA HTML, \texttt{/log} $\to$ POST \texttt{\{lat,lon,te
 \item \texttt{fin.high\_yield\_bonds()}, \texttt{fin.high\_yield\_etfs()}, \texttt{fin.high\_yield\_equities()} --- top 50 from TradingView
 \item \texttt{fin.bs\_price(type, strike, spot, rate, vol, t)} --- European option pricing
 \item \texttt{fin.greeks(type, strike, spot, rate, vol, t)} $\to$ NPV, Delta, Gamma, Theta, Vega
-\item \texttt{fin.date(d,m,y)}, \texttt{fin.calendar(name)}, \texttt{fin.is\_holiday(cal,d,m,y)}, \texttt{fin.add\_days(...)}, \texttt{fin.diff\_days(...)}
+\item \texttt{fin.date(d,m,y)}, \texttt{fin.calendar(name)}, \texttt{fin.is\_holiday(cal,d,m,y)}, \texttt{fin.add\_days(d,m,y,n)}, \texttt{fin.diff\_days(...)}, \texttt{fin.dashboard()}
 \end{itemize}
 
 \textit{Comparisons:} C++=	exttt{QuantLib} 	extperiodcentered{} Python=	exttt{yfinance/quantlib-python} 	extperiodcentered{} Julia=	exttt{MarketData.jl} 	extperiodcentered{} Go=	exttt{piquette/quantlib} 	extperiodcentered{} Ruby=	exttt{quantlib-ruby} 	extperiodcentered{} Rust=	exttt{ta crate}
@@ -630,8 +682,8 @@ All functions accept optional flags string (\texttt{"i"} = case-insensitive):
 
 \begin{itemize}
 \tightlist
-\item \texttt{tcp.listen(port)}, \texttt{tcp.accept(fd)}, \texttt{tcp.connect(host, port)} --- socket management
-\item \texttt{tcp.send(fd, msg)}, \texttt{tcp.recv(fd, [size])}, \texttt{tcp.close(fd)} --- data transfer
+\item \texttt{tcp.listen(port)→int}, \texttt{tcp.accept(fd)→\{.fd,.addr\}}, \texttt{tcp.connect(host,port)→int}
+\item \texttt{tcp.send(fd,msg)→int}, \texttt{tcp.recv(fd,[size])→string}, \texttt{tcp.close(fd)→bool}
 \item \texttt{tcp.nic()} --- network interface configurations
 \item \texttt{tcp.routes()} --- system routing table
 \end{itemize}

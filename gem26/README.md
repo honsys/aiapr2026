@@ -79,6 +79,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 10. Travel Logs & OSM Mapping
 - **[39_trek.g](39_trek.g)**: `trek` builtin — create, display, and edit travel logs on OpenStreetMap with GeoJSON/GPX support.
 
+### 11. ASCII Art & SVG
+- **[41_art.g](41_art.g)**: `art` builtin — generate ASCII art from text, convert to/from SVG, render mindmap/README/tutorial as ASCII art.
+
 ---
 
 ## Help & Builtins
@@ -105,7 +108,7 @@ CLI Options:
 Available Builtin Modules:
   sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
   cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
-  fin, bsm, chart, astro, mobl, trek, seo, drvr
+  fin, bsm, chart, astro, mobl, trek, seo, drvr, art
 
 Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, while,
@@ -116,6 +119,8 @@ Mobile & Cross-Platform:
   ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)
 
 Detailed help: help "topic"  or  help(topic)
+Full reference: helpfull  or  sys.helpfull()  (writes helpfull_DATETIME.md, opens in viewer)
+Paged reference: helpless  or  sys.helpless()  (writes helpfull_DATETIME.md, pipes through less)
 ```
 
 ---
@@ -132,6 +137,8 @@ Every object inherits from `sys`. Methods:
 - `sys.exec(cmd)` — run shell command
 - `sys.doc([path])` — read file comments
 - `sys.help([topic])` — interactive help (with cross-language comparisons)
+- `sys.helpfull()` — write complete reference to `helpfull_DATETIME.md`, open in system viewer; returns filename
+- `sys.helpless()` — same as helpfull but pipes through `less` instead of opening viewer; returns filename
 - `sys.exit()` — exit interpreter
 - `sys.langport(pattern, [output])` — AI-port foreign code to Gem
 - `sys.redirect(url, [port])` — HTTP redirect server
@@ -212,6 +219,19 @@ Comparisons: C++=`SOFA/ERFA` · Python=`astropy` · Julia=`AstroLib.jl` · Go=`s
 Signals extracted: `title`, `description`, `keywords`, `og:title`, `og:description`, `canonical`, `word_count`, `img_count`, `img_with_alt`, `internal_links`, `external_links`, `h1`/`h2`/`h3` headings
 
 Comparisons: C++=`libcurl+custom parser` · Python=`scrapy/beautifulsoup4` · Julia=`HTTP.jl/Gumbo.jl` · Go=`colly/goquery` · Ruby=`nokogiri/mechanize` · Rust=`scraper/reqwest`
+
+### art — ASCII Art & SVG
+- `art.text_to_art(text, [font])` — render text as ASCII art via figlet/toilet (fallback: box)
+- `art.art_to_file(text, path)` — write ASCII art string to a text file
+- `art.art_to_svg(text, [path])` — convert ASCII art to SVG; returns SVG string
+- `art.svg_to_art(svg_path, [width])` — convert SVG to ASCII art via rsvg-convert + jp2a
+- `art.mindmap([path])` — render `docs/gem_mindmap.md` as ASCII art (mermaid mindmap)
+- `art.readme([path])` — render `README.md` headings as ASCII art summary
+- `art.tutorial([path])` — render `tutorial/README.md` as ASCII art summary
+
+Optional deps: `figlet`/`toilet` (text→art) · `mmdc` (mermaid CLI) · `rsvg-convert`+`jp2a` (SVG→art)
+
+Comparisons: C++=`libaa/figlet CLI` · Python=`pyfiglet/ascii_magic` · Julia=`no built-in` · Go=`no built-in` · Ruby=`artii gem` · Rust=`figlet-rs crate`
 
 ### trek — Travel Logs & OSM Mapping
 - `trek.new(path)` — create empty GeoJSON travel log

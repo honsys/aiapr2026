@@ -4,245 +4,140 @@
 
 ```mermaid
 mindmap
-  root((Gem Language))
+  root((Gem))
     Keywords
       fun
-        Define named function
-        Last expr is return value
-        Supports recursion & closures
       obj
-        Define object / class
-        Single inheritance
-        All inherit from sys
       use
-        Include Gem module
-        AI-translate foreign code
-        .py .jl .r .cpp .go .rb .rs .js
       if
-        Conditional execution
-        if ... else ... end
-        No parens required
+      else
       while
-        Loop while condition true
-        while cond ... end
       end
-        Close fun / obj / if / while
       alias
-        Create name alias
       his
-        View session history
       lib
-        List loaded modules
       exit
-        Exit interpreter
+      quit
+      langport
+    Literals
+      true
+      false
+      null
+      nil
+      nan
     Types
       int
-        Integer variable
-        Must initialize: int x = 0
       double
-        Floating point
-        double pi = 3.14
       string
-        Text value
-        string s = "hello"
       bool
-        Boolean true/false
-        bool ok = true
-    Scope Rules
-      Local
-        No underscore prefix
-        int count = 0
-      Global
-        Underscore prefix
-        _config = 1
-    Object Hierarchy
+      _global
+    Builtins
+      isnil x
+      isnan x
+      tonum x
+      tostr x
+    Operators
+      Arithmetic + - * /
+      Compound += -= *= /=
+      Comparison == != > >= < <=
+      Logical ! && ||
+      Separator ; multi-stmt
+      String concat +
+    Scope
+      Local no underscore
+      Global underscore prefix
+    System
       sys
-        Root of all objects
-        print
-        args
-        async
-        sethandler
-        host
-        exec
-        doc
-        help
-        exit
-        langport
-        redirect
-        app
-        math
-          sin cos sqrt
-          pi
-          Symbolic SymPy/Sage
-            useSymPy useSage
-            diff integrate
-            simplify solve
-            sym_latex to_latex
-            write_latex read_latex
-            parse_latex compile_latex
-        ai
-          prompt
-          prompt_native
-          useMistral useOllama useGemini
-          setKey setHost setPath
-          provider model host
-        text
-          read sub replace
-          write_pdf write_pdf_a read_pdf
-          read_markdown write_markdown
-          read_yaml write_yaml
-          read_html write_html
-          read_xml write_xml
-          read_fits_header read_hdf_header
-        geo
-          lookup
-          distance
-          write_geojson
-          history
-          plot2d plot3d
-        astro
-          Constants
-            G c AU pc ly
-            Msun Rsun Lsun Tsun
-            Mearth Rearth H0 sigma_sb
-          Unit Conversions
-            to_ly to_pc to_au
-            deg_to_rad rad_to_deg
-          Stellar
-            luminosity stefan_boltzmann wien
-            abs_magnitude distance_modulus
-            spectral_class schwarzschild_radius
-            escape_velocity
-          Orbital
-            orbital_period orbital_velocity
-            hill_sphere roche_limit
-            synodic_period planet
-          Solar
-            solar_flux solar_wind_pressure
-            sunspot_cycle parker_spiral_angle
-            solar_activity
-          Cosmology
-            hubble_distance redshift_velocity
-            lookback_time critical_density
-          Coordinates
-            equatorial_to_galactic
-            angular_separation
-          Exoplanet
-            transit_depth habitable_zone
-            equilibrium_temp
-          Pulsar
-            pulsar_spindown
-        fin
-          ticker
-          high_yield_bonds
-          high_yield_etfs
-          high_yield_equities
-          bs_price greeks
-          date calendar
-          is_holiday add_days diff_days
-          bsm
-            Inherits all fin methods
-            price_american
-        chart
-          plot show server
-        data
-          read_csv mean std
-        rex
-          match find findall groups
-          sub gsub split count
-        algo
-          add quicksort sort
-          now date_add date_diff
-        tcp
-          listen accept connect
-          send recv close
-          nic routes
-        thread
-          wait is_finished
-        www
-          wget app redirect map2d
-          cdn
-            Inherits all www methods
-            start stats purge config
-        nlp
-          Delegates to ai.prompt
-        bev
-          data fit_line param
-        file
-          write exists
-        zip
-          compress decompress
-        img
-          resize
-        cpp
-          repl exec
-        itr
-          range while
-        k3s
-          docker_run docker_ps
-          docker_build docker_stop
-          k3s_apply k3s_get
-          k3s_pods k3s_nodes k3s_logs
-        vm
-          init up ssh
-          status halt destroy
-        mobl
-          phone
-            dictate
-            make_feature
-          Routes
-            / PWA HTML
-            /log POST waypoint
-            /data GET GeoJSON
-        trek
-          new add edit remove
-          load show export_gpx stats
-        seo
-          index analyze
-          Signals
-            title description keywords
-            og_title og_description
-            canonical word_count
-            img_count img_with_alt
-            internal_links external_links
-            h1 h2 h3
-        drvr
-          linux win11 macos android
-          build deploy
-    Polyglot Interop
-      use keyword
-        AI-translate on-the-fly
-        .py .jl .r .cpp .go .rb .rs .js
-      go
-        run build
-      ruby
-        run
-      node
-        run npm_install
-      rust
-        run cargo_new
-    CLI Options
-      gem file.g
-        Run script
-      gem -c main.g
-        Compile to binary
-      gem -o name
-        Output name
-      gem -h
-        Print history
-      gem -t file
-        AI-translate to Gem
-      gem REPL
-        Interactive mode
+        print args async exec
+        help helpfull doc host exit
+        langport redirect app
+      math
+        sin cos sqrt pi
+        diff integrate simplify
+        sym_latex compile_latex
+      ai
+        prompt prompt_native
+        useMistral useOllama useGemini
+      text
+        read write_pdf read_pdf
+        read_yaml write_yaml
+        read_html read_xml
+    Science
+      astro
+        Constants G c AU pc
+        Stellar luminosity wien
+        Orbital period velocity
+        Solar flux sunspot
+        Cosmology hubble redshift
+        Exoplanet transit habitable
+      geo
+        lookup distance
+        write_geojson plot2d plot3d
+      math symbolic
+        diff integrate solve
+        sym_latex compile_latex
+      bev
+        data fit_line param
+      data
+        read_csv mean std
+    Finance
+      fin
+        ticker bs_price greeks
+        high_yield_bonds etfs equities
+        date calendar is_holiday
+      bsm extends fin
+        price_american
+    Web and Network
+      www
+        app wget redirect map2d
+      cdn extends www
+        start stats purge config
+      tcp
+        listen accept connect
+        send recv close nic routes
+      seo
+        index analyze
+    DevOps
+      k3s
+        docker_run docker_ps
+        k3s_apply k3s_pods
+      vm
+        init up ssh halt destroy
+      drvr
+        linux win11 macos android
+    Mobile
+      mobl
+        phone dictate make_feature
+      trek
+        new add edit show stats
+    Polyglot
+      go run build
+      ruby run
+      node run npm_install
+      rust run cargo_new
+      cpp exec repl
+    Utilities
+      rex
+        match find findall
+        sub gsub split count
+      algo
+        quicksort sort now
+        date_add date_diff
+      itr
+        range while
+      file write exists
+      zip compress decompress
+      img resize
+      nlp prompt delegate
+      thread wait is_finished
+      art
+        text_to_art art_to_svg
+        svg_to_art mindmap readme
     Platforms
-      macOS
-      Linux
-      Windows 11
-        MSYS2 MinGW-w64
-      Android
-        Chrome PWA
-      iPhone
-        Safari PWA
+      macOS Linux
+      Windows 11 MSYS2
+      Android Chrome PWA
+      iPhone Safari PWA
 ```
 
 ---
@@ -264,7 +159,7 @@ graph TD
     rex["rex"]
     algo["algo"]
     tcp["tcp"]
-    thread["thread"]
+    thread["thread (handle)"]
     www["www"]
     cdn["cdn (extends www)"]
     nlp["nlp"]
@@ -280,6 +175,7 @@ graph TD
     trek["trek"]
     seo["seo"]
     drvr["drvr"]
+    art["art"]
     go["go"]
     ruby["ruby"]
     node["node"]
@@ -313,6 +209,7 @@ graph TD
     sys --> trek
     sys --> seo
     sys --> drvr
+    sys --> art
     sys --> go
     sys --> ruby
     sys --> node
@@ -329,12 +226,29 @@ graph TD
 | `obj` | Define object/class | `obj Dog(name) : Animal ... end` |
 | `use` | Import or translate foreign code | `use "script.py"` |
 | `if` | Conditional | `if x > 0 ... else ... end` |
+| `else` | Alternate branch | `if cond ... else ... end` |
 | `while` | Loop | `while i < 10 ... end` |
 | `end` | Close block | closes `fun`/`obj`/`if`/`while` |
-| `alias` | Name alias | `alias myprint = sys.print` |
+| `alias` | REPL shortcut | `alias ? = sys.help()` |
 | `his` | Session history | `his` |
 | `lib` | List modules | `lib` |
 | `exit` | Exit interpreter | `exit` |
+| `quit` | Exit interpreter (alias) | `quit` |
+| `langport` | AI-port foreign code | `langport("*.py", "out.gm")` |
+| `true` | Boolean literal | `bool ok = true` |
+| `false` | Boolean literal | `bool done = false` |
+| `null` | Null/void value | returned by void functions |
+
+## Operator Quick Reference
+
+| Operator | Type | Example |
+|----------|------|---------|
+| `+` `-` `*` `/` | Arithmetic | `x = a + b * 2` |
+| `+=` `-=` `*=` `/=` | Compound assignment | `x += 5` |
+| `==` `!=` `>` `>=` `<` `<=` | Comparison | `if x >= 10` |
+| `!` | Logical not (prefix) | `while !done` |
+| `;` | Statement separator | `int a = 1; int b = 2` |
+| `+` (strings) | Concatenation | `"Hello" + " World"` |
 
 ## Type Quick Reference
 
@@ -346,25 +260,25 @@ graph TD
 | `bool` | `bool ok = true` | Boolean; must initialize |
 | `_var` | `_config = 1` | Underscore prefix = global scope |
 
-## Builtin Module Summary (34 total)
+## Builtin Module Summary (35 total)
 
 | Module | Domain | Key Functions |
 |--------|--------|---------------|
-| `sys` | System root | `print`, `async`, `exec`, `app`, `help` |
+| `sys` | System root | `print`, `async`, `exec`, `app`, `help`, `langport` |
 | `math` | Math + symbolic | `sin`, `diff`, `integrate`, `compile_latex` |
-| `ai` | AI/LLM | `prompt`, `useMistral`, `useOllama` |
+| `ai` | AI/LLM | `prompt`, `useMistral`, `useOllama`, `useGemini` |
 | `text` | Documents | `read`, `write_pdf`, `read_yaml`, `read_xml` |
 | `geo` | GIS | `lookup`, `distance`, `plot2d`, `plot3d` |
-| `astro` | Astrophysics | `luminosity`, `orbital_period`, `hubble_distance` |
-| `fin` | Finance | `ticker`, `bs_price`, `greeks` |
+| `astro` | Astrophysics | `luminosity`, `orbital_period`, `hubble_distance`, `pulsar_spindown` |
+| `fin` | Finance | `ticker`, `bs_price`, `greeks`, `high_yield_bonds` |
 | `bsm` | Options | `price_american` (extends `fin`) |
 | `chart` | Plotting | `plot`, `show`, `server` |
 | `data` | Data science | `read_csv`, `mean`, `std` |
 | `rex` | Regex | `match`, `findall`, `gsub`, `split` |
 | `algo` | Algorithms | `quicksort`, `now`, `date_add` |
-| `tcp` | Networking | `listen`, `connect`, `send`, `recv` |
+| `tcp` | Networking | `listen`, `connect`, `send`, `recv`, `nic`, `routes` |
 | `thread` | Concurrency | `wait`, `is_finished` |
-| `www` | Web server | `app`, `wget`, `redirect` |
+| `www` | Web server | `app`, `wget`, `redirect`, `map2d` |
 | `cdn` | Caching proxy | `start`, `stats`, `purge` (extends `www`) |
 | `nlp` | NLP | delegates to `ai.prompt` |
 | `bev` | Curve fitting | `data`, `fit_line`, `param` |
@@ -373,12 +287,13 @@ graph TD
 | `img` | Images | `resize` |
 | `cpp` | C++ JIT | `exec`, `repl` |
 | `itr` | Iterators | `range`, `while` |
-| `k3s` | Docker/K8s | `docker_run`, `k3s_pods` |
-| `vm` | Vagrant VMs | `init`, `up`, `ssh`, `halt` |
+| `k3s` | Docker/K8s | `docker_run`, `k3s_pods`, `k3s_apply` |
+| `vm` | Vagrant VMs | `init`, `up`, `ssh`, `halt`, `destroy` |
 | `mobl` | Mobile PWA | `phone`, `dictate`, `make_feature` |
-| `trek` | Travel logs | `new`, `add`, `show`, `export_gpx` |
+| `trek` | Travel logs | `new`, `add`, `show`, `export_gpx`, `stats` |
 | `seo` | SEO analysis | `index`, `analyze` |
-| `drvr` | Device drivers | `linux`, `win11`, `macos`, `android` |
+| `drvr` | Device drivers | `linux`, `win11`, `macos`, `android`, `build`, `deploy` |
+| `art` | ASCII art/SVG | `text_to_art`, `art_to_svg`, `mindmap`, `readme`, `tutorial` |
 | `go` | Go polyglot | `run`, `build` |
 | `ruby` | Ruby polyglot | `run` |
 | `node` | Node.js polyglot | `run`, `npm_install` |

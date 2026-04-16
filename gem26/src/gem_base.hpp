@@ -470,29 +470,61 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo, mobl, trek, seo, cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
+                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo, mobl, trek, seo, cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr, art" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
-                std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
+                std::cout << "  fun, obj, use, alias, his, lib, end, if, else, while," << std::endl;
+                std::cout << "  int, double, string, bool, exit, quit, langport," << std::endl;
+                std::cout << "  true, false, null, nil, nan, vectors, repl" << std::endl;
+                std::cout << "\nBuiltin Functions:" << std::endl;
+                std::cout << "  isnil(x)  isnan(x)  tonum(x)  tostr(x)" << std::endl;
+                std::cout << "\nOperators:" << std::endl;
+                std::cout << "  Arithmetic:   +  -  *  /" << std::endl;
+                std::cout << "  Compound:     +=  -=  *=  /=" << std::endl;
+                std::cout << "  Comparison:   ==  !=  >  >=  <  <=" << std::endl;
+                std::cout << "  Logical:      !  (prefix not)  &&  ||" << std::endl;
+                std::cout << "  Separator:    ;  (multiple statements per line)" << std::endl;
+                std::cout << "  String concat: +" << std::endl;
                 std::cout << "\nMobile & Cross-Platform:" << std::endl;
                 std::cout << "  mobl phone(\"name\")  phone.dictate(text)  phone.make_feature(lat,lon,text)" << std::endl;
                 std::cout << "  ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)" << std::endl;
                 std::cout << "\nDetailed help: help \"topic\" or help(topic)" << std::endl;
+                std::cout << "Full reference: helpfull  or  sys.helpfull()  (writes helpfull_DATETIME.md)" << std::endl;
+                std::cout << "Paged reference: helpless  or  sys.helpless()  (writes + pipes through less)" << std::endl;
                 } else {
                 std::string topic = args[0]->toString();
                 std::cout << "\n--- Help: " << topic << " ---" << std::endl;
                 if (topic == "fin") {
                     std::cout << "Module: fin — Financial engineering (yfinance + TradingView + QuantLib)" << std::endl;
-                    std::cout << "  ticker(symbol)                    — real-time data via yfinance (.price,.volume,...)" << std::endl;
-                    std::cout << "  high_yield_bonds()                — top 50 bonds by yield (TradingView)" << std::endl;
-                    std::cout << "  high_yield_etfs()                 — top 50 ETFs by dividend yield" << std::endl;
-                    std::cout << "  high_yield_equities()             — top 50 stocks by dividend yield" << std::endl;
-                    std::cout << "  bs_price(type,strike,spot,r,vol,t)— Black-Scholes European option price" << std::endl;
-                    std::cout << "  greeks(type,strike,spot,r,vol,t)  — NPV, Delta, Gamma, Theta, Vega" << std::endl;
-                    std::cout << "  date(d,m,y)                       — QuantLib Date object" << std::endl;
-                    std::cout << "  calendar(name)                    — market calendar (USA/UK/TARGET)" << std::endl;
-                    std::cout << "  is_holiday(cal,d,m,y)             — bool: is market holiday?" << std::endl;
-                    std::cout << "  add_days(d,m,y,n)                 — date arithmetic" << std::endl;
-                    std::cout << "  diff_days(d1,m1,y1,d2,m2,y2)     — days between two dates" << std::endl;
+                    std::cout << "Market data:" << std::endl;
+                    std::cout << "  ticker(symbol)            — real-time data -> object" << std::endl;
+                    std::cout << "    returns: .price, .volume, .open, .high, .low, .close," << std::endl;
+                    std::cout << "             .pe_ratio, .market_cap, .dividend_yield, .symbol" << std::endl;
+                    std::cout << "  high_yield_bonds()        — top 50 bonds by yield -> vector" << std::endl;
+                    std::cout << "  high_yield_etfs()         — top 50 ETFs by dividend yield -> vector" << std::endl;
+                    std::cout << "  high_yield_equities()     — top 50 stocks by dividend yield -> vector" << std::endl;
+                    std::cout << "  dashboard()               — serve financial dashboard on :8082 -> bool" << std::endl;
+                    std::cout << "Options pricing (QuantLib):" << std::endl;
+                    std::cout << "  bs_price(type,strike,spot,rate,vol,t) -> double (NPV)" << std::endl;
+                    std::cout << "    type: \"call\" or \"put\"; t: years to expiry (0.25 = 3 months)" << std::endl;
+                    std::cout << "  greeks(type,strike,spot,rate,vol,t) -> object" << std::endl;
+                    std::cout << "    returns: .npv, .delta, .gamma, .theta, .vega (all double)" << std::endl;
+                    std::cout << "Date arithmetic (QuantLib):" << std::endl;
+                    std::cout << "  date(d,m,y)               — QuantLib Date -> object" << std::endl;
+                    std::cout << "    returns: .day, .month, .year, .serial (int), .str (string)" << std::endl;
+                    std::cout << "  calendar(name)            — market calendar -> object" << std::endl;
+                    std::cout << "    name: \"TARGET\", \"USA\", \"UK\" (default: \"TARGET\")" << std::endl;
+                    std::cout << "  is_holiday(cal,d,m,y)     — is market holiday? -> bool" << std::endl;
+                    std::cout << "  add_days(d,m,y,n)         — add n calendar days -> Date object" << std::endl;
+                    std::cout << "    returns: .day, .month, .year, .str" << std::endl;
+                    std::cout << "  diff_days(d1,m1,y1,d2,m2,y2) — days between dates -> double" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string t = fin.ticker(\"AAPL\")" << std::endl;
+                    std::cout << "  sys.print(t.price, t.volume)" << std::endl;
+                    std::cout << "  double p = fin.bs_price(\"call\", 150.0, 148.0, 0.05, 0.25, 0.25)" << std::endl;
+                    std::cout << "  string g = fin.greeks(\"call\", 150.0, 148.0, 0.05, 0.25, 0.25)" << std::endl;
+                    std::cout << "  sys.print(g.delta, g.gamma)" << std::endl;
+                    std::cout << "  string d2 = fin.add_days(15, 1, 2026, 30)" << std::endl;
+                    std::cout << "  sys.print(d2.str)" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    QuantLib directly; no built-in market data" << std::endl;
                     std::cout << "  Python: yfinance, quantlib-python, pandas-datareader" << std::endl;
@@ -599,6 +631,8 @@ public:
                     std::cout << "  exec(cmd)                      — run shell command, returns exit code" << std::endl;
                     std::cout << "  doc([path])                    — read file comments" << std::endl;
                     std::cout << "  help([topic])                  — this help system" << std::endl;
+                    std::cout << "  helpfull()                     — write complete reference to helpfull_DATETIME.md" << std::endl;
+                    std::cout << "  helpless()                     — write + pipe reference through less" << std::endl;
                     std::cout << "  exit()                         — exit interpreter" << std::endl;
                     std::cout << "  langport(pattern,[output])     — AI-port foreign code to Gem" << std::endl;
                     std::cout << "  redirect(url,[port])           — HTTP redirect server" << std::endl;
@@ -627,19 +661,32 @@ public:
                     std::cout << "  Rust:   linux-kernel-module-rust crate; growing kernel support" << std::endl;
                 } else if (topic == "math") {
                     std::cout << "Module: math — Numeric + symbolic math (SymPy/Sage backend)" << std::endl;
-                    std::cout << "Numeric:  sin(x), cos(x), sqrt(x), math.pi" << std::endl;
-                    std::cout << "Symbolic:" << std::endl;
-                    std::cout << "  useSymPy()/useSage()          — switch backend (default: SymPy)" << std::endl;
-                    std::cout << "  simplify(expr)                — algebraic simplification" << std::endl;
-                    std::cout << "  diff(expr,[var])              — symbolic derivative" << std::endl;
-                    std::cout << "  integrate(expr,[var])         — symbolic integral" << std::endl;
-                    std::cout << "  solve(expr,[var])             — solve equation symbolically" << std::endl;
-                    std::cout << "  sym_latex(expr)               — LaTeX string for expression" << std::endl;
-                    std::cout << "  to_latex(val)                 — value/matrix → LaTeX" << std::endl;
-                    std::cout << "  write_latex(path,content)     — write .tex file" << std::endl;
-                    std::cout << "  read_latex(path)              — read LaTeX document body" << std::endl;
-                    std::cout << "  parse_latex(text)             — extract $...$ expressions" << std::endl;
-                    std::cout << "  compile_latex(path)           — run pdflatex" << std::endl;
+                    std::cout << "Numeric functions (params: double → double):" << std::endl;
+                    std::cout << "  sin(x)         — sine of x (radians) → double" << std::endl;
+                    std::cout << "  cos(x)         — cosine of x (radians) → double" << std::endl;
+                    std::cout << "  sqrt(x)        — square root of x → double" << std::endl;
+                    std::cout << "  math.pi        — π constant (3.14159...) → double (property)" << std::endl;
+                    std::cout << "Symbolic math (requires Python 3 + sympy or sage):" << std::endl;
+                    std::cout << "  useSymPy()                    — switch to SymPy backend (default)" << std::endl;
+                    std::cout << "  useSage()                     — switch to SageMath backend" << std::endl;
+                    std::cout << "  diff(expr, [var])             — symbolic derivative → string" << std::endl;
+                    std::cout << "    expr: string e.g. \"x**2 + 3*x\", var: string e.g. \"x\"" << std::endl;
+                    std::cout << "  integrate(expr, [var])        — symbolic integral → string" << std::endl;
+                    std::cout << "  simplify(expr)                — algebraic simplification → string" << std::endl;
+                    std::cout << "  solve(expr, [var])            — solve equation → string" << std::endl;
+                    std::cout << "  sym_latex(expr)               — LaTeX for expression → string" << std::endl;
+                    std::cout << "  to_latex(val)                 — value/matrix → LaTeX string" << std::endl;
+                    std::cout << "  write_latex(path, content, [standalone]) — write .tex file → bool" << std::endl;
+                    std::cout << "    standalone=true adds \\documentclass preamble" << std::endl;
+                    std::cout << "  read_latex(path)              — read LaTeX document body → string" << std::endl;
+                    std::cout << "  parse_latex(text)             — extract $...$ expressions → list" << std::endl;
+                    std::cout << "  compile_latex(path)           — run pdflatex on file → int (exit code)" << std::endl;
+                    std::cout << "Indirect domain — LaTeX workflow:" << std::endl;
+                    std::cout << "  string expr = \"x**2 + sin(x)\"" << std::endl;
+                    std::cout << "  string d = math.diff(expr, \"x\")   # \"2*x + cos(x)\"" << std::endl;
+                    std::cout << "  string tex = math.sym_latex(d)" << std::endl;
+                    std::cout << "  math.write_latex(\"out.tex\", tex, true)" << std::endl;
+                    std::cout << "  math.compile_latex(\"out.tex\")      # produces out.pdf" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    <cmath>; no built-in symbolic (use GiNaC/SymEngine)" << std::endl;
                     std::cout << "  Python: math.sin(); sympy.diff(), sympy.integrate()" << std::endl;
@@ -649,17 +696,32 @@ public:
                     std::cout << "  Rust:   f64::sin(); no built-in symbolic" << std::endl;
                 } else if (topic == "tcp") {
                     std::cout << "Module: tcp — TCP/IP networking" << std::endl;
-                    std::cout << "  listen(port)          — create server socket, returns fd" << std::endl;
-                    std::cout << "  accept(fd)            — block for client connection, returns Socket" << std::endl;
-                    std::cout << "  connect(host,port)    — connect to server, returns Socket" << std::endl;
-                    std::cout << "  send(fd,msg)          — send string over socket" << std::endl;
-                    std::cout << "  recv(fd,[size])       — receive data from socket" << std::endl;
-                    std::cout << "  close(fd)             — close socket descriptor" << std::endl;
-                    std::cout << "  nic()                 — list network interfaces (vector of NIC objects)" << std::endl;
-                    std::cout << "  routes()              — list routing table (vector of Route objects)" << std::endl;
-                    std::cout << "Example:" << std::endl;
-                    std::cout << "  int fd = tcp.listen(8080)" << std::endl;
-                    std::cout << "  string msg = tcp.recv(tcp.accept(fd))" << std::endl;
+                    std::cout << "Server:" << std::endl;
+                    std::cout << "  listen(port)          — bind server socket → int fd" << std::endl;
+                    std::cout << "  accept(fd)            — block for client → Socket {.fd, .addr}" << std::endl;
+                    std::cout << "Client:" << std::endl;
+                    std::cout << "  connect(host, port)   — connect to server → int fd" << std::endl;
+                    std::cout << "Data transfer:" << std::endl;
+                    std::cout << "  send(fd, msg)         — send string → int bytes_sent" << std::endl;
+                    std::cout << "  recv(fd, [size])      — receive data → string (size default 4096)" << std::endl;
+                    std::cout << "  close(fd)             — close socket → bool" << std::endl;
+                    std::cout << "Network info:" << std::endl;
+                    std::cout << "  nic()    — network interfaces → vector of NIC objects" << std::endl;
+                    std::cout << "    NIC properties: .name (string), .ip (string), .status (string)" << std::endl;
+                    std::cout << "  routes() — routing table → vector of Route objects" << std::endl;
+                    std::cout << "    Route properties: .dest (string), .gw (string), .iface (string)" << std::endl;
+                    std::cout << "Example — echo server:" << std::endl;
+                    std::cout << "  int srv = tcp.listen(8080)" << std::endl;
+                    std::cout << "  string client = tcp.accept(srv)" << std::endl;
+                    std::cout << "  string msg = tcp.recv(client.fd)" << std::endl;
+                    std::cout << "  tcp.send(client.fd, msg)" << std::endl;
+                    std::cout << "  tcp.close(client.fd)" << std::endl;
+                    std::cout << "  tcp.close(srv)" << std::endl;
+                    std::cout << "Example — client:" << std::endl;
+                    std::cout << "  int fd = tcp.connect(\"localhost\", 8080)" << std::endl;
+                    std::cout << "  tcp.send(fd, \"hello\")" << std::endl;
+                    std::cout << "  string reply = tcp.recv(fd)" << std::endl;
+                    std::cout << "  tcp.close(fd)" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    POSIX socket()/bind()/listen()/accept()/send()/recv()" << std::endl;
                     std::cout << "  Python: socket.socket(); s.bind(); s.listen(); s.accept()" << std::endl;
@@ -669,18 +731,32 @@ public:
                     std::cout << "  Rust:   TcpListener::bind(), listener.accept(), stream.read()" << std::endl;
                 } else if (topic == "ai") {
                     std::cout << "Module: ai — AI integration (Gemini, Mistral, Ollama)" << std::endl;
-                    std::cout << "  prompt(text)                  — send prompt to current provider" << std::endl;
-                    std::cout << "  prompt_native(text)           — Mistral C++ bridge (mistralai>=1.0, Python 3.14)" << std::endl;
-                    std::cout << "  useMistral(model)             — switch to Mistral API" << std::endl;
-                    std::cout << "  useOllama(model,[host])       — switch to local Ollama" << std::endl;
-                    std::cout << "  useGemini()                   — switch back to Gemini (default)" << std::endl;
-                    std::cout << "  setKey(key)                   — set API key" << std::endl;
-                    std::cout << "  setHost(host), setPath(path)  — override endpoint" << std::endl;
-                    std::cout << "Properties: provider, model, host" << std::endl;
+                    std::cout << "Prompting:" << std::endl;
+                    std::cout << "  prompt(text)                  — send prompt to current provider → string" << std::endl;
+                    std::cout << "  prompt_native(text)           — Mistral C++ bridge → string" << std::endl;
+                    std::cout << "    requires: mistralai >= 1.0, Python 3.14 embedded" << std::endl;
+                    std::cout << "Provider switching:" << std::endl;
+                    std::cout << "  useGemini()                   — switch to Gemini (default) → bool" << std::endl;
+                    std::cout << "  useMistral(model)             — switch to Mistral API → bool" << std::endl;
+                    std::cout << "    model: string e.g. \"mistral-small\", \"mistral-large\"" << std::endl;
+                    std::cout << "  useOllama(model, [host])      — switch to local Ollama → bool" << std::endl;
+                    std::cout << "    model: string e.g. \"llama3\", \"mistral\"" << std::endl;
+                    std::cout << "    host: string (default \"localhost:11434\")" << std::endl;
+                    std::cout << "Configuration:" << std::endl;
+                    std::cout << "  setKey(key)                   — set API key → bool" << std::endl;
+                    std::cout << "  setHost(host)                 — override API host → bool" << std::endl;
+                    std::cout << "  setPath(path)                 — override API path → bool" << std::endl;
+                    std::cout << "Properties (read-only after set):" << std::endl;
+                    std::cout << "  ai.provider   — current provider string (\"gemini\"/\"mistral\"/\"ollama\")" << std::endl;
+                    std::cout << "  ai.model      — current model string" << std::endl;
+                    std::cout << "  ai.host       — current API host string" << std::endl;
                     std::cout << "Example:" << std::endl;
-                    std::cout << "  ai.setKey(\"sk-...\")" << std::endl;
+                    std::cout << "  ai.setKey(\"AIza...\")" << std::endl;
                     std::cout << "  string r = ai.prompt(\"Explain black holes\")" << std::endl;
                     std::cout << "  ai.useMistral(\"mistral-small\")" << std::endl;
+                    std::cout << "  string r2 = ai.prompt(\"What is entropy?\")" << std::endl;
+                    std::cout << "  ai.useGemini()   # switch back" << std::endl;
+                    std::cout << "  ai.useOllama(\"llama3\")   # local model" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    libcurl + nlohmann/json; mistralai C++ SDK" << std::endl;
                     std::cout << "  Python: google-generativeai, mistralai, openai packages" << std::endl;
@@ -690,18 +766,32 @@ public:
                     std::cout << "  Rust:   async-openai crate" << std::endl;
                 } else if (topic == "text") {
                     std::cout << "Module: text — String, document, and file-format processing" << std::endl;
-                    std::cout << "  read(path)                    — read file into string" << std::endl;
-                    std::cout << "  sub(s,start,[len])            — substring" << std::endl;
-                    std::cout << "  replace(s,old,new)            — replace all occurrences" << std::endl;
-                    std::cout << "  write_pdf(path,text)          — create PDF" << std::endl;
-                    std::cout << "  write_pdf_a(path,text)        — create PDF/A (archival)" << std::endl;
-                    std::cout << "  read_pdf(path)                — extract text from PDF" << std::endl;
-                    std::cout << "  read_markdown/write_markdown  — Markdown I/O" << std::endl;
-                    std::cout << "  read_yaml/write_yaml          — YAML I/O" << std::endl;
-                    std::cout << "  read_html/write_html          — HTML I/O" << std::endl;
-                    std::cout << "  read_xml/write_xml            — XML I/O" << std::endl;
-                    std::cout << "  read_fits_header(path)        — FITS header as object" << std::endl;
-                    std::cout << "  read_hdf_header(path)         — HDF5 header as object" << std::endl;
+                    std::cout << "String operations:" << std::endl;
+                    std::cout << "  read(path)                    — read file into string → string" << std::endl;
+                    std::cout << "  sub(s, start, [len])          — substring → string" << std::endl;
+                    std::cout << "    start: int (0-based), len: int (default: to end)" << std::endl;
+                    std::cout << "  replace(s, old, new)          — replace all occurrences → string" << std::endl;
+                    std::cout << "PDF:" << std::endl;
+                    std::cout << "  write_pdf(path, text)         — create PDF → bool" << std::endl;
+                    std::cout << "  write_pdf_a(path, text)       — create PDF/A archival → bool" << std::endl;
+                    std::cout << "  read_pdf(path)                — extract text from PDF → string" << std::endl;
+                    std::cout << "Document formats (path: string, content: string):" << std::endl;
+                    std::cout << "  read_markdown(path)           — read Markdown → string" << std::endl;
+                    std::cout << "  write_markdown(path, text)    — write Markdown → bool" << std::endl;
+                    std::cout << "  read_yaml(path)               — read YAML → object" << std::endl;
+                    std::cout << "  write_yaml(path, obj)         — write YAML → bool" << std::endl;
+                    std::cout << "  read_html(path)               — read HTML → string" << std::endl;
+                    std::cout << "  write_html(path, text)        — write HTML → bool" << std::endl;
+                    std::cout << "  read_xml(path)                — read XML → string" << std::endl;
+                    std::cout << "  write_xml(path, text)         — write XML → bool" << std::endl;
+                    std::cout << "Scientific formats:" << std::endl;
+                    std::cout << "  read_fits_header(path)        — FITS header → object (key/value pairs)" << std::endl;
+                    std::cout << "  read_hdf_header(path)         — HDF5 header → object (key/value pairs)" << std::endl;
+                    std::cout << "Indirect domain — string manipulation:" << std::endl;
+                    std::cout << "  Concatenation: s1 + s2  or  s += \" more\"" << std::endl;
+                    std::cout << "  Length: s.length  or  s.size  or  s.count" << std::endl;
+                    std::cout << "  Char access: s[0], s[1], ..." << std::endl;
+                    std::cout << "  Regex: use rex module for pattern matching" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    std::string, fstream; pdfium/libharu for PDF; pugixml for XML" << std::endl;
                     std::cout << "  Python: str, open(); pypdf, markdown, pyyaml, lxml" << std::endl;
@@ -730,12 +820,20 @@ public:
                     std::cout << "  Rust:   regex crate: Regex::new(), re.find(), re.replace_all()" << std::endl;
                 } else if (topic == "algo") {
                     std::cout << "Module: algo — Algorithms, sorting, and time" << std::endl;
-                    std::cout << "  add(...)                — sum all numeric arguments" << std::endl;
-                    std::cout << "  quicksort(v)            — sort numeric vector in-place (quicksort)" << std::endl;
-                    std::cout << "  sort(v,[start],[end])   — sort slice of vector" << std::endl;
-                    std::cout << "  now()                   — current local time as string" << std::endl;
-                    std::cout << "  date_add(ts,days)       — add days to unix timestamp" << std::endl;
-                    std::cout << "  date_diff(t1,t2)        — difference in days between timestamps" << std::endl;
+                    std::cout << "  add(n1, n2, ...)          — sum all numeric args → double" << std::endl;
+                    std::cout << "  quicksort(v)              — sort numeric vector in-place → vector" << std::endl;
+                    std::cout << "    v: numeric vector (modified in-place and returned)" << std::endl;
+                    std::cout << "  sort(v, [start], [end])   — sort slice of vector → vector" << std::endl;
+                    std::cout << "    start: int (default 0), end: int (default v.length)" << std::endl;
+                    std::cout << "  now()                     — current local time → string \"YYYY-MM-DD HH:MM:SS\"" << std::endl;
+                    std::cout << "  date_add(ts, days)        — add days to unix timestamp → double" << std::endl;
+                    std::cout << "    ts: double (unix timestamp seconds), days: double" << std::endl;
+                    std::cout << "    returns: new unix timestamp (ts + days*86400)" << std::endl;
+                    std::cout << "  date_diff(t1, t2)         — days between timestamps → double" << std::endl;
+                    std::cout << "    t1, t2: double (unix timestamps); returns (t2-t1)/86400" << std::endl;
+                    std::cout << "Indirect domain — date arithmetic:" << std::endl;
+                    std::cout << "  double now_ts = algo.add(0)   # use fin.date() for calendar dates" << std::endl;
+                    std::cout << "  For calendar-aware dates use fin.date(), fin.add_days(), fin.diff_days()" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    std::sort(), std::chrono::system_clock::now()" << std::endl;
                     std::cout << "  Python: sorted(), list.sort(), datetime.now()" << std::endl;
@@ -854,6 +952,31 @@ public:
                     std::cout << "  Go:     colly, goquery (jQuery-like HTML scraper)" << std::endl;
                     std::cout << "  Ruby:   nokogiri + mechanize gems" << std::endl;
                     std::cout << "  Rust:   scraper crate + reqwest" << std::endl;
+                } else if (topic == "art") {
+                    std::cout << "Module: art — ASCII art generation, SVG conversion, and doc rendering" << std::endl;
+                    std::cout << "  text_to_art(text,[font])  — render text as ASCII art (uses figlet/toilet)" << std::endl;
+                    std::cout << "  art_to_file(text,path)    — write ASCII art string to a text file" << std::endl;
+                    std::cout << "  art_to_svg(text,[path])   — convert ASCII art to SVG (returns SVG string)" << std::endl;
+                    std::cout << "  svg_to_art(svg_path,[w])  — convert SVG file to ASCII art (uses rsvg-convert+jp2a)" << std::endl;
+                    std::cout << "  mindmap([path])           — render docs/gem_mindmap.md as ASCII art" << std::endl;
+                    std::cout << "  readme([path])            — render README.md headings as ASCII art summary" << std::endl;
+                    std::cout << "  tutorial([path])          — render tutorial/README.md as ASCII art summary" << std::endl;
+                    std::cout << "Optional deps: figlet, toilet (text→art), mmdc (mermaid), rsvg-convert+jp2a (SVG→art)" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string banner = art.text_to_art(\"Gem\", \"big\")" << std::endl;
+                    std::cout << "  art.art_to_file(banner, \"banner.txt\")" << std::endl;
+                    std::cout << "  string svg = art.art_to_svg(banner, \"banner.svg\")" << std::endl;
+                    std::cout << "  string ascii = art.svg_to_art(\"docs/gem_mindmap.svg\")" << std::endl;
+                    std::cout << "  sys.print(art.mindmap())" << std::endl;
+                    std::cout << "  sys.print(art.readme())" << std::endl;
+                    std::cout << "  sys.print(art.tutorial())" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    no built-in; use figlet CLI or libaa" << std::endl;
+                    std::cout << "  Python: art, pyfiglet, ascii_magic libraries" << std::endl;
+                    std::cout << "  Julia:  no built-in" << std::endl;
+                    std::cout << "  Go:     no built-in" << std::endl;
+                    std::cout << "  Ruby:   artii gem" << std::endl;
+                    std::cout << "  Rust:   figlet-rs crate" << std::endl;
                 } else if (topic == "www") {
                     std::cout << "Module: www — Web framework (Flask-like, built on cpp-httplib)" << std::endl;
                     std::cout << "  wget(url,file)         — download file via curl" << std::endl;
@@ -871,13 +994,21 @@ public:
                     std::cout << "  Rust:   actix-web, axum, warp, hyper" << std::endl;
                 } else if (topic == "cdn") {
                     std::cout << "Module: cdn — Caching reverse-proxy (inherits all www methods)" << std::endl;
-                    std::cout << "  start(port,routes_map) — start proxy; routes: path-prefix→origin URL" << std::endl;
-                    std::cout << "  stats()                — {.hits, .misses, .bytes, .cached_items}" << std::endl;
-                    std::cout << "  purge([path])          — evict path or \"*\" to clear all" << std::endl;
-                    std::cout << "  config(type,content)   — generate nginx/apache config string" << std::endl;
+                    std::cout << "  start(port, routes_map)  — start proxy; routes: path-prefix->origin URL → bool" << std::endl;
+                    std::cout << "    port: int, routes_map: object {path: origin_url}" << std::endl;
+                    std::cout << "  stats()                  — cache statistics → object" << std::endl;
+                    std::cout << "    returns: .hits, .misses, .bytes, .cached_items (all int)" << std::endl;
+                    std::cout << "  purge([path])            — evict path or \"*\" to clear all → bool" << std::endl;
+                    std::cout << "  config(type, content)    — generate config string → string" << std::endl;
+                    std::cout << "    type: \"nginx\" or \"apache\", content: routes object" << std::endl;
+                    std::cout << "  dashboard()              — serve CDN stats dashboard on :8083 → bool" << std::endl;
+                    std::cout << "  + all www methods: app, wget, redirect, map2d" << std::endl;
                     std::cout << "Example:" << std::endl;
                     std::cout << "  cdn.start(8081, {\"/api\": \"http://origin:3000\"})" << std::endl;
-                    std::cout << "  sys.print(cdn.stats().hits)" << std::endl;
+                    std::cout << "  string s = cdn.stats()" << std::endl;
+                    std::cout << "  sys.print(s.hits, s.misses)" << std::endl;
+                    std::cout << "  cdn.purge(\"/api/users\")" << std::endl;
+                    std::cout << "  cdn.purge(\"*\")   # clear all" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    nginx/Varnish (external); no built-in CDN" << std::endl;
                     std::cout << "  Python: no built-in CDN; use nginx + Flask" << std::endl;
@@ -960,7 +1091,7 @@ public:
                     std::cout << "Keyword: fun — Define a named function" << std::endl;
                     std::cout << "Usage:   fun name(p1, p2) ... end  [last expr is return value]" << std::endl;
                     std::cout << "Example: fun add(a, b) a + b end" << std::endl;
-                    std::cout << "         fun fact(n) if n <= 1 1 else n * fact(n-1) end end" << std::endl;
+                    std::cout << "         fun fact(n) if n < 2 1 else n * fact(n-1) end end" << std::endl;
                     std::cout << "Notes:   First-class; supports recursion and closures." << std::endl;
                     std::cout << "         No explicit 'return' needed — last expression is returned." << std::endl;
                     std::cout << "Comparisons:" << std::endl;
@@ -973,22 +1104,40 @@ public:
                 } else if (topic == "obj") {
                     std::cout << "Keyword: obj — Define an object (class) with single inheritance" << std::endl;
                     std::cout << "Usage:   obj Name(params) : Parent ... end" << std::endl;
-                    std::cout << "Example: obj Dog(name) : Animal" << std::endl;
-                    std::cout << "           .name = name" << std::endl;
-                    std::cout << "           fun speak() sys.print(\"Woof!\") end" << std::endl;
-                    std::cout << "         end" << std::endl;
-                    std::cout << "         Dog d = Dog(\"Rex\")" << std::endl;
-                    std::cout << "         d.speak()" << std::endl;
-                    std::cout << "Notes:   .attr = own attribute; ..attr = parent attribute." << std::endl;
-                    std::cout << "         All objects auto-inherit from 'sys' (gives sys.print etc)." << std::endl;
-                    std::cout << "         Single inheritance only (chain for multiple: obj C : B where obj B : A)." << std::endl;
+                    std::cout << "         obj Name(params) ... end   # inherits from sys by default" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  obj Animal(name)" << std::endl;
+                    std::cout << "    .name = name" << std::endl;
+                    std::cout << "    fun speak() sys.print(\"...\")" << std::endl;
+                    std::cout << "    end" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "  obj Dog(name) : Animal" << std::endl;
+                    std::cout << "    .name = name" << std::endl;
+                    std::cout << "    fun speak() sys.print(\"Woof!\") end" << std::endl;
+                    std::cout << "    fun parent_name() ..name end   # ..attr accesses parent attr" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "  Dog d = Dog(\"Rex\")" << std::endl;
+                    std::cout << "  d.speak()          # calls Dog.speak" << std::endl;
+                    std::cout << "  sys.print(d.name)  # access attribute" << std::endl;
+                    std::cout << "Attribute syntax:" << std::endl;
+                    std::cout << "  .attr = val    — set/get own attribute (this.attr)" << std::endl;
+                    std::cout << "  ..attr = val   — set/get parent attribute" << std::endl;
+                    std::cout << "  obj.attr       — access from outside" << std::endl;
+                    std::cout << "Method definition inside obj:" << std::endl;
+                    std::cout << "  fun method(params) ... end   — last expr is return value" << std::endl;
+                    std::cout << "Instantiation:" << std::endl;
+                    std::cout << "  TypeName varname = TypeName(args)" << std::endl;
+                    std::cout << "  string varname = TypeName(args)  # also valid (untyped)" << std::endl;
+                    std::cout << "Notes:   All objects auto-inherit from sys (gives sys.print etc)." << std::endl;
+                    std::cout << "         Single inheritance only. For multiple: chain obj C:B where obj B:A." << std::endl;
+                    std::cout << "         Anonymous object: obj(parent) — creates inline object." << std::endl;
                     std::cout << "Comparisons:" << std::endl;
-                    std::cout << "  C++:    class Dog : public Animal { public: std::string name; void speak(); };" << std::endl;
-                    std::cout << "  Python: class Dog(Animal): def __init__(self, name): self.name = name" << std::endl;
-                    std::cout << "  Julia:  struct Dog <: Animal; name::String; end" << std::endl;
-                    std::cout << "  Go:     type Dog struct { name string }  (no inheritance; use embedding)" << std::endl;
-                    std::cout << "  Ruby:   class Dog < Animal; def initialize(name) @name = name end; end" << std::endl;
-                    std::cout << "  Rust:   struct Dog { name: String }  (traits for behavior, no inheritance)" << std::endl;
+                    std::cout << "  C++:    class Dog : public Animal { ... };" << std::endl;
+                    std::cout << "  Python: class Dog(Animal): ..." << std::endl;
+                    std::cout << "  Julia:  struct Dog <: Animal; ... end" << std::endl;
+                    std::cout << "  Go:     type Dog struct { ... }  (embedding, not inheritance)" << std::endl;
+                    std::cout << "  Ruby:   class Dog < Animal; ... end" << std::endl;
+                    std::cout << "  Rust:   struct Dog { ... }  (traits, no inheritance)" << std::endl;
                 } else if (topic == "use") {
                     std::cout << "Keyword: use — Include a Gem module or run foreign code" << std::endl;
                     std::cout << "Usage:   use \"file.g\"      # include Gem source" << std::endl;
@@ -1049,14 +1198,22 @@ public:
                 } else if (topic == "int" || topic == "double" || topic == "string" || topic == "bool") {
                     std::cout << "Keyword: " << topic << " — Declare and initialize a typed variable" << std::endl;
                     std::cout << "Usage:   " << topic << " var = value" << std::endl;
-                    std::cout << "Example: int x = 42" << std::endl;
-                    std::cout << "         double pi = 3.14159" << std::endl;
-                    std::cout << "         string name = \"Gem\"" << std::endl;
-                    std::cout << "         bool flag = true" << std::endl;
+                    std::cout << "         " << topic << " a, b, c = value   # multi-var: all get same value" << std::endl;
+                    std::cout << "         a = b = c = 0                    # chained assignment" << std::endl;
+                    std::cout << "Examples:" << std::endl;
+                    std::cout << "  int x = 42" << std::endl;
+                    std::cout << "  int a, b, c = 0          # declares a, b, c all = 0" << std::endl;
+                    std::cout << "  double pi = 3.14159" << std::endl;
+                    std::cout << "  string name = \"Gem\"" << std::endl;
+                    std::cout << "  bool flag = true" << std::endl;
+                    std::cout << "  a = b = c = 0            # chained: sets a, b, c to 0" << std::endl;
                     std::cout << "Notes:   All variables MUST be initialized at declaration." << std::endl;
                     std::cout << "         Global scope: prefix with _ (e.g. _config = 1)." << std::endl;
                     std::cout << "         Local scope: all other names." << std::endl;
-                    std::cout << "         Type is inferred from initial value; annotation is explicit." << std::endl;
+                    std::cout << "         int can also hold a vector: int v = [1.0, 2.0, 3.0]" << std::endl;
+                    std::cout << "         Access vector elements: v[0], v[1], ..." << std::endl;
+                    std::cout << "         Vector length: v.length  or  v.size  or  v.count" << std::endl;
+                    std::cout << "         See also: help \"vectors\"" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
                     std::cout << "  C++:    int x = 42;  double pi = 3.14;  std::string s = \"hi\";  bool b = true;" << std::endl;
                     std::cout << "  Python: x = 42  (dynamic; no declaration needed)" << std::endl;
@@ -1129,11 +1286,580 @@ public:
                     std::cout << "Coords:  equatorial_to_galactic(ra,dec), angular_separation(ra1,dec1,ra2,dec2)" << std::endl;
                     std::cout << "Exoplanet: transit_depth(rp_rearth,rs_rsun), habitable_zone(L_lsun), equilibrium_temp(L,d,A)" << std::endl;
                     std::cout << "Pulsar:  pulsar_spindown(P_s, Pdot) → {age_yr, Bfield_G, edot_W}" << std::endl;
-                } else {
-                    std::cout << "No detailed help available for " << topic << std::endl;
+                } else if (topic == "end") {
+                    std::cout << "Keyword: end — Close a block (fun, obj, if, while)" << std::endl;
+                    std::cout << "Usage:   end  (no arguments)" << std::endl;
+                    std::cout << "Example: fun add(a,b) a+b end" << std::endl;
+                    std::cout << "         if x > 0 sys.print(x) end" << std::endl;
+                    std::cout << "         while i < 10 i = i+1 end" << std::endl;
+                    std::cout << "         obj Dog(name) .name=name end" << std::endl;
+                    std::cout << "Notes:   Every fun/obj/if/while block MUST be closed with end." << std::endl;
+                    std::cout << "         No braces or indentation-based scoping — end is mandatory." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    closing brace }" << std::endl;
+                    std::cout << "  Python: indentation (no explicit close)" << std::endl;
+                    std::cout << "  Julia:  end (same)" << std::endl;
+                    std::cout << "  Go:     closing brace }" << std::endl;
+                    std::cout << "  Ruby:   end (same)" << std::endl;
+                    std::cout << "  Rust:   closing brace }" << std::endl;
+                } else if (topic == "langport") {
+                    std::cout << "Function: langport — AI-port foreign code files to Gem" << std::endl;
+                    std::cout << "Usage:   langport(pattern, [output])" << std::endl;
+                    std::cout << "         sys.langport(pattern, [output])" << std::endl;
+                    std::cout << "Example: langport(\"*.py\", \"out.gm\")   # port all .py files" << std::endl;
+                    std::cout << "         langport(\"script.jl\")          # print ported code" << std::endl;
+                    std::cout << "Notes:   Uses ai.prompt() to translate source to Gem syntax." << std::endl;
+                    std::cout << "         Supports: .py .jl .r .cpp .go .rb .rs .js" << std::endl;
+                    std::cout << "         'use' runs translation in-memory; langport saves to file." << std::endl;
+                    std::cout << "         CLI: gem -t <file> [-o output]" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    no built-in; use transpilers (e.g. cppfront)" << std::endl;
+                    std::cout << "  Python: no built-in; use 2to3 for Py2→Py3" << std::endl;
+                    std::cout << "  Julia:  no built-in; manual porting" << std::endl;
+                    std::cout << "  Go:     no built-in; use gofmt for formatting only" << std::endl;
+                    std::cout << "  Ruby:   no built-in" << std::endl;
+                    std::cout << "  Rust:   no built-in; c2rust for C→Rust" << std::endl;
+                } else if (topic == "else") {
+                    std::cout << "Keyword: else — Optional alternate branch for if" << std::endl;
+                    std::cout << "Usage:   if condition ... else ... end" << std::endl;
+                    std::cout << "Example: if x > 0" << std::endl;
+                    std::cout << "           sys.print(\"positive\")" << std::endl;
+                    std::cout << "         else" << std::endl;
+                    std::cout << "           sys.print(\"non-positive\")" << std::endl;
+                    std::cout << "         end" << std::endl;
+                    std::cout << "Notes:   else must appear between if and end on its own line." << std::endl;
+                    std::cout << "         Nested if/else/end blocks are fully supported." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    } else {" << std::endl;
+                    std::cout << "  Python: else:" << std::endl;
+                    std::cout << "  Julia:  else" << std::endl;
+                    std::cout << "  Go:     } else {" << std::endl;
+                    std::cout << "  Ruby:   else" << std::endl;
+                    std::cout << "  Rust:   } else {" << std::endl;
+                } else if (topic == "true" || topic == "false") {
+                    std::cout << "Literal: " << topic << " — Boolean literal value" << std::endl;
+                    std::cout << "Usage:   bool flag = true   /   bool done = false" << std::endl;
+                    std::cout << "Example: bool ok = true" << std::endl;
+                    std::cout << "         if ok sys.print(\"yes\") end" << std::endl;
+                    std::cout << "Notes:   Truthy: non-zero numbers, non-empty strings, true." << std::endl;
+                    std::cout << "         Falsy:  0, \"\", false, null." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    true / false (bool)" << std::endl;
+                    std::cout << "  Python: True / False" << std::endl;
+                    std::cout << "  Julia:  true / false" << std::endl;
+                    std::cout << "  Go:     true / false" << std::endl;
+                    std::cout << "  Ruby:   true / false" << std::endl;
+                    std::cout << "  Rust:   true / false" << std::endl;
+                } else if (topic == "null") {
+                    std::cout << "Literal: null — Null/void value (no value)" << std::endl;
+                    std::cout << "Usage:   Returned by functions with no return value." << std::endl;
+                    std::cout << "         Uninitialized object properties resolve to null." << std::endl;
+                    std::cout << "Notes:   null is falsy in boolean context." << std::endl;
+                    std::cout << "         Comparing with == null checks for absence of value." << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    nullptr / void" << std::endl;
+                    std::cout << "  Python: None" << std::endl;
+                    std::cout << "  Julia:  nothing" << std::endl;
+                    std::cout << "  Go:     nil" << std::endl;
+                    std::cout << "  Ruby:   nil" << std::endl;
+                    std::cout << "  Rust:   None (Option<T>)" << std::endl;
+                } else if (topic == "quit") {
+                    std::cout << "Keyword: quit — Alias for exit; terminates the interpreter" << std::endl;
+                    std::cout << "Usage:   quit  /  exit  /  sys.exit()" << std::endl;
+                    std::cout << "Notes:   All three forms are equivalent." << std::endl;
+                    std::cout << "         In REPL: ends the session." << std::endl;
+                    std::cout << "         In script: terminates execution immediately." << std::endl;
+                    std::cout << "         Also triggered by Ctrl+D (EOF) in REPL." << std::endl;
+                } else if (topic == "operators" || topic == "+=" || topic == "-=" || topic == "*=" || topic == "/=") {
+                    std::cout << "Operators — Gem operator reference" << std::endl;
+                    std::cout << "Arithmetic:   +  -  *  /" << std::endl;
+                    std::cout << "  int x = 10; x = x + 5   # x is 15" << std::endl;
+                    std::cout << "Compound assignment:" << std::endl;
+                    std::cout << "  x += 5  x -= 3  x *= 2  x /= 4  s += \" more\"" << std::endl;
+                    std::cout << "Comparison (numeric and string):" << std::endl;
+                    std::cout << "  ==  !=  >  >=  <  <=" << std::endl;
+                    std::cout << "  if x >= 10 sys.print(\"big\") end" << std::endl;
+                    std::cout << "  if s != \"done\" sys.print(\"still going\") end" << std::endl;
+                    std::cout << "Logical:" << std::endl;
+                    std::cout << "  !expr        — prefix not (bool negation)" << std::endl;
+                    std::cout << "  a && b       — logical and (short-circuit)" << std::endl;
+                    std::cout << "  a || b       — logical or  (short-circuit)" << std::endl;
+                    std::cout << "  if x > 0 && x < 10 sys.print(\"single digit\") end" << std::endl;
+                    std::cout << "  if !done || retry sys.print(\"keep going\") end" << std::endl;
+                    std::cout << "Statement separator:  ;" << std::endl;
+                    std::cout << "  int a = 1; int b = 2; sys.print(a + b)" << std::endl;
+                    std::cout << "String concatenation:  +" << std::endl;
+                    std::cout << "  string s = \"Hello\" + \" \" + \"World\"" << std::endl;
+                } else if (topic == "nil") {
+                    std::cout << "Literal: nil — Null/void value (alias for null)" << std::endl;
+                    std::cout << "Usage:   nil  (same as null)" << std::endl;
+                    std::cout << "Example: if isnil(x) sys.print(\"no value\") end" << std::endl;
+                    std::cout << "Notes:   nil and null are identical — both produce a void GemValue." << std::endl;
+                    std::cout << "         Falsy in boolean context." << std::endl;
+                    std::cout << "         Use isnil(x) to test for nil/null." << std::endl;
+                    std::cout << "See also: isnil(), null, nan" << std::endl;
+                } else if (topic == "nan") {
+                    std::cout << "Literal: nan — IEEE 754 Not-a-Number double value" << std::endl;
+                    std::cout << "Usage:   double x = nan" << std::endl;
+                    std::cout << "Example: double x = nan" << std::endl;
+                    std::cout << "         if isnan(x) sys.print(\"not a number\") end" << std::endl;
+                    std::cout << "Notes:   nan != nan is true (IEEE 754 rule)." << std::endl;
+                    std::cout << "         Use isnan(x) to test for NaN — do not use x == nan." << std::endl;
+                    std::cout << "         Produced by: 0.0/0.0, tonum(\"abc\"), etc." << std::endl;
+                    std::cout << "See also: isnan(), nil, null" << std::endl;
+                } else if (topic == "isnil") {
+                    std::cout << "Function: isnil(x) — test if value is nil/null/void" << std::endl;
+                    std::cout << "Params:   x — any value" << std::endl;
+                    std::cout << "Returns:  bool — true if x is nil/null, false otherwise" << std::endl;
+                    std::cout << "Example:  if isnil(result) sys.print(\"no result\") end" << std::endl;
+                    std::cout << "Notes:    isnil(nil) == true" << std::endl;
+                    std::cout << "          isnil(null) == true" << std::endl;
+                    std::cout << "          isnil(0) == false  (0 is a valid double, not nil)" << std::endl;
+                    std::cout << "          isnil(\"\") == false  (empty string is not nil)" << std::endl;
+                    std::cout << "See also: nil, null, isnan()" << std::endl;
+                } else if (topic == "isnan") {
+                    std::cout << "Function: isnan(x) — test if value is IEEE 754 NaN" << std::endl;
+                    std::cout << "Params:   x — any value (non-double returns false)" << std::endl;
+                    std::cout << "Returns:  bool — true if x is NaN, false otherwise" << std::endl;
+                    std::cout << "Example:  double v = tonum(\"abc\")" << std::endl;
+                    std::cout << "          if isnan(v) sys.print(\"parse failed\") end" << std::endl;
+                    std::cout << "Notes:    isnan(nan) == true" << std::endl;
+                    std::cout << "          isnan(0.0) == false" << std::endl;
+                    std::cout << "          isnan(\"text\") == false  (non-numeric returns false)" << std::endl;
+                    std::cout << "See also: nan, isnil(), tonum()" << std::endl;
+                } else if (topic == "tonum") {
+                    std::cout << "Function: tonum(x) — convert value to double" << std::endl;
+                    std::cout << "Params:   x — string, bool, double, or nil" << std::endl;
+                    std::cout << "Returns:  double" << std::endl;
+                    std::cout << "  tonum(\"3.14\")  -> 3.14" << std::endl;
+                    std::cout << "  tonum(\"42\")    -> 42.0" << std::endl;
+                    std::cout << "  tonum(true)    -> 1.0" << std::endl;
+                    std::cout << "  tonum(false)   -> 0.0" << std::endl;
+                    std::cout << "  tonum(nil)     -> 0.0" << std::endl;
+                    std::cout << "  tonum(\"abc\")   -> nan  (parse failure)" << std::endl;
+                    std::cout << "  tonum(3.14)    -> 3.14  (passthrough)" << std::endl;
+                    std::cout << "Example:  double n = tonum(sys.args()[1])  # parse CLI arg" << std::endl;
+                    std::cout << "See also: tostr(), isnan(), nan" << std::endl;
+                } else if (topic == "tostr") {
+                    std::cout << "Function: tostr(x) — convert value to string" << std::endl;
+                    std::cout << "Params:   x — any value" << std::endl;
+                    std::cout << "Returns:  string" << std::endl;
+                    std::cout << "  tostr(42.0)    -> \"42.000000\"" << std::endl;
+                    std::cout << "  tostr(true)    -> \"true\"" << std::endl;
+                    std::cout << "  tostr(false)   -> \"false\"" << std::endl;
+                    std::cout << "  tostr(nil)     -> \"\"" << std::endl;
+                    std::cout << "  tostr(\"hi\")    -> \"hi\"  (passthrough)" << std::endl;
+                    std::cout << "Example:  string s = tostr(x) + \" items\"" << std::endl;
+                    std::cout << "See also: tonum(), sys.print()" << std::endl;
+                } else if (topic == ";") {
+                    std::cout << "Operator: ; — Statement separator (multiple statements per line)" << std::endl;
+                    std::cout << "Usage:   stmt1; stmt2; stmt3" << std::endl;
+                    std::cout << "Example: int a = 1; int b = 2; sys.print(a + b)" << std::endl;
+                    std::cout << "Notes:   Semicolons are optional at end of line." << std::endl;
+                    std::cout << "         Useful for compact one-liners in REPL." << std::endl;
+                } else if (topic == "vectors" || topic == "vector" || topic == "array") {
+                    std::cout << "Vectors — Gem's built-in dynamic array type" << std::endl;
+                    std::cout << "Creation:" << std::endl;
+                    std::cout << "  int v = [1.0, 2.0, 3.0]       # numeric vector" << std::endl;
+                    std::cout << "  string s = [\"a\", \"b\", \"c\"]    # string vector" << std::endl;
+                    std::cout << "  int empty = []                 # empty numeric vector" << std::endl;
+                    std::cout << "Indexing (0-based):" << std::endl;
+                    std::cout << "  v[0]   # first element" << std::endl;
+                    std::cout << "  v[2]   # third element" << std::endl;
+                    std::cout << "  s[0]   # first string" << std::endl;
+                    std::cout << "  str[1] # second character of a string" << std::endl;
+                    std::cout << "Length:" << std::endl;
+                    std::cout << "  v.length   # number of elements (also .size, .count)" << std::endl;
+                    std::cout << "  v.size     # same as .length" << std::endl;
+                    std::cout << "  v.count    # same as .length" << std::endl;
+                    std::cout << "Sorting (algo module):" << std::endl;
+                    std::cout << "  algo.quicksort(v)          # sort in-place, returns sorted vector" << std::endl;
+                    std::cout << "  algo.sort(v, [start], [end]) # sort a slice" << std::endl;
+                    std::cout << "Iteration:" << std::endl;
+                    std::cout << "  int i = 0" << std::endl;
+                    std::cout << "  while i < v.length" << std::endl;
+                    std::cout << "    sys.print(v[i])" << std::endl;
+                    std::cout << "    i += 1" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "  itr.range(5)   # returns [0,1,2,3,4]" << std::endl;
+                    std::cout << "Object vectors:" << std::endl;
+                    std::cout << "  tcp.nic()    # returns vector of NIC objects (.name, .ip, .status)" << std::endl;
+                    std::cout << "  tcp.routes() # returns vector of Route objects (.dest, .gw, .iface)" << std::endl;
+                    std::cout << "  data.read_csv(path) # returns vector of row objects" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    std::vector<double>, std::vector<std::string>" << std::endl;
+                    std::cout << "  Python: list  [1, 2, 3]" << std::endl;
+                    std::cout << "  Julia:  Vector{Float64}  [1.0, 2.0, 3.0]" << std::endl;
+                    std::cout << "  Go:     []float64{1, 2, 3}" << std::endl;
+                    std::cout << "  Ruby:   Array  [1, 2, 3]" << std::endl;
+                    std::cout << "  Rust:   Vec<f64>  vec![1.0, 2.0, 3.0]" << std::endl;
+                } else if (topic == "repl") {
+                    std::cout << "REPL — Gem Interactive Read-Eval-Print Loop" << std::endl;
+                    std::cout << "Start:   ./gem          # enter REPL" << std::endl;
+                    std::cout << "Exit:    exit  or  quit  or  Ctrl+D" << std::endl;
+                    std::cout << "Expression output:" << std::endl;
+                    std::cout << "  Any expression that produces a value prints: => value" << std::endl;
+                    std::cout << "  Example: 2 + 3        => 5" << std::endl;
+                    std::cout << "  Example: \"hello\"      => hello" << std::endl;
+                    std::cout << "  Example: math.sin(0)  => 0" << std::endl;
+                    std::cout << "History:" << std::endl;
+                    std::cout << "  Arrow keys navigate history (readline)" << std::endl;
+                    std::cout << "  his          — show today's session log" << std::endl;
+                    std::cout << "  gem -h       — print history and exit" << std::endl;
+                    std::cout << "  Saved to: ~/.gem/YYYYDDD.txt (Julian date)" << std::endl;
+                    std::cout << "  Readline history: ~/.gem/history.txt" << std::endl;
+                    std::cout << "Help system:" << std::endl;
+                    std::cout << "  help              — general help" << std::endl;
+                    std::cout << "  help \"topic\"      — detailed help for topic" << std::endl;
+                    std::cout << "  help(\"topic\")     — same, function call form" << std::endl;
+                    std::cout << "  sys.help(\"topic\") — same, explicit form" << std::endl;
+                    std::cout << "  helpfull          — write full reference to helpfull_DATETIME.md" << std::endl;
+                    std::cout << "  sys.helpfull()    — same, method call form" << std::endl;
+                    std::cout << "  helpless          — write + pipe through less" << std::endl;
+                    std::cout << "  sys.helpless()    — same, method call form" << std::endl;
+                    std::cout << "Module listing:" << std::endl;
+                    std::cout << "  lib   — list all loaded builtin modules" << std::endl;
+                    std::cout << "Aliases:" << std::endl;
+                    std::cout << "  alias ? = sys.help()   # define shortcut" << std::endl;
+                    std::cout << "  ?                      # invoke alias" << std::endl;
+                    std::cout << "Multi-statement lines:" << std::endl;
+                    std::cout << "  int a = 1; int b = 2; sys.print(a + b)" << std::endl;
+                    std::cout << "C++ REPL:" << std::endl;
+                    std::cout << "  cpp.repl()   # drop into Cling C++26 REPL" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  Python: python3 (interactive)" << std::endl;
+                    std::cout << "  Julia:  julia (interactive)" << std::endl;
+                    std::cout << "  Go:     no built-in REPL" << std::endl;
+                    std::cout << "  Ruby:   irb" << std::endl;
+                    std::cout << "  Rust:   no built-in REPL (evcxr external)" << std::endl;
+                } else if (topic == "all") {
+                    // Generate helpfull_DATETIME.md
+                    auto t = std::time(nullptr);
+                    auto tm = *std::localtime(&t);
+                    std::ostringstream ts;
+                    ts << std::put_time(&tm, "%Y%m%d_%H%M%S");
+                    std::string filename = "helpfull_" + ts.str() + ".md";
+
+                    std::ostringstream md;
+                    md << "# Gem Language — Complete Reference\n\n";
+                    md << "**Generated:** " << std::put_time(&tm, "%Y-%m-%d %H:%M:%S") << "  \n";
+                    md << "**Version:** 0.1.0 | **Built with:** C++26\n\n---\n\n";
+
+                    md << "## Keywords\n\n";
+                    md << "| Keyword | Purpose |\n|---------|----------|\n";
+                    md << "| `fun name(p1,p2) ... end` | Define function; last expr is return value |\n";
+                    md << "| `obj Name(params) : Parent ... end` | Define object/class (single inheritance) |\n";
+                    md << "| `use \"file\"` | Include .g/.gm or AI-translate .py/.jl/.r/.cpp/.go/.rb/.rs/.js |\n";
+                    md << "| `if cond ... else ... end` | Conditional (else optional) |\n";
+                    md << "| `while cond ... end` | Loop while condition is truthy |\n";
+                    md << "| `end [expr]` | Close block; optional return expr for fun |\n";
+                    md << "| `alias name = expr` | REPL shortcut |\n";
+                    md << "| `his` | Show today's session history |\n";
+                    md << "| `lib` | List all loaded builtin modules |\n";
+                    md << "| `exit` / `quit` | Exit interpreter |\n";
+                    md << "| `langport(pattern,[out])` | AI-port foreign code to Gem |\n\n";
+
+                    md << "## Types\n\n";
+                    md << "| Type | Declaration | Notes |\n|------|-------------|-------|\n";
+                    md << "| `int` | `int x = 0` | Stores double; also holds vectors |\n";
+                    md << "| `double` | `double pi = 3.14` | IEEE 754 double |\n";
+                    md << "| `string` | `string s = \"hi\"` | UTF-8 string |\n";
+                    md << "| `bool` | `bool ok = true` | true / false |\n";
+                    md << "| `_var` | `_config = 1` | Underscore prefix = global scope |\n\n";
+                    md << "Multi-var: `int a, b, c = 0`  Chained: `a = b = c = 0`\n\n";
+
+                    md << "## Literals\n\n";
+                    md << "`true` `false` `null` `nil` (=null) `nan` (IEEE 754 NaN)\n\n";
+
+                    md << "## Operators\n\n";
+                    md << "| Category | Operators |\n|----------|-----------|\n";
+                    md << "| Arithmetic | `+` `-` `*` `/` |\n";
+                    md << "| Compound assign | `+=` `-=` `*=` `/=` |\n";
+                    md << "| Comparison | `==` `!=` `>` `>=` `<` `<=` |\n";
+                    md << "| Logical | `!` (prefix not) `&&` `||` |\n";
+                    md << "| Separator | `;` (multiple statements per line) |\n";
+                    md << "| String concat | `+` |\n\n";
+
+                    md << "## Builtin Functions\n\n";
+                    md << "| Function | Params | Returns | Notes |\n|----------|--------|---------|-------|\n";
+                    md << "| `isnil(x)` | any | bool | true if x is nil/null/void |\n";
+                    md << "| `isnan(x)` | any | bool | true if x is IEEE 754 NaN |\n";
+                    md << "| `tonum(x)` | any | double | parse to number; nan on failure |\n";
+                    md << "| `tostr(x)` | any | string | convert to string |\n\n";
+
+                    md << "## Vectors\n\n";
+                    md << "```\nint v = [1.0, 2.0, 3.0]   # creation\nv[0]                       # index (0-based)\nv.length / v.size / v.count  # length\n```\n\n";
+
+                    md << "## Builtin Modules (35)\n\n";
+
+                    // sys
+                    md << "### sys — System Root (inherited by all objects)\n";
+                    md << "| Method | Signature | Returns |\n|--------|-----------|--------|\n";
+                    md << "| `print` | `print(...)` | void |\n";
+                    md << "| `args` | `args()` | vector\\<string\\> |\n";
+                    md << "| `async` | `async(func,[params],[timeout])` | thread handle |\n";
+                    md << "| `sethandler` | `sethandler(signals,func)` | bool |\n";
+                    md << "| `host` | `host()` | string |\n";
+                    md << "| `exec` | `exec(cmd)` | int (exit code) |\n";
+                    md << "| `doc` | `doc([path])` | string |\n";
+                    md << "| `help` | `help([topic])` | void |\n";
+                    md << "| `exit` | `exit()` | void |\n";
+                    md << "| `langport` | `langport(pattern,[output])` | bool |\n";
+                    md << "| `redirect` | `redirect(url,[port])` | bool |\n";
+                    md << "| `app` | `app(port,[routes])` | bool |\n\n";
+
+                    // math
+                    md << "### math — Mathematics & Symbolic Math\n";
+                    md << "**Numeric:** `sin(x)` `cos(x)` `sqrt(x)` `math.pi`  \n";
+                    md << "**Symbolic (SymPy/Sage):** `useSymPy()` `useSage()` `diff(expr,[var])` `integrate(expr,[var])` `simplify(expr)` `solve(expr,[var])` `sym_latex(expr)` `to_latex(val)` `write_latex(path,content,[standalone])` `read_latex(path)` `parse_latex(text)` `compile_latex(path)`\n\n";
+
+                    // ai
+                    md << "### ai — AI Integration (Gemini/Mistral/Ollama)\n";
+                    md << "| Method | Signature | Returns |\n|--------|-----------|--------|\n";
+                    md << "| `prompt` | `prompt(text)` | string |\n";
+                    md << "| `prompt_native` | `prompt_native(text)` | string |\n";
+                    md << "| `useGemini` | `useGemini()` | bool |\n";
+                    md << "| `useMistral` | `useMistral(model)` | bool |\n";
+                    md << "| `useOllama` | `useOllama(model,[host])` | bool |\n";
+                    md << "| `setKey` | `setKey(key)` | bool |\n";
+                    md << "| `setHost` | `setHost(host)` | bool |\n";
+                    md << "| `setPath` | `setPath(path)` | bool |\n";
+                    md << "**Properties:** `ai.provider` `ai.model` `ai.host`\n\n";
+
+                    // text
+                    md << "### text — String & Document Processing\n";
+                    md << "`read(path)→string` `sub(s,start,[len])→string` `replace(s,old,new)→string`  \n";
+                    md << "`write_pdf(path,text)→bool` `write_pdf_a(path,text)→bool` `read_pdf(path)→string`  \n";
+                    md << "`read_markdown(path)` `write_markdown(path,text)` `read_yaml(path)` `write_yaml(path,obj)`  \n";
+                    md << "`read_html(path)` `write_html(path,text)` `read_xml(path)` `write_xml(path,text)`  \n";
+                    md << "`read_fits_header(path)→object` `read_hdf_header(path)→object`\n\n";
+
+                    // rex
+                    md << "### rex — Regular Expressions (ECMAScript)\n";
+                    md << "All accept optional `flags` string (`\"i\"` = case-insensitive):  \n";
+                    md << "`match(text,pattern,[flags])→bool` `find(text,pattern,[flags])→string`  \n";
+                    md << "`findall(text,pattern,[flags])→list` `groups(text,pattern,[flags])→list`  \n";
+                    md << "`sub(text,pattern,repl,[flags])→string` `gsub(text,pattern,repl,[flags])→string`  \n";
+                    md << "`split(text,pattern,[flags])→list` `count(text,pattern,[flags])→int`\n\n";
+
+                    // algo
+                    md << "### algo — Algorithms, Sorting & Time\n";
+                    md << "`add(...)→double` `quicksort(v)→vector` `sort(v,[start],[end])→vector`  \n";
+                    md << "`now()→string` `date_add(ts,days)→double` `date_diff(t1,t2)→double`\n\n";
+
+                    // geo
+                    md << "### geo — GIS & Geolocation\n";
+                    md << "`lookup()→{.lat,.lon,.city,.country}` `distance(lat1,lon1,lat2,lon2)→double`  \n";
+                    md << "`write_geojson(path,features)→bool` `history(plate)→string`  \n";
+                    md << "`plot2d(data,[layout])→string` `plot3d(data,[layout])→string`\n\n";
+
+                    // astro
+                    md << "### astro — Astrophysics & Planetary Science\n";
+                    md << "**Constants:** `G` `c` `AU` `pc` `ly` `Msun` `Rsun` `Lsun` `Tsun` `Mearth` `Rearth` `H0` `sigma_sb`  \n";
+                    md << "**Unit conv:** `to_ly(pc)` `to_pc(ly)` `to_au(m)` `deg_to_rad(d)` `rad_to_deg(r)`  \n";
+                    md << "**Stellar:** `luminosity(R,T)` `stefan_boltzmann(T,R)` `wien(T)` `abs_magnitude(m,d_pc)` `distance_modulus(d_pc)` `spectral_class(T)` `schwarzschild_radius(M)` `escape_velocity(M,R)`  \n";
+                    md << "**Orbital:** `orbital_period(a_au,M_msun)` `orbital_velocity(a_m,M_kg)` `hill_sphere(a,mp,ms)` `roche_limit(R,rho_p,rho_s)` `synodic_period(p1,p2)` `planet(name)`  \n";
+                    md << "**Solar:** `solar_flux(dist_au)` `solar_wind_pressure(n,v)` `sunspot_cycle(year)` `parker_spiral_angle(v,d)` `solar_activity()`  \n";
+                    md << "**Cosmology:** `hubble_distance(z)` `redshift_velocity(z)` `lookback_time(z)` `critical_density()`  \n";
+                    md << "**Coords:** `equatorial_to_galactic(ra,dec)` `angular_separation(ra1,dec1,ra2,dec2)`  \n";
+                    md << "**Exoplanet:** `transit_depth(rp,rs)` `habitable_zone(L)` `equilibrium_temp(L,d,A)`  \n";
+                    md << "**Pulsar:** `pulsar_spindown(P,Pdot)→{age_yr,Bfield_G,edot_W}`\n\n";
+
+                    // fin
+                    md << "### fin — Financial Engineering (QuantLib + yfinance)\n";
+                    md << "`ticker(symbol)→{.price,.volume,.open,.high,.low,.close,.pe_ratio,.market_cap,.dividend_yield}`  \n";
+                    md << "`high_yield_bonds()` `high_yield_etfs()` `high_yield_equities()` `dashboard()`  \n";
+                    md << "`bs_price(type,strike,spot,rate,vol,t)→double`  \n";
+                    md << "`greeks(type,strike,spot,rate,vol,t)→{.npv,.delta,.gamma,.theta,.vega}`  \n";
+                    md << "`date(d,m,y)→{.day,.month,.year,.serial,.str}` `calendar(name)→object`  \n";
+                    md << "`is_holiday(cal,d,m,y)→bool` `add_days(d,m,y,n)→{.day,.month,.year,.str}` `diff_days(d1,m1,y1,d2,m2,y2)→double`\n\n";
+
+                    // bsm
+                    md << "### bsm — Black-Scholes-Merton (extends fin)\n";
+                    md << "`price_american(symbol,type,duration)→double`  duration: `\"weekly\"` `\"monthly\"` `\"quarterly\"`\n\n";
+
+                    // chart
+                    md << "### chart — Interactive Plotting (Plotly.js)\n";
+                    md << "`plot(traces,[layout])→string` `show(path)→bool` `server(path,[port])→bool`\n\n";
+
+                    // data
+                    md << "### data — Data Science\n";
+                    md << "`read_csv(path)→vector` `mean(vector)→double` `std(vector)→double`\n\n";
+
+                    // tcp
+                    md << "### tcp — TCP/IP Networking\n";
+                    md << "`listen(port)→int` `accept(fd)→{.fd,.addr}` `connect(host,port)→int`  \n";
+                    md << "`send(fd,msg)→int` `recv(fd,[size])→string` `close(fd)→bool`  \n";
+                    md << "`nic()→[{.name,.ip,.status}]` `routes()→[{.dest,.gw,.iface}]`\n\n";
+
+                    // thread
+                    md << "### thread — Background Thread Handle (from sys.async)\n";
+                    md << "`wait()→any` `is_finished()→bool`\n\n";
+
+                    // www
+                    md << "### www — Web Framework\n";
+                    md << "`wget(url,file)→bool` `app(port,[routes])→bool` `redirect(target,[port])→bool` `map2d(geojson,output)→bool`\n\n";
+
+                    // cdn
+                    md << "### cdn — Caching Proxy (extends www)\n";
+                    md << "`start(port,routes_map)→bool` `stats()→{.hits,.misses,.bytes,.cached_items}` `purge([path])→bool` `config(type,content)→string` `dashboard()→bool`\n\n";
+
+                    // itr
+                    md << "### itr — Iterators\n";
+                    md << "`range(n)→[0..n-1]` `while(cond_fun,body_fun)→void`\n\n";
+
+                    // bev
+                    md << "### bev — Bevington Data Reduction\n";
+                    md << "`data(x_vec,y_vec)→bool` `fit_line()→bool` `param(idx)→double`  idx: 0=intercept, 1=slope\n\n";
+
+                    // file
+                    md << "### file — Filesystem\n";
+                    md << "`write(path,content)→bool` `exists(path)→bool`\n\n";
+
+                    // zip
+                    md << "### zip — Compression\n";
+                    md << "`compress(src,archive)→bool` `decompress(archive,dest)→bool`\n\n";
+
+                    // img
+                    md << "### img — Image Processing (ImageMagick)\n";
+                    md << "`resize(src,width,height,dest)→bool`\n\n";
+
+                    // nlp
+                    md << "### nlp — Natural Language Processing\n";
+                    md << "Delegates to `ai.prompt()`. Used internally by `mobl.dictate()`.\n\n";
+
+                    // cpp
+                    md << "### cpp — C++26 JIT (Cling)\n";
+                    md << "`repl()→int` `exec(code)→int`\n\n";
+
+                    // k3s
+                    md << "### k3s — Docker & Kubernetes\n";
+                    md << "`docker_run(image,cmd)` `docker_ps()` `docker_build(path,tag)` `docker_stop(id)`  \n";
+                    md << "`k3s_apply(yaml)` `k3s_get(resource)` `k3s_pods()` `k3s_nodes()` `k3s_logs(pod)`\n\n";
+
+                    // vm
+                    md << "### vm — Vagrant VMs\n";
+                    md << "`init(box)` `up()` `ssh(cmd)` `status()` `halt()` `destroy()`\n\n";
+
+                    // mobl
+                    md << "### mobl — Mobile PWA\n";
+                    md << "`phone(name)→object` `dictate(text)→{title,note,tags}` `make_feature(lat,lon,text)→GeoJSON`\n\n";
+
+                    // trek
+                    md << "### trek — Travel Logs & OSM\n";
+                    md << "`new(path)` `add(path,lat,lon,[title],[note])` `edit(path,idx,title,note)` `remove(path,idx)`  \n";
+                    md << "`load(path)→string` `show(path,[port])` `export_gpx(geojson,gpx)` `stats(path)→{.waypoints,.distance_km}`\n\n";
+
+                    // seo
+                    md << "### seo — Search Engine Optimization\n";
+                    md << "`index(urls,output_path)→bool` `analyze(index_path)→void`\n\n";
+
+                    // drvr
+                    md << "### drvr — Device Drivers\n";
+                    md << "`linux(name)` `win11(name)` `macos(name)` `android(name)` `build(target)` `deploy(target)`\n\n";
+
+                    // art
+                    md << "### art — ASCII Art & SVG\n";
+                    md << "`text_to_art(text,[font])→string` `art_to_file(text,path)→bool` `art_to_svg(text,[path])→string`  \n";
+                    md << "`svg_to_art(svg_path,[width])→string` `mindmap([path])→string` `readme([path])→string` `tutorial([path])→string`\n\n";
+
+                    // polyglot
+                    md << "### go / ruby / node / rust — Polyglot\n";
+                    md << "`run(input)→string`  \n";
+                    md << "`go.build(file)` `node.npm_install(pkg)` `rust.cargo_new(name)`\n\n";
+
+                    md << "## CLI\n\n";
+                    md << "```\ngem <file.g>              Run script\ngem -c <main.g> [mods...] Compile to binary\ngem -o <name>             Output name\ngem -h                    Print history and exit\ngem -t <file> [-o out]    AI-translate to Gem\ngem                       Start REPL\n```\n\n";
+
+                    md << "## REPL\n\n";
+                    md << "- Expressions print `=> value`\n";
+                    md << "- Arrow keys: readline history\n";
+                    md << "- History saved to `~/.gem/YYYYDDD.txt`\n";
+                    md << "- `his` — show today's log\n";
+                    md << "- `lib` — list modules\n";
+                    md << "- `help \"topic\"` — detailed help\n";
+                    md << "- `alias ? = sys.help()` — define shortcut\n\n";
+
+                    md << "## Object System\n\n";
+                    md << "```\nobj Name(params) : Parent\n  .attr = val        # own attribute\n  ..attr = val       # parent attribute\n  fun method(p) ... end\nend\nName var = Name(args)\n```\nAll objects inherit from `sys`. Single inheritance only.\n\n";
+
+                    md << "---\n*Generated by `sys.help(\"all\")`*\n";
+
+                    // Write file
+                    std::ofstream ofs(filename);
+                    ofs << md.str();
+                    ofs.close();
+
+                    // Dedup: find any prior helpfull_*.md and remove if identical
+                    {
+                        namespace fs = std::filesystem;
+                        std::string newContent = md.str();
+                        for (auto& entry : fs::directory_iterator(".")) {
+                            std::string name = entry.path().filename().string();
+                            if (name == filename) continue;
+                            if (name.rfind("helpfull_", 0) == 0 && name.size() > 9 &&
+                                name.substr(name.size() - 3) == ".md") {
+                                std::ifstream prev(entry.path());
+                                std::string prevContent((std::istreambuf_iterator<char>(prev)),
+                                                         std::istreambuf_iterator<char>());
+                                if (prevContent == newContent) {
+                                    fs::remove(filename);
+                                    filename = name;
+                                    std::cout << "No change — reusing: " << filename << std::endl;
+                                    goto helpfull_done;
+                                } else {
+                                    fs::remove(entry.path());
+                                }
+                            }
+                        }
+                    }
+                    std::cout << "Written: " << filename << std::endl;
+                    helpfull_done:;
+                    // Open the markdown file in the default system viewer
+                    // (suppressed when a second arg "noopen" is passed, e.g. from helpless)
+                    bool noopen = (args.size() >= 2 && std::holds_alternative<std::string>(args[1]->value)
+                                   && std::get<std::string>(args[1]->value) == "noopen");
+                    if (!noopen) {
+                        std::string open_cmd;
+#if defined(_WIN32)
+                        open_cmd = "start \"\" \"" + filename + "\"";
+#elif defined(__APPLE__)
+                        open_cmd = "open \"" + filename + "\"";
+#else
+                        open_cmd = "xdg-open \"" + filename + "\" &";
+#endif
+                        std::system(open_cmd.c_str());
+                    }
+                    // Also display to stdout (suppressed when called from helpless — less handles display)
+                    if (!noopen) {
+                        std::cout << md.str();
+                    }
+                    std::cout << "Available topics: sys, math, ai, text, rex, algo, bev, file, zip, nlp, img," << std::endl;
+                    std::cout << "  www, cdn, geo, astro, fin, bsm, chart, data, tcp, thread, cpp, itr," << std::endl;
+                    std::cout << "  k3s, vm, mobl, trek, seo, drvr, art, go, ruby, node, rust," << std::endl;
+                    std::cout << "  fun, obj, use, if, else, while, end, alias, his, lib, exit, quit," << std::endl;
+                    std::cout << "  int, double, string, bool, true, false, null, nil, nan," << std::endl;
+                    std::cout << "  isnil, isnan, tonum, tostr, langport, operators, ;, vectors, repl" << std::endl;
+                    return std::make_shared<GemValue>(filename);
                 }
             }
             return std::make_shared<GemValue>();
+        }, true };
+
+        methods["helpfull"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            return call("help", {std::make_shared<GemValue>(std::string("all"))});
+        }, true };
+
+        methods["helpless"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            // helpless: write the reference file then pipe it through less.
+            // We get the filename back from help("all") to avoid a timestamp race.
+            auto result = call("help", {std::make_shared<GemValue>(std::string("all")), std::make_shared<GemValue>(std::string("noopen"))});
+            std::string filename;
+            if (result && std::holds_alternative<std::string>(result->value))
+                filename = std::get<std::string>(result->value);
+            if (!filename.empty())
+                std::system(("less \"" + filename + "\"").c_str());
+            return result;
         }, true };
 
         methods["doc"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
@@ -1262,6 +1988,17 @@ public:
             return std::make_shared<GemValue>(true);
         }, true };
 
+        methods["useGemini"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            provider = "gemini";
+            model = "gemini-pro";
+            host = "generativelanguage.googleapis.com";
+            path = "/v1beta/models/gemini-pro:generateContent";
+            properties["provider"] = std::make_shared<GemValue>(provider);
+            properties["model"] = std::make_shared<GemValue>(model);
+            properties["host"] = std::make_shared<GemValue>(host);
+            return std::make_shared<GemValue>(true);
+        }, true };
+
         methods["prompt_native"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
 #ifdef HAS_MISTRAL
             if (args.empty()) return std::make_shared<GemValue>("");
@@ -1317,6 +2054,21 @@ public:
         name = "tcp";
         methods["listen"] = { [](std::vector<std::shared_ptr<GemValue>> args) { return std::make_shared<GemValue>(0.0); }, true };
         methods["connect"] = { [](std::vector<std::shared_ptr<GemValue>> args) { return std::make_shared<GemValue>(0.0); }, true };
+        methods["accept"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            auto sock = std::make_shared<GemObject>("Socket");
+            sock->set("fd", std::make_shared<GemValue>(0.0));
+            sock->set("addr", std::make_shared<GemValue>("0.0.0.0"));
+            return std::make_shared<GemValue>(sock);
+        }, true };
+        methods["send"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            return std::make_shared<GemValue>(args.size() > 1 ? (double)args[1]->toString().size() : 0.0);
+        }, true };
+        methods["recv"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            return std::make_shared<GemValue>(std::string(""));
+        }, true };
+        methods["close"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            return std::make_shared<GemValue>(true);
+        }, true };
         
         methods["nic"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::vector<std::shared_ptr<GemObject>> nics;
@@ -1608,6 +2360,36 @@ public:
             oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
             return std::make_shared<GemValue>(oss.str());
         }, true };
+        methods["quicksort"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty() || !std::holds_alternative<std::vector<double>>(args[0]->value)) return std::make_shared<GemValue>();
+            auto v = std::get<std::vector<double>>(args[0]->value);
+            std::sort(v.begin(), v.end());
+            args[0]->value = v;
+            return std::make_shared<GemValue>(v);
+        }, true };
+        methods["sort"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty() || !std::holds_alternative<std::vector<double>>(args[0]->value)) return std::make_shared<GemValue>();
+            auto v = std::get<std::vector<double>>(args[0]->value);
+            int start = (args.size() > 1 && std::holds_alternative<double>(args[1]->value)) ? (int)std::get<double>(args[1]->value) : 0;
+            int end   = (args.size() > 2 && std::holds_alternative<double>(args[2]->value)) ? (int)std::get<double>(args[2]->value) : (int)v.size();
+            if (start < 0) start = 0;
+            if (end > (int)v.size()) end = (int)v.size();
+            std::sort(v.begin() + start, v.begin() + end);
+            args[0]->value = v;
+            return std::make_shared<GemValue>(v);
+        }, true };
+        methods["date_add"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 2) return std::make_shared<GemValue>(0.0);
+            double ts = std::holds_alternative<double>(args[0]->value) ? std::get<double>(args[0]->value) : 0.0;
+            double days = std::holds_alternative<double>(args[1]->value) ? std::get<double>(args[1]->value) : 0.0;
+            return std::make_shared<GemValue>(ts + days * 86400.0);
+        }, true };
+        methods["date_diff"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 2) return std::make_shared<GemValue>(0.0);
+            double t1 = std::holds_alternative<double>(args[0]->value) ? std::get<double>(args[0]->value) : 0.0;
+            double t2 = std::holds_alternative<double>(args[1]->value) ? std::get<double>(args[1]->value) : 0.0;
+            return std::make_shared<GemValue>((t2 - t1) / 86400.0);
+        }, true };
     }
 };
 
@@ -1619,6 +2401,14 @@ public:
         methods["compress"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             if (args.size() < 2) return std::make_shared<GemValue>(false);
             return std::make_shared<GemValue>(true); // Stub
+        }, true };
+        methods["decompress"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 2) return std::make_shared<GemValue>(false);
+            std::string archive = args[0]->toString();
+            std::string dest = args[1]->toString();
+            std::string cmd = "unzip -o \"" + archive + "\" -d \"" + dest + "\" 2>/dev/null";
+            int rc = std::system(cmd.c_str());
+            return std::make_shared<GemValue>(rc == 0);
         }, true };
     }
 };
@@ -2831,6 +3621,42 @@ public:
              obj->set("str", std::make_shared<GemValue>(std::to_string(d) + "/" + std::to_string(m) + "/" + std::to_string(y)));
              return std::make_shared<GemValue>(obj);
         }, true };
+        methods["calendar"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::string name = args.empty() ? "TARGET" : args[0]->toString();
+            auto obj = std::make_shared<GemObject>("Calendar");
+            obj->set("name", std::make_shared<GemValue>(name));
+            return std::make_shared<GemValue>(obj);
+        }, true };
+        methods["is_holiday"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 4) return std::make_shared<GemValue>(false);
+            int d = (int)std::get<double>(args[1]->value);
+            int m = (int)std::get<double>(args[2]->value);
+            int y = (int)std::get<double>(args[3]->value);
+            QuantLib::Date date(d, (QuantLib::Month)m, y);
+            QuantLib::TARGET cal;
+            return std::make_shared<GemValue>(!cal.isBusinessDay(date));
+        }, true };
+        methods["add_days"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 4) return std::make_shared<GemValue>();
+            int d = (int)std::get<double>(args[0]->value);
+            int m = (int)std::get<double>(args[1]->value);
+            int y = (int)std::get<double>(args[2]->value);
+            int n = (int)std::get<double>(args[3]->value);
+            QuantLib::Date date(d, (QuantLib::Month)m, y);
+            date += n;
+            auto obj = std::make_shared<GemObject>("Date");
+            obj->set("day",   std::make_shared<GemValue>((double)date.dayOfMonth()));
+            obj->set("month", std::make_shared<GemValue>((double)(int)date.month()));
+            obj->set("year",  std::make_shared<GemValue>((double)date.year()));
+            obj->set("str",   std::make_shared<GemValue>(std::to_string(date.dayOfMonth()) + "/" + std::to_string((int)date.month()) + "/" + std::to_string(date.year())));
+            return std::make_shared<GemValue>(obj);
+        }, true };
+        methods["diff_days"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 6) return std::make_shared<GemValue>(0.0);
+            QuantLib::Date d1((int)std::get<double>(args[0]->value), (QuantLib::Month)(int)std::get<double>(args[1]->value), (int)std::get<double>(args[2]->value));
+            QuantLib::Date d2((int)std::get<double>(args[3]->value), (QuantLib::Month)(int)std::get<double>(args[4]->value), (int)std::get<double>(args[5]->value));
+            return std::make_shared<GemValue>((double)(d2 - d1));
+        }, true };
         methods["bs_price"] = { std::function<std::shared_ptr<GemValue>(std::vector<std::shared_ptr<GemValue>>)>([](std::vector<std::shared_ptr<GemValue>> args) {
              if (args.size() < 6) return std::make_shared<GemValue>(0.0);
              std::string type = args[0]->toString();
@@ -3632,5 +4458,6 @@ public:
 
 #include "gem_drvr.hpp"
 #include "gem_astro.hpp"
+#include "gem_art.hpp"
 
 #endif
