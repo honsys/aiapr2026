@@ -11,6 +11,7 @@ Welcome to the official tutorial repository for the **Gem Language** — a moder
 - **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++ on-the-fly.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
 - **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl` built into the runtime.
+- **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
 
 ---
 
@@ -68,6 +69,9 @@ Welcome to the official tutorial repository for the **Gem Language** — a moder
 ### 8. System Programming & Hardware
 - **[37_device_drivers.g](37_device_drivers.g)**: `drvr` builtin — Linux, Windows 11, macOS, and Android device driver development.
 
+### 9. Text & Pattern Matching
+- **[38_rex.g](38_rex.g)**: `rex` builtin — full ECMAScript regular expressions: match, find, findall, groups, sub, gsub, split, count.
+
 ---
 
 ## Help & Builtins
@@ -91,7 +95,7 @@ CLI Options:
   gem -t <file> [-o output] - AI-assisted translation to Gem.
 
 Available Builtin Modules:
-  sys, math, ai, text, algo, bev, file, zip, img, geo, mobl,
+  sys, math, ai, text, rex, algo, bev, file, zip, img, geo, mobl,
   cpp, tcp, itr, data, container, vm, go, ruby, node, rust,
   fin, bsm, chart, astro, drvr
 
