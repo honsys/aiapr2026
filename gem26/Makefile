@@ -305,5 +305,5 @@ clean:
 	# find . -maxdepth 1 -type f ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" ! -name "*.md" ! -name "*.g" ! -name "*.gm" -delete 2>/dev/null || true
 
 clean-deps:
-	$(RM) ImageMagick PDF-Writer QuantLib cling mapnik mistral-common cython mistral-client-python mistral-inference mistral-finetune
+	$(RM) ImageMagick PDF-Writer QuantLib cling mapnik mistral-common cython mistral-client-python mistral-inference mistral-finetune mistral-vibe
 	@echo deps cleaned
