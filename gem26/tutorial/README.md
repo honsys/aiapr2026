@@ -79,6 +79,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 10. Travel Logs & OSM Mapping
 - **[39_trek.g](39_trek.g)**: `trek` builtin — create, display, and edit travel logs on OpenStreetMap with GeoJSON/GPX support.
 
+### 11. Search Engine Optimization
+- **[40_seo.g](40_seo.g)**: `seo` builtin — crawl URLs, extract SEO signals (title, meta, headings, links), write JSON index, and print analysis report.
+
 ---
 
 ## Help & Builtins
