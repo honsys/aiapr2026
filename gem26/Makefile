@@ -38,7 +38,7 @@ MAPNIK_PATH = $(PWD)/mapnik/install
 LIBZIP_PATH = $(PWD)/libzip/install
 
 # Detection & Flags
-CXXFLAGS = -std=c++2b -Igem_src -Iccbevington/CppLibrary -O2 -Wall $(ARCH_FLAGS)
+CXXFLAGS = -std=c++2b -Isrc -Iccbevington/CppLibrary -O2 -Wall $(ARCH_FLAGS)
 LDFLAGS = $(ARCH_FLAGS) -lpthread -lz -lreadline
 
 ifeq ($(IS_WINDOWS),1)
@@ -121,8 +121,8 @@ else
 endif
 
 # Sources
-GEM_SRCS = gem_src/main.cpp gem_src/gem_mistral_bridge.cpp \
-           gem_src/miniz.c gem_src/miniz_tdef.c gem_src/miniz_tinfl.c gem_src/miniz_zip.c
+GEM_SRCS = src/main.cpp src/gem_mistral_bridge.cpp \
+           src/miniz.c src/miniz_tdef.c src/miniz_tinfl.c src/miniz_zip.c
 BEV_SRCS = ccbevington/CppLibrary/FitUtil.cpp ccbevington/CppLibrary/GenUtil.cpp ccbevington/CppLibrary/MonteLib.cpp ccbevington/CppLibrary/QuikHist.cpp
 
 .PHONY: all build deps clean help clean-deps test install
@@ -173,9 +173,9 @@ help:
 	@echo "  clean-deps - Remove all dependency source folders"
 	@echo "  help       - Show this help message"
 
-gem_src/gem_mistral_bridge.cpp: gem_src/gem_mistral_bridge.pyx
+src/gem_mistral_bridge.cpp: src/gem_mistral_bridge.pyx
 	@echo "Generating C++ from Cython..."
-	@cython --cplus -3 gem_src/gem_mistral_bridge.pyx -o gem_src/gem_mistral_bridge.cpp
+	@cython --cplus -3 src/gem_mistral_bridge.pyx -o src/gem_mistral_bridge.cpp
 
 $(TARGET): $(GEM_SRCS) $(BEV_SRCS)
 	@echo "Building $(TARGET) via $(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS)"
@@ -231,7 +231,7 @@ deps:
 	fi
 
 clean:
-	$(RM) $(TARGET) $(TARGET).exe node_modules gem_test gem_test.exe gem_src/gem_mistral_bridge.cpp
+	$(RM) $(TARGET) $(TARGET).exe node_modules gem_test gem_test.exe # src/gem_mistral_bridge.cpp
 	# Clean up any other temporary build files if necessary
 	# find . -maxdepth 1 -type f ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" ! -name "*.md" ! -name "*.g" ! -name "*.gm" -delete 2>/dev/null || true
 
