@@ -100,7 +100,7 @@ public:
         builtins["geo"] = std::make_shared<GemGeo>();
         builtins["cpp"] = std::make_shared<GemCpp>();
         builtins["data"] = std::make_shared<GemData>();
-        builtins["container"] = std::make_shared<GemContainer>();
+        builtins["k3s"] = std::make_shared<GemContainer>();
         builtins["vm"] = std::make_shared<GemVM>();
         builtins["go"] = std::make_shared<GemGo>();
         builtins["ruby"] = std::make_shared<GemRuby>();
@@ -111,6 +111,8 @@ public:
         builtins["bsm"] = std::make_shared<GemBSM>();
         builtins["astro"] = std::make_shared<GemAstro>();
         builtins["drvr"] = std::make_shared<GemDrvr>();
+        builtins["mobl"] = std::make_shared<GemMobl>();
+        builtins["trek"] = std::make_shared<GemTrek>();
 
         auto caller = [this](const std::string& name, std::vector<std::shared_ptr<GemValue>> args) {
             return this->callUserFunction(name, args);

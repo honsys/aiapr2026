@@ -12,7 +12,7 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 - **First-Class AI Support**: Built-in `ai` object supports Gemini, Mistral, and Ollama.
 - **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
-- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `astro`, `nlp` built into the runtime.
+- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread` built into the runtime.
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
 - **Symbolic Math**: `math` builtin supports symbolic differentiation, integration, simplification, and LaTeX output via SymPy/Sage.
 - **Astrophysics**: `astro` builtin covers stellar physics, orbital mechanics, cosmology, solar physics, and exoplanets.
@@ -76,6 +76,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 9. Text & Pattern Matching
 - **[38_rex.g](38_rex.g)**: `rex` builtin — full ECMAScript regular expressions: match, find, findall, groups, sub, gsub, split, count.
 
+### 10. Travel Logs & OSM Mapping
+- **[39_trek.g](39_trek.g)**: `trek` builtin — create, display, and edit travel logs on OpenStreetMap with GeoJSON/GPX support.
+
 ---
 
 ## Help & Builtins
@@ -100,16 +103,16 @@ CLI Options:
   gem -t <file> [-o output] - AI-assisted translation to Gem.
 
 Available Builtin Modules:
-  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, geo, mobl,
-  cpp, tcp, itr, data, container, vm, go, ruby, node, rust,
-  fin, bsm, chart, astro, drvr
+  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
+  cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
+  fin, bsm, chart, astro, mobl, trek, drvr
 
 Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, while,
   int, double, string, bool, exit
 
 Mobile & Cross-Platform:
-  use "mobl.gm" then: mobl phone("name")  phone.dictate(text)  phone.make_feature(lat,lon,text)
+  mobl phone("name")  phone.dictate(text)  phone.make_feature(lat,lon,text)
   ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)
 
 Detailed help: help "topic"  or  help(topic)
@@ -201,9 +204,18 @@ Exoplanet: `transit_depth(rp_rearth,rs_rsun)`, `habitable_zone(L_lsun)`, `equili
 
 Pulsar: `pulsar_spindown(P_s, Pdot)` → `{age_yr, Bfield_G, edot_W}`
 
+### trek — Travel Logs & OSM Mapping
+- `trek.new(path)` — create a new empty GeoJSON travel log file
+- `trek.add(path, lat, lon, [title], [note])` — append a waypoint
+- `trek.edit(path, index, title, note)` — update title/note of waypoint at index
+- `trek.remove(path, index)` — remove waypoint at index
+- `trek.load(path)` — return GeoJSON string
+- `trek.show(path, [port])` — serve interactive OSM (Leaflet) map with live edit UI (default port 8090)
+- `trek.export_gpx(geojson_path, gpx_path)` — export waypoints to GPX format
+- `trek.stats(path)` — returns object with `.waypoints` count and `.distance_km` total
+
 ### mobl — Mobile & Cross-Platform PWA
 ```
-use "mobl.gm"
 mobl phone("device_name")
 phone.dictate(spoken_text)          # NLP parse → JSON {title, note, tags}
 phone.make_feature(lat, lon, text)  # GPS + dictation → GeoJSON Feature
@@ -256,9 +268,27 @@ All functions accept optional flags string (`"i"` = case-insensitive):
 - `tcp.nic()` — network interface configurations
 - `tcp.routes()` — system routing table
 
-### container — Docker & Kubernetes
-- `container.docker_run(image, cmd)`, `docker_ps()`, `docker_build(path, tag)`, `docker_stop(id)`
-- `container.k3s_apply(yaml)`, `k3s_get(resource)`, `k3s_pods()`, `k3s_nodes()`, `k3s_logs(pod)`
+### thread — Background Threads
+Returned by `sys.async()`. Methods on the thread handle:
+- `thread.wait()` — block until complete, returns result (or timeout error string)
+- `thread.is_finished()` — bool, non-blocking status check
+
+### www — Web Framework
+- `www.wget(url, file)` — download file via curl
+- `www.app(port, [routes])` — background HTTP server; routes map paths to HTML strings
+- `www.redirect(target, [port])` — start redirect server or return redirect header string
+- `www.map2d(geojson, output)` — render 2D map via Mapnik (requires HAS_MAPNIK)
+
+### cdn — Caching Proxy Server
+Inherits all `www` methods, plus:
+- `cdn.start(port, routes_map)` — start caching reverse-proxy; routes map path prefixes to origin URLs
+- `cdn.stats()` — returns object with `.hits`, `.misses`, `.bytes`, `.cached_items`
+- `cdn.purge([path])` — evict one path or `"*"` to clear entire cache
+- `cdn.config(type, content)` — generate nginx/apache config
+
+### k3s — Docker & Kubernetes
+- `k3s.docker_run(image, cmd)`, `k3s.docker_ps()`, `k3s.docker_build(path, tag)`, `k3s.docker_stop(id)`
+- `k3s.k3s_apply(yaml)`, `k3s.k3s_get(resource)`, `k3s.k3s_pods()`, `k3s.k3s_nodes()`, `k3s.k3s_logs(pod)`
 
 ### vm — Vagrant VMs
 - `vm.init(box)`, `vm.up()`, `vm.ssh(cmd)`, `vm.status()`, `vm.halt()`, `vm.destroy()`
@@ -287,7 +317,7 @@ All functions accept optional flags string (`"i"` = case-insensitive):
 # macOS/Linux/Win11 → http://localhost:8080
 ```
 
-Uses `mobl.gm` + `travel_log.html` (PWA). Voice dictation → AI NLP → GPS pin → live GeoJSON → Plotly map.
+Uses the `mobl` builtin + `travel_log.html` (PWA). Voice dictation → AI NLP → GPS pin → live GeoJSON → Plotly map.
 
 ---
 

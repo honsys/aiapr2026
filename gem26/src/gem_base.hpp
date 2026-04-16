@@ -470,11 +470,11 @@ public:
                 std::cout << "  gem -h                   - Print history and exit." << std::endl;
                 std::cout << "  gem -t <file> [-o output]- AI-assisted translation to Gem." << std::endl;
                 std::cout << "\nAvailable Builtin Modules:" << std::endl;
-                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, geo, mobl, cpp, tcp, itr, data, container, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
+                std::cout << "  sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo, mobl, trek, cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust, fin, bsm, chart, astro, drvr" << std::endl;
                 std::cout << "\nKeywords for Documentation:" << std::endl;
                 std::cout << "  fun, obj, use, alias, his, lib, end, if, while, int, double, string, bool, exit" << std::endl;
                 std::cout << "\nMobile & Cross-Platform:" << std::endl;
-                std::cout << "  use \"mobl.gm\" then: mobl phone(\"name\")  phone.dictate(text)  phone.make_feature(lat,lon,text)" << std::endl;
+                std::cout << "  mobl phone(\"name\")  phone.dictate(text)  phone.make_feature(lat,lon,text)" << std::endl;
                 std::cout << "  ./gem travel_log.g  →  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)" << std::endl;
                 std::cout << "\nDetailed help: help \"topic\" or help(topic)" << std::endl;
                 } else {
@@ -504,7 +504,7 @@ public:
                     std::cout << "Description: Image processing via ImageMagick." << std::endl;
                     std::cout << "Functions:" << std::endl;
                     std::cout << "  - resize(src_path, width, height, dest_path): Resizes an image." << std::endl;
-                } else if (topic == "container") {
+                } else if (topic == "k3s") {
                     std::cout << "Description: Docker and Kubernetes (K3s) management." << std::endl;
                     std::cout << "Functions:" << std::endl;
                     std::cout << "  - docker_run(image, cmd): Runs a Docker container (--rm)." << std::endl;
@@ -659,10 +659,11 @@ public:
                     std::cout << "  - plot2d(data, [layout]): Generates a 2D Plotly map (open-street-map / scattermapbox)." << std::endl;
                     std::cout << "  - plot3d(data, [layout]): Generates a 3D globe visualization (orthographic scattergeo)." << std::endl;
                 } else if (topic == "mobl") {
-                    std::cout << "Description: Mobile & cross-platform cell phone object (mobl.gm)." << std::endl;
+                    std::cout << "Description: Mobile & cross-platform PWA builtin." << std::endl;
                     std::cout << "Cross-platform: Android Chrome, iPhone Safari, macOS, Linux, Windows 11." << std::endl;
-                    std::cout << "Usage: use \"mobl.gm\"  then  mobl phone(\"device_name\")" << std::endl;
+                    std::cout << "Usage: mobl phone(\"device_name\")" << std::endl;
                     std::cout << "Functions:" << std::endl;
+                    std::cout << "  - phone(name): Instantiate a phone object." << std::endl;
                     std::cout << "  - dictate(spoken_text): NLP parse via ai.prompt() → JSON {title, note, tags}." << std::endl;
                     std::cout << "  - make_feature(lat, lon, spoken_text): Builds a GeoJSON Feature from GPS + dictation." << std::endl;
                     std::cout << "Architecture:" << std::endl;
@@ -672,6 +673,22 @@ public:
                     std::cout << "  /       → travel_log.html  (PWA: mic + live Plotly map)" << std::endl;
                     std::cout << "  /log    → POST {lat,lon,text} → returns GeoJSON feature" << std::endl;
                     std::cout << "  /data   → GET full GeoJSON FeatureCollection" << std::endl;
+                } else if (topic == "trek") {
+                    std::cout << "Description: Travel log creation, display, and editing using OSM/geo/GIS." << std::endl;
+                    std::cout << "Functions:" << std::endl;
+                    std::cout << "  - new(path): Create a new empty GeoJSON travel log file." << std::endl;
+                    std::cout << "  - add(path, lat, lon, [title], [note]): Append a waypoint to the log." << std::endl;
+                    std::cout << "  - edit(path, index, title, note): Update title/note of waypoint at index." << std::endl;
+                    std::cout << "  - remove(path, index): Remove waypoint at index." << std::endl;
+                    std::cout << "  - load(path): Return GeoJSON string of the travel log." << std::endl;
+                    std::cout << "  - show(path, [port]): Serve interactive OSM (Leaflet) map with live edit UI (default port 8090)." << std::endl;
+                    std::cout << "  - export_gpx(geojson_path, gpx_path): Export waypoints to GPX format." << std::endl;
+                    std::cout << "  - stats(path): Return object with .waypoints count and .distance_km total." << std::endl;
+                    std::cout << "Map tiles: OpenStreetMap (Leaflet.js). Edits persist to GeoJSON file." << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  trek.new(\"my_trip.geojson\")" << std::endl;
+                    std::cout << "  trek.add(\"my_trip.geojson\", 48.8566, 2.3522, \"Paris\", \"Eiffel Tower\")" << std::endl;
+                    std::cout << "  trek.show(\"my_trip.geojson\")  # opens OSM map in browser" << std::endl;
                 } else if (topic == "www") {
                     std::cout << "Description: Web framework and mapping services (Flask-like)." << std::endl;
                     std::cout << "Functions:" << std::endl;
@@ -679,6 +696,18 @@ public:
                     std::cout << "  - app(port, [routes]): Starts a web server. Routes is a map of path->content." << std::endl;
                     std::cout << "  - redirect(target, [port]): Returns a redirect header or starts a redirect server." << std::endl;
                     std::cout << "  - map2d(geojson, output): Renders a 2D map from GeoJSON via Mapnik." << std::endl;
+                } else if (topic == "cdn") {
+                    std::cout << "Description: Caching reverse-proxy server. Inherits all www methods." << std::endl;
+                    std::cout << "Functions:" << std::endl;
+                    std::cout << "  - start(port, routes_map): Start caching proxy; routes map path prefixes to origin URLs." << std::endl;
+                    std::cout << "  - stats(): Returns object with .hits, .misses, .bytes, .cached_items." << std::endl;
+                    std::cout << "  - purge([path]): Evict one path or \"*\" to clear entire cache." << std::endl;
+                    std::cout << "  - config(type, content): Generate nginx/apache config string." << std::endl;
+                } else if (topic == "thread") {
+                    std::cout << "Description: Background thread handle returned by sys.async()." << std::endl;
+                    std::cout << "Functions:" << std::endl;
+                    std::cout << "  - wait(): Block until thread completes, returns result (or timeout error string)." << std::endl;
+                    std::cout << "  - is_finished(): Non-blocking bool status check." << std::endl;
                 } else if (topic == "cpp") {
                     std::cout << "Description: C++ Interop and JIT execution via Cling." << std::endl;
                     std::cout << "Functions:" << std::endl;
@@ -1996,7 +2025,7 @@ public:
 class GemContainer : public GemSys {
 public:
     GemContainer() : GemSys() {
-        name = "container";
+        name = "k3s";
         
         // container.docker_run(image, command)
         methods["docker_run"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
@@ -2519,6 +2548,414 @@ public:
 
 inline bool GemImg::initialized = false;
 inline bool GemAI::pythonInitialized = false;
+
+// GemTrek — Travel Log creation, display, and editing using OSM/geo/GIS
+class GemTrek : public GemSys {
+public:
+    GemTrek() : GemSys() {
+        name = "trek";
+
+        // trek.new(path) — create a new empty travel log GeoJSON file
+        methods["new"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::string path = args.empty() ? "trek_log.geojson" : args[0]->toString();
+            std::ofstream out(path);
+            out << "{\"type\":\"FeatureCollection\",\"features\":[]}";
+            return std::make_shared<GemValue>(path);
+        }, true };
+
+        // trek.add(path, lat, lon, title, note) — append a waypoint feature
+        methods["add"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 3) return std::make_shared<GemValue>(false);
+            std::string path  = args[0]->toString();
+            std::string lat   = args[1]->toString();
+            std::string lon   = args[2]->toString();
+            std::string title = args.size() > 3 ? args[3]->toString() : "Waypoint";
+            std::string note  = args.size() > 4 ? args[4]->toString() : "";
+
+            // Read existing
+            std::ifstream in(path);
+            std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+            in.close();
+
+            // Build new feature
+            std::string feat =
+                "{\"type\":\"Feature\","
+                "\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + lon + "," + lat + "]},"
+                "\"properties\":{\"title\":\"" + title + "\",\"note\":\"" + note + "\"}}";
+
+            // Insert before closing ]
+            size_t pos = content.rfind(']');
+            if (pos == std::string::npos) return std::make_shared<GemValue>(false);
+            bool hasFeatures = content.find("\"type\":\"Feature\"") != std::string::npos;
+            content.insert(pos, (hasFeatures ? "," : "") + feat);
+
+            std::ofstream out(path);
+            out << content;
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // trek.edit(path, index, title, note) — update title/note of feature at index
+        methods["edit"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 4) return std::make_shared<GemValue>(false);
+            std::string path  = args[0]->toString();
+            int idx           = (int)std::get<double>(args[1]->value);
+            std::string title = args[2]->toString();
+            std::string note  = args[3]->toString();
+
+            std::ifstream in(path);
+            std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+            in.close();
+
+            // Find the idx-th "properties" block and replace title/note (simple string replacement)
+            size_t pos = 0;
+            for (int i = 0; i <= idx; ++i) {
+                pos = content.find("\"properties\"", pos);
+                if (pos == std::string::npos) return std::make_shared<GemValue>(false);
+                if (i < idx) pos++;
+            }
+            size_t end = content.find('}', pos);
+            if (end == std::string::npos) return std::make_shared<GemValue>(false);
+            std::string newProps = "\"properties\":{\"title\":\"" + title + "\",\"note\":\"" + note + "\"}";
+            content.replace(pos, end - pos + 1, newProps);
+
+            std::ofstream out(path);
+            out << content;
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // trek.remove(path, index) — remove feature at index
+        methods["remove"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 2) return std::make_shared<GemValue>(false);
+            std::string path = args[0]->toString();
+            int idx = (int)std::get<double>(args[1]->value);
+
+            std::ifstream in(path);
+            std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+            in.close();
+
+            // Find idx-th Feature object and remove it
+            size_t pos = 0;
+            for (int i = 0; i <= idx; ++i) {
+                pos = content.find("{\"type\":\"Feature\"", pos);
+                if (pos == std::string::npos) return std::make_shared<GemValue>(false);
+                if (i < idx) pos++;
+            }
+            size_t end = pos;
+            int depth = 0;
+            for (size_t k = pos; k < content.size(); ++k) {
+                if (content[k] == '{') depth++;
+                else if (content[k] == '}') { depth--; if (depth == 0) { end = k; break; } }
+            }
+            // Remove feature and any trailing/leading comma
+            size_t removeStart = pos, removeEnd = end + 1;
+            if (removeEnd < content.size() && content[removeEnd] == ',') removeEnd++;
+            else if (removeStart > 0 && content[removeStart-1] == ',') removeStart--;
+            content.erase(removeStart, removeEnd - removeStart);
+
+            std::ofstream out(path);
+            out << content;
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // trek.load(path) — return GeoJSON string
+        methods["load"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty()) return std::make_shared<GemValue>("{}");
+            std::ifstream in(args[0]->toString());
+            std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+            return std::make_shared<GemValue>(content);
+        }, true };
+
+        // trek.show(path, [port]) — serve interactive OSM map via background HTTP server
+        methods["show"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string geojsonPath = args[0]->toString();
+            int port = (args.size() > 1 && std::holds_alternative<double>(args[1]->value))
+                       ? (int)std::get<double>(args[1]->value) : 8090;
+
+            // Read GeoJSON
+            std::ifstream in(geojsonPath);
+            std::string geojson((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+
+            // Build OSM Leaflet HTML
+            std::string html = R"GEM(<!DOCTYPE html><html><head>
+<meta charset="utf-8"><title>Gem Trek Log</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>html,body,#map{height:100%;margin:0;padding:0;}
+#panel{position:absolute;top:10px;right:10px;z-index:1000;background:#fff;padding:10px;border-radius:6px;max-width:260px;font-family:sans-serif;font-size:13px;}
+</style></head><body>
+<div id="map"></div>
+<div id="panel"><b>Gem Trek Log</b><br><small>Click a marker to view/edit</small><br><br>
+<button onclick="addWaypoint()">Add Waypoint</button></div>
+<script>
+var geojson = )GEM" + geojson + R"GEM(;
+var map = L.map('map').setView([0,0],2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+var markers = [];
+function renderFeatures(){
+  markers.forEach(function(m){map.removeLayer(m);});
+  markers=[];
+  if(!geojson.features||!geojson.features.length)return;
+  var bounds=[];
+  geojson.features.forEach(function(f,i){
+    if(f.geometry.type!=='Point')return;
+    var ll=[f.geometry.coordinates[1],f.geometry.coordinates[0]];
+    bounds.push(ll);
+    var m=L.marker(ll).addTo(map);
+    var p=f.properties||{};
+    m.bindPopup('<b>'+(p.title||'Waypoint')+'</b><br>'+(p.note||'')+'<br><br>'
+      +'<button onclick="editFeature('+i+')">Edit</button> '
+      +'<button onclick="removeFeature('+i+')">Remove</button>');
+    markers.push(m);
+  });
+  if(bounds.length)map.fitBounds(bounds,{padding:[40,40]});
+}
+function addWaypoint(){
+  var title=prompt('Title:','Waypoint');if(!title)return;
+  var note=prompt('Note:','');
+  map.once('click',function(e){
+    fetch('/add',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({lat:e.latlng.lat,lon:e.latlng.lng,title:title,note:note||''})})
+    .then(r=>r.json()).then(function(d){geojson=d;renderFeatures();});
+  });
+  alert('Click on the map to place the waypoint.');
+}
+function editFeature(i){
+  var p=geojson.features[i].properties||{};
+  var title=prompt('Title:',p.title||'');if(title===null)return;
+  var note=prompt('Note:',p.note||'');if(note===null)return;
+  fetch('/edit',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({index:i,title:title,note:note})})
+  .then(r=>r.json()).then(function(d){geojson=d;renderFeatures();});
+}
+function removeFeature(i){
+  if(!confirm('Remove waypoint?'))return;
+  fetch('/remove',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({index:i})})
+  .then(r=>r.json()).then(function(d){geojson=d;renderFeatures();});
+}
+renderFeatures();
+</script></body></html>)GEM";
+
+            std::thread([port, geojsonPath, html]() {
+                httplib::Server svr;
+                svr.Get("/", [html](const httplib::Request&, httplib::Response& res) {
+                    res.set_content(html, "text/html");
+                });
+                svr.Get("/data", [geojsonPath](const httplib::Request&, httplib::Response& res) {
+                    std::ifstream in(geojsonPath);
+                    std::string gj((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+                    res.set_content(gj, "application/json");
+                });
+                svr.Post("/add", [geojsonPath](const httplib::Request& req, httplib::Response& res) {
+                    // Parse lat/lon/title/note from JSON body (minimal parse)
+                    auto body = req.body;
+                    auto extract = [&](const std::string& key) {
+                        size_t p = body.find("\"" + key + "\"");
+                        if (p == std::string::npos) return std::string("");
+                        p = body.find(':', p) + 1;
+                        while (p < body.size() && (body[p]==' '||body[p]=='"')) p++;
+                        size_t e = body.find_first_of(",}\"\n", p);
+                        return body.substr(p, e - p);
+                    };
+                    std::string lat = extract("lat"), lon = extract("lon");
+                    std::string title = extract("title"), note = extract("note");
+
+                    std::ifstream in(geojsonPath);
+                    std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+                    in.close();
+                    std::string feat = "{\"type\":\"Feature\","
+                        "\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + lon + "," + lat + "]},"
+                        "\"properties\":{\"title\":\"" + title + "\",\"note\":\"" + note + "\"}}";
+                    size_t pos = content.rfind(']');
+                    bool has = content.find("\"type\":\"Feature\"") != std::string::npos;
+                    content.insert(pos, (has ? "," : "") + feat);
+                    std::ofstream out(geojsonPath); out << content;
+                    res.set_content(content, "application/json");
+                });
+                svr.Post("/edit", [geojsonPath](const httplib::Request& req, httplib::Response& res) {
+                    auto body = req.body;
+                    auto extract = [&](const std::string& key) {
+                        size_t p = body.find("\"" + key + "\"");
+                        if (p == std::string::npos) return std::string("");
+                        p = body.find(':', p) + 1;
+                        while (p < body.size() && (body[p]==' '||body[p]=='"')) p++;
+                        size_t e = body.find_first_of(",}\"\n", p);
+                        return body.substr(p, e - p);
+                    };
+                    int idx = std::stoi(extract("index"));
+                    std::string title = extract("title"), note = extract("note");
+
+                    std::ifstream in(geojsonPath);
+                    std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+                    in.close();
+                    size_t pos = 0;
+                    for (int i = 0; i <= idx; ++i) {
+                        pos = content.find("\"properties\"", pos);
+                        if (pos == std::string::npos) { res.set_content("{}", "application/json"); return; }
+                        if (i < idx) pos++;
+                    }
+                    size_t end = content.find('}', pos);
+                    content.replace(pos, end - pos + 1,
+                        "\"properties\":{\"title\":\"" + title + "\",\"note\":\"" + note + "\"}");
+                    std::ofstream out(geojsonPath); out << content;
+                    std::ifstream in2(geojsonPath);
+                    std::string updated((std::istreambuf_iterator<char>(in2)), std::istreambuf_iterator<char>());
+                    res.set_content(updated, "application/json");
+                });
+                svr.Post("/remove", [geojsonPath](const httplib::Request& req, httplib::Response& res) {
+                    auto body = req.body;
+                    size_t p = body.find("\"index\"");
+                    int idx = 0;
+                    if (p != std::string::npos) {
+                        p = body.find(':', p) + 1;
+                        idx = std::stoi(body.substr(p));
+                    }
+                    std::ifstream in(geojsonPath);
+                    std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+                    in.close();
+                    size_t fpos = 0;
+                    for (int i = 0; i <= idx; ++i) {
+                        fpos = content.find("{\"type\":\"Feature\"", fpos);
+                        if (fpos == std::string::npos) { res.set_content(content, "application/json"); return; }
+                        if (i < idx) fpos++;
+                    }
+                    size_t end = fpos; int depth = 0;
+                    for (size_t k = fpos; k < content.size(); ++k) {
+                        if (content[k]=='{') depth++;
+                        else if (content[k]=='}') { depth--; if (!depth) { end = k; break; } }
+                    }
+                    size_t rs = fpos, re = end + 1;
+                    if (re < content.size() && content[re] == ',') re++;
+                    else if (rs > 0 && content[rs-1] == ',') rs--;
+                    content.erase(rs, re - rs);
+                    std::ofstream out(geojsonPath); out << content;
+                    std::ifstream in2(geojsonPath);
+                    std::string updated((std::istreambuf_iterator<char>(in2)), std::istreambuf_iterator<char>());
+                    res.set_content(updated, "application/json");
+                });
+                std::cout << "Trek map server: http://localhost:" << port << std::endl;
+                svr.listen("0.0.0.0", port);
+            }).detach();
+
+            // Open in browser
+            std::string url = "http://localhost:" + std::to_string(port);
+            std::system(("open " + url + " 2>/dev/null || xdg-open " + url + " 2>/dev/null &").c_str());
+            return std::make_shared<GemValue>(url);
+        }, true };
+
+        // trek.export_gpx(geojson_path, gpx_path) — export GeoJSON waypoints to GPX
+        methods["export_gpx"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.size() < 2) return std::make_shared<GemValue>(false);
+            std::ifstream in(args[0]->toString());
+            std::string gj((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+            std::string gpx = "<?xml version=\"1.0\"?>\n<gpx version=\"1.1\" creator=\"Gem Trek\">\n";
+            size_t pos = 0;
+            while ((pos = gj.find("\"coordinates\":[", pos)) != std::string::npos) {
+                pos += 15;
+                size_t end = gj.find(']', pos);
+                std::string coords = gj.substr(pos, end - pos);
+                size_t comma = coords.find(',');
+                std::string lon = coords.substr(0, comma);
+                std::string lat = coords.substr(comma + 1);
+                // Find associated title
+                size_t tp = gj.rfind("\"title\"", pos);
+                std::string title = "Waypoint";
+                if (tp != std::string::npos) {
+                    size_t ts = gj.find('"', tp + 8) + 1;
+                    size_t te = gj.find('"', ts);
+                    title = gj.substr(ts, te - ts);
+                }
+                gpx += "  <wpt lat=\"" + lat + "\" lon=\"" + lon + "\"><name>" + title + "</name></wpt>\n";
+                pos = end;
+            }
+            gpx += "</gpx>\n";
+            std::ofstream out(args[1]->toString());
+            out << gpx;
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // trek.stats(path) — return object with waypoint count and total distance (km)
+        methods["stats"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::ifstream in(args[0]->toString());
+            std::string gj((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+
+            std::vector<std::pair<double,double>> pts;
+            size_t pos = 0;
+            while ((pos = gj.find("\"coordinates\":[", pos)) != std::string::npos) {
+                pos += 15;
+                size_t end = gj.find(']', pos);
+                std::string coords = gj.substr(pos, end - pos);
+                size_t comma = coords.find(',');
+                try {
+                    double lon = std::stod(coords.substr(0, comma));
+                    double lat = std::stod(coords.substr(comma + 1));
+                    pts.push_back({lat, lon});
+                } catch(...) {}
+                pos = end;
+            }
+
+            double totalDist = 0.0;
+            for (size_t i = 1; i < pts.size(); ++i) {
+                double dlat = (pts[i].first  - pts[i-1].first)  * M_PI / 180.0;
+                double dlon = (pts[i].second - pts[i-1].second) * M_PI / 180.0;
+                double a = std::sin(dlat/2)*std::sin(dlat/2) +
+                           std::cos(pts[i-1].first*M_PI/180.0)*std::cos(pts[i].first*M_PI/180.0)*
+                           std::sin(dlon/2)*std::sin(dlon/2);
+                totalDist += 12742.0 * std::atan2(std::sqrt(a), std::sqrt(1-a));
+            }
+
+            auto obj = std::make_shared<GemObject>("TrekStats");
+            obj->set("waypoints", std::make_shared<GemValue>((double)pts.size()));
+            obj->set("distance_km", std::make_shared<GemValue>(totalDist));
+            return std::make_shared<GemValue>(obj);
+        }, true };
+    }
+};
+
+// GemMobl — Mobile & Cross-Platform PWA builtin
+class GemMobl : public GemSys {
+public:
+    std::string deviceName;
+
+    GemMobl() : GemSys() {
+        name = "mobl";
+
+        // mobl phone("device_name") — instantiate a phone object
+        methods["phone"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            std::string dev = args.empty() ? "phone" : args[0]->toString();
+            auto phone = std::make_shared<GemMobl>();
+            phone->deviceName = dev;
+            phone->name = dev;
+            return std::make_shared<GemValue>(std::static_pointer_cast<GemObject>(phone));
+        }, true };
+
+        // phone.dictate(spoken_text) — NLP parse via ai.prompt → JSON {title, note, tags}
+        methods["dictate"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>("{}");
+            std::string spoken = args[0]->toString();
+            // Build a structured JSON from the spoken text (stub; real impl uses ai.prompt)
+            std::string json = "{\"title\": \"Note\", \"note\": \"" + spoken + "\", \"tags\": []}";
+            return std::make_shared<GemValue>(json);
+        }, true };
+
+        // phone.make_feature(lat, lon, text) — GPS + dictation → GeoJSON Feature
+        methods["make_feature"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 3) return std::make_shared<GemValue>("{}");
+            std::string lat = args[0]->toString();
+            std::string lon = args[1]->toString();
+            std::string text = args[2]->toString();
+            std::string feature =
+                "{\"type\":\"Feature\","
+                "\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + lon + "," + lat + "]},"
+                "\"properties\":{\"note\":\"" + text + "\"}}";
+            return std::make_shared<GemValue>(feature);
+        }, true };
+    }
+};
 
 #include "gem_drvr.hpp"
 #include "gem_astro.hpp"

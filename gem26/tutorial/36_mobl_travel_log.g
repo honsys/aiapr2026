@@ -10,7 +10,7 @@
 # Supported platforms (browser connects to Gem server):
 #   Android Chrome, iPhone Safari, macOS, Linux, Windows 11
 
-use "mobl.gm"
+# mobl is now a builtin — no use statement needed
 
 sys.print("--- Gem Mobile Travel Log Tutorial ---")
 
