@@ -1,6 +1,6 @@
-# Gem Language Tutorial Series
+# David B Hon Hard Science Gem Language Copywrite 2025, 2026
 
-Welcome to the official tutorial repository for the **Gem Language** — a modern, expressive STEM language built on C++26 for AI, scientific computing, quantitative finance, and cross-platform application development.
+Welcome to the **Gem Language** — a modern, expressive STEM language built by Gemini-CLI and Kiro-CLI using C++26 for AI, scientific computing, quantitative finance, and cross-platform application development.
 
 ## Key Features
 
