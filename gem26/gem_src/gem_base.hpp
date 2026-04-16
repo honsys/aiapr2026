@@ -303,16 +303,22 @@ public:
 
     GemSys() : GemObject("sys", nullptr) { 
         // Register default signal handlers
+#ifdef _WIN32
+        for (int sig : {SIGINT, SIGTERM, SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
+#else
         for (int sig : {SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGABRT, SIGFPE, SIGILL, SIGSEGV, SIGBUS, SIGPIPE, SIGUSR1, SIGUSR2}) {
+#endif
             std::signal(sig, SignalState::handle);
         }
 
         properties["SIGINT"] = std::make_shared<GemValue>((double)SIGINT);
         properties["SIGTERM"] = std::make_shared<GemValue>((double)SIGTERM);
+#ifndef _WIN32
         properties["SIGHUP"] = std::make_shared<GemValue>((double)SIGHUP);
         properties["SIGQUIT"] = std::make_shared<GemValue>((double)SIGQUIT);
         properties["SIGUSR1"] = std::make_shared<GemValue>((double)SIGUSR1);
         properties["SIGUSR2"] = std::make_shared<GemValue>((double)SIGUSR2);
+#endif
 
         methods["args"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
             return std::make_shared<GemValue>(this->cli_args);

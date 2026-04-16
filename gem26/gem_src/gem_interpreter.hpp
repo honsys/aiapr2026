@@ -30,7 +30,7 @@ struct GemFunction {
     std::string name;
     std::vector<std::string> params;
     std::vector<std::string> body;
-    std::vector<Token> returnExpr;
+    std::vector<GemToken> returnExpr;
 };
 
 struct GemObjectDef {
@@ -52,7 +52,7 @@ public:
     std::map<std::string, std::shared_ptr<GemObject>> builtins;
     std::map<std::string, GemFunction> userFunctions;
     std::map<std::string, GemObjectDef> userClasses;
-    std::map<std::string, std::vector<Token>> aliases;
+    std::map<std::string, std::vector<GemToken>> aliases;
     std::string currentFile;
     std::ostream* out = &std::cout;
     
@@ -62,7 +62,7 @@ public:
         bool isObject = false;
         bool isIf = false;
         bool isWhile = false;
-        std::vector<Token> condition;
+        std::vector<GemToken> condition;
         GemFunction func;
         GemObjectDef obj;
         std::vector<std::string> body;
@@ -290,7 +290,7 @@ public:
         }
 
         std::string source((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-        std::string extension = std::filesystem::path(filename).extension();
+        std::string extension = std::filesystem::path(filename).extension().string();
 
         if (extension == ".g" || extension == ".gm") {
             std::stringstream ss(source);
@@ -321,19 +321,19 @@ public:
         if (!currentScope) currentScope = globalScope;
         if (builtins.count("sys")) builtins["sys"]->set("__file__", std::make_shared<GemValue>(currentFile));
         GemTokenizer tokenizer(line);
-        std::vector<Token> rawTokens = tokenizer.tokenize();
-        if (rawTokens.empty() || rawTokens[0].type == TOKEN_EOF) return;
+        std::vector<GemToken> rawTokens = tokenizer.tokenize();
+        if (rawTokens.empty() || rawTokens[0].type == GEM_TOKEN_EOF) return;
 
-        std::vector<std::vector<Token>> statements;
-        std::vector<Token> current;
+        std::vector<std::vector<GemToken>> statements;
+        std::vector<GemToken> current;
         for (const auto& t : rawTokens) {
-            if (t.type == TOKEN_SEMICOLON) {
+            if (t.type == GEM_TOKEN_SEMICOLON) {
                 if (!current.empty()) {
-                    current.push_back({TOKEN_EOF, "", 0});
+                    current.push_back({GEM_TOKEN_EOF, "", 0});
                     statements.push_back(current);
                     current.clear();
                 }
-            } else if (t.type == TOKEN_EOF) {
+            } else if (t.type == GEM_TOKEN_EOF) {
                 if (!current.empty()) {
                     current.push_back(t);
                     statements.push_back(current);
@@ -346,16 +346,16 @@ public:
 
         for (const auto& stmtTokens : statements) {
             std::string fragment = "";
-            for (size_t i = 0; i < stmtTokens.size() && stmtTokens[i].type != TOKEN_EOF; ++i) {
-                if (stmtTokens[i].type == TOKEN_STRING) fragment += "\"" + stmtTokens[i].text + "\"";
+            for (size_t i = 0; i < stmtTokens.size() && stmtTokens[i].type != GEM_TOKEN_EOF; ++i) {
+                if (stmtTokens[i].type == GEM_TOKEN_STRING) fragment += "\"" + stmtTokens[i].text + "\"";
                 else fragment += stmtTokens[i].text;
-                if (i + 1 < stmtTokens.size() && stmtTokens[i+1].type != TOKEN_EOF) fragment += " ";
+                if (i + 1 < stmtTokens.size() && stmtTokens[i+1].type != GEM_TOKEN_EOF) fragment += " ";
             }
             executeTokens(stmtTokens, fragment, skipRecording);
         }
     }
 
-    void executeTokens(const std::vector<Token>& rawTokens, const std::string& line, bool skipRecording = false) {
+    void executeTokens(const std::vector<GemToken>& rawTokens, const std::string& line, bool skipRecording = false) {
         std::lock_guard<std::recursive_mutex> lock(interpreterMutex);
         
         // Check for pending signals
@@ -367,7 +367,11 @@ public:
                 callUserFunction(handler, {std::make_shared<GemValue>((double)sig)});
             } else {
                 // Default handling
+#ifdef _WIN32
+                if (sig == SIGINT || sig == SIGTERM) {
+#else
                 if (sig == SIGINT || sig == SIGTERM || sig == SIGQUIT) {
+#endif
                     *out << "\nReceived signal " << sig << ", exiting..." << std::endl;
                     running = false;
                     return;
@@ -375,7 +379,7 @@ public:
             }
         }
 
-        if (rawTokens.empty() || rawTokens[0].type == TOKEN_EOF) return;
+        if (rawTokens.empty() || rawTokens[0].type == GEM_TOKEN_EOF) return;
         // std::cout << "DEBUG Executing: " << line << std::endl;
 
         if (skippingStack.empty()) {
@@ -387,8 +391,8 @@ public:
         int& skipDepth = skipDepthStack.top();
 
         if (isSkipping) {
-            if (rawTokens[0].type == TOKEN_KEYWORD_FUN || rawTokens[0].type == TOKEN_KEYWORD_OBJ || rawTokens[0].type == TOKEN_KEYWORD_IF || rawTokens[0].type == TOKEN_KEYWORD_WHILE) skipDepth++;
-            if (rawTokens[0].type == TOKEN_KEYWORD_END) {
+            if (rawTokens[0].type == GEM_TOKEN_KEYWORD_FUN || rawTokens[0].type == GEM_TOKEN_KEYWORD_OBJ || rawTokens[0].type == GEM_TOKEN_KEYWORD_IF || rawTokens[0].type == GEM_TOKEN_KEYWORD_WHILE) skipDepth++;
+            if (rawTokens[0].type == GEM_TOKEN_KEYWORD_END) {
                 if (skipDepth > 0) skipDepth--;
                 else {
                     // Only resume if it's a plain 'end' (for if/while)
@@ -401,7 +405,7 @@ public:
 
         if (recordingStack.size() > 1) {
             auto& rec = recordingStack.top();
-            if (rawTokens[0].type == TOKEN_KEYWORD_END) {
+            if (rawTokens[0].type == GEM_TOKEN_KEYWORD_END) {
                 if (rec.isObject) {
                     userClasses[rec.obj.name] = rec.obj;
                     *out << "Defined object " << rec.obj.name << std::endl;
@@ -420,8 +424,8 @@ public:
                     }
                 } else {
                     rec.func.returnExpr.clear();
-                    for (size_t i = 1; i < rawTokens.size() && rawTokens[i].type != TOKEN_EOF; ++i) rec.func.returnExpr.push_back(rawTokens[i]);
-                    if (!rec.func.returnExpr.empty()) rec.func.returnExpr.push_back({TOKEN_EOF, "", 0});
+                    for (size_t i = 1; i < rawTokens.size() && rawTokens[i].type != GEM_TOKEN_EOF; ++i) rec.func.returnExpr.push_back(rawTokens[i]);
+                    if (!rec.func.returnExpr.empty()) rec.func.returnExpr.push_back({GEM_TOKEN_EOF, "", 0});
                     userFunctions[rec.func.name] = rec.func;
                     *out << "Defined function " << rec.func.name << std::endl;
                 }
@@ -438,11 +442,11 @@ public:
             } else {
                 if (rec.isObject) {
                     rec.obj.body.push_back(line);
-                    if (rawTokens[0].type == TOKEN_KEYWORD_FUN && rawTokens.size() > 1 && rawTokens[1].type == TOKEN_ID) {
+                    if (rawTokens[0].type == GEM_TOKEN_KEYWORD_FUN && rawTokens.size() > 1 && rawTokens[1].type == GEM_TOKEN_ID) {
                         GemFunction newFunc; newFunc.name = rawTokens[1].text;
-                        if (rawTokens.size() > 3 && rawTokens[2].type == TOKEN_LPAREN) {
-                             size_t p = 3; while(p < rawTokens.size() && rawTokens[p].type != TOKEN_RPAREN) {
-                                 if (rawTokens[p].type == TOKEN_ID) newFunc.params.push_back(rawTokens[p].text);
+                        if (rawTokens.size() > 3 && rawTokens[2].type == GEM_TOKEN_LPAREN) {
+                             size_t p = 3; while(p < rawTokens.size() && rawTokens[p].type != GEM_TOKEN_RPAREN) {
+                                 if (rawTokens[p].type == GEM_TOKEN_ID) newFunc.params.push_back(rawTokens[p].text);
                                  p++;
                              }
                         }
@@ -457,13 +461,13 @@ public:
             return;
         }
 
-        std::vector<Token> tokens;
+        std::vector<GemToken> tokens;
         for (size_t i = 0; i < rawTokens.size(); ++i) {
             const auto& t = rawTokens[i];
-            if (t.type == TOKEN_ID && aliases.count(t.text)) {
+            if (t.type == GEM_TOKEN_ID && aliases.count(t.text)) {
                 const auto& expansion = aliases[t.text];
-                if (i + 1 < rawTokens.size() && rawTokens[i+1].type == TOKEN_LPAREN) {
-                    if (expansion.size() >= 3 && expansion[expansion.size()-2].type == TOKEN_LPAREN && expansion[expansion.size()-1].type == TOKEN_RPAREN) {
+                if (i + 1 < rawTokens.size() && rawTokens[i+1].type == GEM_TOKEN_LPAREN) {
+                    if (expansion.size() >= 3 && expansion[expansion.size()-2].type == GEM_TOKEN_LPAREN && expansion[expansion.size()-1].type == GEM_TOKEN_RPAREN) {
                         for (size_t j = 0; j < expansion.size() - 2; ++j) tokens.push_back(expansion[j]);
                     } else tokens.insert(tokens.end(), expansion.begin(), expansion.end());
                 } else tokens.insert(tokens.end(), expansion.begin(), expansion.end());
@@ -471,26 +475,26 @@ public:
         }
 
         size_t pos = 0;
-        if (tokens[0].type == TOKEN_KEYWORD_ALIAS) {
-            if (tokens.size() > 3 && tokens[1].type == TOKEN_ID && tokens[2].type == TOKEN_EQUALS) {
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_ALIAS) {
+            if (tokens.size() > 3 && tokens[1].type == GEM_TOKEN_ID && tokens[2].type == GEM_TOKEN_EQUALS) {
                 std::string aliasName = tokens[1].text;
-                std::vector<Token> expansion;
-                for (size_t i = 3; i < tokens.size() && tokens[i].type != TOKEN_EOF; ++i) expansion.push_back(tokens[i]);
+                std::vector<GemToken> expansion;
+                for (size_t i = 3; i < tokens.size() && tokens[i].type != GEM_TOKEN_EOF; ++i) expansion.push_back(tokens[i]);
                 aliases[aliasName] = expansion;
                 *out << "Aliased " << aliasName << std::endl;
                 return;
             }
         }
 
-        if (tokens[0].type == TOKEN_KEYWORD_IF) {
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_IF) {
             if (recordingStack.size() > 1 && !skipRecording) {
                 auto& parentRec = recordingStack.top();
                 if (parentRec.isObject) parentRec.obj.body.push_back(line);
                 else if (parentRec.isIf || parentRec.isWhile) parentRec.body.push_back(line);
                 else parentRec.func.body.push_back(line);
             }
-            std::vector<Token> cond;
-            for (size_t i = 1; i < tokens.size() && tokens[i].type != TOKEN_EOF; ++i) cond.push_back(tokens[i]);
+            std::vector<GemToken> cond;
+            for (size_t i = 1; i < tokens.size() && tokens[i].type != GEM_TOKEN_EOF; ++i) cond.push_back(tokens[i]);
             
             if (skipRecording || recordingStack.size() == 1) {
                 size_t p = 0;
@@ -511,15 +515,15 @@ public:
             return;
         }
 
-        if (tokens[0].type == TOKEN_KEYWORD_WHILE) {
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_WHILE) {
             if (recordingStack.size() > 1 && !skipRecording) {
                 auto& parentRec = recordingStack.top();
                 if (parentRec.isObject) parentRec.obj.body.push_back(line);
                 else if (parentRec.isIf || parentRec.isWhile) parentRec.body.push_back(line);
                 else parentRec.func.body.push_back(line);
             }
-            std::vector<Token> cond;
-            for (size_t i = 1; i < tokens.size() && tokens[i].type != TOKEN_EOF; ++i) cond.push_back(tokens[i]);
+            std::vector<GemToken> cond;
+            for (size_t i = 1; i < tokens.size() && tokens[i].type != GEM_TOKEN_EOF; ++i) cond.push_back(tokens[i]);
             
             if (skipRecording || recordingStack.size() == 1) {
                 size_t p = 0;
@@ -540,8 +544,8 @@ public:
             return;
         }
         
-        if (tokens[0].type == TOKEN_KEYWORD_FUN) {
-            if (tokens.size() > 1 && tokens[1].type == TOKEN_ID) {
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_FUN) {
+            if (tokens.size() > 1 && tokens[1].type == GEM_TOKEN_ID) {
                 std::string funcName = tokens[1].text;
                 auto thisVal = currentScope->resolve("this");
                 if (thisVal && std::holds_alternative<std::shared_ptr<GemObject>>(thisVal->value)) {
@@ -550,10 +554,10 @@ public:
                 if (!skipRecording || recordingStack.size() > 1) {
                     GemFunction newFunc;
                     newFunc.name = funcName;
-                    if (tokens.size() > 3 && tokens[2].type == TOKEN_LPAREN) {
+                    if (tokens.size() > 3 && tokens[2].type == GEM_TOKEN_LPAREN) {
                          size_t p = 3;
-                         while(p < tokens.size() && tokens[p].type != TOKEN_RPAREN) {
-                             if (tokens[p].type == TOKEN_ID) newFunc.params.push_back(tokens[p].text);
+                         while(p < tokens.size() && tokens[p].type != GEM_TOKEN_RPAREN) {
+                             if (tokens[p].type == GEM_TOKEN_ID) newFunc.params.push_back(tokens[p].text);
                              p++;
                          }
                     }
@@ -563,23 +567,23 @@ public:
             }
         }
 
-        if (tokens[0].type == TOKEN_KEYWORD_OBJ) {
-            if (tokens.size() > 1 && tokens[1].type == TOKEN_ID) {
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_OBJ) {
+            if (tokens.size() > 1 && tokens[1].type == GEM_TOKEN_ID) {
                 if (!skipRecording || recordingStack.size() > 1) {
                     GemObjectDef newObj;
                     newObj.name = tokens[1].text;
                     size_t p = 2;
-                    if (p < tokens.size() && tokens[p].type == TOKEN_LPAREN) {
+                    if (p < tokens.size() && tokens[p].type == GEM_TOKEN_LPAREN) {
                         p++;
-                        while (p < tokens.size() && tokens[p].type != TOKEN_RPAREN) {
-                            if (tokens[p].type == TOKEN_ID) newObj.params.push_back(tokens[p].text);
+                        while (p < tokens.size() && tokens[p].type != GEM_TOKEN_RPAREN) {
+                            if (tokens[p].type == GEM_TOKEN_ID) newObj.params.push_back(tokens[p].text);
                             p++;
                         }
-                        if (p < tokens.size() && tokens[p].type == TOKEN_RPAREN) p++;
+                        if (p < tokens.size() && tokens[p].type == GEM_TOKEN_RPAREN) p++;
                     }
-                    if (p < tokens.size() && tokens[p].type == TOKEN_COLON) {
+                    if (p < tokens.size() && tokens[p].type == GEM_TOKEN_COLON) {
                         p++;
-                        if (p < tokens.size() && tokens[p].type == TOKEN_ID) newObj.parentName = tokens[p].text;
+                        if (p < tokens.size() && tokens[p].type == GEM_TOKEN_ID) newObj.parentName = tokens[p].text;
                     }
                     recordingStack.push({true, true, false, false, {}, {}, newObj, {}});
                 } else { isSkipping = true; skipDepth = 0; }
@@ -587,28 +591,28 @@ public:
             }
         }
 
-        if (tokens[0].type == TOKEN_KEYWORD_USE) {
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_USE) {
             if (tokens.size() > 1) {
                 std::string filename = "";
-                if (tokens[1].type == TOKEN_STRING) filename = tokens[1].text;
-                else for (size_t i = 1; i < tokens.size() && tokens[i].type != TOKEN_EOF; ++i) filename += tokens[i].text;
+                if (tokens[1].type == GEM_TOKEN_STRING) filename = tokens[1].text;
+                else for (size_t i = 1; i < tokens.size() && tokens[i].type != GEM_TOKEN_EOF; ++i) filename += tokens[i].text;
                 if (!filename.empty()) handleUse(filename);
                 return;
             }
         }
 
-        if (tokens[0].type == TOKEN_KEYWORD_LIB) { handleLib(); return; }
-        if (tokens[0].type == TOKEN_KEYWORD_HIS) { handleHistory(); return; }
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_LIB) { handleLib(); return; }
+        if (tokens[0].type == GEM_TOKEN_KEYWORD_HIS) { handleHistory(); return; }
 
-        if (tokens[0].type == TOKEN_TYPE_INT || tokens[0].type == TOKEN_TYPE_DOUBLE || tokens[0].type == TOKEN_TYPE_STRING || tokens[0].type == TOKEN_TYPE_BOOL) {
+        if (tokens[0].type == GEM_TOKEN_TYPE_INT || tokens[0].type == GEM_TOKEN_TYPE_DOUBLE || tokens[0].type == GEM_TOKEN_TYPE_STRING || tokens[0].type == GEM_TOKEN_TYPE_BOOL) {
             std::vector<std::string> varNames;
             size_t i = 1;
-            while (i < tokens.size() && tokens[i].type != TOKEN_EQUALS && tokens[i].type != TOKEN_EOF) {
-                if (tokens[i].type == TOKEN_ID) varNames.push_back(tokens[i].text);
+            while (i < tokens.size() && tokens[i].type != GEM_TOKEN_EQUALS && tokens[i].type != GEM_TOKEN_EOF) {
+                if (tokens[i].type == GEM_TOKEN_ID) varNames.push_back(tokens[i].text);
                 i++;
-                if (i < tokens.size() && tokens[i].type == TOKEN_COMMA) i++;
+                if (i < tokens.size() && tokens[i].type == GEM_TOKEN_COMMA) i++;
             }
-            if (i < tokens.size() && tokens[i].type == TOKEN_EQUALS) {
+            if (i < tokens.size() && tokens[i].type == GEM_TOKEN_EQUALS) {
                 pos = i + 1;
                 auto val = parseExpression(tokens, pos);
                 if (val) for (const auto& name : varNames) {
@@ -628,18 +632,18 @@ public:
         if (tokens.size() >= 3) {
             std::vector<std::pair<std::string, std::shared_ptr<GemObject>>> targets;
             size_t i = 0;
-            TokenType compoundOp = TOKEN_UNKNOWN;
+            GemTokenType compoundOp = GEM_TOKEN_UNKNOWN;
             while (i + 1 < tokens.size()) {
                 std::string targetName;
                 std::shared_ptr<GemObject> targetObj = nullptr;
                 size_t nextI = i;
-                TokenType currentOp = TOKEN_UNKNOWN;
+                GemTokenType currentOp = GEM_TOKEN_UNKNOWN;
 
-                if (tokens[i].type == TOKEN_ID && (tokens[i+1].type == TOKEN_EQUALS || tokens[i+1].type == TOKEN_PLUS_EQUALS || tokens[i+1].type == TOKEN_MINUS_EQUALS || tokens[i+1].type == TOKEN_MUL_EQUALS || tokens[i+1].type == TOKEN_DIV_EQUALS)) {
+                if (tokens[i].type == GEM_TOKEN_ID && (tokens[i+1].type == GEM_TOKEN_EQUALS || tokens[i+1].type == GEM_TOKEN_PLUS_EQUALS || tokens[i+1].type == GEM_TOKEN_MINUS_EQUALS || tokens[i+1].type == GEM_TOKEN_MUL_EQUALS || tokens[i+1].type == GEM_TOKEN_DIV_EQUALS)) {
                     targetName = tokens[i].text;
                     currentOp = tokens[i+1].type;
                     nextI = i + 2;
-                } else if (tokens[i].type == TOKEN_DOT && i+1 < tokens.size() && tokens[i+1].type == TOKEN_ID && (tokens[i+2].type == TOKEN_EQUALS || tokens[i+2].type == TOKEN_PLUS_EQUALS || tokens[i+2].type == TOKEN_MINUS_EQUALS || tokens[i+2].type == TOKEN_MUL_EQUALS || tokens[i+2].type == TOKEN_DIV_EQUALS)) {
+                } else if (tokens[i].type == GEM_TOKEN_DOT && i+1 < tokens.size() && tokens[i+1].type == GEM_TOKEN_ID && (tokens[i+2].type == GEM_TOKEN_EQUALS || tokens[i+2].type == GEM_TOKEN_PLUS_EQUALS || tokens[i+2].type == GEM_TOKEN_MINUS_EQUALS || tokens[i+2].type == GEM_TOKEN_MUL_EQUALS || tokens[i+2].type == GEM_TOKEN_DIV_EQUALS)) {
                     auto thisVal = currentScope->resolve("this");
                     if (thisVal && std::holds_alternative<std::shared_ptr<GemObject>>(thisVal->value)) {
                         targetName = tokens[i+1].text;
@@ -647,7 +651,7 @@ public:
                         currentOp = tokens[i+2].type;
                         nextI = i + 3;
                     }
-                } else if (tokens[i].type == TOKEN_DOT_DOT && i+1 < tokens.size() && tokens[i+1].type == TOKEN_ID && (tokens[i+2].type == TOKEN_EQUALS || tokens[i+2].type == TOKEN_PLUS_EQUALS || tokens[i+2].type == TOKEN_MINUS_EQUALS || tokens[i+2].type == TOKEN_MUL_EQUALS || tokens[i+2].type == TOKEN_DIV_EQUALS)) {
+                } else if (tokens[i].type == GEM_TOKEN_DOT_DOT && i+1 < tokens.size() && tokens[i+1].type == GEM_TOKEN_ID && (tokens[i+2].type == GEM_TOKEN_EQUALS || tokens[i+2].type == GEM_TOKEN_PLUS_EQUALS || tokens[i+2].type == GEM_TOKEN_MINUS_EQUALS || tokens[i+2].type == GEM_TOKEN_MUL_EQUALS || tokens[i+2].type == GEM_TOKEN_DIV_EQUALS)) {
                     auto thisVal = currentScope->resolve("this");
                     if (thisVal && std::holds_alternative<std::shared_ptr<GemObject>>(thisVal->value)) {
                         auto obj = std::get<std::shared_ptr<GemObject>>(thisVal->value);
@@ -658,7 +662,7 @@ public:
                             nextI = i + 3;
                         }
                     }
-                } else if (tokens[i].type == TOKEN_ID && i+1 < tokens.size() && tokens[i+1].type == TOKEN_DOT && i+2 < tokens.size() && tokens[i+2].type == TOKEN_ID && (tokens[i+3].type == TOKEN_EQUALS || tokens[i+3].type == TOKEN_PLUS_EQUALS || tokens[i+3].type == TOKEN_MINUS_EQUALS || tokens[i+3].type == TOKEN_MUL_EQUALS || tokens[i+3].type == TOKEN_DIV_EQUALS)) {
+                } else if (tokens[i].type == GEM_TOKEN_ID && i+1 < tokens.size() && tokens[i+1].type == GEM_TOKEN_DOT && i+2 < tokens.size() && tokens[i+2].type == GEM_TOKEN_ID && (tokens[i+3].type == GEM_TOKEN_EQUALS || tokens[i+3].type == GEM_TOKEN_PLUS_EQUALS || tokens[i+3].type == GEM_TOKEN_MINUS_EQUALS || tokens[i+3].type == GEM_TOKEN_MUL_EQUALS || tokens[i+3].type == GEM_TOKEN_DIV_EQUALS)) {
                     auto objVal = currentScope->resolve(tokens[i].text);
                     if (objVal && std::holds_alternative<std::shared_ptr<GemObject>>(objVal->value)) {
                         targetName = tokens[i+2].text;
@@ -671,7 +675,7 @@ public:
                 if (!targetName.empty()) {
                     targets.push_back({targetName, targetObj});
                     i = nextI;
-                    if (currentOp != TOKEN_EQUALS) { compoundOp = currentOp; break; }
+                    if (currentOp != GEM_TOKEN_EQUALS) { compoundOp = currentOp; break; }
                 } else break;
             }
 
@@ -679,8 +683,8 @@ public:
                 size_t p = i;
                 // If RHS is a single bare identifier that resolves to nothing, treat as string literal
                 size_t rhsEnd = p;
-                while (rhsEnd < tokens.size() && tokens[rhsEnd].type != TOKEN_EOF) rhsEnd++;
-                bool rhsIsBareId = (rhsEnd == p + 1 && tokens[p].type == TOKEN_ID
+                while (rhsEnd < tokens.size() && tokens[rhsEnd].type != GEM_TOKEN_EOF) rhsEnd++;
+                bool rhsIsBareId = (rhsEnd == p + 1 && tokens[p].type == GEM_TOKEN_ID
                                     && !currentScope->resolve(tokens[p].text)
                                     && !builtins.count(tokens[p].text)
                                     && !userFunctions.count(tokens[p].text)
@@ -689,7 +693,7 @@ public:
                     ? std::make_shared<GemValue>(tokens[p].text)
                     : parseExpression(tokens, p);
                 if (val) {
-                    if (compoundOp != TOKEN_UNKNOWN && targets.size() == 1) {
+                    if (compoundOp != GEM_TOKEN_UNKNOWN && targets.size() == 1) {
                         auto target = targets[0];
                         auto currentVal = target.second ? target.second->get(target.first) : currentScope->resolve(target.first);
                         if (!currentVal) currentVal = std::make_shared<GemValue>(0.0);
@@ -697,11 +701,11 @@ public:
                         if (std::holds_alternative<double>(currentVal->value) && std::holds_alternative<double>(val->value)) {
                             double l = std::get<double>(currentVal->value);
                             double r = std::get<double>(val->value);
-                            if (compoundOp == TOKEN_PLUS_EQUALS) val = std::make_shared<GemValue>(l + r);
-                            else if (compoundOp == TOKEN_MINUS_EQUALS) val = std::make_shared<GemValue>(l - r);
-                            else if (compoundOp == TOKEN_MUL_EQUALS) val = std::make_shared<GemValue>(l * r);
-                            else if (compoundOp == TOKEN_DIV_EQUALS) val = std::make_shared<GemValue>(l / r);
-                        } else if (compoundOp == TOKEN_PLUS_EQUALS) {
+                            if (compoundOp == GEM_TOKEN_PLUS_EQUALS) val = std::make_shared<GemValue>(l + r);
+                            else if (compoundOp == GEM_TOKEN_MINUS_EQUALS) val = std::make_shared<GemValue>(l - r);
+                            else if (compoundOp == GEM_TOKEN_MUL_EQUALS) val = std::make_shared<GemValue>(l * r);
+                            else if (compoundOp == GEM_TOKEN_DIV_EQUALS) val = std::make_shared<GemValue>(l / r);
+                        } else if (compoundOp == GEM_TOKEN_PLUS_EQUALS) {
                             val = std::make_shared<GemValue>(currentVal->toString() + val->toString());
                         }
                     }
@@ -731,25 +735,25 @@ public:
             }
         }
         
-        if (tokens[0].type == TOKEN_ID && tokens[0].text == "help") {
+        if (tokens[0].type == GEM_TOKEN_ID && tokens[0].text == "help") {
             auto sysVal = globalScope->resolve("sys");
             if (sysVal && std::holds_alternative<std::shared_ptr<GemObject>>(sysVal->value)) {
                 std::vector<std::shared_ptr<GemValue>> args;
                 size_t startIdx = 1;
-                if (tokens.size() > 1 && tokens[1].type == TOKEN_LPAREN) startIdx = 2;
+                if (tokens.size() > 1 && tokens[1].type == GEM_TOKEN_LPAREN) startIdx = 2;
                 
                 if (tokens.size() > startIdx) {
-                    if (tokens[startIdx].type == TOKEN_STRING) args.push_back(std::make_shared<GemValue>(tokens[startIdx].text));
-                    else if (tokens[startIdx].type == TOKEN_ID) args.push_back(std::make_shared<GemValue>(tokens[startIdx].text));
+                    if (tokens[startIdx].type == GEM_TOKEN_STRING) args.push_back(std::make_shared<GemValue>(tokens[startIdx].text));
+                    else if (tokens[startIdx].type == GEM_TOKEN_ID) args.push_back(std::make_shared<GemValue>(tokens[startIdx].text));
                 }
                 std::get<std::shared_ptr<GemObject>>(sysVal->value)->call("help", args);
             }
             return;
         }
 
-        if (tokens[0].type == TOKEN_ID && tokens[0].text == "exit") running = false;
-        else if (tokens[0].type == TOKEN_KEYWORD_END) return;
-        else if (tokens[0].type == TOKEN_DOT || tokens[0].type == TOKEN_DOT_DOT) {
+        if (tokens[0].type == GEM_TOKEN_ID && tokens[0].text == "exit") running = false;
+        else if (tokens[0].type == GEM_TOKEN_KEYWORD_END) return;
+        else if (tokens[0].type == GEM_TOKEN_DOT || tokens[0].type == GEM_TOKEN_DOT_DOT) {
             size_t p = 0;
             auto val = parseExpression(tokens, p);
             if (val && !std::holds_alternative<std::monostate>(val->value)) *out << "=> " << val->toString() << std::endl;
@@ -760,29 +764,29 @@ public:
         }
     }
 
-    std::shared_ptr<GemValue> parseExpression(const std::vector<Token>& tokens, size_t& pos) {
+    std::shared_ptr<GemValue> parseExpression(const std::vector<GemToken>& tokens, size_t& pos) {
         std::lock_guard<std::recursive_mutex> lock(interpreterMutex);
         auto left = parseCompare(tokens, pos);
         return left;
     }
 
-    std::shared_ptr<GemValue> parseCompare(const std::vector<Token>& tokens, size_t& pos) {
+    std::shared_ptr<GemValue> parseCompare(const std::vector<GemToken>& tokens, size_t& pos) {
         auto left = parseAddSub(tokens, pos);
         if (!left) return std::make_shared<GemValue>();
 
         while (pos < tokens.size()) {
-            if (tokens[pos].type == TOKEN_GREATER || tokens[pos].type == TOKEN_LESS || tokens[pos].type == TOKEN_COMPARE_EQUALS) {
-                TokenType op = tokens[pos].type;
+            if (tokens[pos].type == GEM_TOKEN_GREATER || tokens[pos].type == GEM_TOKEN_LESS || tokens[pos].type == GEM_TOKEN_COMPARE_EQUALS) {
+                GemTokenType op = tokens[pos].type;
                 pos++;
                 auto right = parseAddSub(tokens, pos);
                 if (left && right) {
                     if (std::holds_alternative<double>(left->value) && std::holds_alternative<double>(right->value)) {
                         double l = std::get<double>(left->value);
                         double r = std::get<double>(right->value);
-                        if (op == TOKEN_GREATER) left = std::make_shared<GemValue>((bool)(l > r));
-                        else if (op == TOKEN_LESS) left = std::make_shared<GemValue>((bool)(l < r));
-                        else if (op == TOKEN_COMPARE_EQUALS) left = std::make_shared<GemValue>((bool)(l == r));
-                    } else if (op == TOKEN_COMPARE_EQUALS) {
+                        if (op == GEM_TOKEN_GREATER) left = std::make_shared<GemValue>((bool)(l > r));
+                        else if (op == GEM_TOKEN_LESS) left = std::make_shared<GemValue>((bool)(l < r));
+                        else if (op == GEM_TOKEN_COMPARE_EQUALS) left = std::make_shared<GemValue>((bool)(l == r));
+                    } else if (op == GEM_TOKEN_COMPARE_EQUALS) {
                         // std::cout << "DEBUG Comparison: [" << left->toString() << "] == [" << right->toString() << "]" << std::endl;
                         left = std::make_shared<GemValue>((bool)(left->toString() == right->toString()));
                     }
@@ -792,22 +796,22 @@ public:
         return left;
     }
 
-    std::shared_ptr<GemValue> parseAddSub(const std::vector<Token>& tokens, size_t& pos) {
+    std::shared_ptr<GemValue> parseAddSub(const std::vector<GemToken>& tokens, size_t& pos) {
         auto left = parseMul(tokens, pos);
         if (!left) return std::make_shared<GemValue>();
 
         while (pos < tokens.size()) {
-            if (tokens[pos].type == TOKEN_PLUS || tokens[pos].type == TOKEN_MINUS) {
-                TokenType op = tokens[pos].type;
+            if (tokens[pos].type == GEM_TOKEN_PLUS || tokens[pos].type == GEM_TOKEN_MINUS) {
+                GemTokenType op = tokens[pos].type;
                 pos++;
                 auto right = parseMul(tokens, pos);
                 if (left && right) {
                     if (std::holds_alternative<double>(left->value) && std::holds_alternative<double>(right->value)) {
                         double l = std::get<double>(left->value);
                         double r = std::get<double>(right->value);
-                        if (op == TOKEN_PLUS) left = std::make_shared<GemValue>(l + r);
-                        else if (op == TOKEN_MINUS) left = std::make_shared<GemValue>(l - r);
-                    } else if (op == TOKEN_PLUS) {
+                        if (op == GEM_TOKEN_PLUS) left = std::make_shared<GemValue>(l + r);
+                        else if (op == GEM_TOKEN_MINUS) left = std::make_shared<GemValue>(l - r);
+                    } else if (op == GEM_TOKEN_PLUS) {
                         // String concatenation
                         left = std::make_shared<GemValue>(left->toString() + right->toString());
                     }
@@ -817,48 +821,48 @@ public:
         return left ? left : std::make_shared<GemValue>();
     }
 
-    std::shared_ptr<GemValue> parseMul(const std::vector<Token>& tokens, size_t& pos) {
+    std::shared_ptr<GemValue> parseMul(const std::vector<GemToken>& tokens, size_t& pos) {
         auto left = parsePrimary(tokens, pos);
         if (!left) return std::make_shared<GemValue>();
 
         while (pos < tokens.size()) {
-            if (tokens[pos].type == TOKEN_MUL || tokens[pos].type == TOKEN_DIV) {
-                TokenType op = tokens[pos].type;
+            if (tokens[pos].type == GEM_TOKEN_MUL || tokens[pos].type == GEM_TOKEN_DIV) {
+                GemTokenType op = tokens[pos].type;
                 pos++;
                 auto right = parsePrimary(tokens, pos);
                 if (left && right && std::holds_alternative<double>(left->value) && std::holds_alternative<double>(right->value)) {
                     double l = std::get<double>(left->value);
                     double r = std::get<double>(right->value);
-                    if (op == TOKEN_MUL) left = std::make_shared<GemValue>(l * r);
-                    else if (op == TOKEN_DIV) left = std::make_shared<GemValue>(l / r);
+                    if (op == GEM_TOKEN_MUL) left = std::make_shared<GemValue>(l * r);
+                    else if (op == GEM_TOKEN_DIV) left = std::make_shared<GemValue>(l / r);
                 }
             } else break;
         }
         return left ? left : std::make_shared<GemValue>();
     }
 
-    std::shared_ptr<GemValue> parsePrimary(const std::vector<Token>& tokens, size_t& pos) {
+    std::shared_ptr<GemValue> parsePrimary(const std::vector<GemToken>& tokens, size_t& pos) {
         auto left = parseTerm(tokens, pos);
         if (!left) return std::make_shared<GemValue>();
 
         while (pos < tokens.size()) {
-            if (tokens[pos].type == TOKEN_DOT) {
+            if (tokens[pos].type == GEM_TOKEN_DOT) {
                 pos++;
-                if (pos >= tokens.size() || tokens[pos].type != TOKEN_ID) break;
+                if (pos >= tokens.size() || tokens[pos].type != GEM_TOKEN_ID) break;
                 std::string member = tokens[pos].text;
                 pos++;
                 
-                if (pos < tokens.size() && tokens[pos].type == TOKEN_LPAREN) {
+                if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_LPAREN) {
                     pos++;
                     std::vector<std::shared_ptr<GemValue>> args;
-                    if (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN) {
+                    if (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN) {
                         do {
                             auto arg = parseExpression(tokens, pos);
                             args.push_back(arg ? arg : std::make_shared<GemValue>());
-                            if (pos < tokens.size() && tokens[pos].type == TOKEN_COMMA) pos++;
-                        } while (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN);
+                            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_COMMA) pos++;
+                        } while (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN);
                     }
-                    if (pos < tokens.size() && tokens[pos].type == TOKEN_RPAREN) pos++;
+                    if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RPAREN) pos++;
 
                     if (std::holds_alternative<std::shared_ptr<GemObject>>(left->value)) {
                         left = std::get<std::shared_ptr<GemObject>>(left->value)->call(member, args);
@@ -880,10 +884,10 @@ public:
                         else left = std::make_shared<GemValue>();
                     }
                 }
-            } else if (tokens[pos].type == TOKEN_LBRACKET) {
+            } else if (tokens[pos].type == GEM_TOKEN_LBRACKET) {
                 pos++;
                 auto indexVal = parseExpression(tokens, pos);
-                if (pos < tokens.size() && tokens[pos].type == TOKEN_RBRACKET) pos++;
+                if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RBRACKET) pos++;
 
                 if (indexVal) {
                     if (std::holds_alternative<double>(indexVal->value)) {
@@ -919,20 +923,20 @@ public:
         return left ? left : std::make_shared<GemValue>();
     }
 
-    std::shared_ptr<GemValue> parseTerm(const std::vector<Token>& tokens, size_t& pos) {
+    std::shared_ptr<GemValue> parseTerm(const std::vector<GemToken>& tokens, size_t& pos) {
         if (pos >= tokens.size()) return std::make_shared<GemValue>();
 
-        if (tokens[pos].type == TOKEN_NUMBER) {
+        if (tokens[pos].type == GEM_TOKEN_NUMBER) {
             double v = tokens[pos].numberVal;
             pos++;
             return std::make_shared<GemValue>(v);
-        } else if (tokens[pos].type == TOKEN_STRING) {
+        } else if (tokens[pos].type == GEM_TOKEN_STRING) {
             std::string s = tokens[pos].text;
             pos++;
             return std::make_shared<GemValue>(s);
-        } else if (tokens[pos].type == TOKEN_DOT) {
+        } else if (tokens[pos].type == GEM_TOKEN_DOT) {
             pos++;
-            if (pos < tokens.size() && tokens[pos].type == TOKEN_ID) {
+            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_ID) {
                 std::string member = tokens[pos].text;
                 pos++;
                 
@@ -940,26 +944,26 @@ public:
                 if (thisVal && std::holds_alternative<std::shared_ptr<GemObject>>(thisVal->value)) {
                     auto obj = std::get<std::shared_ptr<GemObject>>(thisVal->value);
                     
-                    if (pos < tokens.size() && tokens[pos].type == TOKEN_LPAREN) {
+                    if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_LPAREN) {
                         pos++;
                         std::vector<std::shared_ptr<GemValue>> args;
-                        if (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN) {
+                        if (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN) {
                             do {
                                 auto arg = parseExpression(tokens, pos);
                                 args.push_back(arg ? arg : std::make_shared<GemValue>());
-                                if (pos < tokens.size() && tokens[pos].type == TOKEN_COMMA) pos++;
-                            } while (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN);
+                                if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_COMMA) pos++;
+                            } while (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN);
                         }
-                        if (pos < tokens.size() && tokens[pos].type == TOKEN_RPAREN) pos++;
+                        if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RPAREN) pos++;
                         return obj->call(member, args);
                     }
                     return obj->get(member);
                 }
             }
             return std::make_shared<GemValue>();
-        } else if (tokens[pos].type == TOKEN_DOT_DOT) {
+        } else if (tokens[pos].type == GEM_TOKEN_DOT_DOT) {
             pos++;
-            if (pos < tokens.size() && tokens[pos].type == TOKEN_ID) {
+            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_ID) {
                 std::string member = tokens[pos].text;
                 pos++;
                 
@@ -968,17 +972,17 @@ public:
                     auto obj = std::get<std::shared_ptr<GemObject>>(thisVal->value);
                     if (obj->parent) {
                         auto parent = obj->parent;
-                        if (pos < tokens.size() && tokens[pos].type == TOKEN_LPAREN) {
+                        if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_LPAREN) {
                             pos++;
                             std::vector<std::shared_ptr<GemValue>> args;
-                            if (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN) {
+                            if (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN) {
                                 do {
                                     auto arg = parseExpression(tokens, pos);
                                     args.push_back(arg ? arg : std::make_shared<GemValue>());
-                                    if (pos < tokens.size() && tokens[pos].type == TOKEN_COMMA) pos++;
-                                } while (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN);
+                                    if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_COMMA) pos++;
+                                } while (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN);
                             }
-                            if (pos < tokens.size() && tokens[pos].type == TOKEN_RPAREN) pos++;
+                            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RPAREN) pos++;
                             return parent->call(member, args);
                         }
                         return parent->get(member);
@@ -986,23 +990,23 @@ public:
                 }
             }
             return std::make_shared<GemValue>();
-        } else if (tokens[pos].type == TOKEN_ID) {
+        } else if (tokens[pos].type == GEM_TOKEN_ID) {
             std::string name = tokens[pos].text;
             pos++;
             
-            if (pos < tokens.size() && tokens[pos].type == TOKEN_LPAREN) {
+            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_LPAREN) {
                  if (userClasses.count(name) || userFunctions.count(name)) {
                      bool isClass = userClasses.count(name);
                      pos++; // (
                      std::vector<std::shared_ptr<GemValue>> args;
-                     if (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN) {
+                     if (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN) {
                         do {
                             auto arg = parseExpression(tokens, pos);
                             args.push_back(arg ? arg : std::make_shared<GemValue>());
-                            if (pos < tokens.size() && tokens[pos].type == TOKEN_COMMA) pos++;
-                        } while (pos < tokens.size() && tokens[pos].type != TOKEN_RPAREN);
+                            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_COMMA) pos++;
+                        } while (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RPAREN);
                      }
-                     if (pos < tokens.size() && tokens[pos].type == TOKEN_RPAREN) pos++;
+                     if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RPAREN) pos++;
                      if (isClass) return callUserClass(name, args);
                      return callUserFunction(name, args);
                  }
@@ -1010,28 +1014,28 @@ public:
 
             auto res = currentScope->resolve(name);
             return res ? res : std::make_shared<GemValue>();
-        } else if (tokens[pos].type == TOKEN_KEYWORD_OBJ) {
+        } else if (tokens[pos].type == GEM_TOKEN_KEYWORD_OBJ) {
             pos++;
             std::shared_ptr<GemObject> parent = GemObject::sysInstance;
-            if (pos < tokens.size() && tokens[pos].type == TOKEN_LPAREN) {
+            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_LPAREN) {
                 pos++;
-                if (pos < tokens.size() && tokens[pos].type == TOKEN_ID) {
+                if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_ID) {
                     auto pVal = currentScope->resolve(tokens[pos].text);
                     if (pVal && std::holds_alternative<std::shared_ptr<GemObject>>(pVal->value)) parent = std::get<std::shared_ptr<GemObject>>(pVal->value);
                     pos++;
                 }
-                if (pos < tokens.size() && tokens[pos].type == TOKEN_RPAREN) pos++;
+                if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RPAREN) pos++;
             }
             return std::make_shared<GemValue>(std::make_shared<GemObject>("Generic", parent));
-        } else if (tokens[pos].type == TOKEN_LBRACKET) {
+        } else if (tokens[pos].type == GEM_TOKEN_LBRACKET) {
             pos++;
             std::vector<std::shared_ptr<GemValue>> elements;
-            while (pos < tokens.size() && tokens[pos].type != TOKEN_RBRACKET) {
+            while (pos < tokens.size() && tokens[pos].type != GEM_TOKEN_RBRACKET) {
                 auto val = parseExpression(tokens, pos);
                 if (val) elements.push_back(val);
-                if (pos < tokens.size() && tokens[pos].type == TOKEN_COMMA) pos++;
+                if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_COMMA) pos++;
             }
-            if (pos < tokens.size() && tokens[pos].type == TOKEN_RBRACKET) pos++;
+            if (pos < tokens.size() && tokens[pos].type == GEM_TOKEN_RBRACKET) pos++;
             
             // Try to specialize the vector type for performance/interop
             bool allDouble = true;

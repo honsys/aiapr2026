@@ -138,9 +138,13 @@ int main(int argc, char* argv[]) {
         std::cout << "Compiling to " << outputName << "..." << std::endl;
 
         // Copy current executable to output
-        std::ifstream src(argv[0], std::ios::binary);
+        std::string selfPath = argv[0];
+        std::ifstream src(selfPath, std::ios::binary);
         if (!src.is_open()) {
-             std::cerr << "Error: Could not open gem binary for reading." << std::endl;
+            src.open(selfPath + ".exe", std::ios::binary);
+        }
+        if (!src.is_open()) {
+             std::cerr << "Error: Could not open gem binary for reading. (Checked " << selfPath << " and " << selfPath << ".exe)" << std::endl;
              return 1;
         }
         std::ofstream dst(outputName, std::ios::binary);
@@ -316,7 +320,7 @@ int main(int argc, char* argv[]) {
 
         // Load history
         if (fs::exists(historyFile)) {
-            read_history(historyFile.c_str());
+            read_history(historyFile.string().c_str());
         }
     }
 
@@ -333,7 +337,7 @@ int main(int argc, char* argv[]) {
 
         if (!gemDir.empty()) {
             // Save history after each command for persistence
-            write_history(historyFile.c_str());
+            write_history(historyFile.string().c_str());
 
             auto now = std::chrono::system_clock::now();
             auto time_t_now = std::chrono::system_clock::to_time_t(now);

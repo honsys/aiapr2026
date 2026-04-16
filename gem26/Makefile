@@ -43,6 +43,7 @@ LDFLAGS = $(ARCH_FLAGS) -lpthread -lz -lreadline
 
 ifeq ($(IS_WINDOWS),1)
     LDFLAGS += -lws2_32
+    CXXFLAGS += -D_WIN32_WINNT=0x0A00
 endif
 
 # libzip Detection
@@ -105,20 +106,18 @@ else ifneq ("$(wildcard $(BREW_QL_ARM_PATH)/include/ql/quantlib.hpp)","")
 endif
 
 # Python Integration
-HAS_PYCONFIG := $(shell command -v python3-config 2> /dev/null)
 ifeq ($(IS_WINDOWS),1)
-    ifndef HAS_PYCONFIG
-        PYTHON_PREFIX := $(shell python -c "import sys; import os; print(sys.base_prefix.replace(os.sep, '/'))")
-        PYTHON_VERSION := $(shell python -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
-        PYTHON_INC = -I$(PYTHON_PREFIX)/include
-        PYTHON_LIB = -L$(PYTHON_PREFIX)/libs -lpython$(PYTHON_VERSION)
-    else
+    PYTHON_INC := $(shell python3 -c "import sysconfig; print('-I' + sysconfig.get_path('include'))" 2>/dev/null || python -c "import sysconfig; print('-I' + sysconfig.get_path('include'))" 2>/dev/null)
+    PYTHON_LIB := $(shell python3 -c "import sysconfig; import os; print('-L' + sysconfig.get_config_var('LIBDIR').replace(os.sep, '/') + ' -lpython' + sysconfig.get_config_var('LDVERSION'))" 2>/dev/null || python -c "import sysconfig; import os; print('-L' + sysconfig.get_config_var('LIBDIR').replace(os.sep, '/') + ' -lpython' + sysconfig.get_config_var('LDVERSION'))" 2>/dev/null)
+else
+    HAS_PYCONFIG := $(shell command -v python3-config 2> /dev/null)
+    ifdef HAS_PYCONFIG
         PYTHON_INC = $(shell python3-config --cflags | sed 's/-arch [^ ]*//g')
         PYTHON_LIB = $(shell python3-config --ldflags --embed | sed 's/-arch [^ ]*//g')
+    else
+        PYTHON_INC = $(shell python3 -c "import sysconfig; print('-I' + sysconfig.get_path('include'))")
+        PYTHON_LIB = $(shell python3 -c "import sysconfig; import os; print('-L' + sysconfig.get_config_var('LIBDIR') + ' -lpython' + sysconfig.get_config_var('LDVERSION'))")
     endif
-else
-    PYTHON_INC = $(shell python3-config --cflags | sed 's/-arch arm64//g' | sed 's/-arch x86_64//g')
-    PYTHON_LIB = $(shell python3-config --ldflags --embed | sed 's/-arch arm64//g' | sed 's/-arch x86_64//g')
 endif
 
 # Sources
@@ -137,7 +136,13 @@ all:
 	@$(MAKE) clean
 	@$(MAKE) build
 
-build: $(TARGET) gem_test
+ifeq ($(IS_WINDOWS),1)
+    GEM_TEST_TARGET = gem_test.exe
+else
+    GEM_TEST_TARGET = gem_test
+endif
+
+build: $(TARGET) $(GEM_TEST_TARGET)
 
 install: build
 	@echo "Installing Gem Language to $(PREFIX)..."
@@ -145,7 +150,7 @@ install: build
 	mkdir -p $(LIBDIR)
 	mkdir -p $(DATADIR)
 	install -m 755 $(TARGET) $(BINDIR)/
-	install -m 755 gem_test $(BINDIR)/
+	install -m 755 $(GEM_TEST_TARGET) $(BINDIR)/
 	# Install root modules
 	find . -maxdepth 1 -name "*.gm" -exec cp {} $(LIBDIR)/ \;
 	# Install package modules (bsm, etc.)
@@ -161,7 +166,7 @@ help:
 	@echo "Targets:"
 	@echo "  all        - Perform a clean compile of gem interpreter and test suite (default)"
 	@echo "  build      - Build without cleaning (used internally by 'all')"
-	@echo "  gem_test   - Build the comprehensive test suite binary"
+	@echo "  $(GEM_TEST_TARGET)   - Build the comprehensive test suite binary"
 	@echo "  deps       - Clone and build all dependencies"
 	@echo "  install    - Install binaries and modules into $(PREFIX)"
 	@echo "  clean      - Remove built binaries"
@@ -176,13 +181,13 @@ $(TARGET): $(GEM_SRCS) $(BEV_SRCS)
 	@echo "Building $(TARGET) via $(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS)"
 	$(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS) -o $(TARGET) $(GEM_SRCS) $(BEV_SRCS) $(LDFLAGS) $(PYTHON_LIB)
 
-gem_test: $(TARGET) tests/comprehensive/all_tests.g
-	@echo "Building comprehensive test suite binary (gem_test)..."
-	./$(TARGET) -c tests/comprehensive/all_tests.g -o gem_test
+$(GEM_TEST_TARGET): $(TARGET) tests/comprehensive/all_tests.g
+	@echo "Building comprehensive test suite binary ($(GEM_TEST_TARGET))..."
+	./$(TARGET) -c tests/comprehensive/all_tests.g -o $(GEM_TEST_TARGET)
 
-test: gem_test
+test: $(GEM_TEST_TARGET)
 	@echo "Running comprehensive tests..."
-	./gem_test
+	./$(GEM_TEST_TARGET)
 
 test-async: $(TARGET)
 	@echo "Running async builtin tests..."
@@ -226,8 +231,9 @@ deps:
 	fi
 
 clean:
-	$(RM) $(TARGET) node_modules gem_test gem_src/gem_mistral_bridge.cpp
-	find . -maxdepth 1 -type f ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" -delete
+	$(RM) $(TARGET) $(TARGET).exe node_modules gem_test gem_test.exe gem_src/gem_mistral_bridge.cpp
+	# Clean up any other temporary build files if necessary
+	# find . -maxdepth 1 -type f ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" ! -name "*.md" ! -name "*.g" ! -name "*.gm" -delete 2>/dev/null || true
 
 clean-deps:
 	rm -rf ImageMagick PDF-Writer cling mistral-common cython mistral-client-python mistral-inference mistral-finetune ma

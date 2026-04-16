@@ -118,10 +118,19 @@ Uses `mobl.gm` + `travel_log.html` (PWA). Voice dictation → AI NLP → GPS pin
 
 ## Getting Started
 
+### Prerequisites
+
+- **macOS/Linux**: `g++` (supporting C++2b/C++26), `make`, `python3`, `libreadline-dev`.
+- **Windows 11**: [MSYS2](https://www.msys2.org/) with `mingw-w64-x86_64-gcc`, `make`, and `mingw-w64-x86_64-python`. Ensure `C:\msys64\mingw64\bin` is in your PATH.
+
+### Build and Run
+
 ```bash
 make all
 ./gem tutorial/01_basics.g
 ```
+
+On Windows, the binaries will be produced as `gem.exe` and `gem_test.exe`.
 
 Or enter the REPL:
 ```bash
