@@ -120,6 +120,7 @@ char pause()		//--- pause routine for ch 6
 	char test;
 	cout << "Press Enter to continue " << flush;
 	test = getchar();
+	(void)test;
 	//cin >> test;
 //	if (test== 'Q' || test== 'q' )
 	return('K');
@@ -162,7 +163,6 @@ double Simpson(char functCode,int nIntervals, double loLim, double hiLim, double
 		t2 = SimpsonFunct(x,    p1 ,p2);
 		sum = sum + 4*t1 + 2*t2;
 //		cout << x << "   " << t2 << "  " << sum <<  endl;
-		x = x;
 	}
 	sum = sum*dx/3;
 	return(sum);

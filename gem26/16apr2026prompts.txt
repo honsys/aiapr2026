@@ -1,0 +1,2 @@
+
+write the gem lang builtin function "rex" to fully support regular expression operations on text and strings, including global substring search and replacement

@@ -1,0 +1,432 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{fancyhdr}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{margin=1in}
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[rotate=45, scale=3.5, text opacity=0.10, color=gray]
+      at (current page.center)
+      {\textsf{Gem v0.1.0 \textperiodcentered\ 2026-04-16}};
+  \end{tikzpicture}%
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{Gem Language} v0.1.0}
+\fancyhead[R]{\small 2026-04-16}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Gem Language Reference}
+\author{David B Hon}
+\date{2026-04-16}
+
+\begin{document}
+\maketitle
+
+\section{David B Hon Hard Science Gem Language Copywrite 2025,
+2026}\label{david-b-hon-hard-science-gem-language-copywrite-2025-2026}
+
+\textbf{Version:} 0.1.0 \textbar{} \textbf{Date:} 2026-04-16 \textbar{}
+\textbf{Built with:} Gemini CLI \& Kiro CLI
+
+Welcome to the \textbf{Gem Language} --- a modern, expressive STEM
+language built by Gemini-CLI and Kiro-CLI using C++26 for AI, scientific
+computing, quantitative finance, and cross-platform application
+development.
+
+\subsection{Key Features}\label{key-features}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Explicit Typing with Initial Values}: All variable
+  declarations require an initial value (\texttt{int\ x\ =\ 0}).
+\item
+  \textbf{Global vs.~Local Scope}: Variables starting with \texttt{\_}
+  (e.g., \texttt{\_config}) are global; all others are local.
+\item
+  \textbf{Universal Inheritance}: Every object inherits from
+  \texttt{sys}, giving immediate access to \texttt{sys.print}, etc.
+\item
+  \textbf{First-Class AI Support}: Built-in \texttt{ai} object supports
+  Gemini, Mistral, and Ollama.
+\item
+  \textbf{Polyglot Interop}: \texttt{use} keyword bridges Python, Julia,
+  R, Fortran, C++ on-the-fly.
+\item
+  \textbf{Mobile \& Cross-Platform}: \texttt{mobl} object + browser PWA
+  (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and
+  Windows 11.
+\item
+  \textbf{Domain-Specific Built-ins}: \texttt{fin}, \texttt{bsm},
+  \texttt{bev}, \texttt{geo}, \texttt{data}, \texttt{chart},
+  \texttt{mobl} built into the runtime.
+\item
+  \textbf{Regular Expressions}: \texttt{rex} builtin provides full
+  ECMAScript regex --- match, find, findall, groups, sub, gsub, split,
+  count.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tutorial Roadmap}\label{tutorial-roadmap}
+
+\subsubsection{1. The Foundations}\label{the-foundations}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{01_basics.g}}: Variables, types, and basic I/O using the
+  \texttt{sys} object.
+\item
+  \textbf{\url{02_math_latex.g}}: Arithmetic operations and LaTeX-style
+  mathematical expressions.
+\item
+  \textbf{\url{03_text_pdf.g}}: Text manipulation and PDF document
+  generation.
+\item
+  \textbf{\url{04_images.g}}: Image processing with ImageMagick.
+\item
+  \textbf{\url{05_geo_gis.g}}: GIS, geolocation, GeoJSON, and
+  interactive maps.
+\end{itemize}
+
+\subsubsection{2. Application
+Development}\label{application-development}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{06_web_apps.g}}: Building web servers with
+  \texttt{sys.app()} and route handlers.
+\item
+  \textbf{\url{07_ai_nlp.g}}: NLP and AI prompting with Gemini, Mistral,
+  and Ollama.
+\item
+  \textbf{\url{08_functions.gm}}: Defining functions, objects, and
+  inheritance.
+\item
+  \textbf{\url{09_module_demo.g}}: Structuring code with modules.
+\item
+  \textbf{\url{11_modules_paths.g}}: Managing module resolution and
+  import paths.
+\end{itemize}
+
+\subsubsection{3. Advanced Integration \&
+AI}\label{advanced-integration-ai}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{10_interop_cpp.g}}: High-performance C++ interoperability
+  via Cling JIT.
+\item
+  \textbf{\url{12_lib_management.g}}: Dependency management and library
+  linking.
+\item
+  \textbf{\url{13_dependency_details.g}}: Deep dive into Gem's package
+  ecosystem.
+\item
+  \textbf{\url{14_ai_providers.g}}: Using Gemini, Mistral, and Ollama
+  side-by-side.
+\item
+  \textbf{\url{15_mistral_native.g}}: Native Mistral C++ bridge via
+  \texttt{prompt\_native}.
+\end{itemize}
+
+\subsubsection{4. Specialized Tooling}\label{specialized-tooling}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{16_algo_text_extras.g}}: Advanced string algorithms and
+  text analysis.
+\item
+  \textbf{\url{17_repl_features.g}}: Mastering the interactive Gem REPL.
+\item
+  \textbf{\url{18_tcp_sockets.g}}: Low-level networking fundamentals.
+\item
+  \textbf{\url{19_tcp_server.g}} \& \textbf{\url{20_tcp_client.g}}:
+  Client-server architectures.
+\item
+  \textbf{\url{21_polyglot.g}}: Bridging Python, Julia, and Gem.
+\end{itemize}
+
+\subsubsection{5. Science, Finance \&
+DevOps}\label{science-finance-devops}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{22_builtins_itr_tcp.g}}: Iterators and network protocols.
+\item
+  \textbf{\url{23_data_science.g}}: DataFrames, statistics, and
+  visualization.
+\item
+  \textbf{\url{24_devops.g}}: Automation scripts and infrastructure
+  management.
+\item
+  \textbf{\url{25_ollama_mistral.g}}: Running local LLMs via Ollama.
+\item
+  \textbf{\url{26_devops_containers_vms.g}}: Docker and Vagrant
+  environments.
+\end{itemize}
+
+\subsubsection{6. High-Performance \& Symbolic
+Math}\label{high-performance-symbolic-math}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{27_rust_node.g}}: Polyglot support for Rust and Node.js.
+\item
+  \textbf{\url{28_interactive_charts.g}}: Dynamic 2D/3D/multi-axes
+  Plotly visualization.
+\item
+  \textbf{\url{29_quantlib_finance.g}}: Quantitative finance with
+  QuantLib.
+\item
+  \textbf{\url{30_bsm_pde_inheritance.g}}: Black-Scholes-Merton PDE
+  solvers.
+\item
+  \textbf{\url{31_history_and_compilation.g}}: Gem's compilation model
+  and history.
+\item
+  \textbf{\url{32_symbolic_math.g}}: Symbolic differentiation and
+  integration.
+\item
+  \textbf{\url{33_langport_porting.g}}: Porting legacy codebases to Gem.
+\item
+  \textbf{\url{34_geo_tectonics.g}}: Advanced GIS, tectonic modeling,
+  and geo-visualization.
+\item
+  \textbf{\url{35_text_advanced.g}}: Large-scale text processing and
+  indexing.
+\end{itemize}
+
+\subsubsection{7. Mobile \& Cross-Platform}\label{mobile-cross-platform}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{36_mobl_travel_log.g}}: \texttt{mobl} object --- NLP
+  dictation + GPS + GeoJSON travel log PWA.
+\end{itemize}
+
+\subsubsection{8. System Programming \&
+Hardware}\label{system-programming-hardware}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{37_device_drivers.g}}: \texttt{drvr} builtin --- Linux,
+  Windows 11, macOS, and Android device driver development.
+\end{itemize}
+
+\subsubsection{9. Text \& Pattern Matching}\label{text-pattern-matching}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\url{38_rex.g}}: \texttt{rex} builtin --- full ECMAScript
+  regular expressions: match, find, findall, groups, sub, gsub, split,
+  count.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Help \& Builtins}\label{help-builtins}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{{-}{-}{-} Gem Language Help {-}{-}{-}}
+\NormalTok{Gem is a high{-}performance STEM language implemented in C++26.}
+
+\NormalTok{Usage Tips:}
+\NormalTok{  {-} All variables must be initialized: \textquotesingle{}int x = 0\textquotesingle{}}
+\NormalTok{  {-} Global variables start with underscore: \textquotesingle{}\_config = 1\textquotesingle{}}
+\NormalTok{  {-} Use \textquotesingle{}use "file.py"\textquotesingle{} to translate and run foreign code.}
+\NormalTok{  {-} Use \textquotesingle{}lib\textquotesingle{} to see all loaded modules.}
+\NormalTok{  {-} Use \textquotesingle{}his\textquotesingle{} to view today\textquotesingle{}s session history.}
+
+\NormalTok{CLI Options:}
+\NormalTok{  gem \textless{}file.g\textgreater{}              {-} Run a script.}
+\NormalTok{  gem {-}c \textless{}main.g\textgreater{} [mod...]  {-} Compile multiple files into a binary.}
+\NormalTok{  gem {-}o \textless{}name\textgreater{}             {-} Specify output name for compiler.}
+\NormalTok{  gem {-}h                    {-} Print history and exit.}
+\NormalTok{  gem {-}t \textless{}file\textgreater{} [{-}o output] {-} AI{-}assisted translation to Gem.}
+
+\NormalTok{Available Builtin Modules:}
+\NormalTok{  sys, math, ai, text, rex, algo, bev, file, zip, img, geo, mobl,}
+\NormalTok{  cpp, tcp, itr, data, container, vm, go, ruby, node, rust,}
+\NormalTok{  fin, bsm, chart, astro, drvr}
+
+\NormalTok{Keywords for Documentation:}
+\NormalTok{  fun, obj, use, alias, his, lib, end, if, while,}
+\NormalTok{  int, double, string, bool, exit}
+
+\NormalTok{Detailed help: help "topic"  or  help(topic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Mobile Travel Log App}\label{mobile-travel-log-app}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{./gem}\NormalTok{ travel\_log.g          }\CommentTok{\# start server on :8080}
+\CommentTok{\# Android/iPhone → http://\textless{}host{-}ip\textgreater{}:8080}
+\CommentTok{\# macOS/Linux/Win11 → http://localhost:8080}
+\end{Highlighting}
+\end{Shaded}
+
+Uses \texttt{mobl.gm} + \texttt{travel\_log.html} (PWA). Voice dictation
+→ AI NLP → GPS pin → live GeoJSON → Plotly map.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Getting Started}\label{getting-started}
+
+\subsubsection{Prerequisites}\label{prerequisites}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{macOS/Linux}: \texttt{g++} (supporting C++2b/C++26),
+  \texttt{make}, \texttt{python3}, \texttt{libreadline-dev}.
+\item
+  \textbf{Windows 11}: \href{https://www.msys2.org/}{MSYS2} with
+  \texttt{mingw-w64-x86\_64-gcc}, \texttt{make}, and
+  \texttt{mingw-w64-x86\_64-python}. Ensure
+  \texttt{C:\textbackslash{}msys64\textbackslash{}mingw64\textbackslash{}bin}
+  is in your PATH.
+\end{itemize}
+
+\subsubsection{Build and Run}\label{build-and-run}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make}\NormalTok{ all}
+\ExtensionTok{./gem}\NormalTok{ tutorial/01\_basics.g}
+\end{Highlighting}
+\end{Shaded}
+
+On Windows, the binaries will be produced as \texttt{gem.exe} and
+\texttt{gem\_test.exe}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Windows Support}\label{windows-support}
+
+Gem is now fully compatible with Windows 11 via MSYS2/MinGW-w64. Key
+improvements include: - \textbf{Robust Dependency Detection}: Automatic
+detection of Python headers and libraries using \texttt{sysconfig}. -
+\textbf{Modern API Integration}: Support for \texttt{cpp-httplib} and
+other libraries through \texttt{\_WIN32\_WINNT=0x0A00}. -
+\textbf{Cross-Platform Signals}: Graceful handling of platform-specific
+signals (\texttt{SIGINT}, \texttt{SIGTERM}). - \textbf{Path
+Compatibility}: Seamless handling of Windows-style paths and
+\texttt{.exe} extensions in compilation mode.
+
+Or enter the REPL:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{./gem}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Developed with Gemini CLI and Kiro.}
+
+\end{document}

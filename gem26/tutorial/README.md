@@ -1,5 +1,7 @@
 # Gem Language Tutorial Series
 
+**Version:** 0.1.0 | **Date:** 2026-04-16 | **Built with:** Gemini CLI & Kiro CLI
+
 Welcome to the official tutorial repository for the **Gem Language** — a modern, expressive STEM language built on C++26 for scientific computing, AI, finance, and cross-platform application development.
 
 ## Key Features

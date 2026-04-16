@@ -1,0 +1,65 @@
+use c++26 to implement the "gem" STEM language repl and compiler which is interopable with python and julia and R and fortran and c++. the "gem" lnguage supports user function declarations via the "fun" keyword "fun name(params)" and "obj" keyword for object def with single object inheritance indicated by the syntax "obj name(params)". "gem" code blocks terminate with the "end" keyword, including function and object defs. "gem" provides a number of builtin objects. the fundamental "sys" builtin object is automatically extended by all other builtin objects and by user defined objects. the sys builtin object provide CLI arg parsing and host and user information. the "gem" "tcp" builtin object extends the "sys" object to support sockets listen and connect and routingg. the "gem" builtin "itr" object provide for loops and range method functions. the "gem" "thread" object supports multithreaded apps. the "gem" "text" object supports plain text and html and xml parsing and file I/O. the "gem" "algo" object provides math and is extended by the "bev" object to provide both fortran and c++ scientific data reduction and analysis.
+
+
+use c++26 to write a simple url redirect webapp that redirects all traffic to the url provided by the CLI
+refactor the c++26 webapp into a shared lib module for http using filename www.h and a separte main.cc file that imports or includes the www.h module and performs the CLI; and write a makefile that supports both macos and linux.
+
+ensure gem lang compiler and repl source and all dependencies compile without error or warning and the executable binaries link without errors or warninns on macos and linux and win11
+
+the builtin "algo" object provides quicksort and other useful algorithmic function methods; the builtin "zip" object provides file system info and directory tree listings and recursive compression and decompression of folders 
+
+the img object provides image processing of gifs and jpegs and animated gifs and mp4 videos via https://github.com/ImageMagick/ImageMagick.git
+
+geographic information and cartographic maps are provided in the gem language by the geo object which includes geoIP identification
+
+the gem builtin "text" object should also support reading and writing PDF using the source from https://github.com/galkahana/PDF-Writer.git
+
+the gem language builtin math object should support reading and parsing and writing latex files with support of the text builtin object
+
+the gem language builtin "www" object provides a webapp framework akin to python flask and supports 2D GIS maps via mapnik c++ and a wget function method and an an efficient redirect function method
+
+the gem language geo builtin object should support reading/parsing and writing geojson files and the www builtin object should support rendering a 2D map from geojson files using mapnik
+
+create a detailed gem language tutoorial and reference markdown doc with multiple examples of the builtin objects and best practices for user defined functions and objects with all example source code in a new "tutorial" folder
+
+the gem language source file can use convention of ".g" for a script or app and ".gm" for a module; rename all tutorial files accordingly
+
+ensure the gem compiler supports filename extensions .g and .gm and supports both macos and linux
+
+the gem language "use" keyword is a builtin function that translates source code from supported languages to native gem language. consequently syntax such as "use filename.py" should read and parse the Python file and translate to gem language. in addition to Python, the gem language should support translation of R and Julia and Fortran and C++ to native gem lang.
+
+the gem lang repl should create a user folder ~/.gem/ and save the user interaction in separate text files each day using filenames with julian calendar dates
+
+gem lang support for c++26 should include the "cling" repl from the root project gem lang support for c++26 should include the "cling" repl from the root project
+
+update the tutorial to reflect all new features and also add more examples, then write a readme that describes the gem lang development process and include details of the prompts in @prompts.txt and interactions with the user vie the gemini-cli
+
+the ~/.gem folder should include a sub-folder for the gem modules in use and under development ~/.gem/lib and the "use modulename" should find ~/.gem/lib/modulename.gm" files and load them intoe the repl or into the compiled binary executable
+
+the gem lang "lib" keyword should list the contents of ~/.gem and prompt the user to create a new module from the user session history log of the day
+
+modify the makefile to perform a "git clone --depth=1" of all deps required to create the gem compiler and repl, including cython and cling and R and mistral AI
+
+supplement the readme and tutorial with detailed discussions of all deps
+
+the gem builtin AI object should fully support the open source AI https://github.com/mistralai 
+
+
+the gem repl and compiler should natively integrate with the mistral python via cython
+
+
+the gem language algo oobject should provide sorting of array content and slices and  and sorting of dictionaries by either key or value and also data and time and manipulation; the text object should provide string concatination and substring extraction and replacement 
+
+
+the makefile c++ compile of gem should find all required header includes in the cloned repos
+
+the makefile clean target should recursively remove all git cloned folders
+
+the makefile should clone deps with depth=1 and follow the install instructions for each dep to ensure gem compiles withut errors
+
+update all markdown docs and tutorials and generate latex and pdf versions with page numbers and watermaks indicating today's date and the current version of gem lang                                     
+
+
+
+the makefile docs target should update all markdown readmes and tutorials, then regenerate latex and pdf docs, and also after manual markdown doc edits
+

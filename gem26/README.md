@@ -1,5 +1,7 @@
 # David B Hon Hard Science Gem Language Copywrite 2025, 2026
 
+**Version:** 0.1.0 | **Date:** 2026-04-16 | **Built with:** Gemini CLI & Kiro CLI
+
 Welcome to the **Gem Language** — a modern, expressive STEM language built by Gemini-CLI and Kiro-CLI using C++26 for AI, scientific computing, quantitative finance, and cross-platform application development.
 
 ## Key Features

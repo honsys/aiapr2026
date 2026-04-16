@@ -7,3 +7,21 @@
 [submodule "ghost_eye"]
 	path = ghost_eye
 	url = https://github.com/BullsEye0/ghost_eye.git
+[submodule "gem26/mistral-client-python"]
+	path = gem26/mistral-client-python
+	url = https://github.com/mistralai/client-python.git
+[submodule "gem26/mistral-common"]
+	path = gem26/mistral-common
+	url = https://github.com/mistralai/mistral-common.git
+[submodule "gem26/mistral-vibe"]
+	path = gem26/mistral-vibe
+	url = https://github.com/mistralai/mistral-vibe.git
+[submodule "gem26/mistral-finetune"]
+	path = gem26/mistral-finetune
+	url = https://github.com/mistralai/mistral-finetune.git
+[submodule "gem26/libzip"]
+	path = gem26/libzip
+	url = https://github.com/nih-at/libzip.git
+[submodule "gem26/mapnik"]
+	path = gem26/mapnik
+	url = https://github.com/mapnik/mapnik.git

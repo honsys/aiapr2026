@@ -8,7 +8,7 @@ public:
     GemDrvr() : GemSys() {
         name = "drvr";
         
-        methods["linux"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+        methods["linux"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::string drvName = (args.size() > 0) ? args[0]->toString() : "my_driver";
             std::string templateCode = 
                 "#include <linux/module.h>\n"
@@ -30,7 +30,7 @@ public:
             return std::make_shared<GemValue>(templateCode);
         }, true };
 
-        methods["win11"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+        methods["win11"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::string drvName = (args.size() > 0) ? args[0]->toString() : "MyDriver";
             std::string templateCode = 
                 "#include <ntddk.h>\n"
@@ -52,7 +52,7 @@ public:
             return std::make_shared<GemValue>(templateCode);
         }, true };
 
-        methods["macos"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+        methods["macos"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::string drvName = (args.size() > 0) ? args[0]->toString() : "MyDriver";
             std::string templateCode = 
                 "#include <IOKit/IOLib.h>\n"
@@ -69,7 +69,7 @@ public:
             return std::make_shared<GemValue>(templateCode);
         }, true };
 
-        methods["android"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+        methods["android"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
              std::string drvName = (args.size() > 0) ? args[0]->toString() : "my_hal";
              std::string templateCode = 
                 "#define LOG_TAG \"" + drvName + "\"\n"
@@ -86,12 +86,12 @@ public:
              return std::make_shared<GemValue>(templateCode);
         }, true };
 
-        methods["build"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+        methods["build"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::string target = (args.size() > 0) ? args[0]->toString() : "linux";
             return std::make_shared<GemValue>("Building for " + target + " using cross-compiler...");
         }, true };
         
-        methods["deploy"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+        methods["deploy"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::string target = (args.size() > 0) ? args[0]->toString() : "local";
             return std::make_shared<GemValue>("Deploying driver to " + target + "...");
         }, true };

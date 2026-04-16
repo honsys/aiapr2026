@@ -645,7 +645,6 @@ void Gradls(double &chiSqr, double stepDown)
 // label  5;
 {
 	double stepSum,step1;
-	double fract = 0.001;
 	int   j;
 
 	CalcGrad();   //calculate the gradient
@@ -709,11 +708,10 @@ void CalcGrad()
 void ChiFit(double &chiSqr)			// double  det, chiSq1;
 {
 	int  j;
-	double det;
 
 	MakeBeta();
 	MakeAlpha();
-	det = MatInv();					// Invert matrix
+	(void)MatInv();					// Invert matrix
 	SquareByRow();				// Evalulate parameter increments
 	for (j = 1; j <= g_m;j++)
 		a[j] = a[j] + da[j];	// Increment to next solution. 
@@ -727,14 +725,14 @@ void ChiFit(double &chiSqr)			// double  det, chiSq1;
 void Marquardt(double &chiSqr, double chiCut, double lambda)
 {
 	int  j;
-	double  det, chiSq1;
+	double  chiSq1;
 
 TOP:
 	MakeBeta();
 	MakeAlpha();
 	for (j = 1; j <= g_m;j++) 
 		alpha[j][j] = (1 + lambda) * alpha[j][j];
-	det = MatInv();					// Invert matrix 
+	(void)MatInv();					// Invert matrix
 	if (lambda > 0)					//On final call, enter with lambda = 0 to get the error matrix
 	{
 		SquareByRow();//Evaluate parameter increments 

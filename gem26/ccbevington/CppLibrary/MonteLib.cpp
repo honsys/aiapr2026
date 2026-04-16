@@ -86,7 +86,7 @@ float PoissonRecur(int j, float m)				//--- Recursion method for Poisson Probabi
 int PoissonDeviate(float mu, bool init)			//--- Find a random variable drawn from the Poisson distribution
 
 {
-	int  i,jx,n, jpd;
+	int  i,jx,n, jpd = 0;
 	float  p,r;
 	if (init) 
 	{											//--- Make table of sums ---

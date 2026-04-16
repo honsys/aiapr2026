@@ -3,7 +3,7 @@
 
 CXX = g++
 TARGET = gem
-RM = rm -f
+RM = rm -rf
 
 # Detect OS and Architecture
 UNAME_S := $(shell uname -s)
@@ -28,14 +28,14 @@ endif
 # Default Target
 .DEFAULT_GOAL := all
 
-# Dependency Paths
-PWD = $(shell pwd)
-MAGICK_PATH = $(PWD)/ImageMagick/install
-PDF_PATH    = $(PWD)/PDF-Writer/install
-CLING_PATH  = $(PWD)/cling/install
-MISTRAL_PATH = $(PWD)/mistral-common/install
-MAPNIK_PATH = $(PWD)/mapnik/install
-LIBZIP_PATH = $(PWD)/libzip/install
+# Dependency Paths (relative to project root)
+MAGICK_PATH  = ImageMagick/install
+PDF_PATH     = PDF-Writer/install
+CLING_PATH   = cling/install
+MISTRAL_PATH = mistral-common/install
+MAPNIK_PATH  = mapnik/install
+LIBZIP_PATH  = libzip/install
+QUANTLIB_PATH = QuantLib/install
 
 # Detection & Flags
 CXXFLAGS = -std=c++2b -Isrc -Iccbevington/CppLibrary -O2 -Wall $(ARCH_FLAGS)
@@ -57,6 +57,11 @@ ifneq ("$(wildcard $(MAGICK_PATH)/include/ImageMagick-7/Magick++.h)","")
     CXXFLAGS += -DHAS_IMAGEMAGICK -I$(MAGICK_PATH)/include/ImageMagick-7
     CXXFLAGS += -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16
     LDFLAGS  += -L$(MAGICK_PATH)/lib -lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI
+    ifeq ($(UNAME_S),Darwin)
+        LDFLAGS += -Wl,-rpath,$(abspath $(MAGICK_PATH)/lib)
+    else ifeq ($(UNAME_S),Linux)
+        LDFLAGS += -Wl,-rpath,$(abspath $(MAGICK_PATH)/lib)
+    endif
 endif
 
 # PDF-Writer Detection (Strictly check install dir)
@@ -90,19 +95,23 @@ ifneq ("$(wildcard $(MAPNIK_PATH)/include/mapnik/map.hpp)","")
 endif
 
 # QuantLib Detection
-QUANTLIB_PATH = $(PWD)/QuantLib/install
-BREW_QL_PATH = /usr/local/opt/quantlib
-BREW_QL_ARM_PATH = /opt/homebrew/opt/quantlib
+QUANTLIB_PATH = QuantLib/install
+BREW_QL_PATH  = $(shell brew --prefix quantlib 2>/dev/null)
 
 ifneq ("$(wildcard $(QUANTLIB_PATH)/include/ql/quantlib.hpp)","")
     CXXFLAGS += -DHAS_QUANTLIB -I$(QUANTLIB_PATH)/include
     LDFLAGS  += -L$(QUANTLIB_PATH)/lib -lQuantLib
-else ifneq ("$(wildcard $(BREW_QL_PATH)/include/ql/quantlib.hpp)","")
+    ifneq ($(UNAME_S),Windows_NT)
+        LDFLAGS += -Wl,-rpath,$(abspath $(QUANTLIB_PATH)/lib)
+    endif
+else ifneq ($(BREW_QL_PATH),)
+ifneq ("$(wildcard $(BREW_QL_PATH)/include/ql/quantlib.hpp)","")
     CXXFLAGS += -DHAS_QUANTLIB -I$(BREW_QL_PATH)/include
     LDFLAGS  += -L$(BREW_QL_PATH)/lib -lQuantLib
-else ifneq ("$(wildcard $(BREW_QL_ARM_PATH)/include/ql/quantlib.hpp)","")
-    CXXFLAGS += -DHAS_QUANTLIB -I$(BREW_QL_ARM_PATH)/include
-    LDFLAGS  += -L$(BREW_QL_ARM_PATH)/lib -lQuantLib
+    ifneq ($(UNAME_S),Windows_NT)
+        LDFLAGS += -Wl,-rpath,$(BREW_QL_PATH)/lib
+    endif
+endif
 endif
 
 # Python Integration
@@ -121,11 +130,67 @@ else
 endif
 
 # Sources
-GEM_SRCS = src/main.cpp src/gem_mistral_bridge.cpp \
-           src/miniz.c src/miniz_tdef.c src/miniz_tinfl.c src/miniz_zip.c
-BEV_SRCS = ccbevington/CppLibrary/FitUtil.cpp ccbevington/CppLibrary/GenUtil.cpp ccbevington/CppLibrary/MonteLib.cpp ccbevington/CppLibrary/QuikHist.cpp
+GEM_SRCS   = src/main.cpp src/gem_mistral_bridge.cpp
+MINIZ_SRCS = src/miniz.c src/miniz_tdef.c src/miniz_tinfl.c src/miniz_zip.c
+MINIZ_OBJS = $(MINIZ_SRCS:.c=.o)
+BEV_SRCS   = ccbevington/CppLibrary/FitUtil.cpp ccbevington/CppLibrary/GenUtil.cpp ccbevington/CppLibrary/MonteLib.cpp ccbevington/CppLibrary/QuikHist.cpp
 
-.PHONY: all build deps clean help clean-deps test install
+.PHONY: all build deps clean help clean-deps test install docs update-docs
+
+# Docs: stamp markdown with current version/date, then regenerate LaTeX + PDF
+# Requires: pandoc, MacTeX/TeX Live (xelatex)
+GEM_VERSION   = 0.1.0
+GEM_DATE      = 2026-04-16
+PANDOC        = pandoc
+PANDOC_ENGINE = xelatex
+DOCSDIR       = docs
+PANDOC_FLAGS  = --pdf-engine=$(PANDOC_ENGINE) --include-in-header=gem_latex_header.tex \
+                -V author="David B Hon" -V date="$(GEM_DATE)"
+# Prepend common TeX binary locations so xelatex is found regardless of shell PATH
+TEX_PATHS     = /Library/TeX/texbin:/usr/local/texlive/bin/x86_64-linux:/usr/bin
+export PATH   := $(TEX_PATHS):$(PATH)
+
+# Update version/date stamp in both markdown files
+update-docs:
+	@sed -i.bak 's/\*\*Version:\*\* [0-9.]* | \*\*Date:\*\* [0-9-]*/\*\*Version:\*\* $(GEM_VERSION) | \*\*Date:\*\* $(GEM_DATE)/' README.md tutorial/README.md
+	@rm -f README.md.bak tutorial/README.md.bak
+	@echo "Stamped README.md and tutorial/README.md with v$(GEM_VERSION) / $(GEM_DATE)"
+
+docs: update-docs $(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_tutorials.pdf
+
+$(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_reference.tex: README.md gem_latex_header.tex
+	@mkdir -p $(DOCSDIR)
+	$(PANDOC) README.md $(PANDOC_FLAGS) -V title="Gem Language Reference" -s -o $(DOCSDIR)/gem_lang_reference.tex
+	$(PANDOC) README.md $(PANDOC_FLAGS) -V title="Gem Language Reference"    -o $(DOCSDIR)/gem_lang_reference.pdf
+
+$(DOCSDIR)/gem_lang_tutorials.pdf $(DOCSDIR)/gem_lang_tutorials.tex: tutorial/README.md gem_latex_header.tex
+	@mkdir -p $(DOCSDIR)
+	$(PANDOC) tutorial/README.md $(PANDOC_FLAGS) -V title="Gem Language Tutorial Series" -s -o $(DOCSDIR)/gem_lang_tutorials.tex
+	$(PANDOC) tutorial/README.md $(PANDOC_FLAGS) -V title="Gem Language Tutorial Series"    -o $(DOCSDIR)/gem_lang_tutorials.pdf
+
+gem_latex_header.tex:
+	@printf '%s\n' \
+	  '\usepackage{fancyhdr}' \
+	  '\usepackage{eso-pic}' \
+	  '\usepackage{tikz}' \
+	  '\usepackage{geometry}' \
+	  '\usepackage{xcolor}' \
+	  '\geometry{margin=1in}' \
+	  '\AddToShipoutPictureBG{%' \
+	  '  \begin{tikzpicture}[remember picture, overlay]' \
+	  '    \node[rotate=45, scale=3.5, text opacity=0.10, color=gray]' \
+	  '      at (current page.center)' \
+	  '      {\textsf{Gem v$(GEM_VERSION) \textperiodcentered\ $(GEM_DATE)}};' \
+	  '  \end{tikzpicture}%' \
+	  '}' \
+	  '\pagestyle{fancy}' \
+	  '\fancyhf{}' \
+	  '\fancyhead[L]{\small\textbf{Gem Language} v$(GEM_VERSION)}' \
+	  '\fancyhead[R]{\small $(GEM_DATE)}' \
+	  '\fancyfoot[C]{\small\thepage}' \
+	  '\renewcommand{\headrulewidth}{0.4pt}' \
+	  '\renewcommand{\footrulewidth}{0.4pt}' \
+	  > gem_latex_header.tex
 
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
@@ -171,15 +236,20 @@ help:
 	@echo "  install    - Install binaries and modules into $(PREFIX)"
 	@echo "  clean      - Remove built binaries"
 	@echo "  clean-deps - Remove all dependency source folders"
+	@echo "  docs       - Stamp markdown version/date, regenerate LaTeX + PDF docs"
 	@echo "  help       - Show this help message"
 
 src/gem_mistral_bridge.cpp: src/gem_mistral_bridge.pyx
 	@echo "Generating C++ from Cython..."
 	@cython --cplus -3 src/gem_mistral_bridge.pyx -o src/gem_mistral_bridge.cpp
 
-$(TARGET): $(GEM_SRCS) $(BEV_SRCS)
+$(TARGET): $(GEM_SRCS) $(MINIZ_OBJS) $(BEV_SRCS)
 	@echo "Building $(TARGET) via $(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS)"
-	$(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS) -o $(TARGET) $(GEM_SRCS) $(BEV_SRCS) $(LDFLAGS) $(PYTHON_LIB)
+	$(CXX) $(CXXFLAGS) $(PYTHON_INC) $(ARCH_FLAGS) -o $(TARGET) $(GEM_SRCS) $(MINIZ_OBJS) $(BEV_SRCS) $(LDFLAGS) $(PYTHON_LIB)
+
+# Compile miniz C files as plain C (not C++) to avoid deprecation warnings
+src/%.o: src/%.c
+	$(CC) -c -O2 $(ARCH_FLAGS) -Isrc -o $@ $<
 
 $(GEM_TEST_TARGET): $(TARGET) tests/comprehensive/all_tests.g
 	@echo "Building comprehensive test suite binary ($(GEM_TEST_TARGET))..."
@@ -197,43 +267,43 @@ deps:
 	@echo "Cloning and building dependencies (errors ignored)..."
 	-@if [ ! -d "libzip" ]; then \
 		git clone --depth=1 https://github.com/nih-at/libzip.git && \
-		cd libzip && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(LIBZIP_PATH) -DBUILD_SHARED_LIBS=OFF -DENABLE_GNUTLS=OFF -DENABLE_MBEDTLS=OFF -DENABLE_OPENSSL=OFF -DENABLE_COMMONCRYPTO=OFF .. && make -j4 && make install; \
+		cd libzip && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(abspath $(LIBZIP_PATH)) -DBUILD_SHARED_LIBS=OFF -DENABLE_GNUTLS=OFF -DENABLE_MBEDTLS=OFF -DENABLE_OPENSSL=OFF -DENABLE_COMMONCRYPTO=OFF .. && make -j4 && make install; \
 	fi
 	-@if [ ! -d "ImageMagick" ]; then \
 		git clone --depth=1 https://github.com/ImageMagick/ImageMagick.git && \
-		cd ImageMagick && ./configure --prefix=$(MAGICK_PATH) --with-magick-plus-plus=yes --disable-docs --disable-openmp AX_CV_PROG_CC_OPENMP=no AX_CV_PROG_CXX_OPENMP=no CFLAGS="$(ARCH_FLAGS)" CXXFLAGS="$(ARCH_FLAGS)" LDFLAGS="$(ARCH_FLAGS)" && make -j4 && make install; \
+		cd ImageMagick && ./configure --prefix=$(abspath $(MAGICK_PATH)) --with-magick-plus-plus=yes --disable-docs --disable-openmp AX_CV_PROG_CC_OPENMP=no AX_CV_PROG_CXX_OPENMP=no CFLAGS="$(ARCH_FLAGS)" CXXFLAGS="$(ARCH_FLAGS)" LDFLAGS="$(ARCH_FLAGS)" && make -j4 && make install; \
 	fi
 	-@if [ ! -d "PDF-Writer" ]; then \
 		git clone --depth=1 https://github.com/galkahana/PDF-Writer.git && \
-		cd PDF-Writer && cmake -DCMAKE_INSTALL_PREFIX=$(PDF_PATH) -DCMAKE_OSX_ARCHITECTURES=arm64 . && make -j4 && make install; \
+		cd PDF-Writer && cmake -DCMAKE_INSTALL_PREFIX=$(abspath $(PDF_PATH)) -DCMAKE_OSX_ARCHITECTURES=arm64 . && make -j4 && make install; \
 	fi
 	-@if [ ! -d "cling" ]; then \
 		git clone --depth=1 https://github.com/root-project/cling.git && \
-		cd cling && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(CLING_PATH) -DCMAKE_OSX_ARCHITECTURES=arm64 -DCLING_CXX_PATH=g++ .. && make -j4 && make install; \
+		cd cling && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(abspath $(CLING_PATH)) -DCMAKE_OSX_ARCHITECTURES=arm64 -DCLING_CXX_PATH=g++ .. && make -j4 && make install; \
 	fi
 	-@if [ ! -d "mistral-common" ]; then \
 		git clone --depth=1 https://github.com/mistralai/mistral-common.git && \
-		cd mistral-common && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(MISTRAL_PATH) -DCMAKE_OSX_ARCHITECTURES=arm64 .. && make -j4 && make install; \
+		cd mistral-common && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(abspath $(MISTRAL_PATH)) -DCMAKE_OSX_ARCHITECTURES=arm64 .. && make -j4 && make install; \
 	fi
 	-@if [ ! -d "mapnik" ]; then \
 		git clone --depth=1 https://github.com/mapnik/mapnik.git && \
-		cd mapnik && git submodule update --init --recursive --depth 1 && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(MAPNIK_PATH) -DCMAKE_OSX_ARCHITECTURES=arm64 .. && make -j4 && make install; \
+		cd mapnik && git submodule update --init --recursive --depth 1 && mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(abspath $(MAPNIK_PATH)) -DCMAKE_OSX_ARCHITECTURES=arm64 .. && make -j4 && make install; \
 	fi
 	-@if [ ! -d "cython" ]; then git clone --depth=1 https://github.com/cython/cython.git; fi
 	-@if [ ! -d "mistral-client-python" ]; then git clone --depth=1 https://github.com/mistralai/client-python.git mistral-client-python; fi
 	-@if [ ! -d "mistral-inference" ]; then git clone --depth=1 https://github.com/mistralai/mistral-inference.git; fi
 	-@if [ ! -d "mistral-finetune" ]; then git clone --depth=1 https://github.com/mistralai/mistral-finetune.git; fi
-	-@if [ ! -d "QuantLib" ]; then \
-		git clone --depth=1 https://github.com/lballabio/QuantLib.git && \
-		cd QuantLib && mkdir -p build && cd build && \
-		cmake -DCMAKE_INSTALL_PREFIX=$(QUANTLIB_PATH) -DCMAKE_CXX_STANDARD=20 -DQL_BUILD_EXAMPLES=OFF -DQL_BUILD_TEST_SUITE=OFF -DQL_BUILD_BENCHMARK=OFF .. && \
+	-@if [ ! -d "QuantLib" ]; then git clone --depth=1 https://github.com/lballabio/QuantLib.git && cd QuantLib && mkdir -p build && cd build && \
+		cmake -DCMAKE_INSTALL_PREFIX=$(abspath $(QUANTLIB_PATH)) -DCMAKE_CXX_STANDARD=20 -DQL_BUILD_EXAMPLES=OFF -DQL_BUILD_TEST_SUITE=OFF -DQL_BUILD_BENCHMARK=OFF .. && \
 		make -j4 && make install; \
 	fi
 
 clean:
-	$(RM) $(TARGET) $(TARGET).exe node_modules gem_test gem_test.exe # src/gem_mistral_bridge.cpp
+	#$(RM) $(TARGET) $(TARGET).exe node_modules gem_test gem_test.exe $(MINIZ_OBJS) # src/gem_mistral_bridge.cpp
+	$(RM) node_modules gem_test $(MINIZ_OBJS) # src/gem_mistral_bridge.cpp
 	# Clean up any other temporary build files if necessary
 	# find . -maxdepth 1 -type f ! -name "*.sh" ! -name "Makefile" ! -name "*.py" ! -name "*.jl" ! -name "*.md" ! -name "*.g" ! -name "*.gm" -delete 2>/dev/null || true
 
 clean-deps:
-	rm -rf ImageMagick PDF-Writer cling mistral-common cython mistral-client-python mistral-inference mistral-finetune ma
+	$(RM) ImageMagick PDF-Writer QuantLib cling mapnik mistral-common cython mistral-client-python mistral-inference mistral-finetune
+	@echo deps cleaned
