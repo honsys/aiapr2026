@@ -6,19 +6,12 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 
 ## Language Mindmap
 
-<!-- Static render (GitHub, npm, etc.) -->
-<div style="position:fixed;top:0;left:0;width:100vw;height:100vh;overflow:hidden;z-index:0;">
-<img src="../docs/gem_mindmap.svg" alt="Gem Language Mindmap" style="width:100%;height:100%;object-fit:fill;display:block;"/>
-</div>
-
 <details>
 <summary>🔍 Interactive mindmap — drag to pan, scroll to zoom</summary>
 
 <div style="overflow:hidden;border:1px solid #333;border-radius:8px;">
 
-![Gem Mindmap](../docs/gem_mindmap.png)
-
-> Open [../docs/gem_mindmap.svg](../docs/gem_mindmap.svg) directly in a browser for the fully interactive pan/zoom version.
+<iframe src="../docs/gem_mindmap.svg" style="width:100%;height:600px;border:none;"></iframe>
 
 </div>
 </details>
