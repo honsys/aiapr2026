@@ -5,56 +5,46 @@
 <title>Gem Object Inheritance Diagram</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #1e1e2e; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-  #toolbar {
-    background: rgba(0,0,0,0.6); padding: 6px 14px;
-    display: flex; gap: 10px; align-items: center; color: #cdd6f4; font-size: 13px; flex-shrink: 0;
-  }
-  #toolbar button {
-    background: #313244; border: 1px solid #45475a; color: #cdd6f4;
-    border-radius: 5px; padding: 3px 10px; cursor: pointer; font-size: 13px;
-  }
-  #toolbar button:hover { background: #45475a; }
-  .frames { display: flex; flex: 1; }
-  iframe { flex: 1; border: none; height: 100%; }
-  iframe + iframe { border-left: 2px solid #313244; }
+  body { background: #1e1e2e; overflow: hidden; width: 100vw; height: 100vh; }
+  #wrap { transform-origin: 0 0; position: absolute; }
+  #wrap svg { display: block; }
 </style>
 </head>
 <body>
-<div id="toolbar">
-  <span>Gem Object Inheritance Diagram</span>
-</div>
-<div class="frames">
-  <!-- PNG iframe -->
-  <iframe srcdoc="<!DOCTYPE html><html><head><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1e1e2e;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh}img{max-width:100%;max-height:100%;object-fit:contain}</style></head><body><img src='gem_mindmap.png'></body></html>"></iframe>
+<div id="wrap"></div>
+<script>
+  fetch('gem_mindmap-2.svg').then(r => r.text()).then(svg => {
+    const wrap = document.getElementById('wrap');
+    wrap.innerHTML = svg;
+    const s = wrap.querySelector('svg');
+    const vw = innerWidth, vh = innerHeight;
+    const sw = s.viewBox.baseVal.width || s.getBoundingClientRect().width;
+    const sh = s.viewBox.baseVal.height || s.getBoundingClientRect().height;
+    let sc = Math.min(vw / sw, vh / sh);
+    let tx = (vw - sw * sc) / 2, ty = (vh - sh * sc) / 2;
+    const apply = () => wrap.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+    apply();
 
-  <!-- SVG iframe with pan/zoom -->
-  <iframe id="svg-frame" srcdoc="<!DOCTYPE html><html><head><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1e1e2e;overflow:hidden;width:100vw;height:100vh}#wrap{transform-origin:0 0;position:absolute}#wrap svg{display:block}</style></head><body><div id='wrap'></div><script>
-    fetch('gem_mindmap-2.svg').then(r=>r.text()).then(svg=>{
-      const wrap=document.getElementById('wrap');
-      wrap.innerHTML=svg;
-      const s=wrap.querySelector('svg');
-      const vw=innerWidth,vh=innerHeight;
-      const sw=s.viewBox.baseVal.width||s.getBoundingClientRect().width;
-      const sh=s.viewBox.baseVal.height||s.getBoundingClientRect().height;
-      let sc=Math.min(vw/sw,vh/sh);
-      let tx=(vw-sw*sc)/2,ty=(vh-sh*sc)/2;
-      const apply=()=>wrap.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;
-      apply();
-      document.body.addEventListener('wheel',e=>{
-        e.preventDefault();
-        const d=e.deltaY<0?1.1:1/1.1;
-        const nx=Math.min(Math.max(sc*d,0.05),20);
-        tx=e.clientX-(e.clientX-tx)*(nx/sc);
-        ty=e.clientY-(e.clientY-ty)*(nx/sc);
-        sc=nx;apply();
-      },{passive:false});
-      let drag=false,ox,oy,otx,oty;
-      document.body.addEventListener('mousedown',e=>{drag=true;ox=e.clientX;oy=e.clientY;otx=tx;oty=ty;document.body.style.cursor='grabbing'});
-      window.addEventListener('mousemove',e=>{if(!drag)return;tx=otx+e.clientX-ox;ty=oty+e.clientY-oy;apply()});
-      window.addEventListener('mouseup',()=>{drag=false;document.body.style.cursor='default'});
+    document.body.addEventListener('wheel', e => {
+      e.preventDefault();
+      const d = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+      const ns = Math.min(Math.max(sc * d, 0.05), 20);
+      tx = e.clientX - (e.clientX - tx) * (ns / sc);
+      ty = e.clientY - (e.clientY - ty) * (ns / sc);
+      sc = ns; apply();
+    }, { passive: false });
+
+    let drag = false, ox, oy, otx, oty;
+    document.body.addEventListener('mousedown', e => {
+      drag = true; ox = e.clientX; oy = e.clientY; otx = tx; oty = ty;
+      document.body.style.cursor = 'grabbing';
     });
-  <\/script></body></html>"></iframe>
-</div>
+    window.addEventListener('mousemove', e => {
+      if (!drag) return;
+      tx = otx + e.clientX - ox; ty = oty + e.clientY - oy; apply();
+    });
+    window.addEventListener('mouseup', () => { drag = false; document.body.style.cursor = 'default'; });
+  });
+</script>
 </body>
 </html>

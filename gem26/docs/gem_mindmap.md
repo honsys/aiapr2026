@@ -312,10 +312,9 @@ mindmap
 ## Object Inheritance Diagram
 
 <!-- Interactive diagram: scroll to zoom, drag to pan -->
-<object data="gem_inheritance.html" type="text/html" width="100%" height="320"
-        style="border:1px solid #ccc; border-radius:6px; display:block;">
-  <a href="gem_inheritance.html">Open interactive inheritance diagram</a>
-</object>
+<iframe src="gem_inheritance.html" width="100%" height="320"
+        style="border:1px solid #ccc; border-radius:6px; display:block;"
+        allowfullscreen></iframe>
 
 <!-- Static fallback (GitHub.com / plain markdown renderers) -->
 <details>
