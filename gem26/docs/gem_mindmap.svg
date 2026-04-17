@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 2400 2000" width="2400" height="2000"
+     style="background:#0d1117; font-family: 'Segoe UI', Arial, sans-serif;">
+
+  <defs>
+    <!-- Radial gradient for root -->
+    <radialGradient id="rootGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1f6feb;stop-opacity:1"/>
+    </radialGradient>
+    <!-- Gradients for each branch category -->
+    <linearGradient id="gradKeywords" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3fb950"/>
+      <stop offset="100%" style="stop-color:#238636"/>
+    </linearGradient>
+    <linearGradient id="gradTypes" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#58a6ff"/>
+      <stop offset="100%" style="stop-color:#1f6feb"/>
+    </linearGradient>
+    <linearGradient id="gradSystem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f78166"/>
+      <stop offset="100%" style="stop-color:#da3633"/>
+    </linearGradient>
+    <linearGradient id="gradScience" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d2a8ff"/>
+      <stop offset="100%" style="stop-color:#8957e5"/>
+    </linearGradient>
+    <linearGradient id="gradFinance" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffa657"/>
+      <stop offset="100%" style="stop-color:#e09b3d"/>
+    </linearGradient>
+    <linearGradient id="gradWeb" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#79c0ff"/>
+      <stop offset="100%" style="stop-color:#388bfd"/>
+    </linearGradient>
+    <linearGradient id="gradDevOps" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffa657"/>
+      <stop offset="100%" style="stop-color:#bf8700"/>
+    </linearGradient>
+    <linearGradient id="gradPolyglot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#56d364"/>
+      <stop offset="100%" style="stop-color:#2ea043"/>
+    </linearGradient>
+    <linearGradient id="gradMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff7b72"/>
+      <stop offset="100%" style="stop-color:#f85149"/>
+    </linearGradient>
+    <linearGradient id="gradUtils" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3b341"/>
+      <stop offset="100%" style="stop-color:#9e6a03"/>
+    </linearGradient>
+    <!-- Drop shadow filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <!-- Glow filter for root -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TITLE -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <text x="1200" y="38" text-anchor="middle" font-size="22" font-weight="bold"
+        fill="#c9d1d9" letter-spacing="2">Gem Language v0.1.0 — Interactive Mindmap</text>
+  <text x="1200" y="60" text-anchor="middle" font-size="13" fill="#8b949e">
+    34 Builtins · Keywords · Types · Operators · Platforms | © 2025-2026 David B Hon
+  </text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH CONNECTOR LINES (drawn first, behind nodes) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Root → Keywords (upper-left) -->
+  <line x1="1200" y1="1000" x2="680" y2="330" stroke="#3fb950" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Types (left) -->
+  <line x1="1200" y1="1000" x2="300" y2="680" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → System Builtins (upper-right) -->
+  <line x1="1200" y1="1000" x2="1800" y2="300" stroke="#f78166" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Science (right-upper) -->
+  <line x1="1200" y1="1000" x2="1950" y2="680" stroke="#d2a8ff" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Finance (right) -->
+  <line x1="1200" y1="1000" x2="2050" y2="1000" stroke="#ffa657" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Web/Network (right-lower) -->
+  <line x1="1200" y1="1000" x2="1950" y2="1320" stroke="#79c0ff" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → DevOps (lower-right) -->
+  <line x1="1200" y1="1000" x2="1700" y2="1620" stroke="#ffa657" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Mobile (lower) -->
+  <line x1="1200" y1="1000" x2="1200" y2="1680" stroke="#ff7b72" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Polyglot (lower-left) -->
+  <line x1="1200" y1="1000" x2="700" y2="1620" stroke="#56d364" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Utilities (left-lower) -->
+  <line x1="1200" y1="1000" x2="250" y2="1320" stroke="#e3b341" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+  <!-- Root → Operators (left-upper) -->
+  <line x1="1200" y1="1000" x2="350" y2="1000" stroke="#8b949e" stroke-width="2.5" stroke-opacity="0.6" stroke-dasharray="6,3"/>
+
+  <!-- Keywords branch sub-lines -->
+  <line x1="680" y1="330" x2="560" y2="180" stroke="#3fb950" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="680" y1="330" x2="480" y2="270" stroke="#3fb950" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="680" y1="330" x2="490" y2="370" stroke="#3fb950" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="680" y1="330" x2="560" y2="460" stroke="#3fb950" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="680" y1="330" x2="750" y2="175" stroke="#3fb950" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="680" y1="330" x2="820" y2="230" stroke="#3fb950" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Types branch sub-lines -->
+  <line x1="300" y1="680" x2="130" y2="580" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="300" y1="680" x2="110" y2="680" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="300" y1="680" x2="130" y2="780" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="300" y1="680" x2="190" y2="840" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Operators branch sub-lines -->
+  <line x1="350" y1="1000" x2="160" y2="920" stroke="#8b949e" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="350" y1="1000" x2="130" y2="1000" stroke="#8b949e" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="350" y1="1000" x2="160" y2="1080" stroke="#8b949e" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="350" y1="1000" x2="200" y2="1150" stroke="#8b949e" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- System branch sub-lines -->
+  <line x1="1800" y1="300" x2="1950" y2="150" stroke="#f78166" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1800" y1="300" x2="2020" y2="250" stroke="#f78166" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1800" y1="300" x2="2050" y2="350" stroke="#f78166" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1800" y1="300" x2="1980" y2="420" stroke="#f78166" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1800" y1="300" x2="1650" y2="150" stroke="#f78166" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Science branch sub-lines -->
+  <line x1="1950" y1="680" x2="2130" y2="580" stroke="#d2a8ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1950" y1="680" x2="2160" y2="680" stroke="#d2a8ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1950" y1="680" x2="2130" y2="780" stroke="#d2a8ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1950" y1="680" x2="2060" y2="840" stroke="#d2a8ff" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Finance branch sub-lines -->
+  <line x1="2050" y1="1000" x2="2210" y2="920" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="2050" y1="1000" x2="2240" y2="1000" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="2050" y1="1000" x2="2210" y2="1080" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="2050" y1="1000" x2="2160" y2="1150" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Web/Network sub-lines -->
+  <line x1="1950" y1="1320" x2="2130" y2="1220" stroke="#79c0ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1950" y1="1320" x2="2160" y2="1320" stroke="#79c0ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1950" y1="1320" x2="2130" y2="1420" stroke="#79c0ff" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1950" y1="1320" x2="2050" y2="1500" stroke="#79c0ff" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- DevOps sub-lines -->
+  <line x1="1700" y1="1620" x2="1820" y2="1750" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1700" y1="1620" x2="1700" y2="1800" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1700" y1="1620" x2="1580" y2="1750" stroke="#ffa657" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Mobile sub-lines -->
+  <line x1="1200" y1="1680" x2="1350" y2="1830" stroke="#ff7b72" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1200" y1="1680" x2="1200" y2="1870" stroke="#ff7b72" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="1200" y1="1680" x2="1050" y2="1830" stroke="#ff7b72" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Polyglot sub-lines -->
+  <line x1="700" y1="1620" x2="580" y2="1750" stroke="#56d364" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="700" y1="1620" x2="700" y2="1800" stroke="#56d364" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="700" y1="1620" x2="820" y2="1750" stroke="#56d364" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="700" y1="1620" x2="460" y2="1750" stroke="#56d364" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Utilities sub-lines -->
+  <line x1="250" y1="1320" x2="100" y2="1220" stroke="#e3b341" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="250" y1="1320" x2="70" y2="1320" stroke="#e3b341" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="250" y1="1320" x2="100" y2="1420" stroke="#e3b341" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="250" y1="1320" x2="150" y2="1500" stroke="#e3b341" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="250" y1="1320" x2="200" y2="1160" stroke="#e3b341" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ROOT NODE -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#glow)" cursor="pointer">
+    <circle cx="1200" cy="1000" r="72" fill="url(#rootGrad)" filter="url(#shadow)"/>
+    <circle cx="1200" cy="1000" r="72" fill="none" stroke="#79c0ff" stroke-width="3" stroke-opacity="0.8"/>
+    <text x="1200" y="993" text-anchor="middle" font-size="32" font-weight="bold" fill="white">Gem</text>
+    <text x="1200" y="1020" text-anchor="middle" font-size="13" fill="#cae8ff">v0.1.0</text>
+    <text x="1200" y="1037" text-anchor="middle" font-size="11" fill="#79c0ff">C++26 STEM</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: KEYWORDS (upper-left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="610" y="300" width="140" height="60" rx="14" fill="url(#gradKeywords)" filter="url(#shadow)"/>
+    <text x="680" y="327" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Keywords</text>
+    <text x="680" y="347" text-anchor="middle" font-size="11" fill="#d2ffd9">fun · obj · end</text>
+  </g>
+  <!-- keyword children -->
+  <g font-size="11" fill="white">
+    <rect x="490" y="155" width="140" height="44" rx="10" fill="#238636" opacity="0.9" filter="url(#shadow)"/>
+    <text x="560" y="174" text-anchor="middle" font-weight="bold" fill="white" font-size="12">fun / obj / end</text>
+    <text x="560" y="191" text-anchor="middle" fill="#d2ffd9">define functions &amp; objects</text>
+
+    <rect x="390" y="248" width="140" height="44" rx="10" fill="#238636" opacity="0.9" filter="url(#shadow)"/>
+    <text x="460" y="267" text-anchor="middle" font-weight="bold" fill="white" font-size="12">if / else / while</text>
+    <text x="460" y="284" text-anchor="middle" fill="#d2ffd9">control flow</text>
+
+    <rect x="400" y="348" width="140" height="44" rx="10" fill="#238636" opacity="0.9" filter="url(#shadow)"/>
+    <text x="470" y="367" text-anchor="middle" font-weight="bold" fill="white" font-size="12">use / alias / lib</text>
+    <text x="470" y="384" text-anchor="middle" fill="#d2ffd9">modules &amp; imports</text>
+
+    <rect x="480" y="438" width="140" height="44" rx="10" fill="#238636" opacity="0.9" filter="url(#shadow)"/>
+    <text x="550" y="457" text-anchor="middle" font-weight="bold" fill="white" font-size="12">his / exit / quit</text>
+    <text x="550" y="474" text-anchor="middle" fill="#d2ffd9">REPL &amp; session</text>
+
+    <rect x="680" y="152" width="140" height="44" rx="10" fill="#238636" opacity="0.9" filter="url(#shadow)"/>
+    <text x="750" y="171" text-anchor="middle" font-weight="bold" fill="white" font-size="12">langport</text>
+    <text x="750" y="188" text-anchor="middle" fill="#d2ffd9">AI-port foreign code</text>
+
+    <rect x="740" y="208" width="140" height="44" rx="10" fill="#238636" opacity="0.9" filter="url(#shadow)"/>
+    <text x="810" y="227" text-anchor="middle" font-weight="bold" fill="white" font-size="12">true/false/null</text>
+    <text x="810" y="244" text-anchor="middle" fill="#d2ffd9">literals</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: TYPES (left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="220" y="650" width="160" height="60" rx="14" fill="url(#gradTypes)" filter="url(#shadow)"/>
+    <text x="300" y="677" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Types</text>
+    <text x="300" y="697" text-anchor="middle" font-size="11" fill="#cae8ff">int · double · string · bool</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="50" y="558" width="130" height="44" rx="10" fill="#1f6feb" opacity="0.9" filter="url(#shadow)"/>
+    <text x="115" y="577" text-anchor="middle" font-weight="bold" font-size="12">int x = 0</text>
+    <text x="115" y="594" text-anchor="middle" fill="#cae8ff">integer</text>
+
+    <rect x="30" y="658" width="130" height="44" rx="10" fill="#1f6feb" opacity="0.9" filter="url(#shadow)"/>
+    <text x="95" y="677" text-anchor="middle" font-weight="bold" font-size="12">double x = 0.0</text>
+    <text x="95" y="694" text-anchor="middle" fill="#cae8ff">floating point</text>
+
+    <rect x="50" y="758" width="130" height="44" rx="10" fill="#1f6feb" opacity="0.9" filter="url(#shadow)"/>
+    <text x="115" y="777" text-anchor="middle" font-weight="bold" font-size="12">string s = ""</text>
+    <text x="115" y="794" text-anchor="middle" fill="#cae8ff">text</text>
+
+    <rect x="100" y="820" width="150" height="44" rx="10" fill="#1f6feb" opacity="0.9" filter="url(#shadow)"/>
+    <text x="175" y="839" text-anchor="middle" font-weight="bold" font-size="12">bool ok = true</text>
+    <text x="175" y="856" text-anchor="middle" fill="#cae8ff">_var = global scope</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: OPERATORS (left-middle) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="268" y="970" width="164" height="60" rx="14" fill="#484f58" filter="url(#shadow)"/>
+    <text x="350" y="997" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Operators</text>
+    <text x="350" y="1017" text-anchor="middle" font-size="11" fill="#c9d1d9">+ - * / == != &amp;&amp; ||</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="60" y="898" width="150" height="44" rx="10" fill="#30363d" opacity="0.95" filter="url(#shadow)"/>
+    <text x="135" y="917" text-anchor="middle" font-weight="bold" font-size="12">+  -  *  /</text>
+    <text x="135" y="934" text-anchor="middle" fill="#8b949e">arithmetic</text>
+
+    <rect x="30" y="978" width="155" height="44" rx="10" fill="#30363d" opacity="0.95" filter="url(#shadow)"/>
+    <text x="108" y="997" text-anchor="middle" font-weight="bold" font-size="12">+=  -=  *=  /=</text>
+    <text x="108" y="1014" text-anchor="middle" fill="#8b949e">compound assignment</text>
+
+    <rect x="60" y="1058" width="155" height="44" rx="10" fill="#30363d" opacity="0.95" filter="url(#shadow)"/>
+    <text x="138" y="1077" text-anchor="middle" font-weight="bold" font-size="12">==  !=  &gt;  &lt;  &gt;=  &lt;=</text>
+    <text x="138" y="1094" text-anchor="middle" fill="#8b949e">comparison</text>
+
+    <rect x="115" y="1128" width="155" height="44" rx="10" fill="#30363d" opacity="0.95" filter="url(#shadow)"/>
+    <text x="193" y="1147" text-anchor="middle" font-weight="bold" font-size="12">!  &amp;&amp;  ||  ;</text>
+    <text x="193" y="1164" text-anchor="middle" fill="#8b949e">logical · separator</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: SYSTEM BUILTINS (upper-right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="1718" y="268" width="164" height="64" rx="14" fill="url(#gradSystem)" filter="url(#shadow)"/>
+    <text x="1800" y="296" text-anchor="middle" font-size="15" font-weight="bold" fill="white">System</text>
+    <text x="1800" y="316" text-anchor="middle" font-size="11" fill="#ffdcd7">sys · ai · math · text</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="1870" y="120" width="170" height="52" rx="10" fill="#da3633" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1955" y="141" text-anchor="middle" font-weight="bold" font-size="12">sys</text>
+    <text x="1955" y="157" text-anchor="middle" fill="#ffdcd7">print exec async app</text>
+    <text x="1955" y="171" text-anchor="middle" fill="#ffdcd7">help langport redirect</text>
+
+    <rect x="1960" y="218" width="150" height="52" rx="10" fill="#da3633" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2035" y="239" text-anchor="middle" font-weight="bold" font-size="12">ai</text>
+    <text x="2035" y="255" text-anchor="middle" fill="#ffdcd7">prompt useMistral</text>
+    <text x="2035" y="270" text-anchor="middle" fill="#ffdcd7">useOllama useGemini</text>
+
+    <rect x="1990" y="322" width="150" height="52" rx="10" fill="#da3633" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2065" y="343" text-anchor="middle" font-weight="bold" font-size="12">math</text>
+    <text x="2065" y="359" text-anchor="middle" fill="#ffdcd7">sin cos sqrt diff</text>
+    <text x="2065" y="374" text-anchor="middle" fill="#ffdcd7">integrate sym_latex</text>
+
+    <rect x="1900" y="398" width="160" height="52" rx="10" fill="#da3633" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1980" y="419" text-anchor="middle" font-weight="bold" font-size="12">text</text>
+    <text x="1980" y="435" text-anchor="middle" fill="#ffdcd7">read write_pdf</text>
+    <text x="1980" y="450" text-anchor="middle" fill="#ffdcd7">read_yaml read_xml</text>
+
+    <rect x="1570" y="120" width="150" height="52" rx="10" fill="#da3633" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1645" y="141" text-anchor="middle" font-weight="bold" font-size="12">cpp / itr / nlp</text>
+    <text x="1645" y="157" text-anchor="middle" fill="#ffdcd7">C++26 JIT iterators</text>
+    <text x="1645" y="171" text-anchor="middle" fill="#ffdcd7">NLP via ai.prompt</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: SCIENCE (right-upper) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="1868" y="648" width="164" height="64" rx="14" fill="url(#gradScience)" filter="url(#shadow)"/>
+    <text x="1950" y="676" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Science</text>
+    <text x="1950" y="696" text-anchor="middle" font-size="11" fill="#eddeff">astro · geo · bev · data</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="2060" y="558" width="160" height="52" rx="10" fill="#8957e5" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2140" y="579" text-anchor="middle" font-weight="bold" font-size="12">astro</text>
+    <text x="2140" y="595" text-anchor="middle" fill="#eddeff">stellar orbital solar</text>
+    <text x="2140" y="609" text-anchor="middle" fill="#eddeff">cosmology exoplanet</text>
+
+    <rect x="2090" y="658" width="150" height="44" rx="10" fill="#8957e5" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2165" y="677" text-anchor="middle" font-weight="bold" font-size="12">geo</text>
+    <text x="2165" y="694" text-anchor="middle" fill="#eddeff">lookup distance plot2d plot3d</text>
+
+    <rect x="2060" y="758" width="150" height="44" rx="10" fill="#8957e5" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2135" y="777" text-anchor="middle" font-weight="bold" font-size="12">data</text>
+    <text x="2135" y="794" text-anchor="middle" fill="#eddeff">read_csv mean std</text>
+
+    <rect x="1970" y="820" width="150" height="44" rx="10" fill="#8957e5" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2045" y="839" text-anchor="middle" font-weight="bold" font-size="12">bev</text>
+    <text x="2045" y="856" text-anchor="middle" fill="#eddeff">data fit_line param</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: FINANCE (right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="1968" y="968" width="164" height="64" rx="14" fill="url(#gradFinance)" filter="url(#shadow)"/>
+    <text x="2050" y="996" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Finance</text>
+    <text x="2050" y="1016" text-anchor="middle" font-size="11" fill="#fff0da">fin · bsm · chart</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="2130" y="898" width="160" height="52" rx="10" fill="#e09b3d" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2210" y="919" text-anchor="middle" font-weight="bold" font-size="12">fin</text>
+    <text x="2210" y="935" text-anchor="middle" fill="#fff0da">ticker bs_price greeks</text>
+    <text x="2210" y="949" text-anchor="middle" fill="#fff0da">high_yield_bonds/etfs</text>
+
+    <rect x="2160" y="978" width="150" height="44" rx="10" fill="#e09b3d" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2235" y="997" text-anchor="middle" font-weight="bold" font-size="12">bsm</text>
+    <text x="2235" y="1014" text-anchor="middle" fill="#fff0da">price_american (extends fin)</text>
+
+    <rect x="2130" y="1058" width="150" height="44" rx="10" fill="#e09b3d" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2205" y="1077" text-anchor="middle" font-weight="bold" font-size="12">chart</text>
+    <text x="2205" y="1094" text-anchor="middle" fill="#fff0da">plot show server (Plotly)</text>
+
+    <rect x="2060" y="1128" width="160" height="44" rx="10" fill="#e09b3d" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2140" y="1147" text-anchor="middle" font-weight="bold" font-size="12">img / file / zip</text>
+    <text x="2140" y="1164" text-anchor="middle" fill="#fff0da">resize write compress</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: WEB / NETWORK (right-lower) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="1868" y="1288" width="164" height="64" rx="14" fill="url(#gradWeb)" filter="url(#shadow)"/>
+    <text x="1950" y="1316" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Web / Net</text>
+    <text x="1950" y="1336" text-anchor="middle" font-size="11" fill="#d5eeff">www · cdn · tcp · seo</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="2060" y="1198" width="160" height="52" rx="10" fill="#388bfd" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2140" y="1219" text-anchor="middle" font-weight="bold" font-size="12">www</text>
+    <text x="2140" y="1235" text-anchor="middle" fill="#d5eeff">app wget redirect</text>
+    <text x="2140" y="1249" text-anchor="middle" fill="#d5eeff">map2d (Mapnik)</text>
+
+    <rect x="2090" y="1298" width="150" height="44" rx="10" fill="#388bfd" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2165" y="1317" text-anchor="middle" font-weight="bold" font-size="12">cdn</text>
+    <text x="2165" y="1334" text-anchor="middle" fill="#d5eeff">start stats purge (extends www)</text>
+
+    <rect x="2060" y="1398" width="160" height="44" rx="10" fill="#388bfd" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2140" y="1417" text-anchor="middle" font-weight="bold" font-size="12">tcp</text>
+    <text x="2140" y="1434" text-anchor="middle" fill="#d5eeff">listen connect send recv nic</text>
+
+    <rect x="1960" y="1478" width="160" height="44" rx="10" fill="#388bfd" opacity="0.9" filter="url(#shadow)"/>
+    <text x="2040" y="1497" text-anchor="middle" font-weight="bold" font-size="12">seo</text>
+    <text x="2040" y="1514" text-anchor="middle" fill="#d5eeff">index analyze (crawler)</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: DEVOPS (lower-right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="1618" y="1588" width="164" height="64" rx="14" fill="url(#gradDevOps)" filter="url(#shadow)"/>
+    <text x="1700" y="1616" text-anchor="middle" font-size="15" font-weight="bold" fill="white">DevOps</text>
+    <text x="1700" y="1636" text-anchor="middle" font-size="11" fill="#fff0da">k3s · vm · drvr · thread</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="1740" y="1728" width="160" height="52" rx="10" fill="#bf8700" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1820" y="1749" text-anchor="middle" font-weight="bold" font-size="12">k3s</text>
+    <text x="1820" y="1765" text-anchor="middle" fill="#fff0da">docker_run docker_ps</text>
+    <text x="1820" y="1779" text-anchor="middle" fill="#fff0da">k3s_apply k3s_pods</text>
+    <rect x="1620" y="1778" width="150" height="44" rx="10" fill="#bf8700" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1695" y="1797" text-anchor="middle" font-weight="bold" font-size="12">vm</text>
+    <text x="1695" y="1814" text-anchor="middle" fill="#fff0da">init up ssh halt destroy</text>
+    <rect x="1490" y="1728" width="160" height="52" rx="10" fill="#bf8700" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1570" y="1749" text-anchor="middle" font-weight="bold" font-size="12">drvr</text>
+    <text x="1570" y="1765" text-anchor="middle" fill="#fff0da">linux win11 macos</text>
+    <text x="1570" y="1779" text-anchor="middle" fill="#fff0da">android build deploy</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: MOBILE (bottom) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="1118" y="1648" width="164" height="64" rx="14" fill="url(#gradMobile)" filter="url(#shadow)"/>
+    <text x="1200" y="1676" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Mobile</text>
+    <text x="1200" y="1696" text-anchor="middle" font-size="11" fill="#ffdcd7">mobl · trek · art</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="1268" y="1808" width="165" height="52" rx="10" fill="#f85149" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1351" y="1829" text-anchor="middle" font-weight="bold" font-size="12">mobl</text>
+    <text x="1351" y="1845" text-anchor="middle" fill="#ffdcd7">phone dictate</text>
+    <text x="1351" y="1859" text-anchor="middle" fill="#ffdcd7">make_feature PWA</text>
+    <rect x="1130" y="1848" width="150" height="44" rx="10" fill="#f85149" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1205" y="1867" text-anchor="middle" font-weight="bold" font-size="12">trek</text>
+    <text x="1205" y="1884" text-anchor="middle" fill="#ffdcd7">new add show export_gpx</text>
+    <rect x="968" y="1808" width="150" height="52" rx="10" fill="#f85149" opacity="0.9" filter="url(#shadow)"/>
+    <text x="1043" y="1829" text-anchor="middle" font-weight="bold" font-size="12">art</text>
+    <text x="1043" y="1845" text-anchor="middle" fill="#ffdcd7">text_to_art art_to_svg</text>
+    <text x="1043" y="1859" text-anchor="middle" fill="#ffdcd7">svg_to_art mindmap</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: POLYGLOT (lower-left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="618" y="1588" width="164" height="64" rx="14" fill="url(#gradPolyglot)" filter="url(#shadow)"/>
+    <text x="700" y="1616" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Polyglot</text>
+    <text x="700" y="1636" text-anchor="middle" font-size="11" fill="#d2ffd9">go · ruby · node · rust</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="498" y="1728" width="150" height="44" rx="10" fill="#2ea043" opacity="0.9" filter="url(#shadow)"/>
+    <text x="573" y="1747" text-anchor="middle" font-weight="bold" font-size="12">go</text>
+    <text x="573" y="1764" text-anchor="middle" fill="#d2ffd9">run build</text>
+    <rect x="620" y="1778" width="150" height="44" rx="10" fill="#2ea043" opacity="0.9" filter="url(#shadow)"/>
+    <text x="695" y="1797" text-anchor="middle" font-weight="bold" font-size="12">ruby</text>
+    <text x="695" y="1814" text-anchor="middle" fill="#d2ffd9">run</text>
+    <rect x="740" y="1728" width="160" height="44" rx="10" fill="#2ea043" opacity="0.9" filter="url(#shadow)"/>
+    <text x="820" y="1747" text-anchor="middle" font-weight="bold" font-size="12">node</text>
+    <text x="820" y="1764" text-anchor="middle" fill="#d2ffd9">run npm_install</text>
+    <rect x="370" y="1728" width="155" height="44" rx="10" fill="#2ea043" opacity="0.9" filter="url(#shadow)"/>
+    <text x="448" y="1747" text-anchor="middle" font-weight="bold" font-size="12">rust</text>
+    <text x="448" y="1764" text-anchor="middle" fill="#d2ffd9">run cargo_new</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BRANCH: UTILITIES (left-lower) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g cursor="pointer">
+    <rect x="168" y="1288" width="164" height="64" rx="14" fill="url(#gradUtils)" filter="url(#shadow)"/>
+    <text x="250" y="1316" text-anchor="middle" font-size="15" font-weight="bold" fill="white">Utilities</text>
+    <text x="250" y="1336" text-anchor="middle" font-size="11" fill="#fff8c5">rex · algo · itr · thread</text>
+  </g>
+  <g font-size="11" fill="white">
+    <rect x="18" y="1198" width="165" height="52" rx="10" fill="#9e6a03" opacity="0.9" filter="url(#shadow)"/>
+    <text x="101" y="1219" text-anchor="middle" font-weight="bold" font-size="12">rex</text>
+    <text x="101" y="1235" text-anchor="middle" fill="#fff8c5">match find findall</text>
+    <text x="101" y="1249" text-anchor="middle" fill="#fff8c5">sub gsub split count</text>
+    <rect x="0" y="1298" width="150" height="44" rx="10" fill="#9e6a03" opacity="0.9" filter="url(#shadow)"/>
+    <text x="75" y="1317" text-anchor="middle" font-weight="bold" font-size="12">algo</text>
+    <text x="75" y="1334" text-anchor="middle" fill="#fff8c5">quicksort now date_add</text>
+    <rect x="18" y="1398" width="150" height="44" rx="10" fill="#9e6a03" opacity="0.9" filter="url(#shadow)"/>
+    <text x="93" y="1417" text-anchor="middle" font-weight="bold" font-size="12">itr</text>
+    <text x="93" y="1434" text-anchor="middle" fill="#fff8c5">range while (functional)</text>
+    <rect x="80" y="1478" width="155" height="44" rx="10" fill="#9e6a03" opacity="0.9" filter="url(#shadow)"/>
+    <text x="158" y="1497" text-anchor="middle" font-weight="bold" font-size="12">thread</text>
+    <text x="158" y="1514" text-anchor="middle" fill="#fff8c5">wait is_finished</text>
+    <rect x="100" y="1138" width="155" height="44" rx="10" fill="#9e6a03" opacity="0.9" filter="url(#shadow)"/>
+    <text x="178" y="1157" text-anchor="middle" font-weight="bold" font-size="12">file / zip / img</text>
+    <text x="178" y="1174" text-anchor="middle" fill="#fff8c5">write compress resize</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- LEGEND -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <rect x="820" y="1910" width="760" height="72" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="1200" y="1930" text-anchor="middle" font-size="12" fill="#8b949e" font-weight="bold">LEGEND  (34 builtins · hover nodes for details)</text>
+  <circle cx="870" cy="1958" r="8" fill="url(#rootGrad)"/>
+  <text x="884" y="1962" font-size="11" fill="#c9d1d9">Root</text>
+  <rect x="920" y="1950" width="18" height="14" rx="3" fill="#238636"/>
+  <text x="943" y="1962" font-size="11" fill="#c9d1d9">Keywords</text>
+  <rect x="1010" y="1950" width="18" height="14" rx="3" fill="#1f6feb"/>
+  <text x="1033" y="1962" font-size="11" fill="#c9d1d9">Types</text>
+  <rect x="1080" y="1950" width="18" height="14" rx="3" fill="#da3633"/>
+  <text x="1103" y="1962" font-size="11" fill="#c9d1d9">System</text>
+  <rect x="1160" y="1950" width="18" height="14" rx="3" fill="#8957e5"/>
+  <text x="1183" y="1962" font-size="11" fill="#c9d1d9">Science</text>
+  <rect x="1250" y="1950" width="18" height="14" rx="3" fill="#e09b3d"/>
+  <text x="1273" y="1962" font-size="11" fill="#c9d1d9">Finance</text>
+  <rect x="1330" y="1950" width="18" height="14" rx="3" fill="#388bfd"/>
+  <text x="1353" y="1962" font-size="11" fill="#c9d1d9">Web/Net</text>
+  <rect x="1415" y="1950" width="18" height="14" rx="3" fill="#bf8700"/>
+  <text x="1438" y="1962" font-size="11" fill="#c9d1d9">DevOps</text>
+  <rect x="1500" y="1950" width="18" height="14" rx="3" fill="#f85149"/>
+  <text x="1523" y="1962" font-size="11" fill="#c9d1d9">Mobile</text>
+  <rect x="1580" y="1950" width="18" height="14" rx="3" fill="#2ea043"/>
+  <text x="1603" y="1962" font-size="11" fill="#c9d1d9">Polyglot</text>
+
+</svg>

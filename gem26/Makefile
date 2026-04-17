@@ -158,13 +158,25 @@ update-docs:
 
 docs: update-docs mindmap $(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_tutorials.pdf
 
-mindmap: $(DOCSDIR)/gem_mindmap.svg
+mindmap: $(DOCSDIR)/gem_mindmap.svg $(DOCSDIR)/gem_mindmap.png
+	@echo "Mindmap → $(DOCSDIR)/gem_mindmap.svg  $(DOCSDIR)/gem_mindmap.png"
 
-$(DOCSDIR)/gem_mindmap.svg: $(DOCSDIR)/gem_mindmap.md
+$(DOCSDIR)/gem_mindmap.svg: $(DOCSDIR)/gem_mindmap.md src/gem_base.hpp tutorial/41_art.g
 	@mkdir -p $(DOCSDIR)
-	cd $(DOCSDIR) && $(shell which mmdc 2>/dev/null || echo npx --yes @mermaid-js/mermaid-cli) -i gem_mindmap.md -o gem_mindmap.svg
-	@echo "Mindmap diagrams → $(DOCSDIR)/gem_mindmap-1.svg (mindmap) $(DOCSDIR)/gem_mindmap-2.svg (inheritance)"
+	./$(TARGET) tutorial/41_art.g 2>/dev/null || true
+	@# Regenerate interactive SVG: pipe mermaid mindmap through mmdc if available
+	@if command -v mmdc >/dev/null 2>&1; then \
+	  mmdc -i $(DOCSDIR)/gem_mindmap.md -o $(DOCSDIR)/gem_mindmap.svg; \
+	elif command -v npx >/dev/null 2>&1; then \
+	  npx --yes @mermaid-js/mermaid-cli -i $(DOCSDIR)/gem_mindmap.md -o $(DOCSDIR)/gem_mindmap.svg; \
+	else \
+	  echo "Warning: mmdc not found — SVG not regenerated from mermaid source"; \
+	fi
 	@touch $(DOCSDIR)/gem_mindmap.svg
+
+$(DOCSDIR)/gem_mindmap.png: $(DOCSDIR)/gem_mindmap.svg
+	rsvg-convert -w 2400 -h 2000 $(DOCSDIR)/gem_mindmap.svg -o $(DOCSDIR)/gem_mindmap.png
+	@echo "PNG → $(DOCSDIR)/gem_mindmap.png (2400x2000)"
 
 $(DOCSDIR)/gem_lang_reference.pdf $(DOCSDIR)/gem_lang_reference.tex: README.md gem_latex_header.tex
 	@mkdir -p $(DOCSDIR)

@@ -260,7 +260,7 @@ graph TD
 | `bool` | `bool ok = true` | Boolean; must initialize |
 | `_var` | `_config = 1` | Underscore prefix = global scope |
 
-## Builtin Module Summary (35 total)
+## Builtin Module Summary (34 total)
 
 | Module | Domain | Key Functions |
 |--------|--------|---------------|
