@@ -473,9 +473,9 @@ public:
                 std::cout << "  gem translate <file>      - Alias for -t." << std::endl;
                 std::cout << "  gem                       - Start interactive REPL." << std::endl;
                 std::cout << "\nKeywords:" << std::endl;
-                std::cout << "  fun    - define a function:  fun name(a, b) ... end" << std::endl;
+                std::cout << "  fun    - define a function:  fun name(a, b) ... end <expr>" << std::endl;
                 std::cout << "  obj    - define an object:   obj Name(args) : Parent ... end" << std::endl;
-                std::cout << "  end    - close fun/obj/if/while block" << std::endl;
+                std::cout << "  end    - close fun/obj/if/while block; 'end <expr>' returns value from fun" << std::endl;
                 std::cout << "  use    - run/translate foreign file: use \"script.py\"" << std::endl;
                 std::cout << "  lib    - list loaded modules" << std::endl;
                 std::cout << "  alias  - REPL shortcut: alias ? = sys.help()" << std::endl;
@@ -483,8 +483,9 @@ public:
                 std::cout << "  else   - else branch" << std::endl;
                 std::cout << "  while  - loop:  while cond ... end" << std::endl;
                 std::cout << "  his    - print today's session history" << std::endl;
-                std::cout << "  exit/quit - exit the interpreter" << std::endl;
+                std::cout << "  exit/quit - exit the interpreter (identifiers, not keywords)" << std::endl;
                 std::cout << "  langport  - AI-port foreign code: langport(\"*.py\", \"out.gm\")" << std::endl;
+                std::cout << "Note: 'return' is NOT a keyword. Functions return via 'end <expr>'." << std::endl;
                 std::cout << "\nTypes:" << std::endl;
                 std::cout << "  int x = 0      double pi = 3.14      string s = \"hi\"      bool ok = true" << std::endl;
                 std::cout << "  _global = 1    (underscore prefix = global scope)" << std::endl;
@@ -498,11 +499,11 @@ public:
                 std::cout << "  Separator:     ;  (multiple statements per line)" << std::endl;
                 std::cout << "  String concat: +" << std::endl;
                 std::cout << "  Range:         ..  (e.g. 1..10 in itr.range)" << std::endl;
-                std::cout << "\nAvailable Builtin Modules (34 total):" << std::endl;
+                std::cout << "\nAvailable Builtin Modules (36 total):" << std::endl;
                 std::cout << "  sys    math   ai     text   rex    algo   bev    file   zip" << std::endl;
                 std::cout << "  nlp    img    www    cdn    geo    cpp    tcp    itr    thread" << std::endl;
-                std::cout << "  data   k3s    vm     go     ruby   node   rust   fin    bsm" << std::endl;
-                std::cout << "  chart  astro  mobl   trek   seo    drvr   art" << std::endl;
+                std::cout << "  data   k3s    vm     python cython go     ruby   node   rust" << std::endl;
+                std::cout << "  fin    bsm    chart  astro  mobl   trek   seo    drvr   art" << std::endl;
                 std::cout << "\nModule Quick Reference:" << std::endl;
                 std::cout << "  sys    - system root; print, exec, async, app, help, langport" << std::endl;
                 std::cout << "  math   - math + symbolic (diff, integrate, sym_latex, compile_latex)" << std::endl;
@@ -1854,7 +1855,7 @@ public:
                     md << "## Vectors\n\n";
                     md << "```\nint v = [1.0, 2.0, 3.0]   # creation\nv[0]                       # index (0-based)\nv.length / v.size / v.count  # length\n```\n\n";
 
-                    md << "## Builtin Modules (35)\n\n";
+                    md << "## Builtin Modules (36)\n\n";
 
                     // sys
                     md << "### sys — System Root (inherited by all objects)\n";
@@ -2110,11 +2111,11 @@ public:
                     }
                     std::cout << "Available topics: sys, math, ai, text, rex, algo, bev, file, zip, nlp, img," << std::endl;
                     std::cout << "  www, cdn, geo, astro, fin, bsm, chart, data, tcp, thread, cpp, itr," << std::endl;
-                    std::cout << "  k3s, vm, mobl, trek, seo, drvr, art, go, ruby, node, rust," << std::endl;
+                    std::cout << "  k3s, vm, mobl, trek, seo, drvr, art, go, ruby, node, rust, python, cython," << std::endl;
                     std::cout << "  fun, obj, use, if, else, while, end, alias, his, lib, exit, quit," << std::endl;
                     std::cout << "  int, double, string, bool, true, false, null, nil, nan," << std::endl;
                     std::cout << "  isnil, isnan, tonum, tostr, len, type, langport, operators, ;, vectors, repl," << std::endl;
-                    std::cout << "  for, return, scope" << std::endl;
+                    std::cout << "  scope (Note: 'return' is not a keyword; use 'end <expr>' to return values)" << std::endl;
                     return std::make_shared<GemValue>(filename);
                 } else {
                     std::cout << "No help found for: \"" << topic << "\"" << std::endl;

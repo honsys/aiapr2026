@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 2800 2800" width="2800" height="2800"
+     viewBox="0 0 3200 3200" width="3200" height="3200"
      style="background:#0f0f1a;font-family:'Segoe UI',Arial,sans-serif;">
 <defs>
   <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -23,11 +23,10 @@
   .leaf-node:hover rect { fill:#e8f4fd; }
   text { user-select:none; }
 </style>
-<!-- ── interactive pan/zoom ── -->
 <script type="text/javascript"><![CDATA[
 (function(){
   var svg = document.documentElement;
-  var vb = [0,0,2800,2800];
+  var vb = [0,0,3200,3200];
   var drag = false, sx=0, sy=0, ox=0, oy=0;
   svg.addEventListener('mousedown', function(e){
     drag=true; sx=e.clientX; sy=e.clientY;
@@ -35,8 +34,8 @@
   });
   svg.addEventListener('mousemove', function(e){
     if(!drag) return;
-    var dx=(e.clientX-sx)*vb[2]/2800;
-    var dy=(e.clientY-sy)*vb[3]/2800;
+    var dx=(e.clientX-sx)*vb[2]/3200;
+    var dy=(e.clientY-sy)*vb[3]/3200;
     vb[0]=ox-dx; vb[1]=oy-dy;
     svg.setAttribute('viewBox', vb.join(' '));
   });
@@ -44,8 +43,8 @@
   svg.addEventListener('wheel', function(e){
     e.preventDefault();
     var f = e.deltaY>0 ? 1.1 : 0.9;
-    var mx=e.offsetX/2800*vb[2]+vb[0];
-    var my=e.offsetY/2800*vb[3]+vb[1];
+    var mx=e.offsetX/3200*vb[2]+vb[0];
+    var my=e.offsetY/3200*vb[3]+vb[1];
     vb[2]*=f; vb[3]*=f;
     vb[0]=mx-(mx-vb[0])*f; vb[1]=my-(my-vb[1])*f;
     svg.setAttribute('viewBox', vb.join(' '));
@@ -53,1039 +52,954 @@
 })();
 ]]></script>
 <g id="mindmap">
-
 <g class="branch-node" id="root">
-<circle cx="1400.0" cy="1400.0" r="60" fill="url(#rootgrad)" filter="url(#shadow)"/>
-<text x="1400.0" y="1406.9" text-anchor="middle" font-size="22" fill="#e0e0ff" font-weight="bold">Gem</text>
+<circle cx="1600.0" cy="1600.0" r="70" fill="url(#rootgrad)" filter="url(#shadow)"/>
+<text x="1600.0" y="1600.0" text-anchor="middle" font-size="33" fill="#e0e0ff" font-weight="bold"><tspan x="1600.0" dy="11.5">Gem</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1507.1,1309.9 1614.3,1219.7" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1600.0,1360.0 1600.0,1120.0" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g0">
-<circle cx="1614.3" cy="1219.7" r="38" fill="#c0392b" filter="url(#shadow)"/>
-<text x="1614.3" y="1223.8" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Language</text>
+<circle cx="1600.0" cy="1120.0" r="44" fill="#c0392b" filter="url(#shadow)"/>
+<text x="1600.0" y="1120.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1600.0" dy="6.6">Language</tspan></text>
 </g>
-<path d="M1614.3,1219.7 Q1644.9,1135.1 1675.6,1050.5" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,1120.0 Q1382.0,1048.7 1164.1,977.4" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g0b0">
-<circle cx="1675.6" cy="1050.5" r="30" fill="#c0392bcc" filter="url(#shadow)"/>
-<text x="1675.6" y="1054.3" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Keywords</text>
+<circle cx="1164.1" cy="977.4" r="34" fill="#c0392bcc" filter="url(#shadow)"/>
+<text x="1164.1" y="977.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1164.1" dy="6.3">Keywords</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1668.8,973.3 1661.9,896.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q901.7,1064.7 639.3,1152.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1644.3" y="884.0" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1661.9" y="900.4" text-anchor="middle" font-size="11" fill="#2c3e50">fun</text>
+<rect x="614.3" y="1140.0" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="639.3" y="1152.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="639.3" dy="5.6">fun</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1674.4,973.0 1673.2,895.5" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q927.7,1015.8 691.4,1054.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1655.6" y="883.4" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1673.2" y="899.8" text-anchor="middle" font-size="11" fill="#2c3e50">obj</text>
+<rect x="666.4" y="1042.1" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="691.4" y="1054.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="691.4" dy="5.6">obj</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1680.0,973.1 1684.4,895.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q958.8,969.8 753.4,962.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1666.9" y="883.6" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1684.4" y="900.1" text-anchor="middle" font-size="11" fill="#2c3e50">use</text>
+<rect x="728.4" y="950.1" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="753.4" y="962.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="753.4" dy="5.6">use</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1685.6,973.7 1695.6,896.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q994.4,927.3 824.8,877.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1681.3" y="884.7" width="28.8" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1695.6" y="901.1" text-anchor="middle" font-size="11" fill="#2c3e50">if</text>
+<rect x="799.8" y="865.1" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="824.8" y="877.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="824.8" dy="5.6">if</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1691.2,974.6 1706.8,898.7" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1034.3,888.7 904.6,800.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1686.0" y="886.5" width="41.5" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1706.8" y="903.0" text-anchor="middle" font-size="11" fill="#2c3e50">else</text>
+<rect x="879.6" y="788.0" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="904.6" y="800.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="904.6" dy="5.6">else</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1696.7,975.9 1717.7,901.4" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1078.0,854.6 992.0,731.7" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1693.8" y="889.2" width="47.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1717.7" y="905.6" text-anchor="middle" font-size="11" fill="#2c3e50">while</text>
+<rect x="967.0" y="719.7" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="992.0" y="731.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="992.0" dy="5.6">while</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1702.0,977.7 1728.4,904.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1125.1,825.2 1086.1,672.9" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1710.9" y="892.7" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1728.4" y="909.1" text-anchor="middle" font-size="11" fill="#2c3e50">end</text>
+<rect x="1061.1" y="660.9" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1086.1" y="672.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1086.1" dy="5.6">end</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1707.2,979.8 1738.9,909.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1175.0,800.9 1185.8,624.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1714.9" y="896.9" width="47.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1738.9" y="913.3" text-anchor="middle" font-size="11" fill="#2c3e50">alias</text>
+<rect x="1160.8" y="612.3" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1185.8" y="624.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1185.8" dy="5.6">alias</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1712.3,982.3 1749.0,914.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1227.1,781.9 1290.1,586.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1731.4" y="901.8" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1749.0" y="918.3" text-anchor="middle" font-size="11" fill="#2c3e50">his</text>
+<rect x="1265.1" y="574.3" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1290.1" y="586.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1290.1" dy="5.6">his</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1717.2,985.1 1758.7,919.7" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1280.9,768.5 1397.7,559.5" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1741.2" y="907.5" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1758.7" y="924.0" text-anchor="middle" font-size="11" fill="#2c3e50">lib</text>
+<rect x="1372.7" y="547.5" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1397.7" y="559.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1397.7" dy="5.6">lib</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1721.8,988.3 1768.0,926.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,977.4 Q1335.8,760.7 1507.6,544.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1747.3" y="913.9" width="41.5" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1768.0" y="930.4" text-anchor="middle" font-size="11" fill="#2c3e50">exit</text>
+<rect x="1467.9" y="532.0" width="79.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1507.6" y="544.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1507.6" dy="5.6">langport</tspan></text>
 </g>
-<path d="M1675.6,1050.5 Q1726.2,991.8 1776.8,933.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
-<g class="leaf-node">
-<rect x="1756.1" y="921.0" width="41.5" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1776.8" y="937.4" text-anchor="middle" font-size="11" fill="#2c3e50">quit</text>
-</g>
-<path d="M1675.6,1050.5 Q1730.3,995.7 1785.1,940.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
-<g class="leaf-node">
-<rect x="1751.6" y="928.6" width="67.0" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1785.1" y="945.1" text-anchor="middle" font-size="11" fill="#2c3e50">langport</text>
-</g>
-<path d="M1614.3,1219.7 Q1661.9,1143.4 1709.5,1067.0" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,1120.0 Q1463.8,1005.2 1327.6,890.5" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g0b1">
-<circle cx="1709.5" cy="1067.0" r="30" fill="#c0392bcc" filter="url(#shadow)"/>
-<text x="1709.5" y="1070.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Types</text>
+<circle cx="1327.6" cy="890.5" r="34" fill="#c0392bcc" filter="url(#shadow)"/>
+<text x="1327.6" y="890.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1327.6" dy="6.3">Types</tspan></text>
 </g>
-<path d="M1709.5,1067.0 Q1718.8,990.0 1728.1,913.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1327.6,890.5 Q1066.9,894.1 806.1,897.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1710.6" y="901.0" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1728.1" y="917.4" text-anchor="middle" font-size="11" fill="#2c3e50">int</text>
+<rect x="781.1" y="885.6" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="806.1" y="897.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="806.1" dy="5.6">int</tspan></text>
 </g>
-<path d="M1709.5,1067.0 Q1735.2,993.9 1761.0,920.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1327.6,890.5 Q1161.7,809.8 995.8,729.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1733.9" y="908.7" width="54.3" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1761.0" y="925.1" text-anchor="middle" font-size="11" fill="#2c3e50">double</text>
+<rect x="966.0" y="717.1" width="59.5" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="995.8" y="729.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="995.8" dy="5.6">double</tspan></text>
 </g>
-<path d="M1709.5,1067.0 Q1750.4,1001.2 1791.4,935.4" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1327.6,890.5 Q1273.9,750.4 1220.1,610.4" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1764.3" y="923.3" width="54.3" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1791.4" y="939.7" text-anchor="middle" font-size="11" fill="#2c3e50">string</text>
+<rect x="1190.4" y="598.4" width="59.5" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1220.1" y="610.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1220.1" dy="5.6">string</tspan></text>
 </g>
-<path d="M1709.5,1067.0 Q1763.7,1011.6 1818.0,956.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1327.6,890.5 Q1396.9,719.5 1466.2,548.5" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1797.2" y="944.1" width="41.5" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1818.0" y="960.6" text-anchor="middle" font-size="11" fill="#2c3e50">bool</text>
+<rect x="1441.2" y="536.5" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1466.2" y="548.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1466.2" dy="5.6">bool</tspan></text>
 </g>
-<path d="M1709.5,1067.0 Q1774.4,1024.7 1839.3,982.4" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1327.6,890.5 Q1523.8,718.6 1720.0,546.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1799.4" y="963.1" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1839.3" y="979.5" text-anchor="middle" font-size="11" fill="#2c3e50">_global</text>
-<text x="1839.3" y="993.8" text-anchor="middle" font-size="11" fill="#2c3e50">underscore</text>
+<rect x="1670.4" y="524.8" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1720.0" y="546.8" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1720.0" dy="-4.4">_global</tspan><tspan x="1720.0" dy="15.6">underscore</tspan></text>
 </g>
-<path d="M1614.3,1219.7 Q1676.7,1154.9 1739.1,1090.1" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,1120.0 Q1553.7,982.8 1507.4,845.7" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g0b2">
-<circle cx="1739.1" cy="1090.1" r="30" fill="#c0392bcc" filter="url(#shadow)"/>
-<text x="1739.1" y="1093.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Literals</text>
+<circle cx="1507.4" cy="845.7" r="34" fill="#c0392bcc" filter="url(#shadow)"/>
+<text x="1507.4" y="845.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1507.4" dy="6.3">Literals</tspan></text>
 </g>
-<path d="M1739.1,1090.1 Q1764.3,1016.8 1789.4,943.5" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1507.4,845.7 Q1272.8,773.4 1038.3,701.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1768.7" y="931.3" width="41.5" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1789.4" y="947.8" text-anchor="middle" font-size="11" fill="#2c3e50">true</text>
+<rect x="1013.3" y="689.1" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1038.3" y="701.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1038.3" dy="5.6">true</tspan></text>
 </g>
-<path d="M1739.1,1090.1 Q1784.2,1027.1 1829.4,964.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1507.4,845.7 Q1413.5,711.7 1319.7,577.7" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1805.4" y="951.9" width="47.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1829.4" y="968.4" text-anchor="middle" font-size="11" fill="#2c3e50">false</text>
+<rect x="1294.7" y="565.7" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1319.7" y="577.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1319.7" dy="5.6">false</tspan></text>
 </g>
-<path d="M1739.1,1090.1 Q1800.4,1042.7 1861.7,995.2" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1507.4,845.7 Q1566.0,693.0 1624.7,540.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1821.8" y="983.1" width="79.8" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1861.7" y="999.5" text-anchor="middle" font-size="11" fill="#2c3e50">null / nil</text>
+<rect x="1575.1" y="528.3" width="99.2" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1624.7" y="540.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1624.7" dy="5.6">null / nil</tspan></text>
 </g>
-<path d="M1739.1,1090.1 Q1811.5,1062.2 1883.8,1034.4" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1507.4,845.7 Q1717.5,718.8 1927.6,591.9" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1866.2" y="1022.2" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1883.8" y="1038.7" text-anchor="middle" font-size="11" fill="#2c3e50">nan</text>
+<rect x="1902.6" y="579.9" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1927.6" y="591.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1927.6" dy="5.6">nan</tspan></text>
 </g>
-<path d="M1614.3,1219.7 Q1688.8,1169.3 1763.4,1118.9" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,1120.0 Q1646.3,982.8 1692.6,845.7" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g0b3">
-<circle cx="1763.4" cy="1118.9" r="30" fill="#c0392bcc" filter="url(#shadow)"/>
-<text x="1763.4" y="1122.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Operators</text>
+<circle cx="1692.6" cy="845.7" r="34" fill="#c0392bcc" filter="url(#shadow)"/>
+<text x="1692.6" y="845.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1692.6" dy="6.3">Operators</tspan></text>
 </g>
-<path d="M1763.4,1118.9 Q1803.2,1052.4 1843.0,985.9" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1692.6,845.7 Q1439.2,735.0 1185.8,624.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1793.6" y="973.8" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1843.0" y="990.2" text-anchor="middle" font-size="11" fill="#2c3e50">+ - * / arith</text>
+<rect x="1121.3" y="612.3" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1185.8" y="624.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1185.8" dy="5.6">+ - * / arith</tspan></text>
 </g>
-<path d="M1763.4,1118.9 Q1814.1,1060.3 1864.9,1001.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1692.6,845.7 Q1545.2,702.6 1397.7,559.5" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1821.8" y="989.6" width="86.2" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1864.9" y="1006.1" text-anchor="middle" font-size="11" fill="#2c3e50">+= -= *= /=</text>
+<rect x="1328.3" y="547.5" width="138.9" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1397.7" y="559.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1397.7" dy="5.6">+=  -=  *=  /=</tspan></text>
 </g>
-<path d="M1763.4,1118.9 Q1823.5,1070.1 1883.7,1021.2" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1692.6,845.7 Q1655.6,692.9 1618.5,540.2" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1827.8" y="1009.1" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1883.7" y="1025.5" text-anchor="middle" font-size="11" fill="#2c3e50">== != &gt; &gt;= &lt; &lt;=</text>
+<rect x="1544.1" y="528.2" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1618.5" y="540.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1618.5" dy="5.6">== != &gt; &gt;= &lt; &lt;=</tspan></text>
 </g>
-<path d="M1763.4,1118.9 Q1831.1,1081.2 1898.8,1043.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1692.6,845.7 Q1765.5,706.4 1838.4,567.2" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1868.5" y="1031.4" width="60.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1898.8" y="1047.9" text-anchor="middle" font-size="11" fill="#2c3e50">! &amp;&amp; ||</text>
+<rect x="1803.7" y="555.2" width="69.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1838.4" y="567.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1838.4" dy="5.6">! &amp;&amp; ||</tspan></text>
 </g>
-<path d="M1763.4,1118.9 Q1836.6,1093.6 1909.9,1068.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1692.6,845.7 Q1870.3,742.5 2048.0,639.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1866.8" y="1056.1" width="86.2" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1909.9" y="1072.5" text-anchor="middle" font-size="11" fill="#2c3e50">; separator</text>
+<rect x="1993.4" y="627.3" width="109.1" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2048.0" y="639.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2048.0" dy="5.6">; separator</tspan></text>
 </g>
-<path d="M1763.4,1118.9 Q1839.9,1106.7 1916.4,1094.5" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1692.6,845.7 Q1965.3,799.6 2237.9,753.4" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1860.6" y="1082.3" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1916.4" y="1098.7" text-anchor="middle" font-size="11" fill="#2c3e50">+ string concat</text>
+<rect x="2163.5" y="741.4" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2237.9" y="753.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2237.9" dy="5.6">+ string concat</tspan></text>
 </g>
-<path d="M1614.3,1219.7 Q1697.7,1185.9 1781.1,1152.1" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,1120.0 Q1736.2,1005.2 1872.4,890.5" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g0b4">
-<circle cx="1781.1" cy="1152.1" r="30" fill="#c0392bcc" filter="url(#shadow)"/>
-<text x="1781.1" y="1155.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Scope</text>
+<circle cx="1872.4" cy="890.5" r="34" fill="#c0392bcc" filter="url(#shadow)"/>
+<text x="1872.4" y="890.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1872.4" dy="6.3">Scope</tspan></text>
 </g>
-<path d="M1781.1,1152.1 Q1833.9,1095.4 1886.6,1038.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1872.4,890.5 Q1699.2,716.5 1526.1,542.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1837.2" y="1026.5" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1886.6" y="1042.9" text-anchor="middle" font-size="11" fill="#2c3e50">local  (no _)</text>
+<rect x="1461.6" y="530.6" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1526.1" y="542.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1526.1" dy="5.6">local  (no _)</tspan></text>
 </g>
-<path d="M1781.1,1152.1 Q1847.9,1112.9 1914.8,1073.7" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1872.4,890.5 Q1852.4,728.1 1832.4,565.8" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1874.9" y="1054.4" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1914.8" y="1070.8" text-anchor="middle" font-size="11" fill="#2c3e50">global  (_</text>
-<text x="1914.8" y="1085.1" text-anchor="middle" font-size="11" fill="#2c3e50">prefix</text>
+<rect x="1782.8" y="543.8" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1832.4" y="565.8" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1832.4" dy="-4.4">global  (_</tspan><tspan x="1832.4" dy="15.6">prefix</tspan></text>
 </g>
-<path d="M1781.1,1152.1 Q1856.4,1133.7 1931.6,1115.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1872.4,890.5 Q1995.8,783.2 2119.3,675.9" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1875.8" y="1103.1" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1931.6" y="1119.6" text-anchor="middle" font-size="11" fill="#2c3e50">.attr  instance</text>
+<rect x="2044.9" y="663.9" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2119.3" y="675.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2119.3" dy="5.6">.attr  instance</tspan></text>
 </g>
-<path d="M1781.1,1152.1 Q1858.5,1156.1 1935.9,1160.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1872.4,890.5 Q2117.4,877.1 2362.5,863.7" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1883.2" y="1147.9" width="105.3" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1935.9" y="1164.3" text-anchor="middle" font-size="11" fill="#2c3e50">..attr  parent</text>
+<rect x="2293.1" y="851.7" width="138.9" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2362.5" y="863.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2362.5" dy="5.6">..attr  parent</tspan></text>
 </g>
-<path d="M1614.3,1219.7 Q1702.9,1204.0 1791.5,1188.3" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,1120.0 Q1818.0,1048.7 2035.9,977.4" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g0b5">
-<circle cx="1791.5" cy="1188.3" r="30" fill="#c0392bcc" filter="url(#shadow)"/>
-<text x="1791.5" y="1192.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Builtin Fns</text>
+<circle cx="2035.9" cy="977.4" r="34" fill="#c0392bcc" filter="url(#shadow)"/>
+<text x="2035.9" y="977.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2035.9" dy="6.3">Builtin Fns</tspan></text>
 </g>
-<path d="M1791.5,1188.3 Q1854.9,1143.7 1918.3,1099.2" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2035.9,977.4 Q1864.2,760.7 1692.4,544.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1884.8" y="1087.0" width="67.0" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1918.3" y="1103.5" text-anchor="middle" font-size="11" fill="#2c3e50">isnil(x)</text>
+<rect x="1652.7" y="532.0" width="79.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1692.4" y="544.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1692.4" dy="5.6">isnil(x)</tspan></text>
 </g>
-<path d="M1791.5,1188.3 Q1861.7,1155.4 1931.9,1122.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2035.9,977.4 Q1972.9,781.9 1909.9,586.3" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1898.4" y="1110.4" width="67.0" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1931.9" y="1126.9" text-anchor="middle" font-size="11" fill="#2c3e50">isnan(x)</text>
+<rect x="1870.2" y="574.3" width="79.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1909.9" y="586.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1909.9" dy="5.6">isnan(x)</tspan></text>
 </g>
-<path d="M1791.5,1188.3 Q1866.3,1168.1 1941.2,1148.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2035.9,977.4 Q2074.9,825.2 2113.9,672.9" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1907.6" y="1135.8" width="67.0" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1941.2" y="1152.2" text-anchor="middle" font-size="11" fill="#2c3e50">tonum(x)</text>
+<rect x="2074.2" y="660.9" width="79.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2113.9" y="672.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2113.9" dy="5.6">tonum(x)</tspan></text>
 </g>
-<path d="M1791.5,1188.3 Q1868.7,1181.4 1945.9,1174.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2035.9,977.4 Q2165.7,888.7 2295.4,800.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1915.6" y="1162.4" width="60.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1945.9" y="1178.8" text-anchor="middle" font-size="11" fill="#2c3e50">tostr(x</text>
+<rect x="2255.7" y="788.0" width="79.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2295.4" y="800.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2295.4" dy="5.6">tostr(x)</tspan></text>
 </g>
-<path d="M1791.5,1188.3 Q1868.7,1194.9 1945.9,1201.6" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2035.9,977.4 Q2241.2,969.8 2446.6,962.1" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1918.8" y="1189.4" width="54.3" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1945.9" y="1205.9" text-anchor="middle" font-size="11" fill="#2c3e50">len(x)</text>
+<rect x="2416.8" y="950.1" width="59.5" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2446.6" y="962.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2446.6" dy="5.6">len(x)</tspan></text>
 </g>
-<path d="M1791.5,1188.3 Q1866.4,1208.2 1941.3,1228.2" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2035.9,977.4 Q2298.3,1064.7 2560.7,1152.0" fill="none" stroke="#c0392b" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1910.9" y="1216.0" width="60.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
-<text x="1941.3" y="1232.5" text-anchor="middle" font-size="11" fill="#2c3e50">type(x)</text>
+<rect x="2526.0" y="1140.0" width="69.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#c0392b" stroke-width="1.5"/>
+<text x="2560.7" y="1152.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2560.7" dy="5.6">type(x)</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1520.2,1471.8 1640.3,1543.7" fill="none" stroke="#e67e22" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1720.0,1392.2 1840.0,1184.3" fill="none" stroke="#e67e22" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g1">
-<circle cx="1640.3" cy="1543.7" r="38" fill="#e67e22" filter="url(#shadow)"/>
-<text x="1640.3" y="1547.8" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">System</text>
+<circle cx="1840.0" cy="1184.3" r="44" fill="#e67e22" filter="url(#shadow)"/>
+<text x="1840.0" y="1184.3" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1840.0" dy="6.6">System</tspan></text>
 </g>
-<path d="M1640.3,1543.7 Q1727.3,1566.8 1814.3,1589.8" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,1184.3 Q1700.1,1012.7 1560.2,841.0" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g1b0">
-<circle cx="1814.3" cy="1589.8" r="30" fill="#e67e22cc" filter="url(#shadow)"/>
-<text x="1814.3" y="1593.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">sys</text>
+<circle cx="1560.2" cy="841.0" r="34" fill="#e67e22cc" filter="url(#shadow)"/>
+<text x="1560.2" y="841.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1560.2" dy="6.3">sys</tspan></text>
 </g>
-<path d="M1814.3,1589.8 Q1890.6,1576.2 1966.9,1562.5" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1560.2,841.0 Q1331.3,752.6 1102.4,664.1" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1907.8" y="1550.4" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1966.9" y="1566.8" text-anchor="middle" font-size="11" fill="#2c3e50">print args async</text>
+<rect x="1023.0" y="652.1" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1102.4" y="664.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1102.4" dy="5.6">print args async</tspan></text>
 </g>
-<path d="M1814.3,1589.8 Q1891.3,1598.6 1968.3,1607.4" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1560.2,841.0 Q1476.0,700.9 1391.7,560.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1918.8" y="1595.3" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1968.3" y="1611.7" text-anchor="middle" font-size="11" fill="#2c3e50">exec host doc</text>
+<rect x="1327.2" y="548.7" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1391.7" y="560.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1391.7" dy="5.6">exec host doc</tspan></text>
 </g>
-<path d="M1814.3,1589.8 Q1885.5,1620.3 1956.8,1650.9" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1560.2,841.0 Q1629.4,692.8 1698.5,544.6" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1907.3" y="1631.6" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1956.8" y="1648.0" text-anchor="middle" font-size="11" fill="#2c3e50">help helpfull</text>
-<text x="1956.8" y="1662.3" text-anchor="middle" font-size="11" fill="#2c3e50">helpless</text>
+<rect x="1634.0" y="522.6" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1698.5" y="544.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1698.5" dy="-4.4">help helpfull</tspan><tspan x="1698.5" dy="15.6">helpless</tspan></text>
 </g>
-<path d="M1814.3,1589.8 Q1873.8,1639.5 1933.3,1689.2" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1560.2,841.0 Q1778.7,729.1 1997.1,617.2" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1887.0" y="1669.9" width="92.6" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1933.3" y="1686.3" text-anchor="middle" font-size="11" fill="#2c3e50">langport</text>
-<text x="1933.3" y="1700.6" text-anchor="middle" font-size="11" fill="#2c3e50">redirect app</text>
+<rect x="1937.6" y="595.2" width="119.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1997.1" y="617.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1997.1" dy="-4.4">langport</tspan><tspan x="1997.1" dy="15.6">redirect app</tspan></text>
 </g>
-<path d="M1640.3,1543.7 Q1721.5,1582.5 1802.7,1621.3" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,1184.3 Q1843.7,1032.9 1847.4,881.4" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g1b1">
-<circle cx="1802.7" cy="1621.3" r="30" fill="#e67e22cc" filter="url(#shadow)"/>
-<text x="1802.7" y="1625.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">math</text>
+<circle cx="1847.4" cy="881.4" r="34" fill="#e67e22cc" filter="url(#shadow)"/>
+<text x="1847.4" y="881.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1847.4" dy="6.3">math</tspan></text>
 </g>
-<path d="M1802.7,1621.3 Q1880.2,1622.0 1957.7,1622.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1847.4,881.4 Q1668.3,713.6 1489.2,545.8" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1901.9" y="1610.6" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1957.7" y="1627.0" text-anchor="middle" font-size="11" fill="#2c3e50">sin cos sqrt pi</text>
+<rect x="1414.8" y="533.8" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1489.2" y="545.8" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1489.2" dy="5.6">sin cos sqrt pi</tspan></text>
 </g>
-<path d="M1802.7,1621.3 Q1876.8,1644.2 1950.8,1667.1" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1847.4,881.4 Q1821.8,719.9 1796.2,558.3" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1898.1" y="1647.8" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1950.8" y="1664.3" text-anchor="middle" font-size="11" fill="#2c3e50">diff integrate</text>
-<text x="1950.8" y="1678.6" text-anchor="middle" font-size="11" fill="#2c3e50">simplify</text>
+<rect x="1726.8" y="536.3" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1796.2" y="558.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1796.2" dy="-4.4">diff integrate</tspan><tspan x="1796.2" dy="15.6">simplify</tspan></text>
 </g>
-<path d="M1802.7,1621.3 Q1867.1,1664.5 1931.4,1707.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1847.4,881.4 Q1967.1,769.9 2086.7,658.3" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1882.0" y="1688.4" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1931.4" y="1704.8" text-anchor="middle" font-size="11" fill="#2c3e50">sym_latex</text>
-<text x="1931.4" y="1719.1" text-anchor="middle" font-size="11" fill="#2c3e50">compile_latex</text>
+<rect x="2022.2" y="636.3" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2086.7" y="658.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2086.7" dy="-4.4">sym_latex</tspan><tspan x="2086.7" dy="15.6">compile_latex</tspan></text>
 </g>
-<path d="M1802.7,1621.3 Q1852.0,1681.1 1901.3,1740.9" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1847.4,881.4 Q2091.9,859.5 2336.3,837.5" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1842.2" y="1728.8" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1901.3" y="1745.2" text-anchor="middle" font-size="11" fill="#2c3e50">useSymPy useSage</text>
+<rect x="2257.0" y="825.5" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2336.3" y="837.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2336.3" dy="5.6">useSymPy useSage</tspan></text>
 </g>
-<path d="M1640.3,1543.7 Q1712.9,1596.9 1785.5,1650.0" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,1184.3 Q1969.3,1105.4 2098.6,1026.4" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g1b2">
-<circle cx="1785.5" cy="1650.0" r="30" fill="#e67e22cc" filter="url(#shadow)"/>
-<text x="1785.5" y="1653.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">ai</text>
+<circle cx="2098.6" cy="1026.4" r="34" fill="#e67e22cc" filter="url(#shadow)"/>
+<text x="2098.6" y="1026.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2098.6" dy="6.3">ai</tspan></text>
 </g>
-<path d="M1785.5,1650.0 Q1861.6,1665.1 1937.6,1680.2" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2098.6,1026.4 Q1995.4,803.7 1892.2,581.1" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1888.1" y="1660.9" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1937.6" y="1677.3" text-anchor="middle" font-size="11" fill="#2c3e50">prompt</text>
-<text x="1937.6" y="1691.6" text-anchor="middle" font-size="11" fill="#2c3e50">prompt_native</text>
+<rect x="1827.7" y="559.1" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="1892.2" y="581.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1892.2" dy="-4.4">prompt</tspan><tspan x="1892.2" dy="15.6">prompt_native</tspan></text>
 </g>
-<path d="M1785.5,1650.0 Q1854.0,1686.3 1922.5,1722.5" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2098.6,1026.4 Q2135.4,867.0 2172.1,707.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1882.6" y="1703.2" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1922.5" y="1719.7" text-anchor="middle" font-size="11" fill="#2c3e50">useMistral</text>
-<text x="1922.5" y="1734.0" text-anchor="middle" font-size="11" fill="#2c3e50">useOllama</text>
+<rect x="2122.5" y="685.7" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2172.1" y="707.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2172.1" dy="-4.4">useMistral</tspan><tspan x="2172.1" dy="15.6">useOllama</tspan></text>
 </g>
-<path d="M1785.5,1650.0 Q1840.8,1704.4 1896.0,1758.8" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2098.6,1026.4 Q2251.3,967.8 2404.0,909.2" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1837.0" y="1746.6" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1896.0" y="1763.1" text-anchor="middle" font-size="11" fill="#2c3e50">useGemini setKey</text>
+<rect x="2324.7" y="897.2" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2404.0" y="909.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2404.0" dy="5.6">useGemini setKey</tspan></text>
 </g>
-<path d="M1785.5,1650.0 Q1822.9,1718.0 1860.2,1785.9" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2098.6,1026.4 Q2333.5,1097.6 2568.4,1168.9" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1807.5" y="1766.6" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1860.2" y="1783.0" text-anchor="middle" font-size="11" fill="#2c3e50">provider model</text>
-<text x="1860.2" y="1797.3" text-anchor="middle" font-size="11" fill="#2c3e50">host</text>
+<rect x="2498.9" y="1146.9" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2568.4" y="1168.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2568.4" dy="-4.4">provider model</tspan><tspan x="2568.4" dy="15.6">host</tspan></text>
 </g>
-<path d="M1640.3,1543.7 Q1701.8,1609.4 1763.3,1675.1" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,1184.3 Q2058.6,1219.6 2277.2,1255.0" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g1b3">
-<circle cx="1763.3" cy="1675.1" r="30" fill="#e67e22cc" filter="url(#shadow)"/>
-<text x="1763.3" y="1678.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">text</text>
+<circle cx="2277.2" cy="1255.0" r="34" fill="#e67e22cc" filter="url(#shadow)"/>
+<text x="2277.2" y="1255.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2277.2" dy="6.3">text</tspan></text>
 </g>
-<path d="M1763.3,1675.1 Q1835.2,1704.0 1907.1,1732.9" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2277.2,1255.0 Q2264.9,1009.8 2252.6,764.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1848.1" y="1720.8" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1907.1" y="1737.2" text-anchor="middle" font-size="11" fill="#2c3e50">read sub replace</text>
+<rect x="2173.2" y="752.7" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2252.6" y="764.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2252.6" dy="5.6">read sub replace</tspan></text>
 </g>
-<path d="M1763.3,1675.1 Q1823.9,1723.4 1884.5,1771.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2277.2,1255.0 Q2371.0,1121.0 2464.7,987.0" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1847.8" y="1752.4" width="73.4" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1884.5" y="1768.9" text-anchor="middle" font-size="11" fill="#2c3e50">write_pdf</text>
-<text x="1884.5" y="1783.2" text-anchor="middle" font-size="11" fill="#2c3e50">read_pdf</text>
+<rect x="2420.1" y="965.0" width="89.3" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2464.7" y="987.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2464.7" dy="-4.4">write_pdf</tspan><tspan x="2464.7" dy="15.6">read_pdf</tspan></text>
 </g>
-<path d="M1763.3,1675.1 Q1807.5,1738.8 1851.7,1802.4" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2277.2,1255.0 Q2440.7,1257.9 2604.2,1260.7" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1795.9" y="1783.1" width="111.7" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1851.7" y="1799.6" text-anchor="middle" font-size="11" fill="#2c3e50">read/write yaml</text>
-<text x="1851.7" y="1813.9" text-anchor="middle" font-size="11" fill="#2c3e50">xml html</text>
+<rect x="2529.8" y="1238.7" width="148.8" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2604.2" y="1260.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2604.2" dy="-4.4">read/write yaml</tspan><tspan x="2604.2" dy="15.6">xml html</tspan></text>
 </g>
-<path d="M1763.3,1675.1 Q1787.4,1748.8 1811.5,1822.4" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2277.2,1255.0 Q2468.3,1409.0 2659.4,1563.0" fill="none" stroke="#e67e22" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1752.4" y="1810.3" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
-<text x="1811.5" y="1826.7" text-anchor="middle" font-size="11" fill="#2c3e50">read_fits_header</text>
+<rect x="2580.0" y="1551.0" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#e67e22" stroke-width="1.5"/>
+<text x="2659.4" y="1563.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2659.4" dy="5.6">read_fits_header</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1450.2,1530.7 1500.4,1661.4" fill="none" stroke="#f1c40f" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1807.8,1480.0 2015.7,1360.0" fill="none" stroke="#f1c40f" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g2">
-<circle cx="1500.4" cy="1661.4" r="38" fill="#f1c40f" filter="url(#shadow)"/>
-<text x="1500.4" y="1665.4" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Science</text>
+<circle cx="2015.7" cy="1360.0" r="44" fill="#f1c40f" filter="url(#shadow)"/>
+<text x="2015.7" y="1360.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="2015.7" dy="6.6">Science</tspan></text>
 </g>
-<path d="M1500.4,1661.4 Q1549.6,1736.8 1598.7,1812.1" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1360.0 Q1980.4,1141.4 1945.0,922.8" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g2b0">
-<circle cx="1598.7" cy="1812.1" r="30" fill="#f1c40fcc" filter="url(#shadow)"/>
-<text x="1598.7" y="1815.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">astro</text>
+<circle cx="1945.0" cy="922.8" r="34" fill="#f1c40fcc" filter="url(#shadow)"/>
+<text x="1945.0" y="922.8" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1945.0" dy="6.3">astro</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1664.5,1853.1 1730.3,1894.1" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q1744.8,732.1 1544.5,541.5" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1671.3" y="1874.8" width="118.1" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1730.3" y="1891.2" text-anchor="middle" font-size="11" fill="#2c3e50">Constants G c AU</text>
-<text x="1730.3" y="1905.5" text-anchor="middle" font-size="11" fill="#2c3e50">pc</text>
+<rect x="1465.2" y="519.5" width="158.7" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="1544.5" y="541.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1544.5" dy="-4.4">Constants G c AU</tspan><tspan x="1544.5" dy="15.6">pc</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1657.9,1862.2 1717.1,1912.3" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q1837.1,735.4 1729.2,547.9" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1661.2" y="1893.0" width="111.7" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1717.1" y="1909.4" text-anchor="middle" font-size="11" fill="#2c3e50">Stellar</text>
-<text x="1717.1" y="1923.7" text-anchor="middle" font-size="11" fill="#2c3e50">luminosity wien</text>
+<rect x="1654.8" y="525.9" width="148.8" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="1729.2" y="547.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1729.2" dy="-4.4">Stellar</tspan><tspan x="1729.2" dy="15.6">luminosity wien</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1650.0,1870.3 1701.3,1928.4" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q1927.5,754.6 1909.9,586.3" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1648.7" y="1909.1" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1701.3" y="1925.5" text-anchor="middle" font-size="11" fill="#2c3e50">Orbital period</text>
-<text x="1701.3" y="1939.8" text-anchor="middle" font-size="11" fill="#2c3e50">velocity</text>
+<rect x="1840.5" y="564.3" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="1909.9" y="586.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1909.9" dy="-4.4">Orbital period</tspan><tspan x="1909.9" dy="15.6">velocity</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1641.1,1877.1 1683.4,1942.0" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q2013.1,789.2 2081.2,655.5" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1643.5" y="1922.7" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1683.4" y="1939.1" text-anchor="middle" font-size="11" fill="#2c3e50">Solar flux</text>
-<text x="1683.4" y="1953.4" text-anchor="middle" font-size="11" fill="#2c3e50">sunspot</text>
+<rect x="2031.6" y="633.5" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2081.2" y="655.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2081.2" dy="-4.4">Solar flux</tspan><tspan x="2081.2" dy="15.6">sunspot</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1631.2,1882.5 1663.7,1952.9" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q2091.5,838.1 2237.9,753.4" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1604.6" y="1933.6" width="118.1" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1663.7" y="1950.0" text-anchor="middle" font-size="11" fill="#2c3e50">Cosmology hubble</text>
-<text x="1663.7" y="1964.3" text-anchor="middle" font-size="11" fill="#2c3e50">z</text>
+<rect x="2158.6" y="731.4" width="158.7" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2237.9" y="753.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2237.9" dy="-4.4">Cosmology hubble</tspan><tspan x="2237.9" dy="15.6">z</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1620.7,1886.5 1642.6,1960.8" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q2160.1,900.0 2375.2,877.1" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1605.9" y="1934.4" width="73.4" height="52.9" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1642.6" y="1950.8" text-anchor="middle" font-size="11" fill="#2c3e50">Exoplanet</text>
-<text x="1642.6" y="1965.1" text-anchor="middle" font-size="11" fill="#2c3e50">transit</text>
-<text x="1642.6" y="1979.4" text-anchor="middle" font-size="11" fill="#2c3e50">habitable</text>
+<rect x="2330.6" y="845.1" width="89.3" height="64.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2375.2" y="877.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2375.2" dy="-14.4">Exoplanet</tspan><tspan x="2375.2" dy="5.6">transit</tspan><tspan x="2375.2" dy="25.6">habitable</tspan></text>
 </g>
-<path d="M1598.7,1812.1 Q1609.7,1888.9 1620.6,1965.6" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,922.8 Q2217.0,972.8 2489.0,1022.7" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1564.7" y="1946.3" width="111.7" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1620.6" y="1962.7" text-anchor="middle" font-size="11" fill="#2c3e50">Pulsar spindown</text>
-<text x="1620.6" y="1977.0" text-anchor="middle" font-size="11" fill="#2c3e50">age B</text>
+<rect x="2414.6" y="1000.7" width="148.8" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2489.0" y="1022.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2489.0" dy="-4.4">Pulsar spindown</tspan><tspan x="2489.0" dy="15.6">age B</tspan></text>
 </g>
-<path d="M1500.4,1661.4 Q1538.5,1742.9 1576.7,1824.4" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1360.0 Q2094.6,1230.7 2173.6,1101.4" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g2b1">
-<circle cx="1576.7" cy="1824.4" r="30" fill="#f1c40fcc" filter="url(#shadow)"/>
-<text x="1576.7" y="1828.2" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">geo</text>
+<circle cx="2173.6" cy="1101.4" r="34" fill="#f1c40fcc" filter="url(#shadow)"/>
+<text x="2173.6" y="1101.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2173.6" dy="6.3">geo</tspan></text>
 </g>
-<path d="M1576.7,1824.4 Q1636.1,1874.2 1695.5,1924.0" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,1101.4 Q2102.4,866.5 2031.1,631.6" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1642.8" y="1904.7" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1695.5" y="1921.1" text-anchor="middle" font-size="11" fill="#2c3e50">lookup lat lon</text>
-<text x="1695.5" y="1935.4" text-anchor="middle" font-size="11" fill="#2c3e50">city</text>
+<rect x="1961.7" y="609.6" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2031.1" y="631.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2031.1" dy="-4.4">lookup lat lon</tspan><tspan x="2031.1" dy="15.6">city</tspan></text>
 </g>
-<path d="M1576.7,1824.4 Q1619.3,1889.1 1661.9,1953.9" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,1101.4 Q2232.2,948.7 2290.8,796.0" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1625.2" y="1934.6" width="73.4" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1661.9" y="1951.0" text-anchor="middle" font-size="11" fill="#2c3e50">distance</text>
-<text x="1661.9" y="1965.3" text-anchor="middle" font-size="11" fill="#2c3e50">Haversine</text>
+<rect x="2246.1" y="774.0" width="89.3" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2290.8" y="796.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2290.8" dy="-4.4">distance</tspan><tspan x="2290.8" dy="15.6">Haversine</tspan></text>
 </g>
-<path d="M1576.7,1824.4 Q1598.9,1898.7 1621.2,1972.9" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,1101.4 Q2333.0,1064.6 2492.3,1027.9" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1571.8" y="1953.6" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1621.2" y="1970.0" text-anchor="middle" font-size="11" fill="#2c3e50">write_geojson</text>
-<text x="1621.2" y="1984.3" text-anchor="middle" font-size="11" fill="#2c3e50">history</text>
+<rect x="2427.9" y="1005.9" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2492.3" y="1027.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2492.3" dy="-4.4">write_geojson</tspan><tspan x="2492.3" dy="15.6">history</tspan></text>
 </g>
-<path d="M1576.7,1824.4 Q1576.7,1901.9 1576.8,1979.4" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,1101.4 Q2396.3,1204.6 2618.9,1307.8" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1527.3" y="1967.3" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1576.8" y="1983.7" text-anchor="middle" font-size="11" fill="#2c3e50">plot2d plot3d</text>
+<rect x="2554.5" y="1295.8" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2618.9" y="1307.8" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2618.9" dy="5.6">plot2d plot3d</tspan></text>
 </g>
-<path d="M1500.4,1661.4 Q1526.7,1747.4 1553.1,1833.5" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1360.0 Q2167.1,1356.3 2318.6,1352.6" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g2b2">
-<circle cx="1553.1" cy="1833.5" r="30" fill="#f1c40fcc" filter="url(#shadow)"/>
-<text x="1553.1" y="1837.3" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">bev</text>
+<circle cx="2318.6" cy="1352.6" r="34" fill="#f1c40fcc" filter="url(#shadow)"/>
+<text x="2318.6" y="1352.6" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2318.6" dy="6.3">bev</tspan></text>
 </g>
-<path d="M1553.1,1833.5 Q1575.7,1907.6 1598.4,1981.7" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2318.6,1352.6 Q2460.4,1303.7 2602.2,1254.9" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1548.9" y="1962.4" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1598.4" y="1978.9" text-anchor="middle" font-size="11" fill="#2c3e50">data fit_line</text>
-<text x="1598.4" y="1993.2" text-anchor="middle" font-size="11" fill="#2c3e50">param</text>
+<rect x="2537.8" y="1232.9" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2602.2" y="1254.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2602.2" dy="-4.4">data fit_line</tspan><tspan x="2602.2" dy="15.6">param</tspan></text>
 </g>
-<path d="M1500.4,1661.4 Q1514.4,1750.3 1528.4,1839.2" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1360.0 Q2187.3,1499.9 2359.0,1639.8" fill="none" stroke="#f1c40f" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g2b3">
-<circle cx="1528.4" cy="1839.2" r="30" fill="#f1c40fcc" filter="url(#shadow)"/>
-<text x="1528.4" y="1842.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">data</text>
+<circle cx="2359.0" cy="1639.8" r="34" fill="#f1c40fcc" filter="url(#shadow)"/>
+<text x="2359.0" y="1639.8" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2359.0" dy="6.3">data</tspan></text>
 </g>
-<path d="M1528.4,1839.2 Q1540.5,1915.7 1552.5,1992.3" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2359.0,1639.8 Q2508.8,1647.6 2658.5,1655.5" fill="none" stroke="#f1c40f" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1503.0" y="1973.0" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
-<text x="1552.5" y="1989.4" text-anchor="middle" font-size="11" fill="#2c3e50">read_csv mean</text>
-<text x="1552.5" y="2003.7" text-anchor="middle" font-size="11" fill="#2c3e50">std</text>
+<rect x="2594.1" y="1633.5" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#f1c40f" stroke-width="1.5"/>
+<text x="2658.5" y="1655.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2658.5" dy="-4.4">read_csv mean</tspan><tspan x="2658.5" dy="15.6">std</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1393.6,1539.9 1387.2,1679.7" fill="none" stroke="#27ae60" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1840.0,1600.0 2080.0,1600.0" fill="none" stroke="#27ae60" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g3">
-<circle cx="1387.2" cy="1679.7" r="38" fill="#27ae60" filter="url(#shadow)"/>
-<text x="1387.2" y="1683.8" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Finance</text>
+<circle cx="2080.0" cy="1600.0" r="44" fill="#27ae60" filter="url(#shadow)"/>
+<text x="2080.0" y="1600.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="2080.0" dy="6.6">Finance</tspan></text>
 </g>
-<path d="M1387.2,1679.7 Q1385.5,1769.7 1383.8,1859.7" fill="none" stroke="#27ae60" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2080.0,1600.0 Q2172.4,1415.8 2264.7,1231.5" fill="none" stroke="#27ae60" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g3b0">
-<circle cx="1383.8" cy="1859.7" r="30" fill="#27ae60cc" filter="url(#shadow)"/>
-<text x="1383.8" y="1863.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">fin</text>
+<circle cx="2264.7" cy="1231.5" r="34" fill="#27ae60cc" filter="url(#shadow)"/>
+<text x="2264.7" y="1231.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2264.7" dy="6.3">fin</tspan></text>
 </g>
-<path d="M1383.8,1859.7 Q1415.3,1930.5 1446.7,2001.3" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1231.5 Q2243.9,987.0 2223.1,742.4" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1400.5" y="1982.0" width="92.6" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
-<text x="1446.7" y="1998.5" text-anchor="middle" font-size="11" fill="#2c3e50">ticker price</text>
-<text x="1446.7" y="2012.8" text-anchor="middle" font-size="11" fill="#2c3e50">volume</text>
+<rect x="2163.5" y="720.4" width="119.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
+<text x="2223.1" y="742.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2223.1" dy="-4.4">ticker price</tspan><tspan x="2223.1" dy="15.6">volume</tspan></text>
 </g>
-<path d="M1383.8,1859.7 Q1393.7,1936.6 1403.5,2013.4" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1231.5 Q2353.8,1094.4 2442.8,957.2" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1344.4" y="1994.1" width="118.1" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
-<text x="1403.5" y="2010.6" text-anchor="middle" font-size="11" fill="#2c3e50">high_yield bonds</text>
-<text x="1403.5" y="2024.9" text-anchor="middle" font-size="11" fill="#2c3e50">etfs</text>
+<rect x="2363.5" y="935.2" width="158.7" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
+<text x="2442.8" y="957.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2442.8" dy="-4.4">high_yield bonds</tspan><tspan x="2442.8" dy="15.6">etfs</tspan></text>
 </g>
-<path d="M1383.8,1859.7 Q1371.2,1936.1 1358.5,2012.6" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1231.5 Q2428.2,1228.7 2591.8,1225.9" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1302.7" y="2000.4" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
-<text x="1358.5" y="2016.9" text-anchor="middle" font-size="11" fill="#2c3e50">bs_price greeks</text>
+<rect x="2517.4" y="1213.9" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
+<text x="2591.8" y="1225.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2591.8" dy="5.6">bs_price greeks</tspan></text>
 </g>
-<path d="M1383.8,1859.7 Q1349.8,1929.3 1315.7,1998.9" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1231.5 Q2461.1,1378.8 2657.4,1526.1" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1266.3" y="1979.6" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
-<text x="1315.7" y="1996.1" text-anchor="middle" font-size="11" fill="#2c3e50">date calendar</text>
-<text x="1315.7" y="2010.4" text-anchor="middle" font-size="11" fill="#2c3e50">is_holiday</text>
+<rect x="2592.9" y="1504.1" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
+<text x="2657.4" y="1526.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2657.4" dy="-4.4">date calendar</tspan><tspan x="2657.4" dy="15.6">is_holiday</tspan></text>
 </g>
-<path d="M1387.2,1679.7 Q1380.6,1769.5 1374.0,1859.2" fill="none" stroke="#27ae60" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2080.0,1600.0 Q2172.4,1784.2 2264.7,1968.5" fill="none" stroke="#27ae60" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g3b1">
-<circle cx="1374.0" cy="1859.2" r="30" fill="#27ae60cc" filter="url(#shadow)"/>
-<text x="1374.0" y="1863.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">bsm  ⊃ fin</text>
+<circle cx="2264.7" cy="1968.5" r="34" fill="#27ae60cc" filter="url(#shadow)"/>
+<text x="2264.7" y="1968.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2264.7" dy="6.3">bsm  ⊃ fin</tspan></text>
 </g>
-<path d="M1374.0,1859.2 Q1368.3,1936.5 1362.6,2013.8" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1968.5 Q2395.9,2041.2 2527.1,2113.9" fill="none" stroke="#27ae60" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1310.0" y="1994.5" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
-<text x="1362.6" y="2010.9" text-anchor="middle" font-size="11" fill="#2c3e50">price_american</text>
-<text x="1362.6" y="2025.2" text-anchor="middle" font-size="11" fill="#2c3e50">PDE</text>
+<rect x="2457.7" y="2091.9" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#27ae60" stroke-width="1.5"/>
+<text x="2527.1" y="2113.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2527.1" dy="-4.4">price_american</tspan><tspan x="2527.1" dy="15.6">PDE</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1358.9,1533.8 1317.8,1667.7" fill="none" stroke="#16a085" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1807.8,1720.0 2015.7,1840.0" fill="none" stroke="#16a085" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g4">
-<circle cx="1317.8" cy="1667.7" r="38" fill="#16a085" filter="url(#shadow)"/>
-<text x="1317.8" y="1671.7" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Web &amp; Net</text>
+<circle cx="2015.7" cy="1840.0" r="44" fill="#16a085" filter="url(#shadow)"/>
+<text x="2015.7" y="1840.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="2015.7" dy="6.6">Web &amp; Net</tspan></text>
 </g>
-<path d="M1317.8,1667.7 Q1295.7,1754.9 1273.6,1842.2" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1840.0 Q2187.3,1700.1 2359.0,1560.2" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g4b0">
-<circle cx="1273.6" cy="1842.2" r="30" fill="#16a085cc" filter="url(#shadow)"/>
-<text x="1273.6" y="1845.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">www</text>
+<circle cx="2359.0" cy="1560.2" r="34" fill="#16a085cc" filter="url(#shadow)"/>
+<text x="2359.0" y="1560.2" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2359.0" dy="6.3">www</tspan></text>
 </g>
-<path d="M1273.6,1842.2 Q1254.6,1917.3 1235.6,1992.4" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2359.0,1560.2 Q2508.8,1552.4 2658.5,1544.5" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1182.9" y="1973.1" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
-<text x="1235.6" y="1989.6" text-anchor="middle" font-size="11" fill="#2c3e50">app wget</text>
-<text x="1235.6" y="2003.9" text-anchor="middle" font-size="11" fill="#2c3e50">redirect map2d</text>
+<rect x="2589.1" y="1522.5" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
+<text x="2658.5" y="1544.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2658.5" dy="-4.4">app wget</tspan><tspan x="2658.5" dy="15.6">redirect map2d</tspan></text>
 </g>
-<path d="M1317.8,1667.7 Q1292.8,1754.1 1267.8,1840.6" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1840.0 Q2167.1,1843.7 2318.6,1847.4" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g4b1">
-<circle cx="1267.8" cy="1840.6" r="30" fill="#16a085cc" filter="url(#shadow)"/>
-<text x="1267.8" y="1844.3" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">cdn  ⊃ www</text>
+<circle cx="2318.6" cy="1847.4" r="34" fill="#16a085cc" filter="url(#shadow)"/>
+<text x="2318.6" y="1847.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2318.6" dy="6.3">cdn  ⊃ www</tspan></text>
 </g>
-<path d="M1267.8,1840.6 Q1246.3,1915.0 1224.8,1989.5" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2318.6,1847.4 Q2460.4,1896.3 2602.2,1945.1" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1178.5" y="1970.2" width="92.6" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
-<text x="1224.8" y="1986.6" text-anchor="middle" font-size="11" fill="#2c3e50">start stats</text>
-<text x="1224.8" y="2000.9" text-anchor="middle" font-size="11" fill="#2c3e50">purge config</text>
+<rect x="2542.7" y="1923.1" width="119.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
+<text x="2602.2" y="1945.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2602.2" dy="-4.4">start stats</tspan><tspan x="2602.2" dy="15.6">purge config</tspan></text>
 </g>
-<path d="M1317.8,1667.7 Q1289.9,1753.2 1262.0,1838.8" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1840.0 Q2094.6,1969.3 2173.6,2098.6" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g4b2">
-<circle cx="1262.0" cy="1838.8" r="30" fill="#16a085cc" filter="url(#shadow)"/>
-<text x="1262.0" y="1842.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">tcp</text>
+<circle cx="2173.6" cy="2098.6" r="34" fill="#16a085cc" filter="url(#shadow)"/>
+<text x="2173.6" y="2098.6" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2173.6" dy="6.3">tcp</tspan></text>
 </g>
-<path d="M1262.0,1838.8 Q1268.0,1916.1 1274.1,1993.3" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,2098.6 Q2389.4,2017.5 2605.2,1936.3" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1224.6" y="1974.0" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
-<text x="1274.1" y="1990.5" text-anchor="middle" font-size="11" fill="#2c3e50">listen accept</text>
-<text x="1274.1" y="2004.8" text-anchor="middle" font-size="11" fill="#2c3e50">connect</text>
+<rect x="2540.7" y="1914.3" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
+<text x="2605.2" y="1936.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2605.2" dy="-4.4">listen accept</tspan><tspan x="2605.2" dy="15.6">connect</tspan></text>
 </g>
-<path d="M1262.0,1838.8 Q1238.0,1912.5 1214.0,1986.2" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,2098.6 Q2286.8,2197.0 2400.0,2295.4" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1158.2" y="1974.0" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
-<text x="1214.0" y="1990.5" text-anchor="middle" font-size="11" fill="#2c3e50">send recv close</text>
+<rect x="2325.6" y="2283.4" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
+<text x="2400.0" y="2295.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2400.0" dy="5.6">send recv close</tspan></text>
 </g>
-<path d="M1262.0,1838.8 Q1211.6,1897.7 1161.3,1956.6" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2173.6,2098.6 Q2123.3,2323.6 2073.0,2548.6" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1121.4" y="1944.4" width="79.8" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
-<text x="1161.3" y="1960.9" text-anchor="middle" font-size="11" fill="#2c3e50">nic routes</text>
+<rect x="2023.4" y="2536.6" width="99.2" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
+<text x="2073.0" y="2548.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2073.0" dy="5.6">nic routes</tspan></text>
 </g>
-<path d="M1317.8,1667.7 Q1287.0,1752.2 1256.3,1836.8" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M2015.7,1840.0 Q1980.4,2058.6 1945.0,2277.2" fill="none" stroke="#16a085" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g4b3">
-<circle cx="1256.3" cy="1836.8" r="30" fill="#16a085cc" filter="url(#shadow)"/>
-<text x="1256.3" y="1840.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">seo</text>
+<circle cx="1945.0" cy="2277.2" r="34" fill="#16a085cc" filter="url(#shadow)"/>
+<text x="1945.0" y="2277.2" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1945.0" dy="6.3">seo</tspan></text>
 </g>
-<path d="M1256.3,1836.8 Q1229.8,1909.7 1203.4,1982.5" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1945.0,2277.2 Q2013.1,2410.8 2081.2,2544.5" fill="none" stroke="#16a085" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1160.3" y="1963.2" width="86.2" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
-<text x="1203.4" y="1979.7" text-anchor="middle" font-size="11" fill="#2c3e50">index crawl</text>
-<text x="1203.4" y="1994.0" text-anchor="middle" font-size="11" fill="#2c3e50">analyze</text>
+<rect x="2026.7" y="2522.5" width="109.1" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#16a085" stroke-width="1.5"/>
+<text x="2081.2" y="2544.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2081.2" dy="-4.4">index crawl</tspan><tspan x="2081.2" dy="15.6">analyze</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1326.8,1519.3 1253.6,1638.7" fill="none" stroke="#2980b9" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1720.0,1807.8 1840.0,2015.7" fill="none" stroke="#2980b9" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g5">
-<circle cx="1253.6" cy="1638.7" r="38" fill="#2980b9" filter="url(#shadow)"/>
-<text x="1253.6" y="1642.7" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">DevOps</text>
+<circle cx="1840.0" cy="2015.7" r="44" fill="#2980b9" filter="url(#shadow)"/>
+<text x="1840.0" y="2015.7" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1840.0" dy="6.6">DevOps</tspan></text>
 </g>
-<path d="M1253.6,1638.7 Q1208.6,1716.6 1163.7,1794.6" fill="none" stroke="#2980b9" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,2015.7 Q2052.4,1992.1 2264.7,1968.5" fill="none" stroke="#2980b9" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g5b0">
-<circle cx="1163.7" cy="1794.6" r="30" fill="#2980b9cc" filter="url(#shadow)"/>
-<text x="1163.7" y="1798.3" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">k3s</text>
+<circle cx="2264.7" cy="1968.5" r="34" fill="#2980b9cc" filter="url(#shadow)"/>
+<text x="2264.7" y="1968.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="2264.7" dy="6.3">k3s</tspan></text>
 </g>
-<path d="M1163.7,1794.6 Q1150.3,1870.9 1136.8,1947.3" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1968.5 Q2455.8,1867.1 2646.9,1765.8" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1096.9" y="1928.0" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
-<text x="1136.8" y="1944.4" text-anchor="middle" font-size="11" fill="#2c3e50">docker_run</text>
-<text x="1136.8" y="1958.7" text-anchor="middle" font-size="11" fill="#2c3e50">docker_ps</text>
+<rect x="2597.3" y="1743.8" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
+<text x="2646.9" y="1765.8" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2646.9" dy="-4.4">docker_run</tspan><tspan x="2646.9" dy="15.6">docker_ps</tspan></text>
 </g>
-<path d="M1163.7,1794.6 Q1104.3,1844.5 1045.0,1894.3" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M2264.7,1968.5 Q2280.1,2184.2 2295.4,2400.0" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1008.3" y="1875.0" width="73.4" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
-<text x="1045.0" y="1891.4" text-anchor="middle" font-size="11" fill="#2c3e50">k3s_apply</text>
-<text x="1045.0" y="1905.7" text-anchor="middle" font-size="11" fill="#2c3e50">k3s_pods</text>
+<rect x="2250.8" y="2378.0" width="89.3" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
+<text x="2295.4" y="2400.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2295.4" dy="-4.4">k3s_apply</tspan><tspan x="2295.4" dy="15.6">k3s_pods</tspan></text>
 </g>
-<path d="M1253.6,1638.7 Q1206.5,1715.4 1159.4,1792.1" fill="none" stroke="#2980b9" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,2015.7 Q1910.0,2136.9 1980.0,2258.2" fill="none" stroke="#2980b9" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g5b1">
-<circle cx="1159.4" cy="1792.1" r="30" fill="#2980b9cc" filter="url(#shadow)"/>
-<text x="1159.4" y="1795.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">vm</text>
+<circle cx="1980.0" cy="2258.2" r="34" fill="#2980b9cc" filter="url(#shadow)"/>
+<text x="1980.0" y="2258.2" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1980.0" dy="6.3">vm</tspan></text>
 </g>
-<path d="M1159.4,1792.1 Q1118.9,1858.1 1078.4,1924.2" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1980.0,2258.2 Q2055.0,2388.1 2130.0,2518.0" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1019.3" y="1904.9" width="118.1" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
-<text x="1078.4" y="1921.3" text-anchor="middle" font-size="11" fill="#2c3e50">init up ssh halt</text>
-<text x="1078.4" y="1935.6" text-anchor="middle" font-size="11" fill="#2c3e50">destroy</text>
+<rect x="2050.6" y="2496.0" width="158.7" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
+<text x="2130.0" y="2518.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2130.0" dy="-4.4">init up ssh halt</tspan><tspan x="2130.0" dy="15.6">destroy</tspan></text>
 </g>
-<path d="M1253.6,1638.7 Q1204.4,1714.0 1155.3,1789.4" fill="none" stroke="#2980b9" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1840.0,2015.7 Q1713.4,2187.8 1586.7,2359.9" fill="none" stroke="#2980b9" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g5b2">
-<circle cx="1155.3" cy="1789.4" r="30" fill="#2980b9cc" filter="url(#shadow)"/>
-<text x="1155.3" y="1793.2" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">drvr</text>
+<circle cx="1586.7" cy="2359.9" r="34" fill="#2980b9cc" filter="url(#shadow)"/>
+<text x="1586.7" y="2359.9" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1586.7" dy="6.3">drvr</tspan></text>
 </g>
-<path d="M1155.3,1789.4 Q1137.7,1864.9 1120.1,1940.4" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1586.7,2359.9 Q1765.9,2481.1 1945.1,2602.2" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="1070.7" y="1921.1" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
-<text x="1120.1" y="1937.5" text-anchor="middle" font-size="11" fill="#2c3e50">linux win11</text>
-<text x="1120.1" y="1951.8" text-anchor="middle" font-size="11" fill="#2c3e50">macos android</text>
+<rect x="1880.6" y="2580.2" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
+<text x="1945.1" y="2602.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1945.1" dy="-4.4">linux win11</tspan><tspan x="1945.1" dy="15.6">macos android</tspan></text>
 </g>
-<path d="M1155.3,1789.4 Q1093.3,1836.0 1031.3,1882.5" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1586.7,2359.9 Q1403.4,2474.7 1220.1,2589.6" fill="none" stroke="#2980b9" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="985.0" y="1870.4" width="92.6" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
-<text x="1031.3" y="1886.8" text-anchor="middle" font-size="11" fill="#2c3e50">build deploy</text>
+<rect x="1160.6" y="2577.6" width="119.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#2980b9" stroke-width="1.5"/>
+<text x="1220.1" y="2589.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1220.1" dy="5.6">build deploy</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1299.3,1497.3 1198.6,1594.6" fill="none" stroke="#8e44ad" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1600.0,1840.0 1600.0,2080.0" fill="none" stroke="#8e44ad" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g6">
-<circle cx="1198.6" cy="1594.6" r="38" fill="#8e44ad" filter="url(#shadow)"/>
-<text x="1198.6" y="1598.6" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Mobile</text>
+<circle cx="1600.0" cy="2080.0" r="44" fill="#8e44ad" filter="url(#shadow)"/>
+<text x="1600.0" y="2080.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1600.0" dy="6.6">Mobile</tspan></text>
 </g>
-<path d="M1198.6,1594.6 Q1137.1,1660.3 1075.6,1726.0" fill="none" stroke="#8e44ad" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,2080.0 Q1784.2,2172.4 1968.5,2264.7" fill="none" stroke="#8e44ad" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g6b0">
-<circle cx="1075.6" cy="1726.0" r="30" fill="#8e44adcc" filter="url(#shadow)"/>
-<text x="1075.6" y="1729.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">mobl</text>
+<circle cx="1968.5" cy="2264.7" r="34" fill="#8e44adcc" filter="url(#shadow)"/>
+<text x="1968.5" y="2264.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1968.5" dy="6.3">mobl</tspan></text>
 </g>
-<path d="M1075.6,1726.0 Q1048.4,1798.5 1021.1,1871.1" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1968.5,2264.7 Q2199.0,2262.3 2429.6,2259.9" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="971.6" y="1858.9" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
-<text x="1021.1" y="1875.4" text-anchor="middle" font-size="11" fill="#2c3e50">phone dictate</text>
+<rect x="2365.1" y="2247.9" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
+<text x="2429.6" y="2259.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2429.6" dy="5.6">phone dictate</tspan></text>
 </g>
-<path d="M1075.6,1726.0 Q1022.7,1782.6 969.7,1839.2" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1968.5,2264.7 Q2041.2,2395.9 2113.9,2527.1" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="910.7" y="1827.0" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
-<text x="969.7" y="1843.4" text-anchor="middle" font-size="11" fill="#2c3e50">make_feature GPS</text>
+<rect x="2034.5" y="2515.1" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
+<text x="2113.9" y="2527.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2113.9" dy="5.6">make_feature GPS</tspan></text>
 </g>
-<path d="M1075.6,1726.0 Q1005.1,1758.0 934.5,1790.0" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1968.5,2264.7 Q1844.2,2458.9 1720.0,2653.2" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="891.4" y="1770.7" width="86.2" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
-<text x="934.5" y="1787.1" text-anchor="middle" font-size="11" fill="#2c3e50">PWA Android</text>
-<text x="934.5" y="1801.4" text-anchor="middle" font-size="11" fill="#2c3e50">iPhone</text>
+<rect x="1665.4" y="2631.2" width="109.1" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
+<text x="1720.0" y="2653.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1720.0" dy="-4.4">PWA Android</tspan><tspan x="1720.0" dy="15.6">iPhone</tspan></text>
 </g>
-<path d="M1198.6,1594.6 Q1130.8,1653.8 1063.1,1713.0" fill="none" stroke="#8e44ad" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1600.0,2080.0 Q1415.8,2172.4 1231.5,2264.7" fill="none" stroke="#8e44ad" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g6b1">
-<circle cx="1063.1" cy="1713.0" r="30" fill="#8e44adcc" filter="url(#shadow)"/>
-<text x="1063.1" y="1716.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">trek</text>
+<circle cx="1231.5" cy="2264.7" r="34" fill="#8e44adcc" filter="url(#shadow)"/>
+<text x="1231.5" y="2264.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1231.5" dy="6.3">trek</tspan></text>
 </g>
-<path d="M1063.1,1713.0 Q1028.6,1782.4 994.2,1851.8" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1231.5,2264.7 Q1355.8,2458.9 1480.0,2653.2" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="947.9" y="1832.5" width="92.6" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
-<text x="994.2" y="1849.0" text-anchor="middle" font-size="11" fill="#2c3e50">new add edit</text>
-<text x="994.2" y="1863.3" text-anchor="middle" font-size="11" fill="#2c3e50">remove</text>
+<rect x="1420.5" y="2631.2" width="119.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
+<text x="1480.0" y="2653.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1480.0" dy="-4.4">new add edit</tspan><tspan x="1480.0" dy="15.6">remove</tspan></text>
 </g>
-<path d="M1063.1,1713.0 Q1004.7,1763.9 946.3,1814.9" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1231.5,2264.7 Q1158.8,2395.9 1086.1,2527.1" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="887.3" y="1802.8" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
-<text x="946.3" y="1819.2" text-anchor="middle" font-size="11" fill="#2c3e50">show OSM Leaflet</text>
+<rect x="1006.7" y="2515.1" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
+<text x="1086.1" y="2527.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1086.1" dy="5.6">show OSM Leaflet</tspan></text>
 </g>
-<path d="M1063.1,1713.0 Q989.6,1737.7 916.2,1762.5" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1231.5,2264.7 Q1001.0,2262.3 770.4,2259.9" fill="none" stroke="#8e44ad" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="857.1" y="1750.3" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
-<text x="916.2" y="1766.8" text-anchor="middle" font-size="11" fill="#2c3e50">export_gpx stats</text>
+<rect x="691.1" y="2247.9" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#8e44ad" stroke-width="1.5"/>
+<text x="770.4" y="2259.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="770.4" dy="5.6">export_gpx stats</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1269.9,1451.7 1139.8,1503.4" fill="none" stroke="#d35400" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1480.0,1807.8 1360.0,2015.7" fill="none" stroke="#d35400" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g7">
-<circle cx="1139.8" cy="1503.4" r="38" fill="#d35400" filter="url(#shadow)"/>
-<text x="1139.8" y="1507.5" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Polyglot</text>
+<circle cx="1360.0" cy="2015.7" r="44" fill="#d35400" filter="url(#shadow)"/>
+<text x="1360.0" y="2015.7" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1360.0" dy="6.6">Polyglot</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1062.8,1550.0 985.7,1596.5" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1513.1,2186.4 1666.2,2357.1" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b0">
-<circle cx="985.7" cy="1596.5" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="985.7" y="1600.2" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">python</text>
+<circle cx="1666.2" cy="2357.1" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="1666.2" y="2357.1" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1666.2" dy="6.3">python</tspan></text>
 </g>
-<path d="M985.7,1596.5 Q937.1,1656.8 888.5,1717.2" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1666.2,2357.1 Q1857.1,2458.9 2048.0,2560.7" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="845.4" y="1697.9" width="86.2" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="888.5" y="1714.3" text-anchor="middle" font-size="11" fill="#2c3e50">run compile</text>
-<text x="888.5" y="1728.6" text-anchor="middle" font-size="11" fill="#2c3e50">py→pyc</text>
+<rect x="1993.4" y="2538.7" width="109.1" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="2048.0" y="2560.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="2048.0" dy="-4.4">run compile</tspan><tspan x="2048.0" dy="15.6">py→pyc</tspan></text>
 </g>
-<path d="M985.7,1596.5 Q909.7,1611.5 833.6,1626.4" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1666.2,2357.1 Q1495.9,2490.5 1325.7,2623.9" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="790.6" y="1614.3" width="86.2" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="833.6" y="1630.7" text-anchor="middle" font-size="11" fill="#2c3e50">pip install</text>
+<rect x="1271.1" y="2611.9" width="109.1" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="1325.7" y="2623.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1325.7" dy="5.6">pip install</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1060.7,1546.3 981.5,1589.1" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1446.9,2186.4 1533.8,2357.1" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b1">
-<circle cx="981.5" cy="1589.1" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="981.5" y="1592.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">cython</text>
+<circle cx="1533.8" cy="2357.1" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="1533.8" y="2357.1" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1533.8" dy="6.3">cython</tspan></text>
 </g>
-<path d="M981.5,1589.1 Q932.7,1649.3 883.8,1709.5" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1533.8,2357.1 Q1726.3,2484.0 1918.7,2610.9" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="834.4" y="1697.3" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="883.8" y="1713.8" text-anchor="middle" font-size="11" fill="#2c3e50">compile pyx→C</text>
+<rect x="1854.3" y="2598.9" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="1918.7" y="2610.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1918.7" dy="5.6">compile pyx→C</tspan></text>
 </g>
-<path d="M981.5,1589.1 Q913.4,1626.0 845.2,1662.9" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1533.8,2357.1 Q1520.7,2506.5 1507.6,2656.0" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="795.7" y="1650.8" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="845.2" y="1667.2" text-anchor="middle" font-size="11" fill="#2c3e50">build pyx→.so</text>
+<rect x="1443.1" y="2644.0" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="1507.6" y="2656.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1507.6" dy="5.6">build pyx→.so</tspan></text>
 </g>
-<path d="M981.5,1589.1 Q904.4,1597.1 827.3,1605.1" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1533.8,2357.1 Q1322.2,2448.7 1110.5,2540.2" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="797.0" y="1593.0" width="60.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="827.3" y="1609.4" text-anchor="middle" font-size="11" fill="#2c3e50">run pip</text>
+<rect x="1075.8" y="2528.2" width="69.4" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="1110.5" y="2540.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1110.5" dy="5.6">run pip</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1058.7,1542.5 977.7,1581.6" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1381.6,2174.9 1403.3,2334.1" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b2">
-<circle cx="977.7" cy="1581.6" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="977.7" y="1585.3" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">go</text>
+<circle cx="1403.3" cy="2334.1" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="1403.3" y="2334.1" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1403.3" dy="6.3">go</tspan></text>
 </g>
-<path d="M977.7,1581.6 Q907.8,1615.2 838.0,1648.9" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1403.3,2334.1 Q1364.5,2479.0 1325.7,2623.9" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="801.3" y="1636.7" width="73.4" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="838.0" y="1653.2" text-anchor="middle" font-size="11" fill="#2c3e50">run build</text>
+<rect x="1281.0" y="2611.9" width="89.3" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="1325.7" y="2623.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1325.7" dy="5.6">run build</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1057.0,1538.6 974.1,1573.8" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1319.4,2152.2 1278.8,2288.8" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b3">
-<circle cx="974.1" cy="1573.8" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="974.1" y="1577.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">ruby</text>
+<circle cx="1278.8" cy="2288.8" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="1278.8" y="2288.8" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1278.8" dy="6.3">ruby</tspan></text>
 </g>
-<path d="M974.1,1573.8 Q902.8,1604.2 831.5,1634.5" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1278.8,2288.8 Q1215.4,2424.7 1152.0,2560.7" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="813.9" y="1622.3" width="35.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="831.5" y="1638.8" text-anchor="middle" font-size="11" fill="#2c3e50">run</text>
+<rect x="1127.0" y="2548.7" width="50.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="1152.0" y="2560.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1152.0" dy="5.6">run</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1055.4,1534.7 971.0,1566.0" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1262.0,2119.1 1164.1,2222.6" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b4">
-<circle cx="971.0" cy="1566.0" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="971.0" y="1569.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">node</text>
+<circle cx="1164.1" cy="2222.6" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="1164.1" y="2222.6" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1164.1" dy="6.3">node</tspan></text>
 </g>
-<path d="M971.0,1566.0 Q898.3,1592.9 825.7,1619.8" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1164.1,2222.6 Q1078.0,2345.4 992.0,2468.3" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="769.8" y="1607.7" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="825.7" y="1624.1" text-anchor="middle" font-size="11" fill="#2c3e50">run npm_install</text>
+<rect x="917.6" y="2456.3" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="992.0" y="2468.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="992.0" dy="5.6">run npm_install</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1054.0,1530.7 968.3,1557.9" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1211.3,2076.5 1062.6,2137.4" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b5">
-<circle cx="968.3" cy="1557.9" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="968.3" y="1561.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">rust</text>
+<circle cx="1062.6" cy="2137.4" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="1062.6" y="2137.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1062.6" dy="6.3">rust</tspan></text>
 </g>
-<path d="M968.3,1557.9 Q894.4,1581.4 820.5,1604.9" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1062.6,2137.4 Q956.5,2243.5 850.5,2349.5" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="771.1" y="1592.7" width="98.9" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="820.5" y="1609.2" text-anchor="middle" font-size="11" fill="#2c3e50">run cargo_new</text>
+<rect x="786.0" y="2337.5" width="129.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="850.5" y="2349.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="850.5" dy="5.6">run cargo_new</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1052.8,1526.6 965.9,1549.8" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1168.7,2025.8 977.4,2035.9" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b6">
-<circle cx="965.9" cy="1549.8" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="965.9" y="1553.5" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">cpp</text>
+<circle cx="977.4" cy="2035.9" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="977.4" y="2035.9" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="977.4" dy="6.3">cpp</tspan></text>
 </g>
-<path d="M965.9,1549.8 Q891.0,1569.8 816.1,1589.7" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M977.4,2035.9 Q854.6,2122.0 731.7,2208.0" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="760.3" y="1577.6" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="816.1" y="1594.0" text-anchor="middle" font-size="11" fill="#2c3e50">exec repl Cling</text>
+<rect x="657.3" y="2196.0" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="731.7" y="2208.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="731.7" dy="5.6">exec repl Cling</tspan></text>
 </g>
-<path d="M1139.8,1503.4 Q1051.8,1522.5 963.9,1541.6" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,2015.7 Q1135.6,1968.4 911.2,1921.2" fill="none" stroke="#d35400" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g7b7">
-<circle cx="963.9" cy="1541.6" r="30" fill="#d35400cc" filter="url(#shadow)"/>
-<text x="963.9" y="1537.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">use  AI-</text>
-<text x="963.9" y="1552.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">translate</text>
+<circle cx="911.2" cy="1921.2" r="34" fill="#d35400cc" filter="url(#shadow)"/>
+<text x="911.2" y="1921.2" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="911.2" dy="-4.7">use  AI-</tspan><tspan x="911.2" dy="17.3">translate</tspan></text>
 </g>
-<path d="M963.9,1541.6 Q888.1,1558.0 812.4,1574.4" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M911.2,1921.2 Q775.3,1984.6 639.3,2048.0" fill="none" stroke="#d35400" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="759.7" y="1555.1" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
-<text x="812.4" y="1571.5" text-anchor="middle" font-size="11" fill="#2c3e50">py jl r cpp go</text>
-<text x="812.4" y="1585.8" text-anchor="middle" font-size="11" fill="#2c3e50">rb rs js</text>
+<rect x="569.9" y="2026.0" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#d35400" stroke-width="1.5"/>
+<text x="639.3" y="2048.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="639.3" dy="-4.4">py jl r cpp go</tspan><tspan x="639.3" dy="15.6">rb rs js</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1268.8,1351.3 1137.5,1302.6" fill="none" stroke="#1abc9c" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1392.2,1720.0 1184.3,1840.0" fill="none" stroke="#1abc9c" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g8">
-<circle cx="1137.5" cy="1302.6" r="38" fill="#1abc9c" filter="url(#shadow)"/>
-<text x="1137.5" y="1306.6" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Utilities</text>
+<circle cx="1184.3" cy="1840.0" r="44" fill="#1abc9c" filter="url(#shadow)"/>
+<text x="1184.3" y="1840.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1184.3" dy="6.6">Utilities</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1047.6,1306.1 957.6,1309.6" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1231.6,2064.4 1278.8,2288.8" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b0">
-<circle cx="957.6" cy="1309.6" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="957.6" y="1313.3" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">rex</text>
+<circle cx="1278.8" cy="2288.8" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="1278.8" y="2288.8" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1278.8" dy="6.3">rex</tspan></text>
 </g>
-<path d="M957.6,1309.6 Q887.2,1342.0 816.8,1374.4" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1278.8,2288.8 Q1416.3,2473.9 1553.8,2659.0" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="776.9" y="1355.1" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="816.8" y="1371.5" text-anchor="middle" font-size="11" fill="#2c3e50">match find</text>
-<text x="816.8" y="1385.8" text-anchor="middle" font-size="11" fill="#2c3e50">findall</text>
+<rect x="1504.2" y="2637.0" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1553.8" y="2659.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1553.8" dy="-4.4">match find</tspan><tspan x="1553.8" dy="15.6">findall</tspan></text>
 </g>
-<path d="M957.6,1309.6 Q880.2,1312.6 802.8,1315.6" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1278.8,2288.8 Q1215.4,2424.7 1152.0,2560.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="750.1" y="1296.3" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="802.8" y="1312.7" text-anchor="middle" font-size="11" fill="#2c3e50">sub gsub split</text>
-<text x="802.8" y="1327.0" text-anchor="middle" font-size="11" fill="#2c3e50">count</text>
+<rect x="1082.6" y="2538.7" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1152.0" y="2560.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1152.0" dy="-4.4">sub gsub split</tspan><tspan x="1152.0" dy="15.6">count</tspan></text>
 </g>
-<path d="M957.6,1309.6 Q884.9,1282.7 812.2,1255.8" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1278.8,2288.8 Q1048.6,2302.5 818.5,2316.1" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="753.2" y="1243.7" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="812.2" y="1260.1" text-anchor="middle" font-size="11" fill="#2c3e50">ECMAScript flags</text>
+<rect x="739.1" y="2304.1" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="818.5" y="2316.1" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="818.5" dy="5.6">ECMAScript flags</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1047.7,1297.2 957.8,1291.8" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1181.0,2036.0 1177.8,2231.9" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b1">
-<circle cx="957.8" cy="1291.8" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="957.8" y="1295.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">algo</text>
+<circle cx="1177.8" cy="2231.9" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="1177.8" y="2231.9" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1177.8" dy="6.3">algo</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q885.8,1320.3 813.7,1348.8" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q1354.2,2444.8 1530.7,2657.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="764.2" y="1329.5" width="98.9" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="813.7" y="1346.0" text-anchor="middle" font-size="11" fill="#2c3e50">add quicksort</text>
-<text x="813.7" y="1360.3" text-anchor="middle" font-size="11" fill="#2c3e50">sort</text>
+<rect x="1466.2" y="2635.7" width="129.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1530.7" y="2657.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1530.7" dy="-4.4">add quicksort</tspan><tspan x="1530.7" dy="15.6">sort</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q883.1,1312.3 808.3,1332.8" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q1285.5,2435.8 1393.2,2639.6" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="762.1" y="1313.5" width="92.6" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="808.3" y="1329.9" text-anchor="middle" font-size="11" fill="#2c3e50">now date_add</text>
-<text x="808.3" y="1344.2" text-anchor="middle" font-size="11" fill="#2c3e50">date_diff</text>
+<rect x="1333.7" y="2617.6" width="119.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1393.2" y="2639.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1393.2" dy="-4.4">now date_add</tspan><tspan x="1393.2" dy="15.6">date_diff</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q881.3,1304.0 804.8,1316.3" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q1218.5,2417.8 1259.3,2603.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="764.9" y="1297.0" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="804.8" y="1313.4" text-anchor="middle" font-size="11" fill="#2c3e50">array  N-D</text>
-<text x="804.8" y="1327.7" text-anchor="middle" font-size="11" fill="#2c3e50">hetero</text>
+<rect x="1209.7" y="2581.7" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1259.3" y="2603.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1259.3" dy="-4.4">array  N-D</tspan><tspan x="1259.3" dy="15.6">hetero</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q880.4,1295.6 803.0,1299.5" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q1154.5,2391.3 1131.2,2550.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="766.3" y="1280.2" width="73.4" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="803.0" y="1296.6" text-anchor="middle" font-size="11" fill="#2c3e50">array_get</text>
-<text x="803.0" y="1310.9" text-anchor="middle" font-size="11" fill="#2c3e50">array_set</text>
+<rect x="1086.5" y="2528.7" width="89.3" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1131.2" y="2550.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1131.2" dy="-4.4">array_get</tspan><tspan x="1131.2" dy="15.6">array_set</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q880.5,1287.2 803.1,1282.6" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q1094.4,2356.6 1011.1,2481.4" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="747.2" y="1263.3" width="111.7" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="803.1" y="1279.7" text-anchor="middle" font-size="11" fill="#2c3e50">array_push</text>
-<text x="803.1" y="1294.0" text-anchor="middle" font-size="11" fill="#2c3e50">array_len shape</text>
+<rect x="936.7" y="2459.4" width="148.8" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="1011.1" y="2481.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="1011.1" dy="-4.4">array_push</tspan><tspan x="1011.1" dy="15.6">array_len shape</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q881.4,1278.8 805.0,1265.8" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q1039.4,2314.4 901.1,2397.0" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="749.2" y="1253.6" width="111.7" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="805.0" y="1270.1" text-anchor="middle" font-size="11" fill="#2c3e50">dict  key/value</text>
+<rect x="826.7" y="2385.0" width="148.8" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="901.1" y="2397.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="901.1" dy="5.6">dict  key/value</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q883.3,1270.6 808.8,1249.3" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q990.4,2265.4 803.0,2298.9" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="775.2" y="1230.0" width="67.0" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="808.8" y="1246.4" text-anchor="middle" font-size="11" fill="#2c3e50">dict_set</text>
-<text x="808.8" y="1260.7" text-anchor="middle" font-size="11" fill="#2c3e50">dict_get</text>
+<rect x="763.4" y="2276.9" width="79.4" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="803.0" y="2298.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="803.0" dy="-4.4">dict_set</tspan><tspan x="803.0" dy="15.6">dict_get</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q886.1,1262.6 814.3,1233.3" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q948.2,2210.4 718.6,2188.9" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="780.8" y="1214.0" width="67.0" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="814.3" y="1230.5" text-anchor="middle" font-size="11" fill="#2c3e50">dict_del</text>
-<text x="814.3" y="1244.8" text-anchor="middle" font-size="11" fill="#2c3e50">dict_has</text>
+<rect x="679.0" y="2166.9" width="79.4" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="718.6" y="2188.9" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="718.6" dy="-4.4">dict_del</tspan><tspan x="718.6" dy="15.6">dict_has</tspan></text>
 </g>
-<path d="M957.8,1291.8 Q889.7,1254.9 821.5,1218.0" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1177.8,2231.9 Q913.5,2150.4 649.3,2068.8" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="784.8" y="1191.6" width="73.4" height="52.9" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="821.5" y="1208.0" text-anchor="middle" font-size="11" fill="#2c3e50">dict_keys</text>
-<text x="821.5" y="1222.3" text-anchor="middle" font-size="11" fill="#2c3e50">dict_vals</text>
-<text x="821.5" y="1236.6" text-anchor="middle" font-size="11" fill="#2c3e50">dict_len</text>
+<rect x="604.7" y="2036.8" width="89.3" height="64.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="649.3" y="2068.8" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="649.3" dy="-14.4">dict_keys</tspan><tspan x="649.3" dy="5.6">dict_vals</tspan><tspan x="649.3" dy="25.6">dict_len</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1048.6,1288.4 959.8,1274.2" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1135.4,2000.2 1086.6,2160.3" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b2">
-<circle cx="959.8" cy="1274.2" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="959.8" y="1277.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">itr</text>
+<circle cx="1086.6" cy="2160.3" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="1086.6" y="2160.3" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1086.6" dy="6.3">itr</tspan></text>
 </g>
-<path d="M959.8,1274.2 Q883.2,1262.0 806.7,1249.8" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1086.6,2160.3 Q985.2,2270.9 883.9,2381.5" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="763.6" y="1237.6" width="86.2" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="806.7" y="1254.0" text-anchor="middle" font-size="11" fill="#2c3e50">range while</text>
+<rect x="829.3" y="2369.5" width="109.1" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="883.9" y="2381.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="883.9" dy="5.6">range while</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1050.5,1279.7 963.4,1256.8" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1095.8,1957.9 1007.3,2075.7" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b3">
-<circle cx="963.4" cy="1256.8" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="963.4" y="1260.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">file</text>
+<circle cx="1007.3" cy="2075.7" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="1007.3" y="2075.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1007.3" dy="6.3">file</tspan></text>
 </g>
-<path d="M963.4,1256.8 Q888.4,1237.1 813.5,1217.5" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M1007.3,2075.7 Q890.3,2169.6 773.3,2263.5" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="767.2" y="1205.3" width="92.6" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="813.5" y="1221.7" text-anchor="middle" font-size="11" fill="#2c3e50">write exists</text>
+<rect x="713.8" y="2251.5" width="119.0" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="773.3" y="2263.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="773.3" dy="5.6">write exists</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1053.1,1271.2 968.8,1239.9" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1063.1,1910.0 941.8,1980.0" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b4">
-<circle cx="968.8" cy="1239.9" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="968.8" y="1243.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">zip</text>
+<circle cx="941.8" cy="1980.0" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="941.8" y="1980.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="941.8" dy="6.3">zip</tspan></text>
 </g>
-<path d="M968.8,1239.9 Q896.1,1213.0 823.4,1186.0" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M941.8,1980.0 Q811.9,2055.0 682.0,2130.0" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="783.5" y="1166.7" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="823.4" y="1183.1" text-anchor="middle" font-size="11" fill="#2c3e50">compress</text>
-<text x="823.4" y="1197.4" text-anchor="middle" font-size="11" fill="#2c3e50">decompress</text>
+<rect x="632.4" y="2108.0" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="682.0" y="2130.0" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="682.0" dy="-4.4">compress</tspan><tspan x="682.0" dy="15.6">decompress</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1056.6,1263.1 975.7,1223.6" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1038.0,1857.7 891.7,1875.5" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b5">
-<circle cx="975.7" cy="1223.6" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="975.7" y="1227.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">img</text>
+<circle cx="891.7" cy="1875.5" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="891.7" y="1875.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="891.7" dy="6.3">img</tspan></text>
 </g>
-<path d="M975.7,1223.6 Q906.1,1189.6 836.4,1155.6" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M891.7,1875.5 Q751.9,1929.8 612.1,1984.2" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="793.3" y="1136.3" width="86.2" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="836.4" y="1152.8" text-anchor="middle" font-size="11" fill="#2c3e50">resize</text>
-<text x="836.4" y="1167.1" text-anchor="middle" font-size="11" fill="#2c3e50">ImageMagick</text>
+<rect x="557.5" y="1962.2" width="109.1" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="612.1" y="1984.2" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="612.1" dy="-4.4">resize</tspan><tspan x="612.1" dy="15.6">ImageMagick</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1060.9,1255.3 984.3,1208.1" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1021.2,1802.2 858.0,1764.5" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b6">
-<circle cx="984.3" cy="1208.1" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="984.3" y="1211.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">nlp</text>
+<circle cx="858.0" cy="1764.5" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="858.0" y="1764.5" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="858.0" dy="6.3">nlp</tspan></text>
 </g>
-<path d="M984.3,1208.1 Q918.3,1167.4 852.4,1126.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M858.0,1764.5 Q711.6,1797.0 565.1,1829.4" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="806.1" y="1107.4" width="92.6" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="852.4" y="1123.9" text-anchor="middle" font-size="11" fill="#2c3e50">delegates to</text>
-<text x="852.4" y="1138.2" text-anchor="middle" font-size="11" fill="#2c3e50">ai.prompt</text>
+<rect x="505.6" y="1807.4" width="119.0" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="565.1" y="1829.4" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="565.1" dy="-4.4">delegates to</tspan><tspan x="565.1" dy="15.6">ai.prompt</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1065.9,1248.0 994.3,1193.5" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1013.0,1744.9 841.6,1649.7" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b7">
-<circle cx="994.3" cy="1193.5" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="994.3" y="1197.2" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">thread</text>
+<circle cx="841.6" cy="1649.7" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="841.6" y="1649.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="841.6" dy="6.3">thread</tspan></text>
 </g>
-<path d="M994.3,1193.5 Q932.7,1146.5 871.0,1099.5" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M841.6,1649.7 Q691.9,1659.5 542.3,1669.3" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="812.0" y="1087.4" width="118.1" height="24.3" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="871.0" y="1103.8" text-anchor="middle" font-size="11" fill="#2c3e50">wait is_finished</text>
+<rect x="462.9" y="1657.3" width="158.7" height="24.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="542.3" y="1669.3" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="542.3" dy="5.6">wait is_finished</tspan></text>
 </g>
-<path d="M1137.5,1302.6 Q1071.6,1241.2 1005.8,1179.9" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1840.0 Q1013.6,1686.9 842.9,1533.8" fill="none" stroke="#1abc9c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g8b8">
-<circle cx="1005.8" cy="1179.9" r="30" fill="#1abc9ccc" filter="url(#shadow)"/>
-<text x="1005.8" y="1183.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">art</text>
+<circle cx="842.9" cy="1533.8" r="34" fill="#1abc9ccc" filter="url(#shadow)"/>
+<text x="842.9" y="1533.8" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="842.9" dy="6.3">art</tspan></text>
 </g>
-<path d="M1005.8,1179.9 Q933.2,1152.8 860.5,1125.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M842.9,1533.8 Q716.0,1726.3 589.1,1918.7" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="817.4" y="1106.4" width="86.2" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="860.5" y="1122.9" text-anchor="middle" font-size="11" fill="#2c3e50">text_to_art</text>
-<text x="860.5" y="1137.2" text-anchor="middle" font-size="11" fill="#2c3e50">figlet</text>
+<rect x="534.5" y="1896.7" width="109.1" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="589.1" y="1918.7" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="589.1" dy="-4.4">text_to_art</tspan><tspan x="589.1" dy="15.6">figlet</tspan></text>
 </g>
-<path d="M1005.8,1179.9 Q949.0,1127.1 892.3,1074.3" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M842.9,1533.8 Q693.5,1520.7 544.0,1507.6" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="852.4" y="1055.0" width="79.8" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="892.3" y="1071.4" text-anchor="middle" font-size="11" fill="#2c3e50">art_to_svg</text>
-<text x="892.3" y="1085.7" text-anchor="middle" font-size="11" fill="#2c3e50">svg_to_art</text>
+<rect x="494.4" y="1485.6" width="99.2" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="544.0" y="1507.6" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="544.0" dy="-4.4">art_to_svg</tspan><tspan x="544.0" dy="15.6">svg_to_art</tspan></text>
 </g>
-<path d="M1005.8,1179.9 Q973.6,1109.4 941.4,1038.9" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
+<path d="M842.9,1533.8 Q751.3,1322.2 659.8,1110.5" fill="none" stroke="#1abc9c" stroke-width="1.0" stroke-opacity="0.4" stroke-linecap="round"/>
 <g class="leaf-node">
-<rect x="888.7" y="1019.6" width="105.3" height="38.6" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
-<text x="941.4" y="1036.0" text-anchor="middle" font-size="11" fill="#2c3e50">mindmap readme</text>
-<text x="941.4" y="1050.3" text-anchor="middle" font-size="11" fill="#2c3e50">tutorial</text>
+<rect x="590.3" y="1088.5" width="138.9" height="44.0" rx="6" ry="6" fill="#f8f9fa" stroke="#1abc9c" stroke-width="1.5"/>
+<text x="659.8" y="1110.5" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="normal"><tspan x="659.8" dy="-4.4">mindmap readme</tspan><tspan x="659.8" dy="15.6">tutorial</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1316.2,1287.9 1232.3,1175.8" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1360.0,1600.0 1120.0,1600.0" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g9">
-<circle cx="1232.3" cy="1175.8" r="38" fill="#2c3e50" filter="url(#shadow)"/>
-<text x="1232.3" y="1179.8" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Platforms</text>
+<circle cx="1120.0" cy="1600.0" r="44" fill="#2c3e50" filter="url(#shadow)"/>
+<text x="1120.0" y="1600.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1120.0" dy="6.6">Platforms</tspan></text>
 </g>
-<path d="M1232.3,1175.8 Q1178.1,1103.9 1123.9,1032.1" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1120.0,1600.0 Q1041.3,1807.0 962.6,2013.9" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g9b0">
-<circle cx="1123.9" cy="1032.1" r="30" fill="#2c3e50cc" filter="url(#shadow)"/>
-<text x="1123.9" y="1035.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">macOS Linux</text>
+<circle cx="962.6" cy="2013.9" r="34" fill="#2c3e50cc" filter="url(#shadow)"/>
+<text x="962.6" y="2013.9" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="962.6" dy="6.3">macOS Linux</tspan></text>
 </g>
-<path d="M1232.3,1175.8 Q1178.3,1103.8 1124.3,1031.8" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1120.0,1600.0 Q987.0,1672.5 854.0,1745.0" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g9b1">
-<circle cx="1124.3" cy="1031.8" r="30" fill="#2c3e50cc" filter="url(#shadow)"/>
-<text x="1124.3" y="1028.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Windows 11</text>
-<text x="1124.3" y="1043.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">MSYS2</text>
+<circle cx="854.0" cy="1745.0" r="34" fill="#2c3e50cc" filter="url(#shadow)"/>
+<text x="854.0" y="1745.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="854.0" dy="-4.7">Windows 11</tspan><tspan x="854.0" dy="17.3">MSYS2</tspan></text>
 </g>
-<path d="M1232.3,1175.8 Q1178.5,1103.6 1124.7,1031.4" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1120.0,1600.0 Q987.0,1527.5 854.0,1455.0" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g9b2">
-<circle cx="1124.7" cy="1031.4" r="30" fill="#2c3e50cc" filter="url(#shadow)"/>
-<text x="1124.7" y="1027.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Android</text>
-<text x="1124.7" y="1042.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Chrome PWA</text>
+<circle cx="854.0" cy="1455.0" r="34" fill="#2c3e50cc" filter="url(#shadow)"/>
+<text x="854.0" y="1455.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="854.0" dy="-4.7">Android</tspan><tspan x="854.0" dy="17.3">Chrome PWA</tspan></text>
 </g>
-<path d="M1232.3,1175.8 Q1178.7,1103.4 1125.2,1031.1" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1120.0,1600.0 Q1041.3,1393.0 962.6,1186.1" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g9b3">
-<circle cx="1125.2" cy="1031.1" r="30" fill="#2c3e50cc" filter="url(#shadow)"/>
-<text x="1125.2" y="1027.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">iPhone</text>
-<text x="1125.2" y="1042.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Safari PWA</text>
+<circle cx="962.6" cy="1186.1" r="34" fill="#2c3e50cc" filter="url(#shadow)"/>
+<text x="962.6" y="1186.1" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="962.6" dy="-4.7">iPhone</tspan><tspan x="962.6" dy="17.3">Safari PWA</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1343.8,1271.8 1287.7,1143.5" fill="none" stroke="#7f8c8d" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1392.2,1480.0 1184.3,1360.0" fill="none" stroke="#7f8c8d" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g10">
-<circle cx="1287.7" cy="1143.5" r="38" fill="#7f8c8d" filter="url(#shadow)"/>
-<text x="1287.7" y="1139.5" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Tutorials</text>
-<text x="1287.7" y="1155.7" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">1-43</text>
+<circle cx="1184.3" cy="1360.0" r="44" fill="#7f8c8d" filter="url(#shadow)"/>
+<text x="1184.3" y="1360.0" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1184.3" dy="-4.9">Tutorials</tspan><tspan x="1184.3" dy="18.1">1-43</tspan></text>
 </g>
-<path d="M1287.7,1143.5 Q1247.5,1063.0 1207.3,982.5" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1360.0 Q1013.6,1513.1 842.9,1666.2" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g10b0">
-<circle cx="1207.3" cy="982.5" r="30" fill="#7f8c8dcc" filter="url(#shadow)"/>
-<text x="1207.3" y="978.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">01-10</text>
-<text x="1207.3" y="993.7" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Foundations</text>
+<circle cx="842.9" cy="1666.2" r="34" fill="#7f8c8dcc" filter="url(#shadow)"/>
+<text x="842.9" y="1666.2" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="842.9" dy="-4.7">01-10</tspan><tspan x="842.9" dy="17.3">Foundations</tspan></text>
 </g>
-<path d="M1287.7,1143.5 Q1249.1,1062.2 1210.5,980.9" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1360.0 Q1016.8,1420.6 849.4,1481.1" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g10b1">
-<circle cx="1210.5" cy="980.9" r="30" fill="#7f8c8dcc" filter="url(#shadow)"/>
-<text x="1210.5" y="977.1" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">11-20 App</text>
-<text x="1210.5" y="992.1" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Dev</text>
+<circle cx="849.4" cy="1481.1" r="34" fill="#7f8c8dcc" filter="url(#shadow)"/>
+<text x="849.4" y="1481.1" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="849.4" dy="-4.7">11-20 App</tspan><tspan x="849.4" dy="17.3">Dev</tspan></text>
 </g>
-<path d="M1287.7,1143.5 Q1250.7,1061.4 1213.8,979.4" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1360.0 Q1042.4,1331.5 900.4,1303.0" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g10b2">
-<circle cx="1213.8" cy="979.4" r="30" fill="#7f8c8dcc" filter="url(#shadow)"/>
-<text x="1213.8" y="968.1" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">21-30</text>
-<text x="1213.8" y="983.1" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Science</text>
-<text x="1213.8" y="998.1" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Finance</text>
+<circle cx="900.4" cy="1303.0" r="34" fill="#7f8c8dcc" filter="url(#shadow)"/>
+<text x="900.4" y="1303.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="900.4" dy="-15.7">21-30</tspan><tspan x="900.4" dy="6.3">Science</tspan><tspan x="900.4" dy="28.3">Finance</tspan></text>
 </g>
-<path d="M1287.7,1143.5 Q1252.4,1060.7 1217.1,977.9" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1360.0 Q1088.7,1251.3 993.0,1142.6" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g10b3">
-<circle cx="1217.1" cy="977.9" r="30" fill="#7f8c8dcc" filter="url(#shadow)"/>
-<text x="1217.1" y="974.2" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">31-40</text>
-<text x="1217.1" y="989.2" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Advanced</text>
+<circle cx="993.0" cy="1142.6" r="34" fill="#7f8c8dcc" filter="url(#shadow)"/>
+<text x="993.0" y="1142.6" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="993.0" dy="-4.7">31-40</tspan><tspan x="993.0" dy="17.3">Advanced</tspan></text>
 </g>
-<path d="M1287.7,1143.5 Q1254.1,1060.0 1220.5,976.5" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1360.0 Q1153.0,1184.7 1121.7,1009.4" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g10b4">
-<circle cx="1220.5" cy="976.5" r="30" fill="#7f8c8dcc" filter="url(#shadow)"/>
-<text x="1220.5" y="972.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">41 art  42 p</text>
-<text x="1220.5" y="987.8" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">ython/cython</text>
+<circle cx="1121.7" cy="1009.4" r="34" fill="#7f8c8dcc" filter="url(#shadow)"/>
+<text x="1121.7" y="1009.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1121.7" dy="-4.7">41 art  42 p</tspan><tspan x="1121.7" dy="17.3">ython/cython</tspan></text>
 </g>
-<path d="M1287.7,1143.5 Q1255.8,1059.4 1223.9,975.2" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1184.3,1360.0 Q1231.6,1135.6 1278.8,911.2" fill="none" stroke="#7f8c8d" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g10b5">
-<circle cx="1223.9" cy="975.2" r="30" fill="#7f8c8dcc" filter="url(#shadow)"/>
-<text x="1223.9" y="971.5" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">43 arrays &amp;</text>
-<text x="1223.9" y="986.5" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">dicts</text>
+<circle cx="1278.8" cy="911.2" r="34" fill="#7f8c8dcc" filter="url(#shadow)"/>
+<text x="1278.8" y="911.2" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1278.8" dy="-4.7">43 arrays &amp;</tspan><tspan x="1278.8" dy="17.3">dicts</tspan></text>
 </g>
-<path d="M1400.0,1400.0 Q1380.8,1261.3 1361.6,1122.6" fill="none" stroke="#e74c3c" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
+<path d="M1600.0,1600.0 Q1480.0,1392.2 1360.0,1184.3" fill="none" stroke="#e74c3c" stroke-width="2.5" stroke-opacity="0.7" stroke-linecap="round"/>
 <g class="branch-node" id="g11">
-<circle cx="1361.6" cy="1122.6" r="38" fill="#e74c3c" filter="url(#shadow)"/>
-<text x="1361.6" y="1126.7" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">Help System</text>
+<circle cx="1360.0" cy="1184.3" r="44" fill="#e74c3c" filter="url(#shadow)"/>
+<text x="1360.0" y="1184.3" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold"><tspan x="1360.0" dy="6.6">Help System</tspan></text>
 </g>
-<path d="M1361.6,1122.6 Q1344.8,1034.2 1328.0,945.8" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,1184.3 Q1135.6,1231.6 911.2,1278.8" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g11b0">
-<circle cx="1328.0" cy="945.8" r="30" fill="#e74c3ccc" filter="url(#shadow)"/>
-<text x="1328.0" y="949.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">help topic</text>
+<circle cx="911.2" cy="1278.8" r="34" fill="#e74c3ccc" filter="url(#shadow)"/>
+<text x="911.2" y="1278.8" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="911.2" dy="6.3">help topic</tspan></text>
 </g>
-<path d="M1361.6,1122.6 Q1346.6,1033.9 1331.5,945.2" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,1184.3 Q1184.7,1153.0 1009.4,1121.7" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g11b1">
-<circle cx="1331.5" cy="945.2" r="30" fill="#e74c3ccc" filter="url(#shadow)"/>
-<text x="1331.5" y="941.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">helpfull</text>
-<text x="1331.5" y="956.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">write md</text>
+<circle cx="1009.4" cy="1121.7" r="34" fill="#e74c3ccc" filter="url(#shadow)"/>
+<text x="1009.4" y="1121.7" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1009.4" dy="-4.7">helpfull</tspan><tspan x="1009.4" dy="17.3">write md</tspan></text>
 </g>
-<path d="M1361.6,1122.6 Q1348.4,1033.6 1335.1,944.6" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,1184.3 Q1251.3,1088.7 1142.6,993.0" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g11b2">
-<circle cx="1335.1" cy="944.6" r="30" fill="#e74c3ccc" filter="url(#shadow)"/>
-<text x="1335.1" y="940.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">helpless</text>
-<text x="1335.1" y="955.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">pipe less</text>
+<circle cx="1142.6" cy="993.0" r="34" fill="#e74c3ccc" filter="url(#shadow)"/>
+<text x="1142.6" y="993.0" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1142.6" dy="-4.7">helpless</tspan><tspan x="1142.6" dy="17.3">pipe less</tspan></text>
 </g>
-<path d="M1361.6,1122.6 Q1350.2,1033.4 1338.7,944.1" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,1184.3 Q1331.5,1042.4 1303.0,900.4" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g11b3">
-<circle cx="1338.7" cy="944.1" r="30" fill="#e74c3ccc" filter="url(#shadow)"/>
-<text x="1338.7" y="940.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Topics:</text>
-<text x="1338.7" y="955.4" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">keywords</text>
+<circle cx="1303.0" cy="900.4" r="34" fill="#e74c3ccc" filter="url(#shadow)"/>
+<text x="1303.0" y="900.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1303.0" dy="-4.7">Topics:</tspan><tspan x="1303.0" dy="17.3">keywords</tspan></text>
 </g>
-<path d="M1361.6,1122.6 Q1351.9,1033.2 1342.3,943.7" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,1184.3 Q1420.6,1016.8 1481.1,849.4" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g11b4">
-<circle cx="1342.3" cy="943.7" r="30" fill="#e74c3ccc" filter="url(#shadow)"/>
-<text x="1342.3" y="939.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Topics:</text>
-<text x="1342.3" y="954.9" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">builtins</text>
+<circle cx="1481.1" cy="849.4" r="34" fill="#e74c3ccc" filter="url(#shadow)"/>
+<text x="1481.1" y="849.4" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1481.1" dy="-4.7">Topics:</tspan><tspan x="1481.1" dy="17.3">builtins</tspan></text>
 </g>
-<path d="M1361.6,1122.6 Q1353.8,1033.0 1345.9,943.3" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
+<path d="M1360.0,1184.3 Q1513.1,1013.6 1666.2,842.9" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round"/>
 <g class="branch-node" id="g11b5">
-<circle cx="1345.9" cy="943.3" r="30" fill="#e74c3ccc" filter="url(#shadow)"/>
-<text x="1345.9" y="939.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">Topics: for</text>
-<text x="1345.9" y="954.6" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">return scope</text>
+<circle cx="1666.2" cy="842.9" r="34" fill="#e74c3ccc" filter="url(#shadow)"/>
+<text x="1666.2" y="842.9" text-anchor="middle" font-size="18" fill="#fff" font-weight="bold"><tspan x="1666.2" dy="-4.7">Topics: for</tspan><tspan x="1666.2" dy="17.3">return scope</tspan></text>
 </g>
 </g>
 </svg>

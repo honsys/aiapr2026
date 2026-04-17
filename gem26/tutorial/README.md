@@ -7,7 +7,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ## Language Mindmap
 
 <!-- Static render (GitHub, npm, etc.) -->
-<img src="../docs/gem_mindmap.svg" alt="Gem Language Mindmap" width="100%"/>
+<div style="width:100vw;height:100vh;overflow:hidden;">
+<img src="../docs/gem_mindmap.svg" alt="Gem Language Mindmap" style="width:100%;height:100%;object-fit:contain;display:block;"/>
+</div>
 
 <details>
 <summary>🔍 Interactive mindmap — drag to pan, scroll to zoom</summary>
@@ -139,8 +141,9 @@ Available Builtin Modules:
 
 Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, else, while,
-  int, double, string, bool, exit, quit, langport,
+  int, double, string, bool, langport,
   true, false, null, nil, nan
+  (exit/quit are identifiers, not keywords; 'return' is not a keyword — use 'end <expr>')
 
 Builtin Functions:
   isnil(x)  isnan(x)  tonum(x)  tostr(x)  len(x)  type(x)

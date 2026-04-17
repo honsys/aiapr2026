@@ -16,9 +16,8 @@ mindmap
       alias
       his
       lib
-      exit
-      quit
       langport
+      exit/quit identifiers not keywords
     Literals
       true
       false
@@ -56,7 +55,7 @@ mindmap
       helpless write md pipe less
       Topics keywords
       Topics builtins
-      Topics concepts for return scope
+      Topics concepts scope vectors operators repl
     System
       sys
         print args async exec
