@@ -111,6 +111,15 @@ mindmap
       trek
         new add edit show stats
     Polyglot
+      python
+        run
+        compile py_to_pyc
+        pip install
+      cython
+        compile pyx_to_c
+        build pyx_to_so
+        run
+        pip install
       go run build
       ruby run
       node run npm_install
@@ -180,6 +189,8 @@ graph TD
     ruby["ruby"]
     node["node"]
     rust["rust"]
+    python["python"]
+    cython["cython"]
 
     sys --> math
     sys --> ai
@@ -214,6 +225,8 @@ graph TD
     sys --> ruby
     sys --> node
     sys --> rust
+    sys --> python
+    sys --> cython
 ```
 
 ---
@@ -298,3 +311,5 @@ graph TD
 | `ruby` | Ruby polyglot | `run` |
 | `node` | Node.js polyglot | `run`, `npm_install` |
 | `rust` | Rust polyglot | `run`, `cargo_new` |
+| `python` | Python 3 polyglot | `run`, `compile`, `pip` |
+| `cython` | Cython polyglot | `run`, `compile`, `build`, `pip` |

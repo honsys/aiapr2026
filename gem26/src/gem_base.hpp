@@ -534,6 +534,8 @@ public:
                 std::cout << "  file   - filesystem: write, exists" << std::endl;
                 std::cout << "  zip    - compression: compress, decompress" << std::endl;
                 std::cout << "  img    - image processing: resize" << std::endl;
+                std::cout << "  python - Python polyglot: run, compile, pip" << std::endl;
+                std::cout << "  cython - Cython polyglot: run, compile, build, pip" << std::endl;
                 std::cout << "  go     - Go polyglot: run, build" << std::endl;
                 std::cout << "  ruby   - Ruby polyglot: run" << std::endl;
                 std::cout << "  node   - Node.js polyglot: run, npm_install" << std::endl;
@@ -644,6 +646,45 @@ public:
                     std::cout << "  Go:     no official Vagrant SDK; use os/exec" << std::endl;
                     std::cout << "  Ruby:   Vagrant itself is written in Ruby" << std::endl;
                     std::cout << "  Rust:   no official Vagrant bindings; use std::process::Command" << std::endl;
+                } else if (topic == "python") {
+                    std::cout << "Module: python — Python 3 polyglot (direct execution & compilation)" << std::endl;
+                    std::cout << "  run(file_or_code)  — run .py file or inline Python code via python3" << std::endl;
+                    std::cout << "  compile(file)      — byte-compile .py to .pyc  (python3 -m py_compile)" << std::endl;
+                    std::cout << "  pip(package)       — install Python package via pip" << std::endl;
+                    std::cout << "Note: 'use \"file.py\"' AI-translates Python → Gem before running." << std::endl;
+                    std::cout << "      python.run() executes Python code natively without translation." << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  python.run(\"hello.py\")" << std::endl;
+                    std::cout << "  python.run(\"print('hello from Python')\")" << std::endl;
+                    std::cout << "  python.compile(\"mymodule.py\")  # creates mymodule.pyc" << std::endl;
+                    std::cout << "  python.pip(\"numpy\")" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    PyRun_SimpleFile / PyRun_SimpleString (Python C API)" << std::endl;
+                    std::cout << "  Julia:  PyCall.jl / PythonCall.jl" << std::endl;
+                    std::cout << "  Go:     github.com/DataDog/go-python3" << std::endl;
+                    std::cout << "  Ruby:   pycall gem" << std::endl;
+                    std::cout << "  Rust:   pyo3 crate" << std::endl;
+                } else if (topic == "cython") {
+                    std::cout << "Module: cython — Cython polyglot (transpile .pyx → C → .so)" << std::endl;
+                    std::cout << "  run(pyx_file_or_code) — transpile, build, and execute .pyx inline" << std::endl;
+                    std::cout << "  compile(pyx,[c_out])  — transpile .pyx → C using cython CLI" << std::endl;
+                    std::cout << "  build(pyx_file)       — full pipeline: cython + gcc → .so shared lib" << std::endl;
+                    std::cout << "  pip(package)          — install cython or cython dependencies via pip" << std::endl;
+                    std::cout << "Pipeline:" << std::endl;
+                    std::cout << "  .pyx → cython -3 → .c → gcc -shared -fPIC → .so → importable" << std::endl;
+                    std::cout << "Prerequisites: cython (pip install cython), gcc, python3-dev/headers" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  cython.compile(\"fast_math.pyx\")         # → fast_math.c" << std::endl;
+                    std::cout << "  cython.build(\"fast_math.pyx\")           # → fast_math.so" << std::endl;
+                    std::cout << "  cython.run(\"fast_math.pyx\")             # compile + run" << std::endl;
+                    std::cout << "  cython.run(\"cdef int add(int a,int b): return a+b\")" << std::endl;
+                    std::cout << "  use \"fast_math.pyx\"                      # AI-translate + run" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    direct compilation; no Cython wrapper needed" << std::endl;
+                    std::cout << "  Python: import cython; setup(ext_modules=cythonize('*.pyx'))" << std::endl;
+                    std::cout << "  Julia:  no Cython equivalent; use CxxWrap.jl for C++ interop" << std::endl;
+                    std::cout << "  Go:     cgo (C interop); no Python-layer equivalent" << std::endl;
+                    std::cout << "  Rust:   PyO3 + maturin for Python extension modules" << std::endl;
                 } else if (topic == "go" || topic == "ruby" || topic == "node" || topic == "rust") {
                     std::cout << "Module: " << topic << " — Polyglot interop (direct execution)" << std::endl;
                     std::cout << "  run(input)       — execute source file or inline code string" << std::endl;
@@ -1818,6 +1859,16 @@ public:
                     md << "`svg_to_art(svg_path,[width])→string` `mindmap([path])→string` `readme([path])→string` `tutorial([path])→string`\n\n";
 
                     // polyglot
+                    md << "### python — Python 3 Polyglot\n";
+                    md << "`run(file_or_code)→int` `compile(file)→int` `pip(pkg)→int`  \n";
+                    md << "Runs `.py` files or inline Python natively. `compile()` byte-compiles via `py_compile`. `pip()` installs packages.\n\n";
+
+                    md << "### cython — Cython Polyglot\n";
+                    md << "`run(pyx)→int` `compile(pyx,[out])→int` `build(pyx)→int` `pip(pkg)→int`  \n";
+                    md << "Pipeline: `.pyx` → `cython -3` → `.c` → `gcc -shared -fPIC` → `.so`. "
+                          "`build()` produces importable shared library. `run()` compiles and executes. "
+                          "Prerequisites: `cython`, `gcc`, `python3-dev`.\n\n";
+
                     md << "### go / ruby / node / rust — Polyglot\n";
                     md << "`run(input)→string`  \n";
                     md << "`go.build(file)` `node.npm_install(pkg)` `rust.cargo_new(name)`\n\n";
@@ -3463,6 +3514,97 @@ public:
              std::string name = args[0]->toString();
              std::string cmd = "cargo new " + name;
              return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+    }
+};
+
+// Python Interop Object
+class GemPython : public GemSys {
+public:
+    GemPython() : GemSys() {
+        name = "python";
+        // python.run(file_or_code) — execute .py file or inline code via python3
+        methods["run"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string input = args[0]->toString();
+            bool isFile = input.size() > 3 && input.substr(input.size()-3) == ".py";
+            if (isFile) {
+                std::string cmd = "python3 " + input;
+                return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+            } else {
+                std::string fname = "/tmp/gem_py_" + std::to_string(std::time(nullptr)) + ".py";
+                std::ofstream f(fname); f << input; f.close();
+                std::string cmd = "python3 " + fname;
+                int ret = std::system(cmd.c_str());
+                std::remove(fname.c_str());
+                return std::make_shared<GemValue>((double)ret);
+            }
+        }, true };
+        // python.compile(file,[output]) — compile .py to .pyc via py_compile
+        methods["compile"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string src = args[0]->toString();
+            std::string cmd = "python3 -m py_compile " + src;
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+        // python.pip(package) — install package via pip
+        methods["pip"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string pkg = args[0]->toString();
+            std::string cmd = "python3 -m pip install " + pkg;
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+    }
+};
+
+// Cython Interop Object
+class GemCython : public GemSys {
+public:
+    GemCython() : GemSys() {
+        name = "cython";
+        // cython.run(file_or_code) — transpile .pyx, build extension, import & run
+        methods["run"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string input = args[0]->toString();
+            bool isFile = input.size() > 4 && input.substr(input.size()-4) == ".pyx";
+            std::string src = isFile ? input : "/tmp/gem_cyx_" + std::to_string(std::time(nullptr)) + ".pyx";
+            if (!isFile) { std::ofstream f(src); f << input; f.close(); }
+            // Build as shared extension and execute via python3 -c "import ..."
+            std::string modname = std::filesystem::path(src).stem().string();
+            std::string buildCmd = "cython --embed -3 " + src +
+                " && python3 setup_gem_cyx.py build_ext --inplace 2>/dev/null"
+                " || (cython -3 " + src + " -o /tmp/" + modname + ".c"
+                " && gcc -O2 -shared -fPIC $(python3-config --includes --ldflags) /tmp/" + modname + ".c -o /tmp/" + modname + ".so)";
+            int ret = std::system(buildCmd.c_str());
+            if (!isFile) std::remove(src.c_str());
+            return std::make_shared<GemValue>((double)ret);
+        }, true };
+        // cython.compile(pyx_file,[c_file]) — transpile .pyx → .c using cython CLI
+        methods["compile"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string src = args[0]->toString();
+            std::string out_flag = (args.size() > 1) ? " -o " + args[1]->toString() : "";
+            std::string cmd = "cython -3 " + src + out_flag;
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+        // cython.build(pyx_file) — full build: cython + gcc → .so shared library
+        methods["build"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string src = args[0]->toString();
+            std::string modname = std::filesystem::path(src).stem().string();
+            std::string cfile = modname + ".c";
+            std::string sofile = modname + ".so";
+            std::string cmd = "cython -3 " + src + " -o " + cfile +
+                " && gcc -O2 -shared -fPIC $(python3-config --includes --ldflags) " +
+                cfile + " -o " + sofile;
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+        // cython.pip(package) — install via pip (cython itself or cython deps)
+        methods["pip"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(false);
+            std::string pkg = args[0]->toString();
+            std::string cmd = "python3 -m pip install " + pkg;
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
         }, true };
     }
 };

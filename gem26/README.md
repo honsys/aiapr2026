@@ -10,7 +10,8 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 - **Global vs. Local Scope**: Variables starting with `_` (e.g., `_config`) are global; all others are local.
 - **Universal Inheritance**: Every object inherits from `sys`, giving immediate access to `sys.print`, etc.
 - **First-Class AI Support**: Built-in `ai` object supports Gemini, Mistral, and Ollama.
-- **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly.
+- **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly. Native execution via `python.run()`, `python.compile()`, `cython.build()`, `go.run()`, and more.
+- **Python & Cython Compilation**: `python.compile()` byte-compiles `.py` → `.pyc`; `cython.build()` transpiles `.pyx` → C → native `.so` shared library for maximum performance.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
 - **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art` built into the runtime (34 builtins total).
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
@@ -82,6 +83,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 11. ASCII Art & SVG
 - **[41_art.g](41_art.g)**: `art` builtin — generate ASCII art from text, convert to/from SVG, render mindmap/README/tutorial as ASCII art.
 
+### 13. Python & Cython Polyglot
+- **[42_python_cython.g](42_python_cython.g)**: `python` and `cython` builtins — run Python scripts natively, byte-compile `.py` → `.pyc`, full Cython pipeline `.pyx` → C → `.so` native extension, pip management.
+
 ---
 
 ## Help & Builtins
@@ -108,6 +112,7 @@ CLI Options:
 Available Builtin Modules:
   sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
   cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
+  python, cython,
   fin, bsm, chart, astro, mobl, trek, seo, drvr, art
 
 Keywords for Documentation:
@@ -365,6 +370,8 @@ Comparisons: C++=`Linux module_init/WDK/WDF` · Python=`ctypes/cffi (userspace o
 - **`cpp`** — `cpp.repl()`, `cpp.exec(code)` — C++26 JIT via Cling. Python=`ctypes/pybind11` · Julia=`Cxx.jl` · Rust=`bindgen`
 - **`itr`** — `itr.range(n)`, `itr.while(cond_fun, body_fun)`. C++=`std::ranges::iota` · Python=`range()` · Julia=`1:n` · Rust=`0..n`
 - **`go`**, **`ruby`**, **`node`**, **`rust`** — polyglot `run(input)` + `go.build()`, `node.npm_install()`, `rust.cargo_new()`
+- **`python`** — Python 3 polyglot: `python.run(file_or_code)` · `python.compile(file)` byte-compiles `.py`→`.pyc` · `python.pip(pkg)` installs packages. C++=`PyRun_SimpleFile` · Julia=`PyCall.jl` · Rust=`pyo3`
+- **`cython`** — Cython polyglot: `cython.compile(pyx)` transpiles `.pyx`→`.c` · `cython.build(pyx)` full pipeline to `.so` · `cython.run(pyx)` compile+execute · `cython.pip(pkg)`. Pipeline: `.pyx → cython -3 → .c → gcc -shared -fPIC → .so`. C++=`direct` · Python=`cythonize()` · Rust=`PyO3+maturin`
 
 ---
 

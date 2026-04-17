@@ -102,6 +102,8 @@ public:
         builtins["data"] = std::make_shared<GemData>();
         builtins["k3s"] = std::make_shared<GemContainer>();
         builtins["vm"] = std::make_shared<GemVM>();
+        builtins["python"] = std::make_shared<GemPython>();
+        builtins["cython"] = std::make_shared<GemCython>();
         builtins["go"] = std::make_shared<GemGo>();
         builtins["ruby"] = std::make_shared<GemRuby>();
         builtins["node"] = std::make_shared<GemNode>();
@@ -303,11 +305,12 @@ public:
             while (std::getline(ss, line)) {
                 execute(line, false);
             }
-        } else if (extension == ".py" || extension == ".r" || extension == ".jl" || extension == ".for" || extension == ".cpp") {
+        } else if (extension == ".py" || extension == ".pyx" || extension == ".r" || extension == ".jl" || extension == ".for" || extension == ".cpp") {
             std::string language = "";
-            if (extension == ".py") language = "Python";
-            else if (extension == ".r") language = "R";
-            else if (extension == ".jl") language = "Julia";
+            if (extension == ".py")  language = "Python";
+            else if (extension == ".pyx") language = "Cython";
+            else if (extension == ".r")   language = "R";
+            else if (extension == ".jl")  language = "Julia";
             else if (extension == ".for") language = "Fortran";
             else if (extension == ".cpp") language = "C++";
 

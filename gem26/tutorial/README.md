@@ -10,7 +10,7 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 - **Global vs. Local Scope**: Variables starting with `_` (e.g., `_config`) are global; all others are local.
 - **Universal Inheritance**: Every object inherits from `sys`, giving immediate access to `sys.print`, etc.
 - **First-Class AI Support**: Built-in `ai` object supports Gemini, Mistral, and Ollama.
-- **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly.
+- **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly. Native execution via `python.run()`, `python.compile()`, `cython.build()`, `go.run()`, etc.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
 - **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art` built into the runtime.
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
@@ -84,6 +84,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 
 ### 12. ASCII Art & SVG
 - **[41_art.g](41_art.g)**: `art` builtin — generate ASCII art from text, convert to/from SVG, render mindmap/README/tutorial as ASCII art.
+
+### 13. Python & Cython Polyglot
+- **[42_python_cython.g](42_python_cython.g)**: `python` and `cython` builtins — run/compile Python scripts, byte-compile `.py` → `.pyc`, transpile `.pyx` → C → `.so` native extension, pip package management.
 
 ---
 
