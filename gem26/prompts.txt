@@ -63,3 +63,6 @@ update all markdown docs and tutorials and generate latex and pdf versions with 
 
 the makefile docs target should update all markdown readmes and tutorials, then regenerate latex and pdf docs, and also after manual markdown doc edits
 
+
+the gem lang builtin function "git" should provide "git clone --depth=1 --recurse-submodules --shallow-submodules" and "git pull" and "git commit -m sync" and "git push" and as a single CLI in the REPL
+

@@ -1104,6 +1104,19 @@ public:
                     std::cout << "  Go:     no built-in" << std::endl;
                     std::cout << "  Ruby:   artii gem" << std::endl;
                     std::cout << "  Rust:   figlet-rs crate" << std::endl;
+                } else if (topic == "git") {
+                    std::cout << "Module: git — Git version control operations" << std::endl;
+                    std::cout << "  clone(url,[dir])  — git clone --depth=1 --recurse-submodules --shallow-submodules" << std::endl;
+                    std::cout << "  pull()            — git pull" << std::endl;
+                    std::cout << "  commit([msg])     — git add -A && git commit -m msg  (default msg: \"sync\")" << std::endl;
+                    std::cout << "  push()            — git push" << std::endl;
+                    std::cout << "  gitsync()         — pull + commit -m sync + push + show --summary --stat" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  git.clone(\"https://github.com/user/repo\")" << std::endl;
+                    std::cout << "  git.pull()" << std::endl;
+                    std::cout << "  git.commit(\"sync\")" << std::endl;
+                    std::cout << "  git.push()" << std::endl;
+                    std::cout << "  git.gitsync()" << std::endl;
                 } else if (topic == "www") {
                     std::cout << "Module: www — Web framework (Flask-like, built on cpp-httplib)" << std::endl;
                     std::cout << "  wget(url,file)         — download file via curl" << std::endl;
@@ -5004,6 +5017,47 @@ public:
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[" + lon + "," + lat + "]},"
                 "\"properties\":{\"note\":\"" + text + "\"}}";
             return std::make_shared<GemValue>(feature);
+        }, true };
+    }
+};
+
+class GemGit : public GemSys {
+public:
+    GemGit() : GemSys() {
+        name = "git";
+
+        // git.clone(url, [dir]) — shallow clone with submodules
+        methods["clone"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty()) return std::make_shared<GemValue>(-1.0);
+            std::string url = args[0]->toString();
+            std::string cmd = "git clone --depth=1 --recurse-submodules --shallow-submodules " + url;
+            if (args.size() > 1) cmd += " " + args[1]->toString();
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+
+        // git.pull() — pull latest changes
+        methods["pull"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            return std::make_shared<GemValue>((double)std::system("git pull"));
+        }, true };
+
+        // git.commit([msg]) — stage all and commit
+        methods["commit"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::string msg = args.empty() ? "sync" : args[0]->toString();
+            std::string cmd = "git add -A && git commit -m \"" + msg + "\"";
+            return std::make_shared<GemValue>((double)std::system(cmd.c_str()));
+        }, true };
+
+        // git.push() — push to remote
+        methods["push"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            return std::make_shared<GemValue>((double)std::system("git push"));
+        }, true };
+
+        // git.gitsync() — pull, commit -m sync, push, show summary
+        methods["gitsync"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::system("git pull");
+            std::system("git add -A && git commit -m \"sync\"");
+            std::system("git push");
+            return std::make_shared<GemValue>((double)std::system("git show --summary --stat"));
         }, true };
     }
 };

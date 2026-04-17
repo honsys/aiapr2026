@@ -159,6 +159,12 @@ mindmap
         android HAL template
         build cross-compile
         deploy to target
+      git
+        clone depth=1 recurse-submodules shallow-submodules
+        pull
+        commit -m sync
+        push
+        gitsync pull commit push show summary
     Mobile
       mobl
         phone device_name

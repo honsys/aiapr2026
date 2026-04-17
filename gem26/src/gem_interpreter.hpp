@@ -117,6 +117,12 @@ public:
         builtins["seo"]  = std::make_shared<GemSEO>();
         builtins["trek"] = std::make_shared<GemTrek>();
         builtins["art"]  = std::make_shared<GemArt>();
+        builtins["git"]  = std::make_shared<GemGit>();
+
+        // Built-in alias: gitsync = git.gitsync()
+        { GemTokenizer t("git.gitsync()"); auto toks = t.tokenize();
+          toks.erase(std::remove_if(toks.begin(), toks.end(), [](const GemToken& t){ return t.type == GEM_TOKEN_EOF; }), toks.end());
+          aliases["gitsync"] = toks; }
 
         auto caller = [this](const std::string& name, std::vector<std::shared_ptr<GemValue>> args) {
             return this->callUserFunction(name, args);

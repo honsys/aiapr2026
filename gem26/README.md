@@ -25,7 +25,7 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 - **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly. Native execution via `python.run()`, `python.compile()`, `cython.build()`, `go.run()`, and more.
 - **Python & Cython Compilation**: `python.compile()` byte-compiles `.py` → `.pyc`; `cython.build()` transpiles `.pyx` → C → native `.so` shared library for maximum performance.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
-- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art` built into the runtime (36 builtins total: includes `python` and `cython`).
+- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art`, `git` built into the runtime (37 builtins total: includes `python` and `cython`).
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
 - **Symbolic Math**: `math` builtin supports symbolic differentiation, integration, simplification, and LaTeX output via SymPy/Sage.
 - **Astrophysics**: `astro` builtin covers stellar physics, orbital mechanics, cosmology, solar physics, and exoplanets.
