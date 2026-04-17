@@ -128,7 +128,8 @@ Available Builtin Modules:
   sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
   cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
   python, cython,
-  fin, bsm, chart, astro, mobl, trek, seo, drvr, art
+  fin, bsm, chart, astro, mobl, trek, seo, drvr, art,
+  git
 
 Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, else, while,
@@ -188,8 +189,9 @@ Comparisons: C++=`<cmath>/GiNaC` · Python=`math/sympy` · Julia=`sin()/Symbolic
 Supports Gemini (default), Mistral, Ollama:
 - `ai.prompt(text)` — send prompt to current provider
 - `ai.prompt_native(text)` — Mistral C++ bridge (requires `mistralai` >= 1.0, Python 3.14)
+- `ai.code(spec)` — polyglot code generation → writes `YYYYMMDD_solution.{py,go,cpp,rb,rs,js,jl}`, returns list of filenames
 - `ai.useMistral(model)`, `ai.useOllama(model, [host])`, `ai.useGemini()`
-- `ai.setKey(key)`, `ai.setHost(host)`, `ai.setPath(path)`
+- `ai.key(key)`, `ai.setHost(host)`, `ai.setPath(path)`
 - Properties: `provider`, `model`, `host`
 
 Comparisons: C++=`libcurl+json` · Python=`google-generativeai/mistralai` · Julia=`HTTP.jl` · Go=`generative-ai-go` · Ruby=`ruby-openai` · Rust=`async-openai`
@@ -411,6 +413,7 @@ Comparisons: C++=`Linux module_init/WDK/WDF` · Python=`ctypes/cffi (userspace o
 - **`go`**, **`ruby`**, **`node`**, **`rust`** — polyglot `run(input)` + `go.build()`, `node.npm_install()`, `rust.cargo_new()`
 - **`python`** — Python 3 polyglot: `python.run(file_or_code)` · `python.compile(file)` byte-compiles `.py`→`.pyc` · `python.pip(pkg)` installs packages. C++=`PyRun_SimpleFile` · Julia=`PyCall.jl` · Rust=`pyo3`
 - **`cython`** — Cython polyglot: `cython.compile(pyx)` transpiles `.pyx`→`.c` · `cython.build(pyx)` full pipeline to `.so` · `cython.run(pyx)` compile+execute · `cython.pip(pkg)`. Pipeline: `.pyx → cython -3 → .c → gcc -shared -fPIC → .so`. C++=`direct` · Python=`cythonize()` · Rust=`PyO3+maturin`
+- **`git`** — Git VCS: `git.clone(url,[dir])` shallow clone · `git.pull()` · `git.commit([msg])` stage+commit · `git.push()` · `git.gitsync()` pull+commit+push+show. Alias: `gitsync`. C++=`libgit2` · Python=`gitpython` · Julia=`LibGit2` · Rust=`git2 crate`
 
 ---
 

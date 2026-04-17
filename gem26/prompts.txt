@@ -59,10 +59,18 @@ the makefile should clone deps with depth=1 and follow the install instructions 
 
 update all markdown docs and tutorials and generate latex and pdf versions with page numbers and watermaks indicating today's date and the current version of gem lang                                     
 
-
-
 the makefile docs target should update all markdown readmes and tutorials, then regenerate latex and pdf docs, and also after manual markdown doc edits
 
-
 the gem lang builtin function "git" should provide "git clone --depth=1 --recurse-submodules --shallow-submodules" and "git pull" and "git commit -m sync" and "git push" and as a single CLI in the REPL
+
+the builtin "ai" object should support a source code generation function invoked as "ai.code(prompt string)" that automagically generates source code files in all supported languages -- python, go, c++, ruby, rust, nodejs, julia -- based on the specifications of the prompt, and the function should return a list of the generated file names, and the filnames should include the date of creation
+
+
+"ai.key()" invoked without a key string param should find the key in the current environment variable list and return it as a string or return the string "failed to find env key" 
+
+the builtin ai object should fully the kiro-cli and the kiro-cli should be the default, such that the invocation "ai(prompt string)" automagically invokes kiro
+
+ensure the latest current release of each AI tool supported by the gem lang is always used; install and/or update each AI tool as needed; and write smoke tests
+
+inspect the current impl of the gem compiler and REPL and all keywords and builtins and update the builtin help and the readme markdown files and all the tutorial examples and turtorial docs and be sure to update  the scaled interactive mindmap diagrams 
 

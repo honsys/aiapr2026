@@ -24,7 +24,7 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 - **First-Class AI Support**: Built-in `ai` object supports Gemini, Mistral, and Ollama.
 - **Polyglot Interop**: `use` keyword bridges Python, Julia, R, Fortran, C++, Go, Ruby, Rust, Node.js on-the-fly. Native execution via `python.run()`, `python.compile()`, `cython.build()`, `go.run()`, etc.
 - **Mobile & Cross-Platform**: `mobl` object + browser PWA (Web Speech + Geolocation) works on Android, iPhone, macOS, Linux, and Windows 11.
-- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art` built into the runtime.
+- **Domain-Specific Built-ins**: `fin`, `bsm`, `bev`, `geo`, `data`, `chart`, `mobl`, `trek`, `astro`, `nlp`, `www`, `cdn`, `thread`, `rex`, `seo`, `drvr`, `art`, `git` built into the runtime (37 builtins total: includes `python` and `cython`).
 - **Regular Expressions**: `rex` builtin provides full ECMAScript regex — match, find, findall, groups, sub, gsub, split, count.
 - **Symbolic Math**: `math` builtin supports symbolic differentiation, integration, simplification, and LaTeX output via SymPy/Sage.
 - **Astrophysics**: `astro` builtin covers stellar physics, orbital mechanics, cosmology, solar physics, and exoplanets.
@@ -103,6 +103,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 14. Heterogeneous Arrays & Dictionaries
 - **[43_arrays_dicts.g](43_arrays_dicts.g)**: `algo.array` and `algo.dict` — allocate and manipulate heterogeneous multidimensional arrays of arbitrary content, and dictionary objects with arbitrary key/value tuples. Covers 1-D arrays, N-D matrices, dict basics, dict-of-arrays, and array-of-dicts table patterns.
 
+### 15. Git Version Control
+- **[44_git.g](44_git.g)**: `git` builtin — clone repositories, pull, commit, push, and the `gitsync` one-shot workflow (pull + commit + push + show summary).
+
 ---
 
 ## Help & Builtins
@@ -130,7 +133,8 @@ Available Builtin Modules:
   sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
   cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
   python, cython,
-  fin, bsm, chart, astro, mobl, trek, seo, drvr, art
+  fin, bsm, chart, astro, mobl, trek, seo, drvr, art,
+  git
 
 Keywords for Documentation:
   fun, obj, use, alias, his, lib, end, if, else, while,
@@ -209,8 +213,9 @@ Comparisons: C++=`<cmath>/GiNaC` · Python=`math/sympy` · Julia=`sin()/Symbolic
 Supports Gemini (default), Mistral, Ollama:
 - `ai.prompt(text)` — send prompt to current provider
 - `ai.prompt_native(text)` — Mistral C++ bridge (requires `mistralai` >= 1.0, Python 3.14)
+- `ai.code(spec)` — polyglot code generation → writes `YYYYMMDD_solution.{py,go,cpp,rb,rs,js,jl}`, returns list of filenames
 - `ai.useMistral(model)`, `ai.useOllama(model, [host])`, `ai.useGemini()`
-- `ai.setKey(key)`, `ai.setHost(host)`, `ai.setPath(path)`
+- `ai.key(key)`, `ai.setHost(host)`, `ai.setPath(path)`
 - Properties: `provider`, `model`, `host`
 
 Comparisons: C++=`libcurl+json` · Python=`google-generativeai/mistralai` · Julia=`HTTP.jl` · Go=`generative-ai-go` · Ruby=`ruby-openai` · Rust=`async-openai`
@@ -431,6 +436,7 @@ Comparisons: C++=`Linux module_init/WDK/WDF` · Python=`ctypes/cffi (userspace o
 - **`cpp`** — `cpp.repl()`, `cpp.exec(code)` — C++26 JIT via Cling. Python=`ctypes/pybind11` · Julia=`Cxx.jl` · Rust=`bindgen`
 - **`itr`** — `itr.range(n)`, `itr.while(cond_fun, body_fun)`. C++=`std::ranges::iota` · Python=`range()` · Julia=`1:n` · Rust=`0..n`
 - **`go`**, **`ruby`**, **`node`**, **`rust`** — polyglot `run(input)` + `go.build()`, `node.npm_install()`, `rust.cargo_new()`
+- **`git`** — Git VCS: `git.clone(url,[dir])` shallow clone · `git.pull()` · `git.commit([msg])` stage+commit · `git.push()` · `git.gitsync()` pull+commit+push+show. Alias: `gitsync`. C++=`libgit2` · Python=`gitpython` · Julia=`LibGit2` · Rust=`git2 crate`
 
 ---
 

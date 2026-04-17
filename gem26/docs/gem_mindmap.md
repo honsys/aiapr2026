@@ -1,6 +1,6 @@
 # Gem Language Mindmap
 
-**Version:** 0.1.0 | **Date:** 2026-04-16 | **Copyright:** David B Hon 2025, 2026
+**Version:** 0.1.0 | **Date:** 2026-04-17 | **Copyright:** David B Hon 2025, 2026
 
 ```mermaid
 mindmap
@@ -68,9 +68,11 @@ mindmap
         read_latex parse_latex compile_latex
         useSymPy useSage
       ai
-        prompt prompt_native
+        prompt prompt_native code
+        code polyglot py go cpp rb rs js jl
+        code returns YYYYMMDD filenames
         useMistral useOllama useGemini
-        setKey setHost setPath
+        key setHost setPath
         provider model host
       text
         read sub replace
@@ -259,7 +261,7 @@ mindmap
         art_to_file write text file
         art_to_svg convert to SVG
         svg_to_art rsvg-convert jp2a
-        mindmap render gem_mindmap md
+        art.mindmap render gem_mindmap md
         readme render README headings
         tutorial render tutorial README
     Platforms
@@ -311,6 +313,7 @@ mindmap
       41 art ASCII SVG
       42 python cython
       43 arrays dicts algo
+      44 git version control
 ```
 
 ---
@@ -364,6 +367,7 @@ graph TD
     rust["rust"]
     python["python"]
     cython["cython"]
+    git["git"]
 
     sys --> math
     sys --> ai
@@ -400,6 +404,7 @@ graph TD
     sys --> rust
     sys --> python
     sys --> cython
+    sys --> git
 ```
 
 </details>

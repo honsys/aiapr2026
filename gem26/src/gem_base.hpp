@@ -499,15 +499,16 @@ public:
                 std::cout << "  Separator:     ;  (multiple statements per line)" << std::endl;
                 std::cout << "  String concat: +" << std::endl;
                 std::cout << "  Range:         ..  (e.g. 1..10 in itr.range)" << std::endl;
-                std::cout << "\nAvailable Builtin Modules (36 total):" << std::endl;
+                std::cout << "\nAvailable Builtin Modules (37 total):" << std::endl;
                 std::cout << "  sys    math   ai     text   rex    algo   bev    file   zip" << std::endl;
                 std::cout << "  nlp    img    www    cdn    geo    cpp    tcp    itr    thread" << std::endl;
                 std::cout << "  data   k3s    vm     python cython go     ruby   node   rust" << std::endl;
                 std::cout << "  fin    bsm    chart  astro  mobl   trek   seo    drvr   art" << std::endl;
+                std::cout << "  git" << std::endl;
                 std::cout << "\nModule Quick Reference:" << std::endl;
                 std::cout << "  sys    - system root; print, exec, async, app, help, langport" << std::endl;
                 std::cout << "  math   - math + symbolic (diff, integrate, sym_latex, compile_latex)" << std::endl;
-                std::cout << "  ai     - Gemini/Mistral/Ollama: prompt, useMistral, useOllama" << std::endl;
+                std::cout << "  ai     - Gemini/Mistral/Ollama: prompt, prompt_native, code, useMistral, useOllama" << std::endl;
                 std::cout << "  text   - documents: read, write_pdf, read_yaml, read_xml, read_html" << std::endl;
                 std::cout << "  rex    - ECMAScript regex: match, find, findall, sub, gsub, split" << std::endl;
                 std::cout << "  algo   - sort, quicksort, now, date_add, date_diff" << std::endl;
@@ -541,6 +542,7 @@ public:
                 std::cout << "  ruby   - Ruby polyglot: run" << std::endl;
                 std::cout << "  node   - Node.js polyglot: run, npm_install" << std::endl;
                 std::cout << "  rust   - Rust polyglot: run, cargo_new" << std::endl;
+                std::cout << "  git    - Git VCS: clone, pull, commit, push, gitsync" << std::endl;
                 std::cout << "\nMobile & Cross-Platform:" << std::endl;
                 std::cout << "  mobl phone(\"name\")  phone.dictate(text)  phone.make_feature(lat,lon,text)" << std::endl;
                 std::cout << "  ./gem travel_log.g  ->  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)" << std::endl;
@@ -831,6 +833,10 @@ public:
                     std::cout << "  prompt(text)                  — send prompt to current provider → string" << std::endl;
                     std::cout << "  prompt_native(text)           — Mistral C++ bridge → string" << std::endl;
                     std::cout << "    requires: mistralai >= 1.0, Python 3.14 embedded" << std::endl;
+                    std::cout << "  code(spec)                    — polyglot code generation → vector<string> filenames" << std::endl;
+                    std::cout << "    Generates source files in: Python, Go, C++, Ruby, Rust, Node.js, Julia" << std::endl;
+                    std::cout << "    Filenames are datestamped: YYYYMMDD_solution.{py,go,cpp,rb,rs,js,jl}" << std::endl;
+                    std::cout << "    Returns list of written filenames." << std::endl;
                     std::cout << "Provider switching:" << std::endl;
                     std::cout << "  useGemini()                   — switch to Gemini (default) → bool" << std::endl;
                     std::cout << "  useMistral(model)             — switch to Mistral API → bool" << std::endl;
@@ -839,7 +845,13 @@ public:
                     std::cout << "    model: string e.g. \"llama3\", \"mistral\"" << std::endl;
                     std::cout << "    host: string (default \"localhost:11434\")" << std::endl;
                     std::cout << "Configuration:" << std::endl;
-                    std::cout << "  setKey(key)                   — set API key → bool" << std::endl;
+                    std::cout << "  key(value)                    — set API key → bool" << std::endl;
+                    std::cout << "  key()                         — auto-discover key from env → string" << std::endl;
+                    std::cout << "    Gemini:  GEMINI_API_KEY, GOOGLE_API_KEY, GOOGLE_GENERATIVE_AI_KEY" << std::endl;
+                    std::cout << "    Mistral: MISTRAL_API_KEY" << std::endl;
+                    std::cout << "    Ollama:  OLLAMA_API_KEY" << std::endl;
+                    std::cout << "    All:     AI_API_KEY, API_KEY (fallbacks)" << std::endl;
+                    std::cout << "    Returns key string, or \"failed to find env key\"" << std::endl;
                     std::cout << "  setHost(host)                 — override API host → bool" << std::endl;
                     std::cout << "  setPath(path)                 — override API path → bool" << std::endl;
                     std::cout << "Properties (read-only after set):" << std::endl;
@@ -847,7 +859,8 @@ public:
                     std::cout << "  ai.model      — current model string" << std::endl;
                     std::cout << "  ai.host       — current API host string" << std::endl;
                     std::cout << "Example:" << std::endl;
-                    std::cout << "  ai.setKey(\"AIza...\")" << std::endl;
+                    std::cout << "  ai.key(\"AIza...\")             # set explicitly" << std::endl;
+                    std::cout << "  string k = ai.key()           # auto-discover from env" << std::endl;
                     std::cout << "  string r = ai.prompt(\"Explain black holes\")" << std::endl;
                     std::cout << "  ai.useMistral(\"mistral-small\")" << std::endl;
                     std::cout << "  string r2 = ai.prompt(\"What is entropy?\")" << std::endl;
@@ -1111,12 +1124,21 @@ public:
                     std::cout << "  commit([msg])     — git add -A && git commit -m msg  (default msg: \"sync\")" << std::endl;
                     std::cout << "  push()            — git push" << std::endl;
                     std::cout << "  gitsync()         — pull + commit -m sync + push + show --summary --stat" << std::endl;
+                    std::cout << "Alias: 'gitsync' in REPL/scripts calls git.gitsync() directly." << std::endl;
                     std::cout << "Example:" << std::endl;
                     std::cout << "  git.clone(\"https://github.com/user/repo\")" << std::endl;
+                    std::cout << "  git.clone(\"https://github.com/user/repo\", \"mydir\")" << std::endl;
                     std::cout << "  git.pull()" << std::endl;
-                    std::cout << "  git.commit(\"sync\")" << std::endl;
+                    std::cout << "  git.commit(\"feat: add new module\")" << std::endl;
                     std::cout << "  git.push()" << std::endl;
-                    std::cout << "  git.gitsync()" << std::endl;
+                    std::cout << "  git.gitsync()   # or just: gitsync" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    libgit2 / system(\"git ...\")" << std::endl;
+                    std::cout << "  Python: gitpython, pygit2, subprocess.run([\"git\", ...])" << std::endl;
+                    std::cout << "  Julia:  LibGit2 stdlib, run(`git ...`)" << std::endl;
+                    std::cout << "  Go:     go-git library, os/exec" << std::endl;
+                    std::cout << "  Ruby:   rugged gem, git gem" << std::endl;
+                    std::cout << "  Rust:   git2 crate (libgit2 bindings)" << std::endl;
                 } else if (topic == "www") {
                     std::cout << "Module: www — Web framework (Flask-like, built on cpp-httplib)" << std::endl;
                     std::cout << "  wget(url,file)         — download file via curl" << std::endl;
@@ -1899,7 +1921,7 @@ public:
                     md << "| `useGemini` | `useGemini()` | bool |\n";
                     md << "| `useMistral` | `useMistral(model)` | bool |\n";
                     md << "| `useOllama` | `useOllama(model,[host])` | bool |\n";
-                    md << "| `setKey` | `setKey(key)` | bool |\n";
+                    md << "| `key` | `key(key)` | bool |\n";
                     md << "| `setHost` | `setHost(host)` | bool |\n";
                     md << "| `setPath` | `setPath(path)` | bool |\n";
                     md << "**Properties:** `ai.provider` `ai.model` `ai.host`\n\n";
@@ -2230,14 +2252,72 @@ public:
 class GemAI : public GemSys {
 public:
     static bool pythonInitialized;
-    std::string provider = "gemini";
-    std::string model = "gemini-1.5-flash";
-    std::string host = "generativelanguage.googleapis.com";
-    std::string path = "/v1beta/models/";
+    std::string provider = "kiro";
+    std::string model    = "auto";
+    std::string host     = "generativelanguage.googleapis.com";
+    std::string path     = "/v1beta/models/";
+    std::string kiro_agent = "";      // active kiro agent name
+    std::string kiro_session = "";    // resume session id
+
+    // ── kiro-cli helper ──────────────────────────────────────────────────────
+    // Runs kiro-cli chat --classic with a PTY via `script`, strips ANSI/OSC,
+    // returns the response text (lines prefixed "> " in classic mode).
+    std::string kiro_run(const std::string& prompt_text,
+                         const std::string& extra_flags = "") const {
+        // shell-escape single quotes
+        std::string esc = prompt_text;
+        for (size_t p = 0; (p = esc.find('\'', p)) != std::string::npos; p += 4)
+            esc.replace(p, 1, "'\\''");
+
+        std::string flags = "--classic";
+        if (model != "auto")       flags += " --model " + model;
+        if (!kiro_agent.empty())   flags += " --agent " + kiro_agent;
+        if (!kiro_session.empty()) flags += " --resume-id " + kiro_session;
+        flags += extra_flags;
+
+        std::string cmd = "script -q /dev/null kiro-cli chat " + flags +
+                          " '" + esc + "' 2>/dev/null";
+        FILE* pipe = popen(cmd.c_str(), "r");
+        if (!pipe) return "Error: kiro-cli not available";
+        char buf[256]; std::string raw;
+        while (fgets(buf, sizeof(buf), pipe)) raw += buf;
+        pclose(pipe);
+
+        // strip ANSI/OSC escape sequences
+        std::string clean;
+        for (size_t i = 0; i < raw.size(); ) {
+            if (raw[i] == '\x1b') {
+                ++i;
+                if (i < raw.size() && raw[i] == ']') {
+                    while (i < raw.size() && raw[i] != '\x07') {
+                        if (raw[i]=='\x1b' && i+1<raw.size() && raw[i+1]=='\\'){i+=2;break;}
+                        ++i;
+                    }
+                    if (i < raw.size() && raw[i] == '\x07') ++i;
+                } else if (i < raw.size() && raw[i] == '[') {
+                    ++i;
+                    while (i < raw.size() && !isalpha((unsigned char)raw[i]) && raw[i]!='~') ++i;
+                    if (i < raw.size()) ++i;
+                } else { if (i < raw.size()) ++i; }
+            } else if (raw[i] == '\r') { ++i; }
+            else { clean += raw[i++]; }
+        }
+
+        // collect "> " prefixed response lines
+        std::string resp;
+        std::istringstream ss(clean);
+        std::string line;
+        while (std::getline(ss, line)) {
+            if (line.size() >= 2 && line[0] == '>' && line[1] == ' ') {
+                if (!resp.empty()) resp += '\n';
+                resp += line.substr(2);
+            }
+        }
+        return resp.empty() ? clean : resp;
+    }
 
     GemAI() : GemSys() {
         name = "ai";
-        // Initialize embedded Python once (Python 3.14 compatible)
         if (!pythonInitialized) {
             PyImport_AppendInittab("gem_mistral_bridge", PyInit_gem_mistral_bridge);
             Py_Initialize();
@@ -2245,25 +2325,41 @@ public:
             pythonInitialized = true;
         }
         properties["provider"] = std::make_shared<GemValue>(provider);
-        properties["model"] = std::make_shared<GemValue>(model);
-        properties["host"] = std::make_shared<GemValue>(host);
+        properties["model"]    = std::make_shared<GemValue>(model);
+        properties["host"]     = std::make_shared<GemValue>(host);
 
-        methods["setKey"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
-            if (args.empty()) return std::make_shared<GemValue>(false);
-            set("__key__", args[0]);
-            return std::make_shared<GemValue>(true);
+        // ── key ──────────────────────────────────────────────────────────────
+        methods["key"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            if (!args.empty()) { set("__key__", args[0]); return std::make_shared<GemValue>(true); }
+            std::vector<std::string> cands;
+            if (provider=="gemini")  cands={"GEMINI_API_KEY","GOOGLE_API_KEY","GOOGLE_GENERATIVE_AI_KEY"};
+            else if (provider=="mistral") cands={"MISTRAL_API_KEY"};
+            else if (provider=="ollama")  cands={"OLLAMA_API_KEY"};
+            cands.push_back("AI_API_KEY"); cands.push_back("API_KEY");
+            for (auto& v : cands) {
+                const char* val = std::getenv(v.c_str());
+                if (val && val[0]) { set("__key__", std::make_shared<GemValue>(std::string(val))); return std::make_shared<GemValue>(std::string(val)); }
+            }
+            return std::make_shared<GemValue>(std::string("failed to find env key"));
         }, true };
 
+        // ── host / path ───────────────────────────────────────────────────────
         methods["setHost"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
             if (args.empty()) return std::make_shared<GemValue>(false);
-            host = args[0]->toString();
-            properties["host"] = std::make_shared<GemValue>(host);
+            host = args[0]->toString(); properties["host"] = std::make_shared<GemValue>(host);
             return std::make_shared<GemValue>(true);
         }, true };
-
         methods["setPath"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
             if (args.empty()) return std::make_shared<GemValue>(false);
-            path = args[0]->toString();
+            path = args[0]->toString(); return std::make_shared<GemValue>(true);
+        }, true };
+
+        // ── provider switches ─────────────────────────────────────────────────
+        methods["useKiro"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            provider = "kiro";
+            model = args.empty() ? "auto" : args[0]->toString();
+            properties["provider"] = std::make_shared<GemValue>(provider);
+            properties["model"]    = std::make_shared<GemValue>(model);
             return std::make_shared<GemValue>(true);
         }, true };
 
@@ -2290,60 +2386,228 @@ public:
         }, true };
 
         methods["useGemini"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
-            provider = "gemini";
-            model = "gemini-pro";
+            provider = "gemini"; model = "gemini-pro";
             host = "generativelanguage.googleapis.com";
             path = "/v1beta/models/gemini-pro:generateContent";
             properties["provider"] = std::make_shared<GemValue>(provider);
-            properties["model"] = std::make_shared<GemValue>(model);
-            properties["host"] = std::make_shared<GemValue>(host);
+            properties["model"]    = std::make_shared<GemValue>(model);
+            properties["host"]     = std::make_shared<GemValue>(host);
             return std::make_shared<GemValue>(true);
         }, true };
 
+        // ── kiro-specific methods ─────────────────────────────────────────────
+
+        // ai.useAgent(name) — set kiro agent; "" to clear
+        methods["useAgent"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            kiro_agent = args.empty() ? "" : args[0]->toString();
+            properties["agent"] = std::make_shared<GemValue>(kiro_agent);
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // ai.listAgents() — list available kiro agents → string
+        methods["listAgents"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::string cmd = "kiro-cli agent list 2>/dev/null";
+            FILE* p = popen(cmd.c_str(), "r");
+            if (!p) return std::make_shared<GemValue>("Error: kiro-cli not available");
+            char buf[256]; std::string out;
+            while (fgets(buf, sizeof(buf), p)) out += buf;
+            pclose(p);
+            return std::make_shared<GemValue>(out);
+        }, true };
+
+        // ai.listModels() — list available kiro models → string
+        methods["listModels"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::string fmt = (args.empty() || args[0]->toString() == "json") ? "json" : "plain";
+            std::string cmd = "kiro-cli chat --list-models --format " + fmt + " 2>/dev/null";
+            FILE* p = popen(cmd.c_str(), "r");
+            if (!p) return std::make_shared<GemValue>("Error: kiro-cli not available");
+            char buf[256]; std::string out;
+            while (fgets(buf, sizeof(buf), p)) out += buf;
+            pclose(p);
+            return std::make_shared<GemValue>(out);
+        }, true };
+
+        // ai.resume(session_id) — resume a kiro session by id; "" to clear
+        methods["resume"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            kiro_session = args.empty() ? "" : args[0]->toString();
+            properties["session"] = std::make_shared<GemValue>(kiro_session);
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // ai.translate(text) — kiro-cli natural-language → shell command → string
+        methods["translate"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty()) return std::make_shared<GemValue>("");
+            std::string esc = args[0]->toString();
+            for (size_t p = 0; (p = esc.find('\'', p)) != std::string::npos; p += 4)
+                esc.replace(p, 1, "'\\''");
+            std::string cmd = "kiro-cli translate '" + esc + "' 2>/dev/null";
+            FILE* pipe = popen(cmd.c_str(), "r");
+            if (!pipe) return std::make_shared<GemValue>("Error: kiro-cli not available");
+            char buf[256]; std::string out;
+            while (fgets(buf, sizeof(buf), pipe)) out += buf;
+            pclose(pipe);
+            // trim trailing newline
+            while (!out.empty() && (out.back()=='\n'||out.back()=='\r')) out.pop_back();
+            return std::make_shared<GemValue>(out);
+        }, true };
+
+        // ai.whoami() — kiro-cli whoami → string
+        methods["whoami"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            FILE* p = popen("kiro-cli whoami 2>/dev/null", "r");
+            if (!p) return std::make_shared<GemValue>("Error: kiro-cli not available");
+            char buf[256]; std::string out;
+            while (fgets(buf, sizeof(buf), p)) out += buf;
+            pclose(p);
+            while (!out.empty() && (out.back()=='\n'||out.back()=='\r')) out.pop_back();
+            return std::make_shared<GemValue>(out);
+        }, true };
+
+        // ai.version() — kiro-cli --version → string
+        methods["version"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            FILE* p = popen("kiro-cli --version 2>/dev/null", "r");
+            if (!p) return std::make_shared<GemValue>("Error: kiro-cli not available");
+            char buf[256]; std::string out;
+            while (fgets(buf, sizeof(buf), p)) out += buf;
+            pclose(p);
+            while (!out.empty() && (out.back()=='\n'||out.back()=='\r')) out.pop_back();
+            return std::make_shared<GemValue>(out);
+        }, true };
+
+        // ── prompt_native ─────────────────────────────────────────────────────
         methods["prompt_native"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
 #ifdef HAS_MISTRAL
             if (args.empty()) return std::make_shared<GemValue>("");
             std::string p = args[0]->toString();
             char* response = call_mistral_bridge((char*)p.c_str());
-            if (response == NULL) return std::make_shared<GemValue>("Error: Mistral bridge failed");
-            std::string res_str(response);
-            free(response);
-            return std::make_shared<GemValue>(res_str);
+            if (!response) return std::make_shared<GemValue>("Error: Mistral bridge failed");
+            std::string res(response); free(response);
+            return std::make_shared<GemValue>(res);
 #else
             return std::make_shared<GemValue>("Mistral bridge not enabled");
 #endif
         }, true };
 
+        // ── prompt ────────────────────────────────────────────────────────────
         methods["prompt"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
             if (args.empty()) return std::make_shared<GemValue>("");
             std::string p = args[0]->toString();
-            
-            std::string key = "";
-            auto keyVal = get("__key__");
-            if (std::holds_alternative<std::string>(keyVal->value)) key = std::get<std::string>(keyVal->value);
+            std::string key;
+            auto kv = get("__key__");
+            if (std::holds_alternative<std::string>(kv->value)) key = std::get<std::string>(kv->value);
+
+            if (provider == "kiro")
+                return std::make_shared<GemValue>(kiro_run(p));
 
             if (provider == "ollama") {
-                std::string payload = "{\"model\": \"" + model + "\", \"prompt\": \"" + p + "\", \"stream\": false}";
-                std::string cmd = "curl -s -X POST http://" + host + path + " -d '" + payload + "'";
+                std::string payload = "{\"model\":\""+model+"\",\"prompt\":\""+p+"\",\"stream\":false}";
+                std::string cmd = "curl -s -X POST http://"+host+path+" -d '"+payload+"'";
                 FILE* pipe = popen(cmd.c_str(), "r");
                 if (!pipe) return std::make_shared<GemValue>("Error");
-                char buffer[128];
-                std::string result = "";
-                while (fgets(buffer, 128, pipe)) result += buffer;
+                char buf[128]; std::string result;
+                while (fgets(buf, sizeof(buf), pipe)) result += buf;
                 pclose(pipe);
-                // Parse "response" from JSON stub
-                size_t start = result.find("\"response\":\"");
-                if (start != std::string::npos) {
-                    size_t end = result.find("\"", start + 12);
-                    return std::make_shared<GemValue>(result.substr(start + 12, end - (start + 12)));
+                size_t s = result.find("\"response\":\"");
+                if (s != std::string::npos) {
+                    size_t e = result.find("\"", s+12);
+                    return std::make_shared<GemValue>(result.substr(s+12, e-(s+12)));
                 }
                 return std::make_shared<GemValue>(result);
             }
-            
-            // Mock response for other providers if key is missing
-            if (key.empty()) return std::make_shared<GemValue>("AI provider " + provider + " configured. Set API key to use.");
-            
+
+            if (key.empty()) return std::make_shared<GemValue>("AI provider "+provider+" configured. Set API key to use.");
             return std::make_shared<GemValue>("[AI Result Placeholder]");
+        }, true };
+
+        // ai.code(prompt) — generate source files in all supported languages
+        // Returns vector<string> of generated filenames (datestamped)
+        methods["code"] = { [this](std::vector<std::shared_ptr<GemValue>> args) {
+            if (args.empty()) return std::make_shared<GemValue>(std::vector<std::string>{});
+
+            std::string userPrompt = args[0]->toString();
+
+            // Date prefix: YYYYMMDD
+            std::time_t now = std::time(nullptr);
+            std::tm* tm = std::localtime(&now);
+            char dateBuf[16];
+            std::strftime(dateBuf, sizeof(dateBuf), "%Y%m%d", tm);
+            std::string datePrefix = std::string(dateBuf) + "_";
+
+            // Language specs: {lang_label, extension, runner_hint}
+            struct LangSpec { std::string label, ext, hint; };
+            std::vector<LangSpec> langs = {
+                {"Python",  "py",  "python3"},
+                {"Go",      "go",  "go run"},
+                {"C++",     "cpp", "g++ -std=c++17 -o out"},
+                {"Ruby",    "rb",  "ruby"},
+                {"Rust",    "rs",  "rustc"},
+                {"Node.js", "js",  "node"},
+                {"Julia",   "jl",  "julia"},
+            };
+
+            // Build the polyglot code-generation prompt
+            std::string sysPrompt =
+                "You are a polyglot code generator. Given the specification below, generate working source code "
+                "in ALL of the following languages: Python, Go, C++, Ruby, Rust, Node.js, Julia.\n\n"
+                "STRICT OUTPUT FORMAT — for each language output exactly:\n"
+                "===FILE: <filename>===\n"
+                "<source code>\n"
+                "===END===\n\n"
+                "Filename rules:\n"
+                "  Python  → solution.py\n"
+                "  Go      → solution.go\n"
+                "  C++     → solution.cpp\n"
+                "  Ruby    → solution.rb\n"
+                "  Rust    → solution.rs\n"
+                "  Node.js → solution.js\n"
+                "  Julia   → solution.jl\n\n"
+                "Output ONLY the delimited code blocks, no prose before or after.\n\n"
+                "SPECIFICATION:\n" + userPrompt;
+
+            // Call the AI (reuse prompt logic)
+            auto promptResult = call("prompt", {std::make_shared<GemValue>(sysPrompt)});
+            std::string response = promptResult->toString();
+
+            // Parse ===FILE: name=== ... ===END=== blocks and write files
+            std::vector<std::string> filenames;
+            size_t pos = 0;
+            const std::string fileTag = "===FILE:";
+            const std::string endTag  = "===END===";
+
+            while ((pos = response.find(fileTag, pos)) != std::string::npos) {
+                size_t nameStart = pos + fileTag.size();
+                // skip spaces
+                while (nameStart < response.size() && response[nameStart] == ' ') nameStart++;
+                size_t nameEnd = response.find("===", nameStart);
+                if (nameEnd == std::string::npos) break;
+                std::string baseName = response.substr(nameStart, nameEnd - nameStart);
+                // trim trailing whitespace/newline from baseName
+                while (!baseName.empty() && (baseName.back() == ' ' || baseName.back() == '\n' || baseName.back() == '\r'))
+                    baseName.pop_back();
+
+                size_t codeStart = response.find('\n', nameEnd + 3);
+                if (codeStart == std::string::npos) break;
+                codeStart++; // skip the newline after ===
+                size_t codeEnd = response.find(endTag, codeStart);
+                if (codeEnd == std::string::npos) break;
+
+                std::string code = response.substr(codeStart, codeEnd - codeStart);
+                // strip trailing newline
+                if (!code.empty() && code.back() == '\n') code.pop_back();
+
+                // Prepend date to filename
+                std::string outName = datePrefix + baseName;
+                std::ofstream f(outName);
+                if (f.is_open()) {
+                    f << code << "\n";
+                    f.close();
+                    filenames.push_back(outName);
+                    std::cout << "[ai.code] wrote " << outName << std::endl;
+                }
+
+                pos = codeEnd + endTag.size();
+            }
+
+            return std::make_shared<GemValue>(filenames);
         }, true };
     }
 };

@@ -14,7 +14,7 @@
 # Python library directly from the Gem C++ core.
 
 ai.useMistral("mistral-tiny")
-# ai.setKey("YOUR_MISTRAL_API_KEY")
+# ai.key("YOUR_MISTRAL_API_KEY")
 
 sys.print("Requesting response via Native Cython Bridge...")
 # response = ai.prompt_native("What is the benefit of a Cython bridge?")

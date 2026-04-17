@@ -1,16 +1,16 @@
 # Gem Tutorial 14: Multiple AI Providers
 # ----------------------------------------
-# Covers: ai.useMistral, ai.useOllama, ai.useGemini, ai.setKey, ai.prompt
+# Covers: ai.useMistral, ai.useOllama, ai.useGemini, ai.key, ai.prompt
 
 sys.print("--- Gem AI Providers Tutorial ---")
 
 # 1. Default: Gemini
-# ai.setKey("YOUR_GEMINI_API_KEY")
+# ai.key("YOUR_GEMINI_API_KEY")
 # sys.print(ai.prompt("Name three STEM languages."))
 
 # 2. Switch to Mistral API
 ai.useMistral("mistral-small")
-# ai.setKey("YOUR_MISTRAL_API_KEY")
+# ai.key("YOUR_MISTRAL_API_KEY")
 # sys.print(ai.prompt("Tell me a joke about C++."))
 
 # 3. Native Mistral C++ bridge (fastest, no HTTP overhead)

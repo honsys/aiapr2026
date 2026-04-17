@@ -22,7 +22,7 @@ sys.print("Asking local Mistral (via Ollama) for a science fact...")
 
 # 3. Mistral API vs Native Bridge
 ai.useMistral("mistral-small") # Uses curl and Mistral API
-ai.setKey("YOUR_MISTRAL_API_KEY")
+ai.key("YOUR_MISTRAL_API_KEY")
 # ai.prompt("Hello Mistral!")
 
 # ai.prompt_native("Hello from Native Cython Bridge!") # Uses mistralai Python client

@@ -10,7 +10,7 @@ sys.print("--- Gem AI & NLP Tutorial ---")
 
 # 2. Switch to Mistral
 ai.useMistral("mistral-small")
-# ai.setKey("YOUR_MISTRAL_API_KEY")
+# ai.key("YOUR_MISTRAL_API_KEY")
 # response = ai.prompt("Explain quantum entanglement in one sentence.")
 # sys.print("Mistral:", response)
 
