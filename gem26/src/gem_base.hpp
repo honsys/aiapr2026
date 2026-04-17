@@ -914,28 +914,59 @@ public:
                     std::cout << "  Ruby:   =~, .match(), .gsub(), .scan(), .split()" << std::endl;
                     std::cout << "  Rust:   regex crate: Regex::new(), re.find(), re.replace_all()" << std::endl;
                 } else if (topic == "algo") {
-                    std::cout << "Module: algo — Algorithms, sorting, and time" << std::endl;
+                    std::cout << "Module: algo — Algorithms, sorting, time, arrays, and dictionaries" << std::endl;
+                    std::cout << "Sorting & math:" << std::endl;
                     std::cout << "  add(n1, n2, ...)          — sum all numeric args → double" << std::endl;
                     std::cout << "  quicksort(v)              — sort numeric vector in-place → vector" << std::endl;
-                    std::cout << "    v: numeric vector (modified in-place and returned)" << std::endl;
-                    std::cout << "  sort(v, [start], [end])   — sort slice of vector → vector" << std::endl;
-                    std::cout << "    start: int (default 0), end: int (default v.length)" << std::endl;
+                    std::cout << "  sort(v, [start], [end])   — sort slice of numeric vector → vector" << std::endl;
+                    std::cout << "Time:" << std::endl;
                     std::cout << "  now()                     — current local time → string \"YYYY-MM-DD HH:MM:SS\"" << std::endl;
                     std::cout << "  date_add(ts, days)        — add days to unix timestamp → double" << std::endl;
-                    std::cout << "    ts: double (unix timestamp seconds), days: double" << std::endl;
-                    std::cout << "    returns: new unix timestamp (ts + days*86400)" << std::endl;
                     std::cout << "  date_diff(t1, t2)         — days between timestamps → double" << std::endl;
-                    std::cout << "    t1, t2: double (unix timestamps); returns (t2-t1)/86400" << std::endl;
-                    std::cout << "Indirect domain — date arithmetic:" << std::endl;
-                    std::cout << "  double now_ts = algo.add(0)   # use fin.date() for calendar dates" << std::endl;
-                    std::cout << "  For calendar-aware dates use fin.date(), fin.add_days(), fin.diff_days()" << std::endl;
+                    std::cout << "Heterogeneous multidimensional arrays:" << std::endl;
+                    std::cout << "  array([d1,d2,...], [fill]) — allocate nested array of given shape → array" << std::endl;
+                    std::cout << "    dims: numeric vector e.g. [3,4] for 3x4; fill: any value (default nil)" << std::endl;
+                    std::cout << "  array_get(arr, i0, i1, ...)— index into nested array → value" << std::endl;
+                    std::cout << "  array_set(arr, val, i0, i1, ...) — set element in-place → bool" << std::endl;
+                    std::cout << "  array_push(arr, val)      — append to 1-D array in-place → bool" << std::endl;
+                    std::cout << "  array_len(arr)            — length of outermost dimension → double" << std::endl;
+                    std::cout << "  array_shape(arr)          — dimensions as numeric vector → vector" << std::endl;
+                    std::cout << "Array example:" << std::endl;
+                    std::cout << "  int m = algo.array([2,3], 0.0)   # 2x3 matrix filled with 0" << std::endl;
+                    std::cout << "  algo.array_set(m, 42.0, 1, 2)    # m[1][2] = 42" << std::endl;
+                    std::cout << "  sys.print(algo.array_get(m, 1, 2)) # 42" << std::endl;
+                    std::cout << "  sys.print(algo.array_shape(m))    # [2, 3]" << std::endl;
+                    std::cout << "  int row = algo.array([])          # empty 1-D array" << std::endl;
+                    std::cout << "  algo.array_push(row, \"hello\")     # mixed types OK" << std::endl;
+                    std::cout << "  algo.array_push(row, 3.14)" << std::endl;
+                    std::cout << "  sys.print(algo.array_len(row))    # 2" << std::endl;
+                    std::cout << "Dictionaries (arbitrary key/value tuples):" << std::endl;
+                    std::cout << "  dict([k1,v1, k2,v2, ...])  — create dict, optional initial pairs → dict" << std::endl;
+                    std::cout << "  dict_set(d, key, val)      — set key → bool (mutates in-place)" << std::endl;
+                    std::cout << "  dict_get(d, key)           — get value by key → value (nil if missing)" << std::endl;
+                    std::cout << "  dict_del(d, key)           — remove key → bool" << std::endl;
+                    std::cout << "  dict_has(d, key)           — true if key exists → bool" << std::endl;
+                    std::cout << "  dict_keys(d)               — all keys → string vector" << std::endl;
+                    std::cout << "  dict_vals(d)               — all values → heterogeneous array" << std::endl;
+                    std::cout << "  dict_len(d)                — number of entries → double" << std::endl;
+                    std::cout << "Dict example:" << std::endl;
+                    std::cout << "  int d = algo.dict()                  # empty dict" << std::endl;
+                    std::cout << "  algo.dict_set(d, \"name\", \"Alice\")" << std::endl;
+                    std::cout << "  algo.dict_set(d, \"age\", 30.0)" << std::endl;
+                    std::cout << "  algo.dict_set(d, \"scores\", [95.0, 87.0, 92.0])" << std::endl;
+                    std::cout << "  sys.print(algo.dict_get(d, \"name\")) # Alice" << std::endl;
+                    std::cout << "  sys.print(algo.dict_has(d, \"age\"))  # true" << std::endl;
+                    std::cout << "  sys.print(algo.dict_keys(d))        # [age, name, scores]" << std::endl;
+                    std::cout << "  algo.dict_del(d, \"age\")" << std::endl;
+                    std::cout << "  sys.print(algo.dict_len(d))         # 2" << std::endl;
+                    std::cout << "  int d2 = algo.dict(\"x\", 1.0, \"y\", 2.0)  # init with pairs" << std::endl;
                     std::cout << "Comparisons:" << std::endl;
-                    std::cout << "  C++:    std::sort(), std::chrono::system_clock::now()" << std::endl;
-                    std::cout << "  Python: sorted(), list.sort(), datetime.now()" << std::endl;
-                    std::cout << "  Julia:  sort!(), Dates.now()" << std::endl;
-                    std::cout << "  Go:     sort.Slice(), time.Now()" << std::endl;
-                    std::cout << "  Ruby:   Array#sort!, Time.now" << std::endl;
-                    std::cout << "  Rust:   slice.sort(), std::time::SystemTime::now()" << std::endl;
+                    std::cout << "  C++:    std::vector<std::any> / std::map<std::string,std::any>" << std::endl;
+                    std::cout << "  Python: list (heterogeneous) / dict" << std::endl;
+                    std::cout << "  Julia:  Any[] / Dict{String,Any}()" << std::endl;
+                    std::cout << "  Go:     []interface{} / map[string]interface{}" << std::endl;
+                    std::cout << "  Ruby:   Array / Hash" << std::endl;
+                    std::cout << "  Rust:   Vec<Box<dyn Any>> / HashMap<String,Box<dyn Any>>" << std::endl;
                 } else if (topic == "nlp") {
                     std::cout << "Module: nlp — Natural Language Processing" << std::endl;
                     std::cout << "  Used internally by mobl.dictate() for speech-to-structured-JSON." << std::endl;
@@ -1627,6 +1658,144 @@ public:
                     std::cout << "  Go:     no built-in REPL" << std::endl;
                     std::cout << "  Ruby:   irb" << std::endl;
                     std::cout << "  Rust:   no built-in REPL (evcxr external)" << std::endl;
+                } else if (topic == "len") {
+                    std::cout << "Function: len(x) — return the length of a string or vector" << std::endl;
+                    std::cout << "Params:   x — string or vector" << std::endl;
+                    std::cout << "Returns:  double (integer value)" << std::endl;
+                    std::cout << "  len(\"hello\")        -> 5" << std::endl;
+                    std::cout << "  len([1.0, 2.0, 3.0]) -> 3" << std::endl;
+                    std::cout << "  len(\"\")              -> 0" << std::endl;
+                    std::cout << "  len([])              -> 0" << std::endl;
+                    std::cout << "Note:  For strings, also available as s.length / s.size / s.count" << std::endl;
+                    std::cout << "       For vectors, also available as v.length / v.size / v.count" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  string s = \"Gem\"" << std::endl;
+                    std::cout << "  sys.print(len(s))          # 3" << std::endl;
+                    std::cout << "  sys.print(s.length)        # 3  (same)" << std::endl;
+                    std::cout << "  int v = [10.0, 20.0, 30.0]" << std::endl;
+                    std::cout << "  sys.print(len(v))          # 3" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    s.size() / v.size()" << std::endl;
+                    std::cout << "  Python: len(s) / len(v)" << std::endl;
+                    std::cout << "  Julia:  length(s) / length(v)" << std::endl;
+                    std::cout << "  Go:     len(s) / len(v)" << std::endl;
+                    std::cout << "  Ruby:   s.length / v.length" << std::endl;
+                    std::cout << "  Rust:   s.len() / v.len()" << std::endl;
+                } else if (topic == "type") {
+                    std::cout << "Function: type(x) — return the runtime type of a value as a string" << std::endl;
+                    std::cout << "Params:   x — any value" << std::endl;
+                    std::cout << "Returns:  string — one of: \"int\", \"double\", \"string\", \"bool\", \"vector\", \"object\", \"nil\"" << std::endl;
+                    std::cout << "  type(42)           -> \"double\"  (all numbers are double internally)" << std::endl;
+                    std::cout << "  type(3.14)         -> \"double\"" << std::endl;
+                    std::cout << "  type(\"hello\")      -> \"string\"" << std::endl;
+                    std::cout << "  type(true)         -> \"bool\"" << std::endl;
+                    std::cout << "  type([1.0, 2.0])   -> \"vector\"" << std::endl;
+                    std::cout << "  type(nil)          -> \"nil\"" << std::endl;
+                    std::cout << "Example:" << std::endl;
+                    std::cout << "  int x = 5" << std::endl;
+                    std::cout << "  sys.print(type(x))         # double" << std::endl;
+                    std::cout << "  string s = \"hi\"" << std::endl;
+                    std::cout << "  if type(s) == \"string\" sys.print(\"it's a string\") end" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    typeid(x).name()  (compile-time; not runtime string)" << std::endl;
+                    std::cout << "  Python: type(x).__name__" << std::endl;
+                    std::cout << "  Julia:  typeof(x)" << std::endl;
+                    std::cout << "  Go:     reflect.TypeOf(x).String()" << std::endl;
+                    std::cout << "  Ruby:   x.class.name" << std::endl;
+                    std::cout << "  Rust:   std::any::type_name::<T>()  (compile-time)" << std::endl;
+                } else if (topic == "for") {
+                    std::cout << "Loops in Gem — Gem has no 'for' keyword; use 'while' or itr.range()" << std::endl;
+                    std::cout << "Range loop (most common):" << std::endl;
+                    std::cout << "  int v = itr.range(5)   # [0,1,2,3,4]" << std::endl;
+                    std::cout << "  int i = 0" << std::endl;
+                    std::cout << "  while i < v.length" << std::endl;
+                    std::cout << "    sys.print(v[i])" << std::endl;
+                    std::cout << "    i += 1" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "Counted loop (C-style for equivalent):" << std::endl;
+                    std::cout << "  int i = 0" << std::endl;
+                    std::cout << "  while i < 10" << std::endl;
+                    std::cout << "    sys.print(i)" << std::endl;
+                    std::cout << "    i += 1" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "Iterate over vector elements:" << std::endl;
+                    std::cout << "  int data = [10.0, 20.0, 30.0]" << std::endl;
+                    std::cout << "  int i = 0" << std::endl;
+                    std::cout << "  while i < data.length" << std::endl;
+                    std::cout << "    sys.print(data[i])" << std::endl;
+                    std::cout << "    i += 1" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "Functional loop (itr module):" << std::endl;
+                    std::cout << "  int i = 0" << std::endl;
+                    std::cout << "  itr.while(fun() i < 5 end, fun() sys.print(i); i += 1 end)" << std::endl;
+                    std::cout << "See also: help \"while\"  help \"itr\"  help \"vectors\"" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    for (int i = 0; i < 10; i++) { ... }" << std::endl;
+                    std::cout << "  Python: for i in range(10): ..." << std::endl;
+                    std::cout << "  Julia:  for i in 1:10 ... end" << std::endl;
+                    std::cout << "  Go:     for i := 0; i < 10; i++ { ... }" << std::endl;
+                    std::cout << "  Ruby:   10.times { |i| ... }  /  (0...10).each { |i| ... }" << std::endl;
+                    std::cout << "  Rust:   for i in 0..10 { ... }" << std::endl;
+                } else if (topic == "return") {
+                    std::cout << "Return values in Gem — Gem uses implicit return (last expression)" << std::endl;
+                    std::cout << "There is no 'return' keyword. The last expression in a fun body is returned." << std::endl;
+                    std::cout << "Examples:" << std::endl;
+                    std::cout << "  fun add(a, b) a + b end          # returns a+b" << std::endl;
+                    std::cout << "  fun greet(name) \"Hello \" + name end  # returns string" << std::endl;
+                    std::cout << "  fun max(a, b)" << std::endl;
+                    std::cout << "    if a > b a else b end          # if/else is an expression" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "  fun fact(n)" << std::endl;
+                    std::cout << "    if n < 2 1 else n * fact(n-1) end" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "Early exit pattern (use a flag or restructure):" << std::endl;
+                    std::cout << "  fun safe_div(a, b)" << std::endl;
+                    std::cout << "    if b == 0 0.0 else a / b end" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "Notes:   Functions with no expression return nil." << std::endl;
+                    std::cout << "         if/else blocks are expressions — their value is the last expr." << std::endl;
+                    std::cout << "See also: help \"fun\"  help \"if\"" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    return expr;  (explicit)" << std::endl;
+                    std::cout << "  Python: return expr  (explicit)" << std::endl;
+                    std::cout << "  Julia:  last expr implicit  /  return expr explicit" << std::endl;
+                    std::cout << "  Go:     return expr  (explicit)" << std::endl;
+                    std::cout << "  Ruby:   last expr implicit  /  return expr explicit" << std::endl;
+                    std::cout << "  Rust:   last expr without ; implicit  /  return expr explicit" << std::endl;
+                } else if (topic == "scope" || topic == "globals" || topic == "_globals" || topic == "global") {
+                    std::cout << "Scope & Globals in Gem — underscore prefix = global scope" << std::endl;
+                    std::cout << "Rule:  Variables starting with '_' are global; all others are local." << std::endl;
+                    std::cout << "Local variables:" << std::endl;
+                    std::cout << "  int x = 10          # local to current scope" << std::endl;
+                    std::cout << "  fun foo()" << std::endl;
+                    std::cout << "    int y = 20        # local to foo; not visible outside" << std::endl;
+                    std::cout << "    sys.print(y)" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "Global variables (underscore prefix):" << std::endl;
+                    std::cout << "  _count = 0          # global; visible everywhere" << std::endl;
+                    std::cout << "  fun increment()" << std::endl;
+                    std::cout << "    _count += 1       # modifies the global" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "  increment()" << std::endl;
+                    std::cout << "  sys.print(_count)   # 1" << std::endl;
+                    std::cout << "Object attributes (dot prefix inside obj):" << std::endl;
+                    std::cout << "  obj Counter(start)" << std::endl;
+                    std::cout << "    .n = start        # instance attribute" << std::endl;
+                    std::cout << "    fun inc() .n += 1 end" << std::endl;
+                    std::cout << "    fun get() .n end" << std::endl;
+                    std::cout << "  end" << std::endl;
+                    std::cout << "  Counter c = Counter(0)" << std::endl;
+                    std::cout << "  c.inc(); sys.print(c.get())  # 1" << std::endl;
+                    std::cout << "Notes:   No 'global' keyword needed — the _ prefix is the signal." << std::endl;
+                    std::cout << "         Parent attributes inside obj use '..' prefix (e.g. ..name)." << std::endl;
+                    std::cout << "See also: help \"obj\"  help \"int\"" << std::endl;
+                    std::cout << "Comparisons:" << std::endl;
+                    std::cout << "  C++:    global: file-scope variable; local: block-scope" << std::endl;
+                    std::cout << "  Python: global keyword inside function to modify global" << std::endl;
+                    std::cout << "  Julia:  global keyword inside function to modify global" << std::endl;
+                    std::cout << "  Go:     package-level var is global; := is local" << std::endl;
+                    std::cout << "  Ruby:   $var is global; local is default" << std::endl;
+                    std::cout << "  Rust:   static mut for global; let for local" << std::endl;
                 } else if (topic == "all") {
                     // Generate helpfull_DATETIME.md
                     auto t = std::time(nullptr);
@@ -1944,8 +2113,21 @@ public:
                     std::cout << "  k3s, vm, mobl, trek, seo, drvr, art, go, ruby, node, rust," << std::endl;
                     std::cout << "  fun, obj, use, if, else, while, end, alias, his, lib, exit, quit," << std::endl;
                     std::cout << "  int, double, string, bool, true, false, null, nil, nan," << std::endl;
-                    std::cout << "  isnil, isnan, tonum, tostr, langport, operators, ;, vectors, repl" << std::endl;
+                    std::cout << "  isnil, isnan, tonum, tostr, len, type, langport, operators, ;, vectors, repl," << std::endl;
+                    std::cout << "  for, return, scope" << std::endl;
                     return std::make_shared<GemValue>(filename);
+                } else {
+                    std::cout << "No help found for: \"" << topic << "\"" << std::endl;
+                    std::cout << "Available topics:" << std::endl;
+                    std::cout << "  Modules:   sys math ai text rex algo bev file zip nlp img www cdn geo" << std::endl;
+                    std::cout << "             astro fin bsm chart data tcp thread cpp itr k3s vm" << std::endl;
+                    std::cout << "             mobl trek seo drvr art go ruby node rust python cython" << std::endl;
+                    std::cout << "  Keywords:  fun obj use if else while end alias his lib exit quit langport" << std::endl;
+                    std::cout << "  Types:     int double string bool" << std::endl;
+                    std::cout << "  Literals:  true false null nil nan" << std::endl;
+                    std::cout << "  Functions: isnil isnan tonum tostr len type" << std::endl;
+                    std::cout << "  Concepts:  for return scope vectors operators repl ;" << std::endl;
+                    std::cout << "Try: help \"fun\"  help \"while\"  help \"sys\"  help \"scope\"" << std::endl;
                 }
             }
             return std::make_shared<GemValue>();
@@ -2494,6 +2676,179 @@ public:
             double t1 = std::holds_alternative<double>(args[0]->value) ? std::get<double>(args[0]->value) : 0.0;
             double t2 = std::holds_alternative<double>(args[1]->value) ? std::get<double>(args[1]->value) : 0.0;
             return std::make_shared<GemValue>((t2 - t1) / 86400.0);
+        }, true };
+
+        // --- Heterogeneous multidimensional array ---
+
+        // algo.array([dim1, dim2, ...], [fill])
+        // Creates a nested heterogeneous array. Dimensions are given as a numeric vector.
+        // Optional fill value (default nil). Returns vector<GemValue>.
+        methods["array"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(std::vector<std::shared_ptr<GemValue>>{});
+            // Collect dimensions
+            std::vector<int> dims;
+            if (std::holds_alternative<std::vector<double>>(args[0]->value)) {
+                for (double d : std::get<std::vector<double>>(args[0]->value)) dims.push_back((int)d);
+            } else if (std::holds_alternative<double>(args[0]->value)) {
+                dims.push_back((int)std::get<double>(args[0]->value));
+            }
+            if (dims.empty()) return std::make_shared<GemValue>(std::vector<std::shared_ptr<GemValue>>{});
+            auto fill = (args.size() > 1) ? args[1] : std::make_shared<GemValue>();
+            // Recursive builder
+            std::function<std::shared_ptr<GemValue>(int)> build = [&](int depth) -> std::shared_ptr<GemValue> {
+                int n = dims[depth];
+                std::vector<std::shared_ptr<GemValue>> v;
+                v.reserve(n);
+                if (depth + 1 == (int)dims.size()) {
+                    for (int i = 0; i < n; ++i) v.push_back(std::make_shared<GemValue>(*fill));
+                } else {
+                    for (int i = 0; i < n; ++i) v.push_back(build(depth + 1));
+                }
+                return std::make_shared<GemValue>(v);
+            };
+            return build(0);
+        }, true };
+
+        // algo.array_get(arr, i0, i1, ...) — index into nested array
+        methods["array_get"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2) return std::make_shared<GemValue>();
+            auto cur = args[0];
+            for (size_t a = 1; a < args.size(); ++a) {
+                if (!std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(cur->value)) return std::make_shared<GemValue>();
+                auto& v = std::get<std::vector<std::shared_ptr<GemValue>>>(cur->value);
+                int idx = std::holds_alternative<double>(args[a]->value) ? (int)std::get<double>(args[a]->value) : 0;
+                if (idx < 0 || idx >= (int)v.size()) return std::make_shared<GemValue>();
+                cur = v[idx];
+            }
+            return cur ? cur : std::make_shared<GemValue>();
+        }, true };
+
+        // algo.array_set(arr, val, i0, i1, ...) — set element in nested array (mutates in-place)
+        methods["array_set"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 3) return std::make_shared<GemValue>(false);
+            auto cur = args[0];
+            auto val = args[1];
+            // Navigate to parent of target
+            for (size_t a = 2; a < args.size() - 1; ++a) {
+                if (!std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(cur->value)) return std::make_shared<GemValue>(false);
+                auto& v = std::get<std::vector<std::shared_ptr<GemValue>>>(cur->value);
+                int idx = std::holds_alternative<double>(args[a]->value) ? (int)std::get<double>(args[a]->value) : 0;
+                if (idx < 0 || idx >= (int)v.size()) return std::make_shared<GemValue>(false);
+                cur = v[idx];
+            }
+            if (!std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(cur->value)) return std::make_shared<GemValue>(false);
+            auto& v = std::get<std::vector<std::shared_ptr<GemValue>>>(cur->value);
+            int last = std::holds_alternative<double>(args.back()->value) ? (int)std::get<double>(args.back()->value) : 0;
+            if (last < 0 || last >= (int)v.size()) return std::make_shared<GemValue>(false);
+            v[last] = val;
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // algo.array_push(arr, val) — append val to a 1-D heterogeneous array
+        methods["array_push"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2 || !std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(false);
+            std::get<std::vector<std::shared_ptr<GemValue>>>(args[0]->value).push_back(args[1]);
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // algo.array_len(arr) — length of outermost dimension
+        methods["array_len"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(0.0);
+            if (std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>((double)std::get<std::vector<std::shared_ptr<GemValue>>>(args[0]->value).size());
+            return std::make_shared<GemValue>(0.0);
+        }, true };
+
+        // algo.array_shape(arr) — returns numeric vector of dimensions (walks first element at each level)
+        methods["array_shape"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty()) return std::make_shared<GemValue>(std::vector<double>{});
+            std::vector<double> shape;
+            auto cur = args[0];
+            while (std::holds_alternative<std::vector<std::shared_ptr<GemValue>>>(cur->value)) {
+                auto& v = std::get<std::vector<std::shared_ptr<GemValue>>>(cur->value);
+                shape.push_back((double)v.size());
+                if (v.empty()) break;
+                cur = v[0];
+            }
+            return std::make_shared<GemValue>(shape);
+        }, true };
+
+        // --- Dictionary ---
+
+        // algo.dict() — create empty dictionary; returns map<string,GemValue>
+        methods["dict"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            std::map<std::string, std::shared_ptr<GemValue>> m;
+            // Optional: algo.dict("k1", v1, "k2", v2, ...)
+            for (size_t i = 0; i + 1 < args.size(); i += 2) {
+                if (std::holds_alternative<std::string>(args[i]->value))
+                    m[std::get<std::string>(args[i]->value)] = args[i + 1];
+            }
+            return std::make_shared<GemValue>(m);
+        }, true };
+
+        // algo.dict_set(d, key, val) — set key in dict (mutates in-place), returns bool
+        methods["dict_set"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 3 || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(false);
+            std::string key = args[1]->toString();
+            std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value)[key] = args[2];
+            return std::make_shared<GemValue>(true);
+        }, true };
+
+        // algo.dict_get(d, key) — get value by key, nil if missing
+        methods["dict_get"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2 || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>();
+            auto& m = std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value);
+            std::string key = args[1]->toString();
+            auto it = m.find(key);
+            return (it != m.end()) ? it->second : std::make_shared<GemValue>();
+        }, true };
+
+        // algo.dict_del(d, key) — remove key from dict, returns bool
+        methods["dict_del"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2 || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(false);
+            auto& m = std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value);
+            return std::make_shared<GemValue>((bool)m.erase(args[1]->toString()));
+        }, true };
+
+        // algo.dict_has(d, key) — true if key exists
+        methods["dict_has"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.size() < 2 || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(false);
+            auto& m = std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value);
+            return std::make_shared<GemValue>(m.count(args[1]->toString()) > 0);
+        }, true };
+
+        // algo.dict_keys(d) — returns string vector of all keys
+        methods["dict_keys"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty() || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(std::vector<std::string>{});
+            auto& m = std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value);
+            std::vector<std::string> keys;
+            keys.reserve(m.size());
+            for (auto& kv : m) keys.push_back(kv.first);
+            return std::make_shared<GemValue>(keys);
+        }, true };
+
+        // algo.dict_vals(d) — returns heterogeneous vector of all values
+        methods["dict_vals"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty() || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(std::vector<std::shared_ptr<GemValue>>{});
+            auto& m = std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value);
+            std::vector<std::shared_ptr<GemValue>> vals;
+            vals.reserve(m.size());
+            for (auto& kv : m) vals.push_back(kv.second);
+            return std::make_shared<GemValue>(vals);
+        }, true };
+
+        // algo.dict_len(d) — number of key/value pairs
+        methods["dict_len"] = { [](std::vector<std::shared_ptr<GemValue>> args) -> std::shared_ptr<GemValue> {
+            if (args.empty() || !std::holds_alternative<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value))
+                return std::make_shared<GemValue>(0.0);
+            return std::make_shared<GemValue>((double)std::get<std::map<std::string, std::shared_ptr<GemValue>>>(args[0]->value).size());
         }, true };
     }
 };

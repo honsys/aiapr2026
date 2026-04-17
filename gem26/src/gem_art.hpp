@@ -210,6 +210,20 @@ public:
             return std::make_shared<GemValue>(mermaidToAscii(path));
         }, true };
 
+        // art.inheritance([path]) → open interactive zoom/pan inheritance diagram HTML
+        methods["inheritance"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
+            std::string htmlPath = (args.size() > 0) ? args[0]->toString() : "docs/gem_inheritance.html";
+#ifdef __APPLE__
+            std::string cmd = "open \"" + htmlPath + "\"";
+#elif defined(_WIN32)
+            std::string cmd = "start \"\" \"" + htmlPath + "\"";
+#else
+            std::string cmd = "xdg-open \"" + htmlPath + "\"";
+#endif
+            std::system(cmd.c_str());
+            return std::make_shared<GemValue>(htmlPath);
+        }, true };
+
         // art.readme([path]) → ASCII art summary of README.md
         methods["readme"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
             std::string path = (args.size() > 0) ? args[0]->toString() : "README.md";

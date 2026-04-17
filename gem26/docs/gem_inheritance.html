@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gem Object Inheritance Diagram</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1e1e2e; font-family: sans-serif; overflow: hidden; }
+  #toolbar {
+    position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.6); border-radius: 8px; padding: 6px 14px;
+    display: flex; gap: 10px; align-items: center; z-index: 10; color: #cdd6f4;
+    font-size: 13px;
+  }
+  #toolbar button {
+    background: #313244; border: 1px solid #45475a; color: #cdd6f4;
+    border-radius: 5px; padding: 3px 10px; cursor: pointer; font-size: 13px;
+  }
+  #toolbar button:hover { background: #45475a; }
+  #canvas {
+    width: 100vw; height: 100vh; cursor: grab; user-select: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #canvas.dragging { cursor: grabbing; }
+  #svg-wrap {
+    transform-origin: 0 0;
+    background: white; border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  #svg-wrap svg { display: block; }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <span>Gem Object Inheritance Diagram</span>
+  <button onclick="resetView()">Reset</button>
+  <button onclick="zoomIn()">＋</button>
+  <button onclick="zoomOut()">－</button>
+  <span id="zoom-label">100%</span>
+</div>
+<div id="canvas">
+  <div id="svg-wrap"></div>
+</div>
+<script>
+  // Load the SVG inline
+  fetch('gem_mindmap-2.svg')
+    .then(r => r.text())
+    .then(svg => {
+      document.getElementById('svg-wrap').innerHTML = svg;
+      resetView();
+    });
+
+  let scale = 1, tx = 0, ty = 0;
+  let dragging = false, startX, startY, startTx, startTy;
+
+  const canvas = document.getElementById('canvas');
+  const wrap = document.getElementById('svg-wrap');
+
+  function applyTransform() {
+    wrap.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    document.getElementById('zoom-label').textContent = Math.round(scale * 100) + '%';
+  }
+
+  function resetView() {
+    const svgEl = wrap.querySelector('svg');
+    if (!svgEl) return;
+    const vw = canvas.clientWidth, vh = canvas.clientHeight;
+    const sw = svgEl.viewBox.baseVal.width || svgEl.getBoundingClientRect().width;
+    const sh = svgEl.viewBox.baseVal.height || svgEl.getBoundingClientRect().height;
+    scale = Math.min(vw / sw, vh / sh) * 0.9;
+    tx = (vw - sw * scale) / 2;
+    ty = (vh - sh * scale) / 2;
+    applyTransform();
+  }
+
+  function zoomIn()  { scale = Math.min(scale * 1.2, 10); applyTransform(); }
+  function zoomOut() { scale = Math.max(scale / 1.2, 0.05); applyTransform(); }
+
+  // Mouse wheel zoom (centered on cursor)
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const delta = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+    const newScale = Math.min(Math.max(scale * delta, 0.05), 10);
+    tx = mx - (mx - tx) * (newScale / scale);
+    ty = my - (my - ty) * (newScale / scale);
+    scale = newScale;
+    applyTransform();
+  }, { passive: false });
+
+  // Drag to pan
+  canvas.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    dragging = true; canvas.classList.add('dragging');
+    startX = e.clientX; startY = e.clientY;
+    startTx = tx; startTy = ty;
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    tx = startTx + e.clientX - startX;
+    ty = startTy + e.clientY - startY;
+    applyTransform();
+  });
+  window.addEventListener('mouseup', () => {
+    dragging = false; canvas.classList.remove('dragging');
+  });
+
+  // Touch support
+  let lastTouchDist = null;
+  canvas.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      dragging = true;
+      startX = e.touches[0].clientX; startY = e.touches[0].clientY;
+      startTx = tx; startTy = ty;
+    }
+    if (e.touches.length === 2) {
+      lastTouchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY);
+    }
+  }, { passive: true });
+  canvas.addEventListener('touchmove', e => {
+    if (e.touches.length === 1 && dragging) {
+      tx = startTx + e.touches[0].clientX - startX;
+      ty = startTy + e.touches[0].clientY - startY;
+      applyTransform();
+    }
+    if (e.touches.length === 2 && lastTouchDist) {
+      const d = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY);
+      scale = Math.min(Math.max(scale * (d / lastTouchDist), 0.05), 10);
+      lastTouchDist = d;
+      applyTransform();
+    }
+  }, { passive: true });
+  canvas.addEventListener('touchend', () => { dragging = false; lastTouchDist = null; });
+</script>
+</body>
+</html>

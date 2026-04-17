@@ -4,6 +4,23 @@
 
 Welcome to the **Gem Language** — a modern, expressive STEM language built by Gemini-CLI and Kiro-CLI using C++26 for AI, scientific computing, quantitative finance, and cross-platform application development.
 
+## Language Mindmap
+
+<!-- Static render (GitHub, npm, etc.) -->
+<img src="../docs/gem_mindmap.svg" alt="Gem Language Mindmap" width="100%"/>
+
+<details>
+<summary>🔍 Interactive mindmap — drag to pan, scroll to zoom</summary>
+
+<div style="overflow:hidden;border:1px solid #333;border-radius:8px;">
+
+![Gem Mindmap](../docs/gem_mindmap.png)
+
+> Open [../docs/gem_mindmap.svg](../docs/gem_mindmap.svg) directly in a browser for the fully interactive pan/zoom version.
+
+</div>
+</details>
+
 ## Key Features
 
 - **Explicit Typing with Initial Values**: All variable declarations require an initial value (`int x = 0`).
@@ -88,6 +105,9 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ### 13. Python & Cython Polyglot
 - **[42_python_cython.g](42_python_cython.g)**: `python` and `cython` builtins — run/compile Python scripts, byte-compile `.py` → `.pyc`, transpile `.pyx` → C → `.so` native extension, pip package management.
 
+### 14. Heterogeneous Arrays & Dictionaries
+- **[43_arrays_dicts.g](43_arrays_dicts.g)**: `algo.array` and `algo.dict` — allocate and manipulate heterogeneous multidimensional arrays of arbitrary content, and dictionary objects with arbitrary key/value tuples. Covers 1-D arrays, N-D matrices, dict basics, dict-of-arrays, and array-of-dicts table patterns.
+
 ---
 
 ## Help & Builtins
@@ -114,6 +134,7 @@ CLI Options:
 Available Builtin Modules:
   sys, math, ai, text, rex, algo, bev, file, zip, nlp, img, www, cdn, geo,
   cpp, tcp, itr, thread, data, k3s, vm, go, ruby, node, rust,
+  python, cython,
   fin, bsm, chart, astro, mobl, trek, seo, drvr, art
 
 Keywords for Documentation:
@@ -122,7 +143,7 @@ Keywords for Documentation:
   true, false, null, nil, nan
 
 Builtin Functions:
-  isnil(x)  isnan(x)  tonum(x)  tostr(x)
+  isnil(x)  isnan(x)  tonum(x)  tostr(x)  len(x)  type(x)
 
 Operators:
   Arithmetic:   +  -  *  /
@@ -329,13 +350,27 @@ All functions accept optional flags string (`"i"` = case-insensitive):
 
 Comparisons: C++=`std::regex` · Python=`re` · Julia=`Regex/match()` · Go=`regexp` · Ruby=`=~/gsub` · Rust=`regex crate`
 
-### algo — Algorithms & Time
+### algo — Algorithms, Arrays & Dictionaries
 - `algo.add(...)` — sum all numeric arguments
 - `algo.quicksort(v)`, `algo.sort(v, [start], [end])` — sort numeric vectors
 - `algo.now()` — current local time as string
 - `algo.date_add(ts, days)`, `algo.date_diff(t1, t2)` — date arithmetic
+- `algo.array([d1,d2,...], [fill])` — allocate heterogeneous N-D array; fill default nil
+- `algo.array_get(arr, i0, i1, ...)` — index into nested array
+- `algo.array_set(arr, val, i0, i1, ...)` — set element in-place
+- `algo.array_push(arr, val)` — append to 1-D array
+- `algo.array_len(arr)` — outermost dimension length
+- `algo.array_shape(arr)` — dimensions as numeric vector
+- `algo.dict([k,v,...])` — create dictionary, optional initial key/value pairs
+- `algo.dict_set(d, key, val)` — set key (mutates in-place)
+- `algo.dict_get(d, key)` — get value by key (nil if missing)
+- `algo.dict_del(d, key)` — remove key
+- `algo.dict_has(d, key)` — existence check
+- `algo.dict_keys(d)` — all keys as string vector
+- `algo.dict_vals(d)` — all values as heterogeneous array
+- `algo.dict_len(d)` — entry count
 
-Comparisons: C++=`std::sort/std::chrono` · Python=`sorted()/datetime` · Julia=`sort!()/Dates` · Go=`sort.Slice/time` · Ruby=`Array#sort!/Time` · Rust=`slice.sort/SystemTime`
+Comparisons: C++=`std::sort/std::chrono/std::vector<std::any>/std::map` · Python=`sorted()/datetime/list/dict` · Julia=`sort!()/Dates/Any[]/Dict` · Go=`sort.Slice/time/[]interface{}/map` · Ruby=`Array#sort!/Time/Array/Hash` · Rust=`slice.sort/SystemTime/Vec<Box<dyn Any>>/HashMap`
 
 ### tcp — TCP/IP Networking
 - `tcp.listen(port)→int` — bind server socket
