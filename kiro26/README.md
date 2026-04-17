@@ -1,5 +1,17 @@
 # geoip_last
 
+## Language Mindmap
+
+<details>
+<summary>🔍 Interactive mindmap — drag to pan, scroll to zoom</summary>
+
+<div style="overflow:hidden;border:1px solid #333;border-radius:8px;">
+
+<iframe src="../gem26/docs/gem_mindmap.svg" style="width:100%;height:600px;border:none;"></iframe>
+
+</div>
+</details>
+
 Reads login records from `/var/log/wtmp` (the same source as the Unix `last` command) and prints the GeoIP city and country for each remote IP address.
 
 ## Files

@@ -6,6 +6,18 @@ Daniel should devote time to the gem lang dev in vol3 and use revenue from smart
 
 Review list of characters in all vols and create cast of characters appendix with bios; the Vraxx operative needs more attention and her polar opposite the Vraxx preteen Mikey too. Also FoF's grandfather Hector is found somewhere in the Magellenic clouds, and he seems to already have met Golden Eagle, etc.
 
+## Language Mindmap
+
+<details>
+<summary>🔍 Interactive mindmap — drag to pan, scroll to zoom</summary>
+
+<div style="overflow:hidden;border:1px solid #333;border-radius:8px;">
+
+<iframe src="gem26/docs/gem_mindmap.svg" style="width:100%;height:600px;border:none;"></iframe>
+
+</div>
+</details>
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
