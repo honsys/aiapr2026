@@ -7,8 +7,8 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 ## Language Mindmap
 
 <!-- Static render (GitHub, npm, etc.) -->
-<div style="width:100vw;height:100vh;overflow:hidden;">
-<img src="../docs/gem_mindmap.svg" alt="Gem Language Mindmap" style="width:100%;height:100%;object-fit:contain;display:block;"/>
+<div style="position:fixed;top:0;left:0;width:100vw;height:100vh;overflow:hidden;z-index:0;">
+<img src="../docs/gem_mindmap.svg" alt="Gem Language Mindmap" style="width:100%;height:100%;object-fit:fill;display:block;"/>
 </div>
 
 <details>
