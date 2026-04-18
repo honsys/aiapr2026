@@ -4,7 +4,7 @@ This project contains a series of interconnected narratives and technical/humoro
 
 ## Core Narrative: The "Distributed Crown" Saga
 
-The main storyline is divided across four volumes (currently available), centering on Daniel Hahn, his highly capable Border Collie BailieBoy, and his alien friends: the Xylosian scientist FoF (Friend of Friends) and her grandfather, Dr. Hect4.
+The main storyline is divided across four volumes (currently available), centering on Daniel Hahn, his highly capable Border Collie BailieBoy, and his alien friends: the Xylosian scientist FoF (Fifth of Five) and her grandfather, Dr. Hect4.
 
 ### Volume 1: Cyberpunk 314 Atlas 2025 (`vol1cybrpunk3iatlas2025.md`)
 *(Summary pending full read - based on partial content)*

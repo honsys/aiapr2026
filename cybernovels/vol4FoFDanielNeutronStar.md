@@ -124,7 +124,7 @@ Hect4’s hands trembled as he adjusted his spectacles. He looked older, his fac
 
 The terminal displayed a star map of the Large Magellanic Cloud. A single point at the very edge of the satellite galaxy was pulsing with a fierce, violet light. 
 
-*Resonance identified: FoF (Friend of Friends). Status: Critical. Location: Magnetar PSR-J0537, Edge of LMC.*
+*Resonance identified: FoF (Fifth of Five). Status: Critical. Location: Magnetar PSR-J0537, Edge of LMC.*
 
 Beside the coordinates, a new string of 'gem' logic appeared—a protocol for deep-space communication that used Jupiter’s own magnetosphere as a massive signal amplifier. It was a gift from the Sentinel, a one-time bypass of the limitations of Xylosian technology.
 
@@ -337,7 +337,7 @@ Despite the crushing tension, Daniel let out a sharp bark of laughter. Hect4 chu
 *   **Council of Light**: The high governing body of Xylosia Prime, composed of evolved 'Deep-Thinkers'.
 *   **Distributed Crown**: The architectural philosophy of the 11-ship fleet and the Xylosian civilization.
 *   **Far Reach**: An ancient, advanced civilization that built the warship wreckage; also known as the "Glass-Thinkers".
-*   **FoF (Friend of Friends)**: A Xylosian mentor and scientist.
+*   **FoF (Fifth of Five)**: A Xylosian mentor and scientist.
 *   **'gem' Language**: A non-linear programming language based on resonance and symbiosis.
 *   **Glass-Mind**: The primary, crystalline AI of a Far Reach dreadnought.
 *   **GrahamCracker**: FoF's rescue ginger-cat.
