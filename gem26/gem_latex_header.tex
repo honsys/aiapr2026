@@ -1,0 +1,20 @@
+\usepackage{fancyhdr}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{margin=1in}
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[rotate=45, scale=3.5, text opacity=0.10, color=gray]
+      at (current page.center)
+      {\textsf{Gem v0.1.0 \textperiodcentered\ 2026-04-18}};
+  \end{tikzpicture}%
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{Gem Language} v0.1.0}
+\fancyhead[R]{\small 2026-04-18}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gem Mindmap 3D (WebGPU)</title>
+    <style>
+        body { margin: 0; background: #050505; color: white; font-family: sans-serif; overflow: hidden; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+        #info { position: absolute; top: 10px; left: 10px; pointer-events: none; text-shadow: 1px 1px 2px black; }
+        #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2em; }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>Gem Language Mindmap 3D</h1>
+        <p>Raw WebGPU • Dogwood Tree Metaphor • Drag to Orbit • Scroll to Zoom</p>
+        <div id="node-info"></div>
+    </div>
+    <div id="loading">Initializing WebGPU...</div>
+    <canvas id="gpuCanvas"></canvas>
+
+    <script type="module">
+        // --- WGSL Shaders ---
+        const shaderSource = `
+            struct Uniforms {
+                viewProjectionMatrix: mat4x4<f32>,
+                modelMatrix: mat4x4<f32>,
+            };
+            @group(0) @binding(0) var<uniform> uniforms: Uniforms;
+
+            struct VertexInput {
+                @location(0) position: vec3<f32>,
+                @location(1) color: vec3<f32>,
+            };
+
+            struct VertexOutput {
+                @builtin(position) Position: vec4<f32>,
+                @location(0) color: vec3<f32>,
+            };
+
+            @vertex
+            fn vs_main(input: VertexInput) -> VertexOutput {
+                var output: VertexOutput;
+                output.Position = uniforms.viewProjectionMatrix * uniforms.modelMatrix * vec4<f32>(input.position, 1.0);
+                output.color = input.color;
+                return output;
+            }
+
+            @fragment
+            fn fs_main(input: VertexOutput) -> @location(0) vec4<f32> {
+                return vec4<f32>(input.color, 1.0);
+            }
+        `;
+
+        // --- Linear Algebra Utils ---
+        const mat4 = {
+            identity: () => new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]),
+            multiply: (a, b) => {
+                const out = new Float32Array(16);
+                for (let i = 0; i < 4; i++) {
+                    for (let j = 0; j < 4; j++) {
+                        out[i*4+j] = a[i*4+0]*b[0*4+j] + a[i*4+1]*b[1*4+j] + a[i*4+2]*b[2*4+j] + a[i*4+3]*b[3*4+j];
+                    }
+                }
+                return out;
+            },
+            perspective: (fovy, aspect, near, far) => {
+                const f = 1.0 / Math.tan(fovy / 2), nf = 1 / (near - far);
+                return new Float32Array([f/aspect,0,0,0, 0,f,0,0, 0,0,(far+near)*nf,-1, 0,0,2*far*near*nf,0]);
+            },
+            lookAt: (eye, center, up) => {
+                const z = normalize(subtract(eye, center));
+                const x = normalize(cross(up, z));
+                const y = cross(z, x);
+                return new Float32Array([x[0],y[0],z[0],0, x[1],y[1],z[1],0, x[2],y[2],z[2],0, -dot(x,eye),-dot(y,eye),-dot(z,eye),1]);
+            }
+        };
+        const subtract = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]];
+        const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+        const normalize = (a) => {
+            const l = Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]);
+            return [a[0]/l, a[1]/l, a[2]/l];
+        };
+        const dot = (a, b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+
+        // --- Mindmap Parser ---
+        async function fetchAndParseMindmap() {
+            try {
+                const response = await fetch('gem_mindmap.md');
+                const text = await response.text();
+                const mermaidBlock = text.match(/```mermaid\s+mindmap([\s\S]*?)```/);
+                if (!mermaidBlock) throw new Error("No mermaid mindmap found");
+                
+                const lines = mermaidBlock[1].split('\n').filter(l => l.trim() !== "");
+                const root = { name: "Gem", children: [], depth: 0 };
+                const stack = [root];
+                
+                for (let line of lines) {
+                    const indent = line.match(/^\s*/)[0].length;
+                    const content = line.trim();
+                    if (content === "mindmap" || content.startsWith("root")) continue;
+                    
+                    const node = { name: content, children: [], depth: indent };
+                    while (stack.length > 1 && stack[stack.length - 1].depth >= indent) {
+                        stack.pop();
+                    }
+                    stack[stack.length - 1].children.push(node);
+                    stack.push(node);
+                }
+                return root;
+            } catch (e) {
+                console.error("Parsing error:", e);
+                return { name: "Error", children: [{ name: e.message }] };
+            }
+        }
+
+        // --- Tree Geometry Generator ---
+        function generateTreeGeometry(root) {
+            const vertices = [];
+            const indices = [];
+            let vertexCount = 0;
+
+            function addLine(p1, p2, color) {
+                vertices.push(...p1, ...color);
+                vertices.push(...p2, ...color);
+                indices.push(vertexCount, vertexCount + 1);
+                vertexCount += 2;
+            }
+
+            function addPetal(pos, color) {
+                const s = 0.08;
+                // Dogwood petals often have 4 bracts. 
+                // We'll draw 4 "petals" around the point.
+                for (let i = 0; i < 4; i++) {
+                    const ang = (i * Math.PI * 2) / 4;
+                    const p2 = [
+                        pos[0] + s * Math.cos(ang),
+                        pos[1] + s * Math.sin(ang),
+                        pos[2] + (Math.random() - 0.5) * 0.05
+                    ];
+                    addLine(pos, p2, color);
+                    // Add a tiny notch at the end
+                    const p3 = [p2[0]*1.1, p2[1]*1.1, p2[2]];
+                    addLine(p2, p3, [1, 0.5, 0.5]); // pink tip
+                }
+            }
+
+            const barkColor = [0.45, 0.3, 0.2];
+            const leafColor = [0.95, 0.95, 1.0]; // White dogwood petals
+
+            function traverse(node, start, angleH, angleV, length, depth) {
+                // Calculate end point with some noise
+                const noise = (Math.random() - 0.5) * 0.2;
+                const end = [
+                    start[0] + length * Math.sin(angleV + noise) * Math.cos(angleH),
+                    start[1] + length * Math.cos(angleV + noise),
+                    start[2] + length * Math.sin(angleV + noise) * Math.sin(angleH)
+                ];
+                
+                addLine(start, end, barkColor);
+
+                if (node.children.length === 0) {
+                    addPetal(end, leafColor);
+                } else {
+                    const count = node.children.length;
+                    // Spread branches out
+                    const spreadV = 0.4 + (Math.random() * 0.4);
+                    const spreadH = (Math.PI * 2) / count;
+                    
+                    node.children.forEach((child, i) => {
+                        const nextH = angleH + (i * spreadH);
+                        const nextV = angleV + spreadV * (1.0 - depth * 0.1);
+                        // Reduce length and recurse
+                        traverse(child, end, nextH, nextV, length * 0.85, depth + 1);
+                    });
+                }
+            }
+
+            // Start from trunk
+            traverse(root, [0, -1.5, 0], 0, 0, 0.8, 0);
+            return { vertices: new Float32Array(vertices), indices: new Uint32Array(indices) };
+        }
+
+        // --- WebGPU Main ---
+        async function init() {
+            if (!navigator.gpu) {
+                document.getElementById('loading').innerText = "WebGPU not supported in this browser.";
+                return;
+            }
+
+            const adapter = await navigator.gpu.requestAdapter();
+            const device = await adapter.requestDevice();
+            const canvas = document.getElementById('gpuCanvas');
+            const context = canvas.getContext('webgpu');
+
+            const presentationFormat = navigator.gpu.getPreferredCanvasFormat();
+            context.configure({ device, format: presentationFormat, alphaMode: 'premultiplied' });
+
+            const root = await fetchAndParseMindmap();
+            const tree = generateTreeGeometry(root);
+
+            const vertexBuffer = device.createBuffer({
+                size: tree.vertices.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
+            });
+            device.queue.writeBuffer(vertexBuffer, 0, tree.vertices);
+
+            const indexBuffer = device.createBuffer({
+                size: tree.indices.byteLength,
+                usage: GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST,
+            });
+            device.queue.writeBuffer(indexBuffer, 0, tree.indices);
+
+            const uniformBufferSize = 16 * 4 * 2; // two mat4
+            const uniformBuffer = device.createBuffer({
+                size: uniformBufferSize,
+                usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+            });
+
+            const shaderModule = device.createShaderModule({ code: shaderSource });
+            const pipeline = device.createRenderPipeline({
+                layout: 'auto',
+                vertex: {
+                    module: shaderModule,
+                    entryPoint: 'vs_main',
+                    buffers: [{
+                        arrayStride: 6 * 4,
+                        attributes: [
+                            { shaderLocation: 0, offset: 0, format: 'float32x3' },
+                            { shaderLocation: 1, offset: 3 * 4, format: 'float32x3' }
+                        ]
+                    }]
+                },
+                fragment: {
+                    module: shaderModule,
+                    entryPoint: 'fs_main',
+                    targets: [{ format: presentationFormat }]
+                },
+                primitive: { topology: 'line-list' }
+            });
+
+            const bindGroup = device.createBindGroup({
+                layout: pipeline.getBindGroupLayout(0),
+                entries: [{ binding: 0, resource: { buffer: uniformBuffer } }]
+            });
+
+            let cameraRotation = { x: 0, y: 0 };
+            let cameraDistance = 5;
+            let isDragging = false;
+            let lastMousePos = { x: 0, y: 0 };
+
+            window.addEventListener('mousedown', e => { isDragging = true; lastMousePos = { x: e.clientX, y: e.clientY }; });
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', e => {
+                if (isDragging) {
+                    cameraRotation.x += (e.clientX - lastMousePos.x) * 0.01;
+                    cameraRotation.y += (e.clientY - lastMousePos.y) * 0.01;
+                    lastMousePos = { x: e.clientX, y: e.clientY };
+                }
+            });
+            window.addEventListener('wheel', e => { cameraDistance += e.deltaY * 0.005; cameraDistance = Math.max(1, Math.min(20, cameraDistance)); });
+
+            function frame() {
+                const aspect = canvas.clientWidth / canvas.clientHeight;
+                const projectionMatrix = mat4.perspective(Math.PI / 4, aspect, 0.1, 100);
+                
+                const eye = [
+                    cameraDistance * Math.cos(cameraRotation.y) * Math.sin(cameraRotation.x),
+                    cameraDistance * Math.sin(cameraRotation.y),
+                    cameraDistance * Math.cos(cameraRotation.y) * Math.cos(cameraRotation.x)
+                ];
+                const viewMatrix = mat4.lookAt(eye, [0, 0.5, 0], [0, 1, 0]);
+                const viewProjectionMatrix = mat4.multiply(projectionMatrix, viewMatrix);
+                const modelMatrix = mat4.identity();
+
+                device.queue.writeBuffer(uniformBuffer, 0, viewProjectionMatrix);
+                device.queue.writeBuffer(uniformBuffer, 64, modelMatrix);
+
+                const commandEncoder = device.createCommandEncoder();
+                const renderPassDescriptor = {
+                    colorAttachments: [{
+                        view: context.getCurrentTexture().createView(),
+                        clearValue: { r: 0.02, g: 0.02, b: 0.02, a: 1.0 },
+                        loadOp: 'clear',
+                        storeOp: 'store',
+                    }]
+                };
+
+                const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
+                passEncoder.setPipeline(pipeline);
+                passEncoder.setBindGroup(0, bindGroup);
+                passEncoder.setVertexBuffer(0, vertexBuffer);
+                passEncoder.setIndexBuffer(indexBuffer, 'uint32');
+                passEncoder.drawIndexed(tree.indices.length);
+                passEncoder.end();
+
+                device.queue.submit([commandEncoder.finish()]);
+                requestAnimationFrame(frame);
+            }
+
+            document.getElementById('loading').style.display = 'none';
+            requestAnimationFrame(frame);
+        }
+
+        init();
+    </script>
+</body>
+</html>

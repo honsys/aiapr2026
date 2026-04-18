@@ -21,8 +21,14 @@ def sn(v):   # scale a plain number (radius, width, stroke-width, etc.)
 
 # ── path d= ──────────────────────────────────────────────────────────────────
 def scale_path_d(d):
-    """All numbers in path d are absolute coords — scale each from center."""
-    return re.sub(r'-?\d+(?:\.\d+)?', lambda m: f"{sc(float(m.group())):.3f}", d)
+    """All numbers in path d are absolute coords — scale each from center.
+       Avoid matching numbers that are part of XML entities like &#10;
+    """
+    parts = re.split(r'(&#\d+;)', d)
+    for i in range(len(parts)):
+        if not parts[i].startswith('&#'):
+            parts[i] = re.sub(r'-?\d+(?:\.\d+)?', lambda m: f"{sc(float(m.group())):.3f}", parts[i])
+    return "".join(parts)
 
 # ── attribute dispatch ────────────────────────────────────────────────────────
 # Maps attr-name → transform function

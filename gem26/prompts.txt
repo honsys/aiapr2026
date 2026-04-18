@@ -74,3 +74,5 @@ ensure the latest current release of each AI tool supported by the gem lang is a
 
 inspect the current impl of the gem compiler and REPL and all keywords and builtins and update the builtin help and the readme markdown files and all the tutorial examples and turtorial docs and be sure to update  the scaled interactive mindmap diagrams 
 
+render the interactive SVG  mindmap diagram as an interactive 3D webgpu scene displaying a dogwood tree with trunk and branches and petals
+

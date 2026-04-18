@@ -140,7 +140,7 @@ BEV_SRCS   = ccbevington/CppLibrary/FitUtil.cpp ccbevington/CppLibrary/GenUtil.c
 # Docs: stamp markdown with current version/date, then regenerate LaTeX + PDF
 # Requires: pandoc, MacTeX/TeX Live (xelatex)
 GEM_VERSION   = 0.1.0
-GEM_DATE      = 2026-04-16
+GEM_DATE      = 2026-04-18
 PANDOC        = pandoc
 PANDOC_ENGINE = xelatex
 DOCSDIR       = docs

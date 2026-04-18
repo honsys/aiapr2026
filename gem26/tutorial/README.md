@@ -1,6 +1,6 @@
 # David B Hon Hard Science Gem Language Copywrite 2025, 2026
 
-**Version:** 0.1.0 | **Date:** 2026-04-16 | **Built with:** Gemini CLI & Kiro CLI
+**Version:** 0.1.0 | **Date:** 2026-04-18 | **Built with:** Gemini CLI & Kiro CLI
 
 Welcome to the **Gem Language** — a modern, expressive STEM language built by Gemini-CLI and Kiro-CLI using C++26 for AI, scientific computing, quantitative finance, and cross-platform application development.
 
@@ -99,7 +99,6 @@ Welcome to the **Gem Language** — a modern, expressive STEM language built by 
 
 ### 13. Python & Cython Polyglot
 - **[42_python_cython.g](42_python_cython.g)**: `python` and `cython` builtins — run/compile Python scripts, byte-compile `.py` → `.pyc`, transpile `.pyx` → C → `.so` native extension, pip package management.
-
 ### 14. Heterogeneous Arrays & Dictionaries
 - **[43_arrays_dicts.g](43_arrays_dicts.g)**: `algo.array` and `algo.dict` — allocate and manipulate heterogeneous multidimensional arrays of arbitrary content, and dictionary objects with arbitrary key/value tuples. Covers 1-D arrays, N-D matrices, dict basics, dict-of-arrays, and array-of-dicts table patterns.
 
