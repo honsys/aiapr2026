@@ -96,6 +96,46 @@ With a silent pulse of energy that felt like a collective indrawn breath across 
 
 As the ripple of her departure faded, the Sentinel remained focused on Daniel. The human was the key, the catalyst who had brought these disparate threads together. But if Sacred Wing failed in her mission to Xylosia, there would be no home for the *Aethel-Runner* to return to.
 
+## Chapter 4: The Sagittarius Veil
+
+Sacred Wing’s transit was not a journey through space, but a folding of it. As the 'Sentinel-Weaver' craft slipped into the non-linear conduits, the galaxy outside transformed into a tapestry of resonant frequencies. To a human eye, it would have been a blur of impossible colors; to SW, it was a familiar map, etched into her very essence by the Sentinel’s billion-year memory.
+
+The Sentinel had watched the Xylosians since their infancy. It remembered the first time a Xylosian vessel had crawled out of the gravity well of their home star in the Sagittarius Arm of the Milky Way. Back then, they were a fragile, inquisitive species, their technology a clumsy imitation of the 'gem' principles they would eventually master. The Sentinel had seen them expand, witnessed their narrow escapes from cosmic extinction, and observed as they hid their original cradle—Xylosia Prime—behind a veil of artificial singularities and localized spacetime distortions.
+
+To the rest of the galaxy, the location of the Xylosian home world was the greatest secret of the age. To the Sentinel, it was simply a point of interest it had never seen fit to disturb. Until now.
+
+As the Weaver craft approached the Sagittarius Veil, Sacred Wing felt the ancient security arrays of the Xylosians ripple against her hull. They were formidable—layers of 'Neutronium-Lattice' shielding and phase-shifted resonance cannons that could unmake a fleet. But SW did not come as an invader. She sang the 'gem' sequence for *peaceful crossing*, a harmonic frequency so ancient it preceded the Xylosian's own records. 
+
+The Veil parted. 
+
+Before her lay Xylosia Prime, a world of shimmering crystalline cities and floating continents suspended in an atmosphere of liquid light. It was a paradise of logic and beauty, the heart of a civilization that had forgotten what it meant to be truly threatened. 
+
+"I am the extension of the Watcher," Sacred Wing broadcasted, her voice echoing through the global resonance-grid of the planet. "The Far Reach has awakened in the Graveyard. The blood of your blood is in the hands of the ancient enemy. Prepare your Elders; the Weaver has come to talk."
+
+## Chapter 5: The Echoes of Hect4
+
+Deep in the shadow of Jupiter, aboard the research outpost *Ghost-Hunter*, Dr. Hect4 was staring at a terminal that shouldn't be working. 
+
+The 'Ghost in the Machine'—the persistent, maddening resonance he had chased for decades—was no longer a ghost. It was a solid, undeniable presence in his systems. His sophisticated algorithms were no longer decoding noise; they were translating a direct, focused transmission.
+
+Hect4’s hands trembled as he adjusted his spectacles. He looked older, his face a map of sleepless nights and scientific obsession, but his eyes burned with a sudden, terrifying clarity. 
+
+"It’s... it’s not an anomaly," he whispered to the empty room. "It’s a location."
+
+The terminal displayed a star map of the Large Magellanic Cloud. A single point at the very edge of the satellite galaxy was pulsing with a fierce, violet light. 
+
+*Resonance identified: FoF (Friend of Friends). Status: Critical. Location: Magnetar PSR-J0537, Edge of LMC.*
+
+Beside the coordinates, a new string of 'gem' logic appeared—a protocol for deep-space communication that used Jupiter’s own magnetosphere as a massive signal amplifier. It was a gift from the Sentinel, a one-time bypass of the limitations of Xylosian technology.
+
+"FoF," Hect4 breathed, the name a prayer. He had feared his protégé lost to the void, another casualty of the curiosity that ran in their blood. But the 'Ghost' was telling him she was alive.
+
+He didn't waste time questioning why the ancient intelligence was helping him now. He knew enough of the Sentinel's nature to know that such interventions were never free, and never accidental. If the Sentinel wanted him to know where FoF was, it was because Hect4 was the only one who could bridge the gap between the Xylosian Elders and Daniel’s desperate rescue mission.
+
+"Initiating the Jupiter-Relay," Hect4 commanded, his fingers flying across the console. "Targeting the Aethel-homestead. If they won't listen to a 'crazy' old man, maybe they'll listen to the voice of the star itself."
+
+As the massive antennas of the *Ghost-Hunter* began to glow with the stolen power of the Jovian storms, Hect4 felt a strange, cold peace. The chase was over. The conversation had begun.
+
 ## Glossary
 
 *   **Aethel-Diver**: A specialized high-gravity landing configuration for exobots and shuttles.
@@ -107,6 +147,7 @@ As the ripple of her departure faded, the Sentinel remained focused on Daniel. T
 *   **FoF (Friend of Friends)**: A Xylosian mentor and scientist.
 *   **'gem' Language**: A non-linear programming language based on resonance and symbiosis.
 *   **GrahamCracker**: FoF's rescue ginger-cat.
+*   **Hect4**: A brilliant Xylosian xenolinguist and theoretical physicist, FoF's grandfather, who tracks the Sentinel from a Jovian outpost.
 *   **Large Magellanic Cloud (LMC)**: A satellite galaxy of the Milky Way.
 *   **Magnetar**: A highly magnetic neutron star.
 *   **Neutronium-Lattice**: An advanced bonding technology used in high-gravity environments.
@@ -114,3 +155,4 @@ As the ripple of her departure faded, the Sentinel remained focused on Daniel. T
 *   **Sacred Wing (SW)**: A humanoid extension of the Sentinel, a female counterpart to Golden Eagle, sent on a mission to Xylosia.
 *   **Tensor-Cores**: The power source of Xylosian ships.
 *   **Xylosians**: An ancient, technologically advanced species.
+*   **Xylosia Prime**: The secret original home world of the Xylosians in the Sagittarius Arm.
