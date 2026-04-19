@@ -1,24 +1,49 @@
 # Makefile for pubfi - public.com Python to Gem API converter
 
-# Detect OS
+# Detect OS and Environment
 ifeq ($(OS),Windows_NT)
     DETECTED_OS := Windows
+    # Check if running in a shell that supports WSL
+    HAS_WSL := $(shell which wsl 2>/dev/null)
 else
     DETECTED_OS := $(shell uname -s)
 endif
 
 # Configuration
 GEM ?= gem
+# For WSL, we typically need the Linux binary path
+GEM_WSL ?= ../gem26/gem
 PY_SDK_SRC ?= ../publicdotcom-py/src/public_api_sdk
 OUT_DIR ?= .
 
-.PHONY: all convert clean help examples test
+.PHONY: all convert clean help examples test wsl-convert build-gem
 
 all: convert examples
 
+# Target to build the gem binary if missing
+build-gem:
+	@if [ ! -f "$(GEM_WSL)" ]; then \
+		echo "Gem binary not found at $(GEM_WSL). Building in ../gem26..."; \
+		if [ "$(DETECTED_OS)" = "Windows" ]; then \
+			wsl bash -c "cd $$(wslpath '$(CURDIR)/../gem26') && make"; \
+		else \
+			cd ../gem26 && $(MAKE); \
+		fi \
+	fi
+
+# Standard convert (works on macOS, Linux, and Windows if gem.exe is allowed)
 convert:
-	@echo "Converting Python SDK to Gem API..."
+	@echo "Converting Python SDK to Gem API (Native)..."
 	$(GEM) py2gem.g $(PY_SDK_SRC) $(OUT_DIR)
+
+# Explicit WSL support for Windows 11 (bypasses App Control policies)
+wsl-convert: build-gem
+	@echo "Converting Python SDK to Gem API (via WSL)..."
+	@if [ -z "$(HAS_WSL)" ] && [ "$(DETECTED_OS)" = "Windows" ]; then \
+		echo "Error: wsl not found in PATH"; \
+		exit 1; \
+	fi
+	wsl bash -c "cd $$(wslpath '$(CURDIR)') && $(GEM_WSL) py2gem.g $(PY_SDK_SRC) $(OUT_DIR)"
 
 examples:
 	@echo "Generating examples..."
@@ -41,12 +66,15 @@ help:
 	@echo "Detected OS: $(DETECTED_OS)"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make convert    - Run py2gem conversion"
-	@echo "  make examples   - Generate example scripts"
-	@echo "  make all        - convert + examples"
-	@echo "  make test       - Run public.g accounts (requires API key)"
-	@echo "  make clean      - Remove generated .gm and .g files"
+	@echo "  make convert      - Run py2gem conversion (Native)"
+	@echo "  make wsl-convert  - Run py2gem conversion (via WSL for Windows 11)"
+	@echo "  make build-gem    - Build gem binary in ../gem26 if missing"
+	@echo "  make examples     - Generate example scripts"
+	@echo "  make all          - convert + examples"
+	@echo "  make test         - Run public.g accounts (requires API key)"
+	@echo "  make clean        - Remove generated .gm and .g files"
 	@echo ""
 	@echo "Variables:"
-	@echo "  GEM             - Path to gem executable (default: gem)"
-	@echo "  PY_SDK_SRC      - Path to publicdotcom-py SDK (default: ../publicdotcom-py/src/public_api_sdk)"
+	@echo "  GEM               - Path to gem executable (default: gem)"
+	@echo "  GEM_WSL           - Path to gem Linux binary for WSL (default: ../gem26/gem)"
+	@echo "  PY_SDK_SRC        - Path to publicdotcom-py SDK (default: ../publicdotcom-py/src/public_api_sdk)"
