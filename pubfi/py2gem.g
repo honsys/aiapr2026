@@ -14,6 +14,12 @@ if sys.argc() > 2
   out_dir = sys.argv(2)
 end
 
+# Check if src_dir exists
+if file.exists(src_dir) == false
+  sys.print("Error: src_dir not found:", src_dir)
+  sys.exit()
+end
+
 sys.print("=== py2gem: public.com Python SDK -> Gem ===")
 py2gem_run(src_dir, out_dir)
 
@@ -30,11 +36,6 @@ cli_app += "end\n\n"
 cli_app += "# Auth: set PUBLICOM_KEY_ENV or PUBLICOM_OAUTH_CLIENT_ID in environment\n"
 cli_app += "string api_key = sys.env(\"PUBLICOM_KEY_ENV\")\n"
 cli_app += "string oauth_id = sys.env(\"PUBLICOM_OAUTH_CLIENT_ID\")\n\n"
-cli_app += "# Build auth config\n"
-cli_app += "string auth_type = \"apikey\"\n"
-cli_app += "if api_key == \"\"\n"
-cli_app += "  auth_type = \"oauth\"\n"
-cli_app += "end\n\n"
 cli_app += "if cmd == \"accounts\"\n"
 cli_app += "  client = PublicApiClient(ApiKeyAuthConfig(api_key))\n"
 cli_app += "  accounts = client.get_accounts()\n"

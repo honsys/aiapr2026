@@ -1,9 +1,9 @@
 # py2gem.gm — Gem module: convert publicdotcom-py Python SDK to Gem API
 # Usage: use "py2gem.gm" then call py2gem_run(src_dir, out_dir)
 
-# Paths
-_PY2GEM_SRC = "/mnt/c/Users/hon/aiapr2026/publicdotcom-py/src/public_api_sdk"
-_PY2GEM_OUT = "/mnt/c/Users/hon/aiapr2026/pubfi"
+# Paths (defaults)
+_PY2GEM_SRC = "../publicdotcom-py/src/public_api_sdk"
+_PY2GEM_OUT = "."
 
 # Core Python source files to translate (in dependency order)
 _py2gem_files = [
@@ -11,7 +11,9 @@ _py2gem_files = [
   "auth_config.py",
   "auth_manager.py",
   "auth_provider.py",
+  "async_auth_provider.py",
   "api_client.py",
+  "async_api_client.py",
   "models/instrument_type.py",
   "models/auth.py",
   "models/account.py",
@@ -25,18 +27,29 @@ _py2gem_files = [
   "models/new_order.py",
   "models/async_new_order.py",
   "public_api_client.py",
+  "async_public_api_client.py",
   "subscription_manager.py",
+  "async_subscription_manager.py",
   "order_subscription_manager.py",
+  "async_order_subscription_manager.py",
   "price_stream.py",
-  "strategy_preflight.py"
+  "async_price_stream.py",
+  "strategy_preflight.py",
+  "async_strategy_preflight.py"
 ]
 
 fun py2gem_translate_file(src_path, out_path)
   sys.print("  Translating:", src_path)
+  if file.exists(src_path) == false
+    sys.print("  [SKIP] File not found:", src_path)
+    return false
+  end
   src = file.read(src_path)
+  # sys.langport uses AI to translate the code
   gem_code = sys.langport(src_path)
   file.write(out_path, gem_code)
   sys.print("  -> Written:", out_path)
+  return true
 end
 
 fun py2gem_run(src_dir, out_dir)
@@ -67,9 +80,11 @@ fun py2gem_run(src_dir, out_dir)
     base = algo.replace(py_rel, "/", "_")
     base = algo.replace(base, ".py", ".gm")
     frag_path = out_dir + "/" + base
-    frag = file.read(frag_path)
-    combined += "# --- " + base + " ---\n"
-    combined += frag + "\n"
+    if file.exists(frag_path)
+      frag = file.read(frag_path)
+      combined += "# --- " + base + " ---\n"
+      combined += frag + "\n"
+    end
     j += 1
   end
 
