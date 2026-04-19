@@ -1,4 +1,4 @@
-continue to use py2gem.g that makes use of of ~/aiapr2026/gem26 to convert all the public.com python API from ~/aiapr2026/publicdotcom-py to a gem lang API public.gm module with a public.g cli app and write all output here
+continue to develop py2gem.gm and the app py2gem.g that makes use of of ~/aiapr2026/gem26 to convert all the public.com python API of ~/aiapr2026/publicdotcom-py to a gem lang API public.gm module with a public.g cli app and write a makefile that support macos, linux, and win11; along with examples and a readme markdown doc describing the code
 
 
 
