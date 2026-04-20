@@ -453,103 +453,127 @@ public:
         }, true };
 
         methods["help"] = { [](std::vector<std::shared_ptr<GemValue>> args) {
-            if (args.empty()) {
-                std::cout << "\n--- Gem Language Help ---" << std::endl;
+            auto print2 = [](const std::vector<std::string>& lines, int width = 50) {
+                size_t mid = (lines.size() + 1) / 2;
+                for (size_t i = 0; i < mid; ++i) {
+                    std::cout << "  " << std::left << std::setw(width) << lines[i];
+                    if (i + mid < lines.size()) {
+                        std::cout << lines[i + mid];
+                    }
+                    std::cout << std::endl;
+                }
+            };
+
+            if (args.empty() || (args.size() == 1 && args[0]->toString() == "all_2col")) {
+                bool isFull = !args.empty() && args[0]->toString() == "all_2col";
+                std::cout << "\n--- Gem Language Help " << (isFull ? "(2-Column)" : "") << " ---" << std::endl;
                 std::cout << "Gem is a high-performance STEM language implemented in C++26." << std::endl;
+                
                 std::cout << "\nUsage Tips:" << std::endl;
-                std::cout << "  - All variables must be initialized: 'int x = 0'" << std::endl;
-                std::cout << "  - Global variables start with underscore: '_config = 1'" << std::endl;
-                std::cout << "  - Objects inherit from sys: every obj gets sys.print, sys.exec, etc." << std::endl;
-                std::cout << "  - Use 'use \"file.py\"' to translate and run foreign code on-the-fly." << std::endl;
-                std::cout << "  - Use 'langport(\"*.py\", \"out.gm\")' to AI-port and save as Gem." << std::endl;
-                std::cout << "  - Use 'lib' to list all loaded builtin modules." << std::endl;
-                std::cout << "  - Use 'his' to view today's session history." << std::endl;
+                print2({
+                    "- All variables must be initialized: 'int x = 0'",
+                    "- Global variables start with underscore: '_config = 1'",
+                    "- Objects inherit from sys: every obj gets sys.print, etc.",
+                    "- Use 'use \"file.py\"' to translate/run foreign code.",
+                    "- Use 'langport(\"*.py\", \"out.gm\")' to AI-port and save.",
+                    "- Use 'lib' to list all loaded builtin modules.",
+                    "- Use 'his' to view today's session history."
+                });
+
                 std::cout << "\nCLI Options:" << std::endl;
-                std::cout << "  gem <file.g>              - Run a Gem script." << std::endl;
-                std::cout << "  gem -c <main.g> [mod...]  - Compile multiple files into a self-contained binary." << std::endl;
-                std::cout << "  gem -c ... -o <name>      - Specify output binary name." << std::endl;
-                std::cout << "  gem -h                    - Print session history and exit." << std::endl;
-                std::cout << "  gem -t <file> [-o output] - AI-assisted translation to Gem." << std::endl;
-                std::cout << "  gem translate <file>      - Alias for -t." << std::endl;
-                std::cout << "  gem                       - Start interactive REPL." << std::endl;
+                print2({
+                    "gem <file.g>              - Run a Gem script.",
+                    "gem -c <main.g> [mod...]  - Compile to binary.",
+                    "gem -c ... -o <name>      - Specify output name.",
+                    "gem -h                    - Print history and exit.",
+                    "gem --help                - Print this help (2-column).",
+                    "gem -t <file> [-o output] - AI translation.",
+                    "gem translate <file>      - Alias for -t.",
+                    "gem                       - Start interactive REPL."
+                });
+
                 std::cout << "\nKeywords:" << std::endl;
-                std::cout << "  fun    - define a function:  fun name(a, b) ... end <expr>" << std::endl;
-                std::cout << "  obj    - define an object:   obj Name(args) : Parent ... end" << std::endl;
-                std::cout << "  end    - close fun/obj/if/while block; 'end <expr>' returns value from fun" << std::endl;
-                std::cout << "  use    - run/translate foreign file: use \"script.py\"" << std::endl;
-                std::cout << "  lib    - list loaded modules" << std::endl;
-                std::cout << "  alias  - REPL shortcut: alias ? = sys.help()" << std::endl;
-                std::cout << "  if     - conditional:  if cond ... else ... end" << std::endl;
-                std::cout << "  else   - else branch" << std::endl;
-                std::cout << "  while  - loop:  while cond ... end" << std::endl;
-                std::cout << "  his    - print today's session history" << std::endl;
-                std::cout << "  exit/quit - exit the interpreter (identifiers, not keywords)" << std::endl;
-                std::cout << "  langport  - AI-port foreign code: langport(\"*.py\", \"out.gm\")" << std::endl;
-                std::cout << "Note: 'return' is NOT a keyword. Functions return via 'end <expr>'." << std::endl;
-                std::cout << "\nTypes:" << std::endl;
-                std::cout << "  int x = 0      double pi = 3.14      string s = \"hi\"      bool ok = true" << std::endl;
-                std::cout << "  _global = 1    (underscore prefix = global scope)" << std::endl;
+                print2({
+                    "fun    - define function",
+                    "obj    - define object",
+                    "end    - close block / return",
+                    "use    - include module",
+                    "lib    - list modules",
+                    "alias  - REPL shortcut",
+                    "if     - conditional",
+                    "else   - else branch",
+                    "while  - loop",
+                    "his    - session history",
+                    "langport - AI-port code",
+                    "exit/quit - exit interpreter"
+                });
+
                 std::cout << "\nBuiltin Functions:" << std::endl;
-                std::cout << "  isnil(x)   isnan(x)   tonum(x)   tostr(x)   len(x)   type(x)" << std::endl;
+                print2({
+                    "isnil(x)   - is nil/null",
+                    "isnan(x)   - is NaN",
+                    "tonum(x)   - parse to number",
+                    "tostr(x)   - convert to string",
+                    "len(x)     - length of vec/str",
+                    "type(x)    - get runtime type"
+                });
+
                 std::cout << "\nOperators:" << std::endl;
-                std::cout << "  Arithmetic:    +  -  *  /" << std::endl;
-                std::cout << "  Compound:      +=  -=  *=  /=" << std::endl;
-                std::cout << "  Comparison:    ==  !=  >  >=  <  <=" << std::endl;
-                std::cout << "  Logical:       !  &&  ||" << std::endl;
-                std::cout << "  Separator:     ;  (multiple statements per line)" << std::endl;
-                std::cout << "  String concat: +" << std::endl;
-                std::cout << "  Range:         ..  (e.g. 1..10 in itr.range)" << std::endl;
-                std::cout << "\nAvailable Builtin Modules (37 total):" << std::endl;
-                std::cout << "  sys    math   ai     text   rex    algo   bev    file   zip" << std::endl;
-                std::cout << "  nlp    img    www    cdn    geo    cpp    tcp    itr    thread" << std::endl;
-                std::cout << "  data   k3s    vm     python cython go     ruby   node   rust" << std::endl;
-                std::cout << "  fin    bsm    chart  astro  mobl   trek   seo    drvr   art" << std::endl;
-                std::cout << "  git" << std::endl;
-                std::cout << "\nModule Quick Reference:" << std::endl;
-                std::cout << "  sys    - system root; print, exec, async, app, help, langport" << std::endl;
-                std::cout << "  math   - math + symbolic (diff, integrate, sym_latex, compile_latex)" << std::endl;
-                std::cout << "  ai     - Gemini/Mistral/Ollama: prompt, prompt_native, code, useMistral, useOllama" << std::endl;
-                std::cout << "  text   - documents: read, write_pdf, read_yaml, read_xml, read_html" << std::endl;
-                std::cout << "  rex    - ECMAScript regex: match, find, findall, sub, gsub, split" << std::endl;
-                std::cout << "  algo   - sort, quicksort, now, date_add, date_diff" << std::endl;
-                std::cout << "  geo    - GIS: lookup, distance, write_geojson, plot2d, plot3d" << std::endl;
-                std::cout << "  astro  - astrophysics: stellar, orbital, solar, cosmology, exoplanet" << std::endl;
-                std::cout << "  fin    - finance: ticker, bs_price, greeks, high_yield_bonds" << std::endl;
-                std::cout << "  bsm    - Black-Scholes-Merton: price_american (extends fin)" << std::endl;
-                std::cout << "  chart  - Plotly charts: plot, show, server" << std::endl;
-                std::cout << "  data   - data science: read_csv, mean, std" << std::endl;
-                std::cout << "  www    - web server: app, wget, redirect, map2d" << std::endl;
-                std::cout << "  cdn    - caching proxy: start, stats, purge (extends www)" << std::endl;
-                std::cout << "  tcp    - sockets: listen, connect, send, recv, nic, routes" << std::endl;
-                std::cout << "  thread - concurrency: wait, is_finished (returned by sys.async)" << std::endl;
-                std::cout << "  mobl   - mobile PWA: phone, dictate, make_feature" << std::endl;
-                std::cout << "  trek   - travel logs: new, add, edit, show, export_gpx, stats" << std::endl;
-                std::cout << "  seo    - SEO analysis: index, analyze" << std::endl;
-                std::cout << "  drvr   - device drivers: linux, win11, macos, android, build, deploy" << std::endl;
-                std::cout << "  art    - ASCII art/SVG: text_to_art, art_to_svg, mindmap, readme" << std::endl;
-                std::cout << "  k3s    - Docker/K8s: docker_run, docker_ps, k3s_apply, k3s_pods" << std::endl;
-                std::cout << "  vm     - Vagrant VMs: init, up, ssh, halt, destroy" << std::endl;
-                std::cout << "  cpp    - C++26 JIT via Cling: exec, repl" << std::endl;
-                std::cout << "  itr    - iterators: range, while" << std::endl;
-                std::cout << "  nlp    - NLP (delegates to ai.prompt)" << std::endl;
-                std::cout << "  bev    - Bevington data reduction: data, fit_line, param" << std::endl;
-                std::cout << "  file   - filesystem: write, exists" << std::endl;
-                std::cout << "  zip    - compression: compress, decompress" << std::endl;
-                std::cout << "  img    - image processing: resize" << std::endl;
-                std::cout << "  python - Python polyglot: run, compile, pip" << std::endl;
-                std::cout << "  cython - Cython polyglot: run, compile, build, pip" << std::endl;
-                std::cout << "  go     - Go polyglot: run, build" << std::endl;
-                std::cout << "  ruby   - Ruby polyglot: run" << std::endl;
-                std::cout << "  node   - Node.js polyglot: run, npm_install" << std::endl;
-                std::cout << "  rust   - Rust polyglot: run, cargo_new" << std::endl;
-                std::cout << "  git    - Git VCS: clone, pull, commit, push, gitsync" << std::endl;
-                std::cout << "\nMobile & Cross-Platform:" << std::endl;
-                std::cout << "  mobl phone(\"name\")  phone.dictate(text)  phone.make_feature(lat,lon,text)" << std::endl;
-                std::cout << "  ./gem travel_log.g  ->  http://localhost:8080  (Android/iPhone/macOS/Linux/Win11)" << std::endl;
+                print2({
+                    "Arithmetic:    +  -  *  /",
+                    "Compound:      +=  -=  *=  /=",
+                    "Comparison:    ==  !=  >  >=  <  <=",
+                    "Logical:       !  &&  ||",
+                    "Separator:     ;  (multi-stmt)",
+                    "String concat: +",
+                    "Range:         .. (itr.range)"
+                });
+
+                std::cout << "\nModule Quick Reference (37 total):" << std::endl;
+                print2({
+                    "sys    - system root; print, exec, async",
+                    "math   - math + symbolic (diff, integral)",
+                    "ai     - AI: prompt, code, Gemini/Mistral",
+                    "text   - docs: read, write, pdf, yaml, html",
+                    "rex    - Regex: match, find, sub, split",
+                    "algo   - sort, now, date, array, dict",
+                    "geo    - GIS: lookup, distance, geojson",
+                    "astro  - astrophysics: stellar, orbital",
+                    "fin    - finance: ticker, bs_price, greeks",
+                    "bsm    - Black-Scholes-Merton: american",
+                    "chart  - Plotly charts: plot, show, server",
+                    "data   - data science: csv, mean, std",
+                    "www    - web server: app, wget, redirect",
+                    "cdn    - caching proxy: start, stats, purge",
+                    "tcp    - sockets: listen, connect, send, recv",
+                    "thread - concurrency: wait, is_finished",
+                    "mobl   - mobile PWA: phone, dictate, GPS",
+                    "trek   - travel logs: new, add, edit, show, GPX",
+                    "seo    - SEO analysis: index, analyze",
+                    "drvr   - device drivers: linux, win11, macos",
+                    "art    - ASCII art/SVG: text_to_art, mindmap",
+                    "k3s    - Docker/K8s: run, ps, apply, pods",
+                    "vm     - Vagrant VMs: init, up, ssh, halt",
+                    "cpp    - C++26 JIT: exec, repl (Cling)",
+                    "itr    - iterators: range, while",
+                    "nlp    - NLP (delegates to ai.prompt)",
+                    "bev    - Bevington data reduction: fit_line",
+                    "file   - filesystem: write, exists",
+                    "zip    - compression: compress, decompress",
+                    "img    - image processing: resize",
+                    "python - Python polyglot: run, compile, pip",
+                    "cython - Cython polyglot: run, compile, build, pip",
+                    "go     - Go polyglot: run, build",
+                    "ruby   - Ruby polyglot: run",
+                    "node   - Node.js polyglot: run, npm_install",
+                    "rust   - Rust polyglot: run, cargo_new",
+                    "git    - Git VCS: clone, pull, commit, push"
+                });
+
                 std::cout << "\nDetailed help:  help \"topic\"  or  help(topic)" << std::endl;
-                std::cout << "Full reference: helpfull  or  sys.helpfull()  (writes helpfull_DATETIME.md, opens viewer)" << std::endl;
+                std::cout << "Full reference: helpfull  or  sys.helpfull()  (writes .md)" << std::endl;
                 std::cout << "Paged:          helpless  or  sys.helpless()  (same, pipes through less)" << std::endl;
-                } else {
+            } else {
                 std::string topic = args[0]->toString();
                 std::cout << "\n--- Help: " << topic << " ---" << std::endl;
                 if (topic == "fin") {

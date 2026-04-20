@@ -186,6 +186,16 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
+    // 4.5 Help Mode: gem --help
+    if (argc > 1 && (std::string(argv[1]) == "--help" || std::string(argv[1]) == "-help" || std::string(argv[1]) == "/?")) {
+        auto sysVal = interpreter.globalScope->resolve("sys");
+        if (sysVal && std::holds_alternative<std::shared_ptr<GemObject>>(sysVal->value)) {
+            // We pass a special flag to tell help to use 2 columns if it supports it
+            std::get<std::shared_ptr<GemObject>>(sysVal->value)->call("help", {std::make_shared<GemValue>(std::string("all_2col"))});
+        }
+        return 0;
+    }
+
     // 3. Translate Mode: gem translate <file> [-o output] OR gem -t <file> [-o output]
     if (argc > 1 && (std::string(argv[1]) == "translate" || std::string(argv[1]) == "-t")) {
         if (argc < 3) {
