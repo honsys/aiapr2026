@@ -1,12 +1,6 @@
-[submodule "Kiro"]
-	path = Kiro
-	url = https://github.com/kirodotdev/Kiro.git
 [submodule "publicdotcom-py"]
 	path = publicdotcom-py
 	url = https://github.com/PublicDotCom/publicdotcom-py.git
-[submodule "ghost_eye"]
-	path = ghost_eye
-	url = https://github.com/BullsEye0/ghost_eye.git
 [submodule "gem26/mistral-client-python"]
 	path = gem26/mistral-client-python
 	url = https://github.com/mistralai/client-python.git
