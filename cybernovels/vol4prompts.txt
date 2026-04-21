@@ -14,5 +14,7 @@ continue without removing existing prose to provide more prose in vol4FoFDanielN
 continue without removing existing prose to provide more prose in vol4FoFDanielNeutronStar.md describing the warship AI and FoF conversation -- FoF offers to help the warship AI repair its few remaining partially functional bots and warship infrastructure. FoF refuses to help repair any weapons systems, but suggests sufficient repairs to allow the warship to lift off the surface
 
 
+continue without removing existing prose to provide more prose in vol4FoFDanielNeutronStar.md describing daniel's extragalactic ship and its fabrication facilities and the autobots he has built to maintain it; the autobots communicate with the ship AI and directly with daniel via audio-video feeds and are equiped with various builtin tools, including cutting and welding lasers. dainel instructs the ship AI to build exosuits for himself and each autobot equiped with diamond coated tools and more powerful cutting lasers, to use when rescuing FoF.
+
 
 
