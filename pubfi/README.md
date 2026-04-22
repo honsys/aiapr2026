@@ -1,6 +1,7 @@
 # Pubfi - public.com Gem API
 
 Pubfi is a conversion tool and Gem language implementation of the public.com Python SDK. It allows you to interact with the public.com trading API using the Gem language.
+TBD: ensure makefele here executes ../gem26/makefile so we executable gem compiler/repl app is present
 
 ## Overview
 
