@@ -1,4 +1,6 @@
-continue to develop py2gem.gm and the app py2gem.g that makes use of of ~/aiapr2026/gem26 to convert all the public.com python API of ~/aiapr2026/publicdotcom-py to a gem lang API public.gm module with a public.g cli app and write a makefile that support macos, linux, and win11; along with examples and a readme markdown doc describing the code
+continue to develop py2gem.gm and the app py2gem.g that makes use of the compiler ~/aiapr2026/gem26/gem, after first ensuring "gem" itself compiles via c++26, to convert all the public.com python API of ~/aiapr2026/publicdotcom-py to a gem lang API public.gm module with a public.g cli app and write a makefile that support macos, linux, and win11 to build the "py2gem" binary app, and provide with example usage scripts and a readme markdown doc describing the code, with the compiled app "py2gem --help" and the gem REPL "use" feature should provide builtin usage help via the its "py2gem.help()" and "py2gem.usage()" functions. note that function declarations in the gem lang rely on keyword "fun" and objects on "obj" and python classes that use multiple inheritace should be translated to a complete set of gem lang single inheritance objects within a single gem module file.
+  
+
 
 
 
